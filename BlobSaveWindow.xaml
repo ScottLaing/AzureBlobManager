@@ -1,0 +1,24 @@
+﻿<Window x:Class="SimpleBlobUtility.BlobSaveWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleBlobUtility"
+        mc:Ignorable="d"
+        Background="#7B2D26"
+        Title="Upload File" Height="283" Width="758">
+    <Grid>
+
+        <Label Content="Choose Container to Upload File To:" HorizontalAlignment="Left" Margin="71,45,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="349,42,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="33"/>
+
+        <Label Content="File:" HorizontalAlignment="Left" Margin="31,112,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <TextBox x:Name="txtFilePath" HorizontalAlignment="Left" Margin="86,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="514" Height="33" FontSize="16"/>
+        <Button x:Name="btnSelect" Content="Select" HorizontalAlignment="Left" Margin="623,112,0,0" VerticalAlignment="Top" Height="35" Width="94" Click="btnSelect_Click" FontSize="16"/>
+        <Button Content="Upload File" HorizontalAlignment="Left" Margin="546,179,0,0" VerticalAlignment="Top" Height="40" Width="127" Click="Button_Click" FontSize="16"/>
+
+        <Button x:Name="btnListContainers" Content="List Containers" HorizontalAlignment="Left" Margin="58,273,0,0" VerticalAlignment="Top" Height="35" Width="163" Click="btnListContainers_Click" FontSize="16" Visibility="Hidden"/>
+        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Left" Margin="92,179,0,0" VerticalAlignment="Top" Background="#7B2D26" Foreground="White" Width="314"/>
+
+    </Grid>
+</Window>
