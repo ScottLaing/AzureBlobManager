@@ -48,8 +48,7 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
-
-        public static async Task<(bool, string)> DownloadBlobFile(string containerName, string fileName, string downloadFilePath)
+        public static async Task<(bool success, string errorInfo)> DownloadBlobFile(string containerName, string fileName, string downloadFilePath)
         {
             bool res = true;
             string errors = "";

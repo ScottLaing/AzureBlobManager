@@ -29,7 +29,8 @@
                 <DataGridTextColumn Binding="{Binding LastModifiedFriendly}" Header="Last Modified" Width="175"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnDownloadSelectedFile" Content="Download File" HorizontalAlignment="Left" Margin="168,0,0,23" VerticalAlignment="Bottom" Height="35" Width="167" Click="btnDownloadSelectedFile_Click" FontSize="16"/>
+        <Button x:Name="btnDownloadSelectedFile" Content="Download File" HorizontalAlignment="Left" Margin="340,0,0,19" VerticalAlignment="Bottom" Height="35" Width="140" Click="btnDownloadSelectedFile_Click" FontSize="16"/>
+        <Button x:Name="btnViewFile" Content="View File" HorizontalAlignment="Left" Margin="152,0,0,19" VerticalAlignment="Bottom" Height="35" Width="135" Click="btnViewFile_Click"  FontSize="16"/>
 
     </Grid>
 </Window>

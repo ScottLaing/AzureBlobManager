@@ -1,8 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using AzureBlobsAccessor.Utils;
+using Microsoft.Win32;
 using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
@@ -100,6 +102,45 @@ namespace SimpleBlobUtility
             }
         }
 
+
+        private async Task<(bool success, string moreInfo, string downloadedFilePath)> AttemptDownloadFileToTempFolder()
+        {
+            string? containerName = this.cmbContainers.SelectedItem as string;
+            if (containerName == null)
+            {
+                return (false, "Please select a container in the drop down.", "");
+            }
+            if (dgFilesList.SelectedCells[0].Item == null)
+            {
+                return (false, "Please select a file to view.", "");
+            }
+
+            var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
+            if (flid == null)
+            {
+                return (false, "File selection does not appear to map to a valid Cloud Blob object", "");
+            }
+
+            var fileName = flid.FileName;
+
+            string tempFilePath = FileUtils.GetTempFilePath(fileName);
+
+            // If the file name is not an empty string open it for saving.
+            if (! string.IsNullOrEmpty(tempFilePath))
+            {
+                var results = await BlobUtility.DownloadBlobFile(containerName, fileName, tempFilePath);
+                if (results.Item1)
+                {
+                    return (true, "", tempFilePath);
+                }
+                else
+                {
+                    return (false, results.Item2, "");
+                }
+            }
+            return (false, "could not get temp file path", "");
+        }
+
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
         {
             var loading = AttemptDownloadFile();
@@ -115,6 +156,30 @@ namespace SimpleBlobUtility
         private async void cmbContainers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             await ListContainerFiles();
+        }
+
+        private async void btnViewFile_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await AttemptDownloadFileToTempFolder();
+
+            if (!result.success)
+            {
+                MessageBox.Show(result.moreInfo);
+                return;
+            }
+            else if (string.IsNullOrEmpty(result.downloadedFilePath))
+            {
+                MessageBox.Show("Could not get temp file path");
+                return;
+            }
+            else
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = result.downloadedFilePath;
+                startInfo.UseShellExecute = true; // Let the OS handle opening with default app
+
+                Process.Start(startInfo);
+            }
         }
     }
 }
