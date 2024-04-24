@@ -10,30 +10,20 @@ namespace SimpleBlobUtility
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class BlobSaveWindow : Window
+    public partial class UploadFileWindow : Window
     {
-        public BlobSaveWindow()
+        private string _currentContainer;
+        public UploadFileWindow(string currentContainer)
         {
             InitializeComponent();
 
-            var containers = BlobUtility.GetContainers(out string errs);
-            if (string.IsNullOrWhiteSpace(errs))
-            {
-                cmbContainers.ItemsSource = containers;
-            }
+            _currentContainer = currentContainer;
             lblResult.Content = "";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var txtVal = this.txtFilePath.Text;
-            var container = cmbContainers.SelectedItem as string;
-
-            if (container == null)
-            {
-                MessageBox.Show("Please select a blob container to save into.");
-                return;
-            }
 
             if (string.IsNullOrWhiteSpace(txtVal))
             {
@@ -50,10 +40,10 @@ namespace SimpleBlobUtility
             }
             var fileName = Path.GetFileName(txtVal);
 
-            var result = Task.Run(() => BlobUtility.SaveFile(fileName, txtVal, container)).Result;
+            var result = Task.Run(() => BlobUtility.SaveFile(fileName, txtVal, _currentContainer)).Result;
             if (!result.Item1)
             {
-                this.lblResult.Content = ($"Trouble saving file to blob, {result.Item2}");
+                this.lblResult.Content = $"Trouble saving file to blob, {result.Item2}";
             }
             else
             {

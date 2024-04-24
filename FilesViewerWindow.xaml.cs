@@ -12,11 +12,12 @@ namespace SimpleBlobUtility
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class BlobListFilesWindow : Window
+    public partial class FilesViewerWindow : Window
     {
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
+        private string _lastUsedContainer = "";
 
-        public BlobListFilesWindow()
+        public FilesViewerWindow()
         {
             InitializeComponent();
 
@@ -50,6 +51,7 @@ namespace SimpleBlobUtility
             {
                 var listFiles = BlobUtility.ListFiles(containerName);
                 dgFilesList.ItemsSource = await listFiles;
+                this._lastUsedContainer = containerName;
             }
         }
 
@@ -177,6 +179,22 @@ namespace SimpleBlobUtility
 
                 Process.Start(startInfo);
             }
+        }
+
+        private void btnUploadFile_Click(object sender, RoutedEventArgs e)
+        {
+            if (_lastUsedContainer == "")
+            {
+                MessageBox.Show("Please select a container to upload to.");
+                return;
+            }
+            var uploadFileWindow = new UploadFileWindow(_lastUsedContainer);
+            var resp = uploadFileWindow.ShowDialog();
+        }
+
+        private async void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            await ListContainerFiles();
         }
     }
 }
