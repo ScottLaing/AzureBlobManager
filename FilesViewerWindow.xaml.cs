@@ -196,5 +196,10 @@ namespace SimpleBlobUtility
         {
             await ListContainerFiles();
         }
+
+        private void btnRefresh2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

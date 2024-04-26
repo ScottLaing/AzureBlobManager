@@ -4,10 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleBlobUtility"
+                xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
         mc:Ignorable="d"
         Background="#0B7A75"
         Title="Azure Blob Files Viewer" Height="360" Width="594">
     <Grid>
+
+        <Button x:Name="btnViewFile" Content="View" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="35" Width="64" Click="btnViewFile_Click"  FontSize="16" Margin="287,20,0,0"/>
+        <Button x:Name="btnUploadFile" Content="Upload" HorizontalAlignment="Left" Margin="360,20,0,0" VerticalAlignment="Top" Height="35" Width="83" Click="btnUploadFile_Click"  FontSize="16"/>
+        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="480,20,0,0" Width="35" ToolTip="Download File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
+        </Button>
+        <Button x:Name="btnRefresh2" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="527,20,0,0" >
+            <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
+        </Button>
+
 
         <Label Content="Choose Container:" HorizontalAlignment="Left" Margin="30,78,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="180,78,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
@@ -29,10 +40,5 @@
                 <DataGridTextColumn Binding="{Binding LastModifiedFriendly}" Header="Last Modified" Width="175"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnDownloadSelectedFile" Content="Download" HorizontalAlignment="Left" Margin="262,20,0,0" VerticalAlignment="Top" Height="35" Width="93" Click="btnDownloadSelectedFile_Click" FontSize="16"/>
-        <Button x:Name="btnViewFile" Content="View" HorizontalAlignment="Left" Margin="194,20,0,0" VerticalAlignment="Top" Height="35" Width="63" Click="btnViewFile_Click"  FontSize="16"/>
-        <Button x:Name="btnUploadFile" Content="Upload" HorizontalAlignment="Left" Margin="360,20,0,0" VerticalAlignment="Top" Height="35" Width="83" Click="btnUploadFile_Click"  FontSize="16"/>
-        <Button x:Name="btnRefresh" Content="Refresh" HorizontalAlignment="Left" Margin="448,20,0,0" VerticalAlignment="Top" Height="35" Width="83" Click="btnRefresh_Click"  FontSize="16"/>
-
     </Grid>
 </Window>

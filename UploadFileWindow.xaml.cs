@@ -76,6 +76,7 @@ namespace SimpleBlobUtility
             }
 
             dlg.Filter = filter;
+            dlg.FilterIndex = 2;
             bool ?result = dlg.ShowDialog();
 
             if (result == true)
