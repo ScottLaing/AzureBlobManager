@@ -47,7 +47,7 @@ namespace SimpleBlobUtility.Windows
             }
             else
             {
-                this.lblResult.Content = $"{fileName} uploaded successfully, close dialog if done.";
+                this.lblResult.Content = $"{fileName} uploaded successfully, you may now close dialog if finished.";
             }
         }
 

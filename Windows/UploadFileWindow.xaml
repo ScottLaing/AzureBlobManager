@@ -4,18 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleBlobUtility"
+                        xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
         mc:Ignorable="d"
         Background="#0B7A75"
-        Title="Upload File to Azure Container" Height="166" Width="550">
+        Title="Upload File" Height="178" Width="573">
     <Grid>
 
-        <Label Content="File:" HorizontalAlignment="Left" Margin="29,62,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="txtFilePath" HorizontalAlignment="Left" Margin="84,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="353" Height="33" FontSize="16"/>
-        <Button x:Name="btnSelect" Content="Select" HorizontalAlignment="Left" Margin="451,60,0,0" VerticalAlignment="Top" Height="35" Width="74" Click="btnSelect_Click" FontSize="16"/>
-        <Button Content="Upload" HorizontalAlignment="Left" Margin="451,19,0,0" VerticalAlignment="Top" Height="34" Width="74" Click="Button_Click" FontSize="16"/>
+        <Label Content="File:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <TextBox x:Name="txtFilePath" HorizontalAlignment="Left" Margin="50,53,0,0" Text="" VerticalAlignment="Top" Width="440" Height="33" FontSize="16"/>
 
-        <Button x:Name="btnListContainers" Content="List Containers" HorizontalAlignment="Left" Margin="58,273,0,0" VerticalAlignment="Top" Height="35" Width="163" Click="btnListContainers_Click" FontSize="16" Visibility="Hidden"/>
-        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top" Background="#0B7A75" Foreground="White" Width="408"/>
+        <Button x:Name="btnUploadFile" Click="Button_Click" Margin="280,9,0,0" Width="35" Height="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
+        </Button>
+
+        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="500,52,0,0" Width="35" ToolTip="Select File to Upload"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
+        </Button>
+
+        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Center" Margin="0,95,0,0" VerticalAlignment="Top" Background="#0B7A75" Foreground="White" Width="514"/>
 
     </Grid>
 </Window>
