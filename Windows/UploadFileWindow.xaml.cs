@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace SimpleBlobUtility
+namespace SimpleBlobUtility.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -47,7 +47,7 @@ namespace SimpleBlobUtility
             }
             else
             {
-                this.lblResult.Content = "File saved successfully.";
+                this.lblResult.Content = $"{fileName} uploaded successfully, close dialog if done.";
             }
         }
 

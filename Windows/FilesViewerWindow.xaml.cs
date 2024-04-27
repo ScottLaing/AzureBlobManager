@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace SimpleBlobUtility
+namespace SimpleBlobUtility.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -198,6 +198,11 @@ namespace SimpleBlobUtility
         }
 
         private void btnRefresh2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UploadButtonViewbox_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
