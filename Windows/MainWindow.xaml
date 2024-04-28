@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:SimpleBlobUtility"
                 xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
         mc:Ignorable="d"
+        Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#0B7A75"
         Title="Blob Files" Height="360" Width="594">
     <Grid>

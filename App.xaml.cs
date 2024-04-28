@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 
 namespace SimpleBlobUtility
 {
@@ -7,5 +8,6 @@ namespace SimpleBlobUtility
     /// </summary>
     public partial class App : Application
     {
+        public Dictionary<string, string> currentViewFilesWithTempLocations = new Dictionary<string, string>();
     }
 }

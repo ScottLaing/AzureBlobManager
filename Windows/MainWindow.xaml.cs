@@ -4,6 +4,8 @@ using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -109,6 +111,8 @@ namespace SimpleBlobUtility.Windows
             {
                 return (false, "Please select a container in the drop down.", "");
             }
+
+            
             if (dgFilesList.SelectedCells[0].Item == null)
             {
                 return (false, "Please select a file to view.", "");
@@ -122,7 +126,17 @@ namespace SimpleBlobUtility.Windows
 
             var fileName = flid.FileName;
 
-            string tempFilePath = FileUtils.GetTempFilePath(fileName);
+            var app = Application.Current as App;
+            string tempFilePath;
+            if (app.currentViewFilesWithTempLocations.ContainsKey(fileName) && File.Exists(app.currentViewFilesWithTempLocations[fileName]))
+            {
+                tempFilePath = app.currentViewFilesWithTempLocations[fileName];
+                return (true, "", tempFilePath);
+            }
+            else
+            {
+                tempFilePath = FileUtils.GetTempFilePath(fileName);
+            }
 
             // If the file name is not an empty string open it for saving.
             if (! string.IsNullOrEmpty(tempFilePath))
@@ -130,6 +144,7 @@ namespace SimpleBlobUtility.Windows
                 var results = await BlobUtility.DownloadBlobFile(containerName, fileName, tempFilePath);
                 if (results.Item1)
                 {
+                    app.currentViewFilesWithTempLocations[fileName] = tempFilePath;
                     return (true, "", tempFilePath);
                 }
                 else
@@ -137,7 +152,10 @@ namespace SimpleBlobUtility.Windows
                     return (false, results.Item2, "");
                 }
             }
-            return (false, "could not get temp file path", "");
+            else
+            {
+                return (false, "could not get temp file path", "");
+            }
         }
 
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
