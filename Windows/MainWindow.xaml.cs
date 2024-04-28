@@ -12,12 +12,12 @@ namespace SimpleBlobUtility.Windows
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class FilesViewerWindow : Window
+    public partial class MainWindow : Window
     {
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
 
-        public FilesViewerWindow()
+        public MainWindow()
         {
             InitializeComponent();
 
@@ -159,6 +159,19 @@ namespace SimpleBlobUtility.Windows
 
         private async void btnViewFile_Click(object sender, RoutedEventArgs e)
         {
+
+            if (_lastUsedContainer == "")
+            {
+                MessageBox.Show("Unclear of which container to use, cannot view.");
+                return;
+            }
+
+            if (dgFilesList.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a file to view.");
+                return;
+            }
+
             var result = await AttemptDownloadFileToTempFolder();
 
             if (!result.success)
