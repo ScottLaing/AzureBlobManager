@@ -23,4 +23,10 @@
     <Resource Include="Images\CloudFileServiceConfiguration.ico" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Controls\DeleteFileViewbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

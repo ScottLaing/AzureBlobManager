@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#0B7A75"
-        Title="Blob Files" Height="360" Width="594">
+        Title="Blob Files" Height="360" Width="601">
     <Grid>
 
         <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
@@ -24,7 +24,7 @@
         </Button>
         
         <Button x:Name="btnDelete" Click="btnDelete_Click"  Width="35" ToolTip="Delete Selected File"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
-            <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
+            <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
         </Button>
 
         <Button x:Name="btnRefresh2" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="550,20,0,0" >
@@ -36,7 +36,7 @@
         <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="159,20,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
         <Button x:Name="btnListFiles" Content="List Files" HorizontalAlignment="Left" Margin="589,44,0,0" VerticalAlignment="Top" Height="35" Width="94" Click="btnListFiles_Click" FontSize="16" Visibility="Hidden"/>
 
-        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,15,20" MouseDoubleClick="dgFilesList_MouseDoubleClick" FontSize="16" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
+        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,10,20" MouseDoubleClick="dgFilesList_MouseDoubleClick" FontSize="16" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />
