@@ -4,7 +4,6 @@ using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,12 +27,6 @@ namespace SimpleBlobUtility.Windows
             {
                 cmbContainers.ItemsSource = containers;
             }
- 
-        }
-
-        private void btnSelect_Click(object sender, RoutedEventArgs e)
-        {
-           
         }
 
         private void btnListContainers_Click(object sender, RoutedEventArgs e)
@@ -228,16 +221,6 @@ namespace SimpleBlobUtility.Windows
             await ListContainerFiles();
         }
 
-        private void btnRefresh2_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void UploadButtonViewbox_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             string? containerName = this.cmbContainers.SelectedItem as string;
@@ -272,7 +255,6 @@ namespace SimpleBlobUtility.Windows
             {
                 MessageBox.Show($"Error occurred with deleting: {results.Item2}");
             }
-
         }
     }
 }
