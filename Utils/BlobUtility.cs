@@ -48,6 +48,44 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
+        public static async Task<(bool success, string errorInfo)> DeleteBlobFile(string containerName, string fileName)
+        {
+            bool res = true;
+            string errors = "";
+            try
+            {
+                // Replace with your connection string and container/blob names
+                if (BlobConnectionString == null)
+                {
+                    return (false, "blob connection string is null");
+                }
+
+                string connectionString = BlobConnectionString;
+                string blobName = fileName;
+
+                BlobContainerClient containerClient = new BlobContainerClient(connectionString, containerName);
+                BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+                // This will delete the blob if it exists and include snapshots (optional)
+                bool deleted = await blobClient.DeleteIfExistsAsync(Azure.Storage.Blobs.Models.DeleteSnapshotsOption.IncludeSnapshots);
+
+                if (deleted)
+                {
+                    return (true, "Blob deleted successfully!");
+                }
+                else
+                {
+                    return (false, "Blob not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                errors = ex.Message;
+                res = false;
+            }
+            return (res, errors);
+        }
+
         public static async Task<(bool success, string errorInfo)> DownloadBlobFile(string containerName, string fileName, string downloadFilePath)
         {
             bool res = true;

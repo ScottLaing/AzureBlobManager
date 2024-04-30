@@ -11,18 +11,23 @@
         Title="Blob Files" Height="360" Width="594">
     <Grid>
 
-        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="400,20,0,0" Width="35" ToolTip="Open File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
             <controls:OpenFileViewbox></controls:OpenFileViewbox>
         </Button>
 
-        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="440,20,0,0" Width="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="430,20,0,0" Width="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
-        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="480,20,0,0" Width="35" ToolTip="Download File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="470,20,0,0" Width="35" ToolTip="Download File"  VerticalAlignment="Top" HorizontalAlignment="Left" >
             <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
         </Button>
-        <Button x:Name="btnRefresh2" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="520,20,0,0" >
+        
+        <Button x:Name="btnDelete" Click="btnDelete_Click"  Width="35" ToolTip="Delete Selected File"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
+            <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
+        </Button>
+
+        <Button x:Name="btnRefresh2" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="550,20,0,0" >
             <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
         </Button>
 

@@ -237,5 +237,42 @@ namespace SimpleBlobUtility.Windows
         {
 
         }
+
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            string? containerName = this.cmbContainers.SelectedItem as string;
+            if (containerName == null)
+            {
+                MessageBox.Show("Please select a container in the drop down");
+                return;
+            }
+
+            if (dgFilesList.SelectedCells[0].Item == null)
+            {
+                MessageBox.Show("Could not get current grid row, is grid empty?");
+                return;
+            }
+
+            var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
+            if (flid == null)
+            {
+                MessageBox.Show("Grid row source does not appear to be a valid Cloud Blob object");
+                return;
+            }
+
+            var fileName = flid.FileName;
+
+            var results = await BlobUtility.DeleteBlobFile(containerName, fileName);
+            if (results.Item1)
+            {
+                MessageBox.Show("File deleted successfully");
+                await ListContainerFiles();
+            }
+            else
+            {
+                MessageBox.Show($"Error occurred with deleting: {results.Item2}");
+            }
+
+        }
     }
 }
