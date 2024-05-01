@@ -52,10 +52,9 @@ namespace SimpleBlobUtility.Windows
 
         private async Task AttemptDownloadFile()
         {
-            string? containerName = this.cmbContainers.SelectedItem as string;
-            if (containerName == null)
+            if (dgFilesList.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select a container in the drop down");
+                MessageBox.Show("Please select a file to download.");
                 return;
             }
 
@@ -73,6 +72,12 @@ namespace SimpleBlobUtility.Windows
             }
 
             var fileName = flid.FileName;
+            var containerNameForFile = flid.Container;
+            if (string.IsNullOrWhiteSpace(containerNameForFile))
+            {
+                MessageBox.Show("Could not get the container name from file item.");
+                return;
+            }   
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "All Files|*.*|Text Files|*.txt|JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
@@ -83,7 +88,7 @@ namespace SimpleBlobUtility.Windows
             // If the file name is not an empty string open it for saving.
             if (saveFileDialog1.FileName != "")
             {
-                var downloadFile = BlobUtility.DownloadBlobFile(containerName, fileName, saveFileDialog1.FileName);
+                var downloadFile = BlobUtility.DownloadBlobFile(containerNameForFile, fileName, saveFileDialog1.FileName);
                 var results = await downloadFile;
                 if (results.Item1)
                 {
