@@ -4,7 +4,7 @@ namespace SimpleBlobUtility.Dtos
 {
     public class FileListItemDto
     {
-        public string FileName { get; set; }
+        public string FileName { get; set; } = "";
         public long ? FileSize { get; set; }
         public DateTimeOffset? LastModified { get; set; }
         public DateTime? LastModifiedFriendly
@@ -18,5 +18,6 @@ namespace SimpleBlobUtility.Dtos
                 return null;
             }
         }
+        public string Container { get; set; } = "";
     }
 }

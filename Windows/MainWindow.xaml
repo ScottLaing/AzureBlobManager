@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#0B7A75"
-        Title="Blob Files" Height="360" Width="601">
+        Title="Blob Files" Height="360" Width="625">
     <Grid>
         <Label Content="Choose Container:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="159,20,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
@@ -29,7 +29,7 @@
             <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnRefresh2" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="550,20,0,0" >
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="550,20,0,0" >
             <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
         </Button>
 
@@ -47,6 +47,7 @@
                 <DataGridTextColumn Binding="{Binding FileName}" Header="File Name" Width="250" />
                 <DataGridTextColumn Binding="{Binding FileSize}" Header="File Size" Width="100"/>
                 <DataGridTextColumn Binding="{Binding LastModifiedFriendly}" Header="Last Modified" Width="175"/>
+                <DataGridTextColumn Binding="{Binding Container}" Header="Container" Width="200" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

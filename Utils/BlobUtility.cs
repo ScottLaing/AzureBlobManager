@@ -137,6 +137,7 @@ namespace SimpleBlobUtility.Utils
                         FileName = f.Name
                         , LastModified = lastMod
                         , FileSize = len
+                        , Container = containerName
                     });
                 }
             }
