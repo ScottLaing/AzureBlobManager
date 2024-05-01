@@ -77,16 +77,14 @@ namespace SimpleBlobUtility.Windows
             {
                 MessageBox.Show("Could not get the container name from file item.");
                 return;
-            }   
+            }
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "All Files|*.*|Text Files|*.txt|JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
-            saveFileDialog1.Title = "Save File to Local";
-            saveFileDialog1.FileName = fileName;
-            saveFileDialog1.ShowDialog();
+            SaveFileDialog saveFileDialog1;
+            string chosenFileName;
+            GetFileUsingFileDialog(fileName, out saveFileDialog1, out chosenFileName);
 
             // If the file name is not an empty string open it for saving.
-            if (saveFileDialog1.FileName != "")
+            if (chosenFileName != "")
             {
                 var downloadFile = BlobUtility.DownloadBlobFile(containerNameForFile, fileName, saveFileDialog1.FileName);
                 var results = await downloadFile;
@@ -101,6 +99,22 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        private static void GetFileUsingFileDialog(string fileName, out SaveFileDialog saveFileDialog1, out string chosenFileName)
+        {
+            saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "All Files|*.*|Text Files|*.txt|JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
+            saveFileDialog1.Title = "Save File to Local";
+            saveFileDialog1.FileName = fileName;
+            var choice = saveFileDialog1.ShowDialog();
+            if (choice == true)
+            {
+                chosenFileName = saveFileDialog1.FileName;
+            }
+            else
+            {
+                chosenFileName = "";
+            }
+        }
 
         private async Task<(bool success, string moreInfo, string downloadedFilePath)> AttemptDownloadFileToTempFolder()
         {
