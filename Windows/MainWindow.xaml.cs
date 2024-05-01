@@ -79,52 +79,31 @@ namespace SimpleBlobUtility.Windows
                 return;
             }
 
-            SaveFileDialog saveFileDialog1;
-            string chosenFileName;
-            GetFileUsingFileDialog(fileName, out saveFileDialog1, out chosenFileName);
+            string chosenFileName = FileUtils.GetFileUsingFileDialog(fileName);
 
             // If the file name is not an empty string open it for saving.
-            if (chosenFileName != "")
+            if (! string.IsNullOrWhiteSpace(chosenFileName))
             {
-                var downloadFile = BlobUtility.DownloadBlobFile(containerNameForFile, fileName, saveFileDialog1.FileName);
+                var downloadFile = BlobUtility.DownloadBlobFile(containerNameForFile, fileName, chosenFileName);
                 var results = await downloadFile;
-                if (results.Item1)
+                if (results.success)
                 {
                     MessageBox.Show("File downloaded successfully");
                 }
                 else
                 {
-                    MessageBox.Show($"Error occurred: {results.Item2}");
+                    MessageBox.Show($"Error occurred: {results.errorInfo}");
                 }
-            }
-        }
-
-        private static void GetFileUsingFileDialog(string fileName, out SaveFileDialog saveFileDialog1, out string chosenFileName)
-        {
-            saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "All Files|*.*|Text Files|*.txt|JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
-            saveFileDialog1.Title = "Save File to Local";
-            saveFileDialog1.FileName = fileName;
-            var choice = saveFileDialog1.ShowDialog();
-            if (choice == true)
-            {
-                chosenFileName = saveFileDialog1.FileName;
-            }
-            else
-            {
-                chosenFileName = "";
             }
         }
 
         private async Task<(bool success, string moreInfo, string downloadedFilePath)> AttemptDownloadFileToTempFolder()
         {
-            string? containerName = this.cmbContainers.SelectedItem as string;
-            if (containerName == null)
+            if (dgFilesList.SelectedIndex == -1)
             {
-                return (false, "Please select a container in the drop down.", "");
+                return (false, "Please select a file to view.", "");
             }
 
-            
             if (dgFilesList.SelectedCells[0].Item == null)
             {
                 return (false, "Please select a file to view.", "");
@@ -137,6 +116,11 @@ namespace SimpleBlobUtility.Windows
             }
 
             var fileName = flid.FileName;
+            string containerName = flid.Container;
+            if (string.IsNullOrWhiteSpace(containerName))
+            {
+                return (false, "Could not get the container name from file item.", "");
+            }
 
             var app = Application.Current as App;
             string tempFilePath;
@@ -273,6 +257,15 @@ namespace SimpleBlobUtility.Windows
             else
             {
                 MessageBox.Show($"Error occurred with deleting: {results.Item2}");
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var app = Application.Current as App;
+            if (app != null)
+            {
+                app.Cleanup();
             }
         }
     }

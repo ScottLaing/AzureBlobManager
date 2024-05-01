@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
 
 namespace AzureBlobsAccessor.Utils
@@ -33,6 +34,26 @@ namespace AzureBlobsAccessor.Utils
             // Get random integer 
             long randomLong = random.NextInt64(min, max);
             return randomLong;
+        }
+
+        public static string GetFileUsingFileDialog(string fileName)
+        {
+            string chosenFileName;
+            SaveFileDialog saveFileDialog1;
+            saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "All Files|*.*|Text Files|*.txt|JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
+            saveFileDialog1.Title = "Save File to Local";
+            saveFileDialog1.FileName = fileName;
+            var choice = saveFileDialog1.ShowDialog();
+            if (choice == true)
+            {
+                chosenFileName = saveFileDialog1.FileName;
+            }
+            else
+            {
+                chosenFileName = "";
+            }
+            return chosenFileName;
         }
     }
 }

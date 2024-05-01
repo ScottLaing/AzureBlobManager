@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleBlobUtility"
                 xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
+        Closing="Window_Closing"
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#0B7A75"
