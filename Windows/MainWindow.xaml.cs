@@ -1,5 +1,4 @@
 ﻿using AzureBlobsAccessor.Utils;
-using Microsoft.Win32;
 using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
@@ -17,6 +16,8 @@ namespace SimpleBlobUtility.Windows
     {
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
+
+        public App? App =>  Application.Current as App;
 
         public MainWindow()
         {
@@ -41,6 +42,12 @@ namespace SimpleBlobUtility.Windows
 
         private async Task ListContainerFiles()
         {
+            if (this.cmbContainers.SelectedIndex == -1)
+            {
+                MessageBox.Show("No container item chosen or no containers available (create some in Azure Portal?)");
+                return;
+            }
+
             string? containerName = this.cmbContainers.SelectedItem as string;
             if (containerName != null)
             {
@@ -50,120 +57,23 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
-        private async Task AttemptDownloadFile()
-        {
-            if (dgFilesList.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a file to download.");
-                return;
-            }
 
-            if (dgFilesList.SelectedCells[0].Item == null)
-            {
-                MessageBox.Show("Could not get current grid row, is grid empty?");
-                return;
-            }
-
-            var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
-            if (flid == null)
-            {
-                MessageBox.Show("Grid row source does not appear to be a valid Cloud Blob object");
-                return;
-            }
-
-            var fileName = flid.FileName;
-            var containerNameForFile = flid.Container;
-            if (string.IsNullOrWhiteSpace(containerNameForFile))
-            {
-                MessageBox.Show("Could not get the container name from file item.");
-                return;
-            }
-
-            string chosenFileName = FileUtils.GetFileUsingFileDialog(fileName);
-
-            // If the file name is not an empty string open it for saving.
-            if (! string.IsNullOrWhiteSpace(chosenFileName))
-            {
-                var downloadFile = BlobUtility.DownloadBlobFile(containerNameForFile, fileName, chosenFileName);
-                var results = await downloadFile;
-                if (results.success)
-                {
-                    MessageBox.Show("File downloaded successfully");
-                }
-                else
-                {
-                    MessageBox.Show($"Error occurred: {results.errorInfo}");
-                }
-            }
-        }
-
-        private async Task<(bool success, string moreInfo, string downloadedFilePath)> AttemptDownloadFileToTempFolder()
-        {
-            if (dgFilesList.SelectedIndex == -1)
-            {
-                return (false, "Please select a file to view.", "");
-            }
-
-            if (dgFilesList.SelectedCells[0].Item == null)
-            {
-                return (false, "Please select a file to view.", "");
-            }
-
-            var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
-            if (flid == null)
-            {
-                return (false, "File selection does not appear to map to a valid Cloud Blob object", "");
-            }
-
-            var fileName = flid.FileName;
-            string containerName = flid.Container;
-            if (string.IsNullOrWhiteSpace(containerName))
-            {
-                return (false, "Could not get the container name from file item.", "");
-            }
-
-            var app = Application.Current as App;
-            string tempFilePath;
-            if (app.currentViewFilesWithTempLocations.ContainsKey(fileName) && File.Exists(app.currentViewFilesWithTempLocations[fileName]))
-            {
-                tempFilePath = app.currentViewFilesWithTempLocations[fileName];
-                return (true, "", tempFilePath);
-            }
-            else
-            {
-                tempFilePath = FileUtils.GetTempFilePath(fileName);
-            }
-
-            // If the file name is not an empty string open it for saving.
-            if (! string.IsNullOrEmpty(tempFilePath))
-            {
-                var results = await BlobUtility.DownloadBlobFile(containerName, fileName, tempFilePath);
-                if (results.Item1)
-                {
-                    app.currentViewFilesWithTempLocations[fileName] = tempFilePath;
-                    return (true, "", tempFilePath);
-                }
-                else
-                {
-                    return (false, results.Item2, "");
-                }
-            }
-            else
-            {
-                return (false, "could not get temp file path", "");
-            }
-        }
 
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
         {
-            var loading = AttemptDownloadFile();
+            var result = GetSelectedFileAndContainerName();
+
+            if (result.exit)
+            {
+                return;
+            }
+            var loading = FileUtils.AttemptDownloadFile(result.fileName, result.containerName);
             await loading;
         }
 
         private async void dgFilesList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var loading = AttemptDownloadFile();
-            await loading;
+            btnDownloadSelectedFile_Click(new object(), new RoutedEventArgs());
         }
 
         private async void cmbContainers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -173,27 +83,25 @@ namespace SimpleBlobUtility.Windows
 
         private async void btnViewFile_Click(object sender, RoutedEventArgs e)
         {
+            var result = GetSelectedFileAndContainerName();
 
-            if (_lastUsedContainer == "")
+            if (result.exit)
             {
-                MessageBox.Show("Unclear of which container to use, cannot view.");
+                if (!string.IsNullOrWhiteSpace(result.errorMsg))
+                {
+                    MessageBox.Show(result.errorMsg);
+                }
                 return;
             }
 
-            if (dgFilesList.SelectedIndex == -1)
+            var result2 = await FileUtils.AttemptDownloadFileToTempFolder(result.fileName, result.containerName);
+
+            if (!result2.success)
             {
-                MessageBox.Show("Please select a file to view.");
+                MessageBox.Show(result2.moreInfo);
                 return;
             }
-
-            var result = await AttemptDownloadFileToTempFolder();
-
-            if (!result.success)
-            {
-                MessageBox.Show(result.moreInfo);
-                return;
-            }
-            else if (string.IsNullOrEmpty(result.downloadedFilePath))
+            else if (string.IsNullOrEmpty(result2.downloadedFilePath))
             {
                 MessageBox.Show("Could not get temp file path");
                 return;
@@ -201,7 +109,7 @@ namespace SimpleBlobUtility.Windows
             else
             {
                 ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = result.downloadedFilePath;
+                startInfo.FileName = result2.downloadedFilePath;
                 startInfo.UseShellExecute = true; // Let the OS handle opening with default app
 
                 Process.Start(startInfo);
@@ -210,7 +118,7 @@ namespace SimpleBlobUtility.Windows
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
-            if (_lastUsedContainer == "")
+            if (string.IsNullOrWhiteSpace(_lastUsedContainer))
             {
                 MessageBox.Show("Please select a container to upload to.");
                 return;
@@ -226,43 +134,70 @@ namespace SimpleBlobUtility.Windows
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            string? containerName = this.cmbContainers.SelectedItem as string;
-            if (containerName == null)
+            var result = GetSelectedFileAndContainerName();
+
+            if (result.exit)
             {
-                MessageBox.Show("Please select a container in the drop down");
+                if (!string.IsNullOrWhiteSpace(result.errorMsg))
+                {
+                    MessageBox.Show(result.errorMsg);
+                }
                 return;
             }
 
-            if (dgFilesList.SelectedCells[0].Item == null)
-            {
-                MessageBox.Show("Could not get current grid row, is grid empty?");
-                return;
-            }
-
-            var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
-            if (flid == null)
-            {
-                MessageBox.Show("Grid row source does not appear to be a valid Cloud Blob object");
-                return;
-            }
-
-            var fileName = flid.FileName;
-
-            var results = await BlobUtility.DeleteBlobFile(containerName, fileName);
-            if (results.Item1)
+            var results = await BlobUtility.DeleteBlobFile(result.containerName, result.fileName);
+            if (results.success)
             {
                 MessageBox.Show("File deleted successfully");
                 await ListContainerFiles();
             }
             else
             {
-                MessageBox.Show($"Error occurred with deleting: {results.Item2}");
+                MessageBox.Show($"Error occurred with deleting: {results.errorInfo}");
             }
+        }
+
+        private (bool exit, string errorMsg, string fileName, string containerName) GetSelectedFileAndContainerName()
+        {
+            bool exit = false;
+            string fileName = "";
+            string errorMsg = "";
+            string containerName = "";
+
+            if (dgFilesList.SelectedIndex == -1)
+            {
+                errorMsg = ("Could not get current grid row, is grid empty?");
+                exit = true;
+            }
+
+            if (dgFilesList.SelectedCells[0].Item == null)
+            {
+                errorMsg =("Could not get current grid row, is grid empty?");
+                exit = true;
+            }
+
+            var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
+            if (flid == null)
+            {
+                errorMsg = ("Grid row source does not appear to be a valid Cloud Blob object");
+                exit = true;
+            }
+            else
+            {
+                fileName = flid.FileName;
+                containerName = flid.Container;
+                if (string.IsNullOrWhiteSpace(containerName))
+                {
+                    errorMsg = ("Could not get the container name from file item.");
+                    exit = true;
+                }
+            }
+            return (exit, errorMsg, fileName, containerName);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var app = Application.Current as App;
+            var app = App;
             if (app != null)
             {
                 app.Cleanup();

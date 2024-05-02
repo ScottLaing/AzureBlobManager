@@ -1,12 +1,72 @@
 ﻿using Microsoft.Win32;
+using SimpleBlobUtility.Utils;
+using SimpleBlobUtility;
 using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace AzureBlobsAccessor.Utils
 {
     public class FileUtils
     {
         private static Random random = new Random();
+
+        public static App? App => Application.Current as App;
+
+        public static async Task AttemptDownloadFile(string fileName, string containerName)
+        {
+            string chosenFileName = FileUtils.GetFileUsingFileDialog(fileName);
+
+            // If the file name is not an empty string open it for saving.
+            if (!string.IsNullOrWhiteSpace(chosenFileName))
+            {
+                var downloadFile = BlobUtility.DownloadBlobFile(containerName, fileName, chosenFileName);
+                var results = await downloadFile;
+                if (results.success)
+                {
+                    MessageBox.Show($"{fileName} downloaded successfully");
+                }
+                else
+                {
+                    MessageBox.Show($"Error with downloading {fileName}: {results.errorInfo}");
+                }
+            }
+        }
+
+        public static async Task<(bool success, string moreInfo, string downloadedFilePath)> AttemptDownloadFileToTempFolder(string fileName, string containerName)
+        {
+            var app = App;
+            string tempFilePath;
+            if (app.currentViewFilesWithTempLocations.ContainsKey(fileName) && File.Exists(app.currentViewFilesWithTempLocations[fileName]))
+            {
+                tempFilePath = app.currentViewFilesWithTempLocations[fileName];
+                return (true, "", tempFilePath);
+            }
+            else
+            {
+                tempFilePath = FileUtils.GetTempFilePath(fileName);
+            }
+
+            // If the file name is not an empty string open it for saving.
+            if (!string.IsNullOrEmpty(tempFilePath))
+            {
+                var results = await BlobUtility.DownloadBlobFile(containerName, fileName, tempFilePath);
+                if (results.Item1)
+                {
+                    app.currentViewFilesWithTempLocations[fileName] = tempFilePath;
+                    return (true, "", tempFilePath);
+                }
+                else
+                {
+                    return (false, results.Item2, "");
+                }
+            }
+            else
+            {
+                return (false, "could not get temp file path", "");
+            }
+        }
 
         public static string GetTempFilePath(string filename)
         {
