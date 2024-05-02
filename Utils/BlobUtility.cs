@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using static SimpleBlobUtility.Constants;
+using System.Windows;
 
 namespace SimpleBlobUtility.Utils
 {
@@ -88,23 +90,39 @@ namespace SimpleBlobUtility.Utils
 
         public static async Task<(bool success, string errorInfo)> DownloadBlobFile(string containerName, string fileName, string downloadFilePath)
         {
-            bool res = true;
+            bool res = false;
             string errors = "";
-            var result = new List<FileListItemDto>();
+
+            var connectionString = BlobConnectionString;
+            // test params for validity
+            if (string.IsNullOrEmpty(containerName) || string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(downloadFilePath))
+            {
+                return (false, "Missing container name or file name or download file location in download blob file internal call, cannot continue.");
+            }
+
+            // Create a BlobServiceClient using the connection string
+            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+
+            // Get a reference to the container
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+            // Get a reference to the blob
+            BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
+            // Download the blob to a local file
             try
             {
-                var connectionString = BlobConnectionString;
-                var storageAccount = CloudStorageAccount.Parse(connectionString);
-                var blobClient = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = blobClient.GetContainerReference(containerName);
-                CloudBlockBlob blob = container.GetBlockBlobReference(fileName);
-                var task1 = blob.DownloadToFileAsync(downloadFilePath, FileMode.Create);
-                await task1;
+                using (FileStream downloadFileStream = File.OpenWrite(downloadFilePath))
+                {
+                    await blobClient.DownloadToAsync(downloadFileStream);
+                    res = true;
+                    errors = ($"{fileName} Blob downloaded successfully!");
+                }
             }
             catch (Exception ex)
             {
-                errors = ex.Message;
                 res = false;
+                errors = ($"Error downloading blob {fileName}: {ex.Message}");
             }
             return (res, errors);
         }

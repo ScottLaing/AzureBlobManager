@@ -21,7 +21,7 @@ namespace SimpleBlobUtility.Windows
             lblResult.Content = "";
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
             var txtVal = this.txtFilePath.Text;
 
@@ -83,11 +83,6 @@ namespace SimpleBlobUtility.Windows
             {
                 txtFilePath.Text = dlg.FileName; 
             }
-        }
-
-        private void btnListContainers_Click(object sender, RoutedEventArgs e)
-        {
-            var containers = BlobUtility.GetContainers(out string errs);
         }
     }
 }

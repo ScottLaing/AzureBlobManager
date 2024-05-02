@@ -3,9 +3,9 @@ using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+
 
 namespace SimpleBlobUtility.Windows
 {
@@ -30,16 +30,6 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
-        private void btnListContainers_Click(object sender, RoutedEventArgs e)
-        {
-            var containers = BlobUtility.GetContainers(out string errs);
-        }
-
-        private async void btnListFiles_Click(object sender, RoutedEventArgs e)
-        {
-            await ListContainerFiles();
-        }
-
         private async Task ListContainerFiles()
         {
             if (this.cmbContainers.SelectedIndex == -1)
@@ -56,8 +46,6 @@ namespace SimpleBlobUtility.Windows
                 this._lastUsedContainer = containerName;
             }
         }
-
-
 
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
         {

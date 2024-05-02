@@ -14,7 +14,7 @@
         Title="Upload File" Height="175" Width="573">
     <Grid>
 
-        <Button x:Name="btnUploadFile" Click="Button_Click" Margin="0,9,0,0" Width="35" Height="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Stretch" >
+        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,0,0" Width="35" Height="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Stretch" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
