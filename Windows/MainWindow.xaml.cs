@@ -207,8 +207,8 @@ namespace SimpleBlobUtility.Windows
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            //var uploadFileWindow = new UploadFileWindow(_lastUsedContainer);
-            //var resp = uploadFileWindow.ShowDialog();
+            var settingsWindow = new SettingsWindow();
+            var resp = settingsWindow.ShowDialog();
         }
     }
 }
