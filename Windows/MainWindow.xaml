@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#0B7A75"
-        Title="Blob Files" Height="360" Width="625">
+        Title="Azure Blob File Manager" Height="360" Width="713">
     <Grid>
         <Label Content="Choose Container:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="159,20,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
@@ -26,12 +26,16 @@
             <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
         </Button>
         
-        <Button x:Name="btnDelete" Click="btnDelete_Click"  Width="35" ToolTip="Delete Selected File"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
+        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected File"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
             <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  Width="35" ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="550,20,0,0" >
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh Files"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="553,20,0,0" >
             <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
+        </Button>
+
+        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="596,20,0,0" >
+            <controls:SettingsViewbox Height="31" Width="35"></controls:SettingsViewbox>
         </Button>
 
         <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,10,20" MouseDoubleClick="dgFilesList_MouseDoubleClick" FontSize="16" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >

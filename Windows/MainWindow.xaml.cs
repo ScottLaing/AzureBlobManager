@@ -204,5 +204,11 @@ namespace SimpleBlobUtility.Windows
                 app.Cleanup();
             }
         }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            //var uploadFileWindow = new UploadFileWindow(_lastUsedContainer);
+            //var resp = uploadFileWindow.ShowDialog();
+        }
     }
 }

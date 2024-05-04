@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\SettingsViewbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\DeleteFileViewbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
