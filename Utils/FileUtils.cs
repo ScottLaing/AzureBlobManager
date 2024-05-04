@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AzureBlobsAccessor.Utils
+namespace SimpleBlobUtility.Utils
 {
     public class FileUtils
     {

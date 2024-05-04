@@ -1,20 +1,19 @@
 ﻿using Azure.Storage.Blobs;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+using Azure.Storage.Blobs.Models;
 using SimpleBlobUtility.Dtos;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
-using static SimpleBlobUtility.Constants;
-using System.Windows;
+
 
 namespace SimpleBlobUtility.Utils
 {
     public class BlobUtility
     {
         private static string? _blobConnectionString = null;
-        public static string? BlobConnectionString 
+        public static string BlobConnectionString 
         { 
             get
             {
@@ -23,6 +22,10 @@ namespace SimpleBlobUtility.Utils
                     return _blobConnectionString;
                 }   
                 _blobConnectionString = Environment.GetEnvironmentVariable("AzureBlobConnectionString");
+                if (string.IsNullOrEmpty(_blobConnectionString))
+                {
+                    throw new InvalidOperationException("Azure ConnectionString is null or empty, cannot complete blob operation.");
+                }
                 return _blobConnectionString;
             } 
         }
@@ -53,15 +56,9 @@ namespace SimpleBlobUtility.Utils
         public static async Task<(bool success, string errorInfo)> DeleteBlobFile(string containerName, string fileName)
         {
             bool res = true;
-            string errors = "";
+            string errors = string.Empty;
             try
             {
-                // Replace with your connection string and container/blob names
-                if (BlobConnectionString == null)
-                {
-                    return (false, "blob connection string is null");
-                }
-
                 string connectionString = BlobConnectionString;
                 string blobName = fileName;
 
@@ -100,18 +97,13 @@ namespace SimpleBlobUtility.Utils
                 return (false, "Missing container name or file name or download file location in download blob file internal call, cannot continue.");
             }
 
-            // Create a BlobServiceClient using the connection string
-            BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-            // Get a reference to the container
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-
-            // Get a reference to the blob
-            BlobClient blobClient = containerClient.GetBlobClient(fileName);
-
             // Download the blob to a local file
             try
             {
+                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
                 using (FileStream downloadFileStream = File.OpenWrite(downloadFilePath))
                 {
                     await blobClient.DownloadToAsync(downloadFileStream);
@@ -127,44 +119,38 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
-        public static async Task<List<FileListItemDto>> ListFiles(string containerName)
+        public static async Task<(List<FileListItemDto> fileItemsList, string errors)> ListFiles(string containerName)
         {
-            bool res = true;
+            string connectionString = BlobConnectionString;
             var result = new List<FileListItemDto>();
-            string errors = string.Empty;
+            string errors = "";
             try
             {
-                var connectionString = BlobConnectionString;
-                var serviceClient = new BlobServiceClient(connectionString);
-                var containerClient = serviceClient.GetBlobContainerClient(containerName);
-                var files = containerClient.GetBlobs();
-                var storageAccount = CloudStorageAccount.Parse(connectionString);
-                var blobClient = storageAccount.CreateCloudBlobClient();
-                CloudBlobContainer container = blobClient.GetContainerReference(containerName);
 
-                foreach (var f in files)
+                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+
+                await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
                 {
-                    var meta = f.Metadata;
-                    var props = f.Properties;
+                    //var meta = blobItem.Metadata;
+                    var props = blobItem.Properties;
                     var len = props.ContentLength;
                     var lastMod = props.LastModified;
-                    CloudBlockBlob blob = container.GetBlockBlobReference(f.Name);
 
                     result.Add(new FileListItemDto()
                     {
-                        FileName = f.Name
-                        , LastModified = lastMod
-                        , FileSize = len
-                        , Container = containerName
+                        FileName = blobItem.Name,
+                        LastModified = lastMod,
+                        FileSize = len,
+                        Container = containerName
                     });
                 }
             }
             catch (Exception ex)
             {
                 errors = ex.Message;
-                res = false;
             }
-            return result;
+            return (result, errors);
         }
 
         public static List<string> GetContainers(out string errors)
