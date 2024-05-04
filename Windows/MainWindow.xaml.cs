@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using static SimpleBlobUtility.Constants.UIMessages;
 
 
 namespace SimpleBlobUtility.Windows
@@ -13,17 +14,6 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const string GridRowEmptyError = "Could not get current grid row, is grid empty?";
-        private const string GridRowObjectNotValid = "Grid row source does not appear to be a valid Cloud Blob object.";
-        private const string FileItemNoContainerName = "Could not get the container name from file item.";
-        private const string ContainerNotSelected = "No container item chosen or no containers available (create some in Azure Portal?).";
-        private const string NotGetTempFilePathError = "Could not get temp file path.";
-        private const string NoContainerSelected = "Please select a container to upload to.";
-        private const string FileDeletedSuccess = "File deleted successfully.";
-        private const string DeletionError = "Error occurred with deleting: {0}.";
-        private const string ErrorGettingFilesList = "Error occurred with obtaining files list: {0}.";
-        private const string SomeErrorOccurred = "Some error occurred.";
-
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
 
@@ -175,6 +165,7 @@ namespace SimpleBlobUtility.Windows
             {
                 errorMsg = GridRowEmptyError;
                 errors = true;
+                return (errors, errorMsg, fileName, containerName);
             }
 
             var flid = dgFilesList.SelectedCells[0].Item as FileListItemDto;
@@ -182,6 +173,7 @@ namespace SimpleBlobUtility.Windows
             {
                 errorMsg = GridRowObjectNotValid;
                 errors = true;
+                return (errors, errorMsg, fileName, containerName);
             }
             else
             {

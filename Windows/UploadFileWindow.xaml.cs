@@ -4,15 +4,17 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UploadFileWindow.xaml
     /// </summary>
     public partial class UploadFileWindow : Window
     {
         private string _currentContainer;
+
         public UploadFileWindow(string currentContainer)
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace SimpleBlobUtility.Windows
 
             if (string.IsNullOrWhiteSpace(txtVal))
             {
-                MessageBox.Show("Please select a file to upload.");
+                MessageBox.Show(PleaseSelectFile);
                 return;
             }
 
@@ -35,7 +37,7 @@ namespace SimpleBlobUtility.Windows
 
             if (!File.Exists(txtVal))
             {
-                MessageBox.Show("File does not appear to exist. Please retry with a valid file name.");
+                MessageBox.Show( FileDoesNotExist );
                 return;
             }
             var fileName = Path.GetFileName(txtVal);
@@ -43,11 +45,12 @@ namespace SimpleBlobUtility.Windows
             var result = Task.Run(() => BlobUtility.SaveFile(fileName, txtVal, _currentContainer)).Result;
             if (!result.Item1)
             {
-                this.lblResult.Content = $"Trouble saving file to blob, {result.Item2}";
+                string msg = string.Format(TroubleSavingFile, result.Item2);
+                this.lblResult.Content = msg;
             }
             else
             {
-                this.lblResult.Content = $"{fileName} uploaded successfully, you may now close dialog if finished.";
+                this.lblResult.Content = string.Format(FileUploadedSuccessfully, fileName);
             }
         }
 
@@ -60,7 +63,7 @@ namespace SimpleBlobUtility.Windows
             string sep = string.Empty;
 
             var filter = string.Empty;
-            filter = "Text documents (*.txt)|*.txt|"; // Filter files by extension
+            filter = TextDocuments; // Filter files by extension
             filter += String.Format("{0} ({1})|{1}", "All Files", "*.*");
             sep = "|";
 

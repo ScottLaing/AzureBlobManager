@@ -8,7 +8,7 @@ using System.Windows;
 namespace SimpleBlobUtility.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
     public partial class SettingsWindow : Window
     {
