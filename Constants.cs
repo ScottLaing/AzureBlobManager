@@ -28,7 +28,7 @@
             public const string PleaseSelectFile = "Please select a file to upload to blob container.";
             public const string FileDoesNotExist = "File does not appear to exist. Please retry with a valid file name.";
             public const string TroubleSavingFile = "Trouble saving file to blob, {0}";
-            public const string FileUploadedSuccessfully = "{0} uploaded successfully, you may now close dialog if finished.";
+            public const string FileUploadedSuccessfully = "[{0}] uploaded successfully. You may now close dialog if finished.";
             public const string TextDocuments = "Text documents (*.txt)|*.txt|";
         }
 
