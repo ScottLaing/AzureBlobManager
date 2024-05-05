@@ -23,10 +23,27 @@ namespace SimpleBlobUtility.Windows
         {
             InitializeComponent();
 
+            RefreshContainersListDropDown();
+        }
+
+        private async void RefreshContainersListDropDown()
+        {
             var containers = BlobUtility.GetContainers(out string errs);
             if (string.IsNullOrWhiteSpace(errs))
             {
                 cmbContainers.ItemsSource = containers;
+                if (this.cmbContainers.Items.Count > 0)
+                {
+                    this.cmbContainers.SelectedIndex = 0;
+                    await ListContainerFiles();
+                }
+            }
+            else
+            {
+                MessageBox.Show(errs);
+                cmbContainers.ItemsSource = new List<string>();
+                dgFilesList.ItemsSource = new List<FileListItemDto>();
+                _lastUsedContainer = "";
             }
         }
 
@@ -202,6 +219,7 @@ namespace SimpleBlobUtility.Windows
         {
             var settingsWindow = new SettingsWindow();
             var resp = settingsWindow.ShowDialog();
+            RefreshContainersListDropDown();
         }
     }
 }
