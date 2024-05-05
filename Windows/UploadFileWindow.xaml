@@ -11,17 +11,17 @@
         MinHeight="175"
         MaxHeight="175"
         Background="#0B7A75"
-        Title="Upload File" Height="175" Width="573">
+        Title="Upload Blob [My Azure Blob Manager]" Height="175" Width="573" WindowStyle="ToolWindow">
     <Grid>
 
-        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,0,0" Width="35" Height="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Stretch" >
+        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,0,0" Width="35" Height="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Stretch" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
         <Label Content="File:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <TextBox x:Name="txtFilePath" Margin="50,53,70,0" Text="" VerticalAlignment="Top"  Height="30" FontSize="16" HorizontalAlignment="Stretch"/>
 
-        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,50,30,0" Width="35" ToolTip="Select File to Upload"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,50,30,0" Width="35" ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
         </Button>
 

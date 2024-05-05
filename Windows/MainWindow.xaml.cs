@@ -40,11 +40,17 @@ namespace SimpleBlobUtility.Windows
             }
             else
             {
-                MessageBox.Show(errs);
-                cmbContainers.ItemsSource = new List<string>();
-                dgFilesList.ItemsSource = new List<FileListItemDto>();
-                _lastUsedContainer = "";
+                MessageBox.Show("Trouble getting containers for Azure connection, possibly bad connection string or no containers created yet.");
+                //MessageBox.Show(errs);
+                ResetToEmptyDefaults();
             }
+        }
+
+        private void ResetToEmptyDefaults()
+        {
+            cmbContainers.ItemsSource = new List<string>();
+            dgFilesList.ItemsSource = new List<FileListItemDto>();
+            _lastUsedContainer = "";
         }
 
         private async Task ListContainerFiles()
