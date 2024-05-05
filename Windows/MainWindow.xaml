@@ -49,8 +49,8 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding FileName}" Header="File Name" Width="250" />
-                <DataGridTextColumn Binding="{Binding FileSize}" Header="File Size" Width="100"/>
+                <DataGridTextColumn Binding="{Binding FileName}" Header="Blob Name" Width="250" />
+                <DataGridTextColumn Binding="{Binding FileSize}" Header="Size" Width="100"/>
                 <DataGridTextColumn Binding="{Binding LastModifiedFriendly}" Header="Last Modified" Width="175"/>
                 <DataGridTextColumn Binding="{Binding Container}" Header="Container" Width="200" />
             </DataGrid.Columns>

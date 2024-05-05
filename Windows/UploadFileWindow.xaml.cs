@@ -1,4 +1,5 @@
-﻿using SimpleBlobUtility.Utils;
+﻿using Microsoft.Win32;
+using SimpleBlobUtility.Utils;
 using System;
 using System.Drawing.Imaging;
 using System.IO;
@@ -56,6 +57,17 @@ namespace SimpleBlobUtility.Windows
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog dlg = SetupDialog();
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                txtFilePath.Text = dlg.FileName;
+            }
+        }
+
+        private static OpenFileDialog SetupDialog()
+        {
             var dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.Filter = "";
 
@@ -80,12 +92,7 @@ namespace SimpleBlobUtility.Windows
 
             dlg.Filter = filter;
             dlg.FilterIndex = 2;
-            bool ?result = dlg.ShowDialog();
-
-            if (result == true)
-            {
-                txtFilePath.Text = dlg.FileName; 
-            }
+            return dlg;
         }
     }
 }

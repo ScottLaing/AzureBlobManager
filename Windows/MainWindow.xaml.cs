@@ -109,7 +109,7 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
-        private void btnUploadFile_Click(object sender, RoutedEventArgs e)
+        private async void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(_lastUsedContainer))
             {
@@ -118,6 +118,7 @@ namespace SimpleBlobUtility.Windows
             }
             var uploadFileWindow = new UploadFileWindow(_lastUsedContainer);
             var resp = uploadFileWindow.ShowDialog();
+            await ListContainerFiles();
         }
 
         private async void btnRefresh_Click(object sender, RoutedEventArgs e)
