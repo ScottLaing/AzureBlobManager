@@ -10,7 +10,7 @@
         MinWidth="400"
         MinHeight="250"
  
-        Background="#B3C5D7"
+        Background="#7392B7"
         Title="Settings [My Azure Blob Manager]" Height="250" Width="573" WindowStyle="ToolWindow">
     <Grid>
 

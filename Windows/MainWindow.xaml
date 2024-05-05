@@ -8,11 +8,11 @@
         Closing="Window_Closing"
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
-        Background="#0B7A75"
+        Background="#7392B7"
         Title="My Azure Blob Manager" Height="360" Width="713">
     <Grid>
-        <Label Content="Choose Container:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="159,20,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
+        <Label Content="Container:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="105,20,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
 
         <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
             <controls:OpenFileViewbox></controls:OpenFileViewbox>
