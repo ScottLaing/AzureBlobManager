@@ -7,11 +7,11 @@
                         xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
                 Icon="/Images/CloudFileServiceConfiguration.ico"
         mc:Ignorable="d"
-        MinWidth="200"
-        MinHeight="150"
-        MaxHeight="150"
+        MinWidth="400"
+        MinHeight="250"
+ 
         Background="#B3C5D7"
-        Title="Settings [My Azure Blob Manager]" Height="150" Width="573" WindowStyle="ToolWindow">
+        Title="Settings [My Azure Blob Manager]" Height="250" Width="573" WindowStyle="ToolWindow">
     <Grid>
 
         <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,20,0" Width="35" Height="35" ToolTip="Upload File"  VerticalAlignment="Top" HorizontalAlignment="Right" >
@@ -19,7 +19,7 @@
         </Button>
 
         <Label Content="Azure Blob Conn String:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="txtAzureConnString" Margin="190,53,20,0" Text="" VerticalAlignment="Top"  Height="30" FontSize="16" HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="txtAzureConnString" Margin="190,53,20,20" Text="" VerticalAlignment="Stretch" FontSize="16" TextWrapping="Wrap" AcceptsReturn="True"/>
 
     </Grid>
 </Window>

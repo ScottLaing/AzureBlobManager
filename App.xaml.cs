@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SimpleBlobUtility.Utils;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 
@@ -12,6 +13,12 @@ namespace SimpleBlobUtility
         public Dictionary<string, string> currentViewFilesWithTempLocations = new Dictionary<string, string>();
 
         private bool _cleanedup = false;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            BlobUtility.InitializeConnectionString(); // initialize the connection string, from environment variables currently.
+            base.OnStartup(e);
+        }
 
         protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
         {

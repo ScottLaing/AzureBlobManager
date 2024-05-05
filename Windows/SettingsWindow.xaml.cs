@@ -15,11 +15,13 @@ namespace SimpleBlobUtility.Windows
         public SettingsWindow()
         {
             InitializeComponent();
+            this.txtAzureConnString.Text = BlobUtility.BlobConnectionString;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            BlobUtility.BlobConnectionString = this.txtAzureConnString.Text;
+            this.Close();
         }
     }
 }

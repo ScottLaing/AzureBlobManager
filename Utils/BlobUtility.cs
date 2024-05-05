@@ -3,7 +3,6 @@ using Azure.Storage.Blobs.Models;
 using SimpleBlobUtility.Dtos;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -12,22 +11,11 @@ namespace SimpleBlobUtility.Utils
 {
     public class BlobUtility
     {
-        private static string? _blobConnectionString = null;
-        public static string BlobConnectionString 
-        { 
-            get
-            {
-                if (_blobConnectionString != null)
-                {
-                    return _blobConnectionString;
-                }   
-                _blobConnectionString = Environment.GetEnvironmentVariable("AzureBlobConnectionString");
-                if (string.IsNullOrEmpty(_blobConnectionString))
-                {
-                    throw new InvalidOperationException("Azure ConnectionString is null or empty, cannot complete blob operation.");
-                }
-                return _blobConnectionString;
-            } 
+        public static string? BlobConnectionString { get; set; } = "";
+
+        public static void InitializeConnectionString()
+        {
+            BlobConnectionString = Environment.GetEnvironmentVariable("AzureBlobConnectionString");
         }
 
         public static async Task<(bool, string)> SaveFile(string fileName, string filePath, string containerName)
@@ -59,7 +47,7 @@ namespace SimpleBlobUtility.Utils
             string errors = string.Empty;
             try
             {
-                string connectionString = BlobConnectionString;
+                var connectionString = BlobConnectionString;
                 string blobName = fileName;
 
                 BlobContainerClient containerClient = new BlobContainerClient(connectionString, containerName);
