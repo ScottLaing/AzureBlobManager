@@ -14,7 +14,7 @@
         Title="Upload Blob [My Azure Blob Manager]" Height="175" Width="573" WindowStyle="ToolWindow">
     <Grid>
 
-        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,0,0" Width="35" Height="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Stretch" >
+        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,70,0" Width="35" Height="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
