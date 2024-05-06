@@ -12,6 +12,16 @@ And set the value to your Azure Blob connection string.  You can find this in th
 
 Otherwise you will have to go into settings dialog and reset the connection string manually every time you run the app.
 
-![a desert image](https://scottclaing.net/img/image-lib/DSCN0047.JPG "a desert image")
+Sample screenshots of app (current versions may vary slightly as new features are added):
+
+https://scottclaing.net/img/azure-blob-main-page.png
+![main window](https://scottclaing.net/img/azure-blob-main-page.png "Main window")
+
+https://scottclaing.net/img/azure-blob-settings-page.png
+![settings window](https://scottclaing.net/img/azure-blob-settings-page.png "Settings window")
+
+https://scottclaing.net/img/azure-blob-upload-page.png
+![upload window](https://scottclaing.net/img/azure-blob-upload-page.png "Upload new blob window")
+
 
 :smiley: - Scott
