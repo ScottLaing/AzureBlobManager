@@ -25,13 +25,17 @@ namespace SimpleBlobUtility.Windows
             var connString = this.txtAzureConnString.Text.Trim();
             BlobUtility.BlobConnectionString = connString;
 
-            RegUtils.SaveValueToRegistry("BlobConnection", connString);
-
-            var result = RegUtils.GetValueFromRegistry("BlobConnection");
-
-            var same = result == connString;
+            if (chkSaveToRegistry.IsChecked == true)
+            {
+                RegUtils.SaveValueToRegistry("BlobConnection", connString);
+            }
 
             this.Close();
+        }
+
+        private void SaveButtonViewbox_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

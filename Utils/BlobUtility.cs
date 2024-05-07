@@ -13,7 +13,7 @@ namespace SimpleBlobUtility.Utils
     {
         public static string? BlobConnectionString { get; set; } = "";
 
-        public static void InitializeConnectionString()
+        public static void InitializeBlobConnStringFromEnvVariable()
         {
             BlobConnectionString = Environment.GetEnvironmentVariable("AzureBlobConnectionString");
         }

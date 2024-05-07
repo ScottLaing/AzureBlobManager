@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Win32;
-
+﻿using Microsoft.Win32;
+using SimpleBlobUtility;
+using System;
 
 namespace AzureBlobManager.Utils
 {
     public class RegUtils
     {
-        private static string appName = "AzureBlobManager58";  // Replace with your application name
+        public static string RegSubKey => $"Software\\{Constants.CompanyName}\\{Constants.RegistryAppName}";
 
         public static void SaveValueToRegistry(string keyName, string keyValue)
         {
-
             // Create the subkey if it doesn't exist
-            using (RegistryKey key = Registry.CurrentUser.CreateSubKey($"HKEY_CURRENT_USER\\Software\\{appName}"))
+            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(RegSubKey))
             {
                 // Set the value with appropriate data type
                 key.SetValue(keyName, keyValue, RegistryValueKind.String);
@@ -25,15 +20,24 @@ namespace AzureBlobManager.Utils
 
         public static string? GetValueFromRegistry(string keyName)
         {
-            string keyPath = @$"HKEY_CURRENT_USER\Software\{appName}";
-
-            object? registryValue = Registry.GetValue(keyPath, keyName, null);
-
             string? valueAsString = "";
 
-            if (registryValue != null)
+            try
             {
-                valueAsString = registryValue.ToString();
+                RegistryKey? key = Registry.CurrentUser.OpenSubKey(RegSubKey);
+
+                if (key != null)
+                {
+                    if (key.GetValue(keyName) != null)
+                    {
+                        valueAsString = (string?)key.GetValue(keyName);
+                    }
+                    key.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
             return valueAsString;
         }

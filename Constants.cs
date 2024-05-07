@@ -8,6 +8,10 @@
 
         public static bool EncryptNotes = true;
 
+        public static string CompanyName = "BrotwurstSoftware";
+        public static string RegistryAppName = "AzureBlobManager62";  // Replace with your application name
+
+
         public class AppGlobal
         {
             public static string ApplicationName = "Azure Blobs Accessor";

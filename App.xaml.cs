@@ -1,4 +1,5 @@
-﻿using SimpleBlobUtility.Utils;
+﻿using AzureBlobManager.Utils;
+using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -16,8 +17,23 @@ namespace SimpleBlobUtility
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            BlobUtility.InitializeConnectionString(); // initialize the connection string, from environment variables currently.
+            InitBlobConnString();
+
             base.OnStartup(e);
+        }
+
+        private static void InitBlobConnString()
+        {
+            BlobUtility.InitializeBlobConnStringFromEnvVariable(); // try to initialize the connection string, from environment variables first
+            // if not found, then check the registry for any saved connection settings.
+            if (string.IsNullOrWhiteSpace(BlobUtility.BlobConnectionString))
+            {
+                var result = RegUtils.GetValueFromRegistry("BlobConnection");
+                if (!string.IsNullOrWhiteSpace(result))
+                {
+                    BlobUtility.BlobConnectionString = result;
+                }
+            }
         }
 
         protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
