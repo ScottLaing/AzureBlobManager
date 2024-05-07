@@ -1,4 +1,6 @@
-﻿using SimpleBlobUtility.Utils;
+﻿using AzureBlobManager.Utils;
+using Microsoft.Win32;
+using SimpleBlobUtility.Utils;
 using System;
 using System.Drawing.Imaging;
 using System.IO;
@@ -20,7 +22,15 @@ namespace SimpleBlobUtility.Windows
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            BlobUtility.BlobConnectionString = this.txtAzureConnString.Text;
+            var connString = this.txtAzureConnString.Text.Trim();
+            BlobUtility.BlobConnectionString = connString;
+
+            RegUtils.SaveValueToRegistry("BlobConnection", connString);
+
+            var result = RegUtils.GetValueFromRegistry("BlobConnection");
+
+            var same = result == connString;
+
             this.Close();
         }
     }
