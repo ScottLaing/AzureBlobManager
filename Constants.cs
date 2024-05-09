@@ -1,4 +1,6 @@
-﻿namespace SimpleBlobUtility
+﻿using System;
+
+namespace SimpleBlobUtility
 {
     public class Constants
     {
@@ -9,7 +11,7 @@
         public static bool EncryptNotes = true;
 
         public static string CompanyName = "BrotwurstSoftware";
-        public static string RegistryAppName = "AzureBlobManager62";  // Replace with your application name
+        public static string RegistryAppName = "AzureBlobManager62"; 
 
 
         public class AppGlobal
@@ -34,6 +36,8 @@
             public const string TroubleSavingFile = "Trouble saving file to blob, {0}";
             public const string FileUploadedSuccessfully = "[{0}] uploaded successfully. You may now close dialog if finished.";
             public const string TextDocuments = "Text documents (*.txt)|*.txt|";
+            public static readonly string SetupDialogAllFilesSettings = String.Format("{0} ({1})|{1}", "All Files", "*.*");
+            public const string TroubleGettingContainers = "Trouble getting containers for Azure connection, possibly bad connection string or no containers created yet.";
         }
 
         public class TokenOptions

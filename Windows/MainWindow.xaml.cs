@@ -40,7 +40,7 @@ namespace SimpleBlobUtility.Windows
             }
             else
             {
-                MessageBox.Show("Trouble getting containers for Azure connection, possibly bad connection string or no containers created yet.");
+                MessageBox.Show(TroubleGettingContainers);
                 //MessageBox.Show(errs);
                 ResetToEmptyDefaults();
             }

@@ -5,6 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
+using static SimpleBlobUtility.Constants;
 using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Windows
@@ -76,7 +78,7 @@ namespace SimpleBlobUtility.Windows
 
             var filter = string.Empty;
             filter = TextDocuments; // Filter files by extension
-            filter += String.Format("{0} ({1})|{1}", "All Files", "*.*");
+            filter += UIMessages.SetupDialogAllFilesSettings;
             sep = "|";
 
             foreach (var codec in codecs)
