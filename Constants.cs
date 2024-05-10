@@ -38,6 +38,16 @@ namespace SimpleBlobUtility
             public const string TextDocuments = "Text documents (*.txt)|*.txt|";
             public static readonly string SetupDialogAllFilesSettings = String.Format("{0} ({1})|{1}", "All Files", "*.*");
             public const string TroubleGettingContainers = "Trouble getting containers for Azure connection, possibly bad connection string or no containers created yet.";
+
+            public const string BlobDeletedSuccessfully = "Blob deleted successfully!";
+            public const string BlobNotFound = "Blob not found.";
+            public const string MissingContainerName = "Missing container name in delete blob file internal call, cannot continue.";
+            public const string FileNameBlobDownloadedSuccess = "{0} Blob downloaded successfully!";
+            public const string ErrorDownloadingBlob = "Error downloading blob {0}: {1}";
+
+            public const string DownloadedSuccessfully = "{0} downloaded successfully";
+            public const string ErrorWithDownloading = "Error with downloading {0}: {1}";
+            public const string CouldNotGetTempFilePath = "could not get temp file path";
         }
 
         public class TokenOptions

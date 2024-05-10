@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Utils
 {
@@ -25,11 +26,11 @@ namespace SimpleBlobUtility.Utils
                 var results = await downloadFile;
                 if (results.success)
                 {
-                    MessageBox.Show($"{fileName} downloaded successfully");
+                    MessageBox.Show(string.Format(DownloadedSuccessfully, fileName));
                 }
                 else
                 {
-                    MessageBox.Show($"Error with downloading {fileName}: {results.errorInfo}");
+                    MessageBox.Show(string.Format(ErrorWithDownloading, fileName, results.errorInfo));
                 }
             }
         }
@@ -41,7 +42,7 @@ namespace SimpleBlobUtility.Utils
             if (app.currentViewFilesWithTempLocations.ContainsKey(fileName) && File.Exists(app.currentViewFilesWithTempLocations[fileName]))
             {
                 tempFilePath = app.currentViewFilesWithTempLocations[fileName];
-                return (true, "", tempFilePath);
+                return (true, String.Empty, tempFilePath);
             }
             else
             {
@@ -55,16 +56,16 @@ namespace SimpleBlobUtility.Utils
                 if (results.Item1)
                 {
                     app.currentViewFilesWithTempLocations[fileName] = tempFilePath;
-                    return (true, "", tempFilePath);
+                    return (true, String.Empty, tempFilePath);
                 }
                 else
                 {
-                    return (false, results.Item2, "");
+                    return (false, results.Item2, String.Empty);
                 }
             }
             else
             {
-                return (false, "could not get temp file path", "");
+                return (false, CouldNotGetTempFilePath, String.Empty);
             }
         }
 
@@ -73,7 +74,7 @@ namespace SimpleBlobUtility.Utils
             string ext = Path.GetExtension(filename);
             string rootFileName = Path.GetFileNameWithoutExtension(filename);
             string tempPath = Path.GetTempPath();
-            string finalFilePath = "";
+            string finalFilePath = String.Empty;
             long runaway = 0;
             while (runaway < long.MaxValue)
             {
@@ -111,7 +112,7 @@ namespace SimpleBlobUtility.Utils
             }
             else
             {
-                chosenFileName = "";
+                chosenFileName = String.Empty;
             }
             return chosenFileName;
         }

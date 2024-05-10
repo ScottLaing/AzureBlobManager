@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-
+using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Utils
 {
     public class BlobUtility
     {
-        public static string? BlobConnectionString { get; set; } = "";
+        public static string? BlobConnectionString { get; set; } = String.Empty;
 
         public static void InitializeBlobConnStringFromEnvVariable()
         {
@@ -58,11 +58,11 @@ namespace SimpleBlobUtility.Utils
 
                 if (deleted)
                 {
-                    return (true, "Blob deleted successfully!");
+                    return (true, BlobDeletedSuccessfully);
                 }
                 else
                 {
-                    return (false, "Blob not found.");
+                    return (false, BlobNotFound);
                 }
             }
             catch (Exception ex)
@@ -76,13 +76,13 @@ namespace SimpleBlobUtility.Utils
         public static async Task<(bool success, string errorInfo)> DownloadBlobFile(string containerName, string fileName, string downloadFilePath)
         {
             bool res = false;
-            string errors = "";
+            string errors = String.Empty;
 
             var connectionString = BlobConnectionString;
             // test params for validity
             if (string.IsNullOrEmpty(containerName) || string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(downloadFilePath))
             {
-                return (false, "Missing container name or file name or download file location in download blob file internal call, cannot continue.");
+                return (false, MissingContainerName);
             }
 
             // Download the blob to a local file
@@ -96,13 +96,13 @@ namespace SimpleBlobUtility.Utils
                 {
                     await blobClient.DownloadToAsync(downloadFileStream);
                     res = true;
-                    errors = ($"{fileName} Blob downloaded successfully!");
+                    errors = string.Format(FileNameBlobDownloadedSuccess, fileName);
                 }
             }
             catch (Exception ex)
             {
                 res = false;
-                errors = ($"Error downloading blob {fileName}: {ex.Message}");
+                errors = string.Format(ErrorDownloadingBlob, fileName, ex.Message);
             }
             return (res, errors);
         }
@@ -111,7 +111,7 @@ namespace SimpleBlobUtility.Utils
         {
             string connectionString = BlobConnectionString;
             var result = new List<FileListItemDto>();
-            string errors = "";
+            string errors = String.Empty;
             try
             {
 
