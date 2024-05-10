@@ -1,10 +1,9 @@
 ﻿using Microsoft.Win32;
-using SimpleBlobUtility.Utils;
-using SimpleBlobUtility;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using static SimpleBlobUtility.Constants;
 using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Utils
@@ -102,8 +101,8 @@ namespace SimpleBlobUtility.Utils
             string chosenFileName;
             SaveFileDialog saveFileDialog1;
             saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "All Files|*.*|Text Files|*.txt|JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
-            saveFileDialog1.Title = "Save File to Local";
+            saveFileDialog1.Filter = FileDialogMsgs.AllFiles;
+            saveFileDialog1.Title = FileDialogMsgs.SaveFileToLocal;
             saveFileDialog1.FileName = fileName;
             var choice = saveFileDialog1.ShowDialog();
             if (choice == true)

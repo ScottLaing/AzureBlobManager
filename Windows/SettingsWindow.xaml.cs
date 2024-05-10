@@ -1,11 +1,8 @@
 ﻿using AzureBlobManager.Utils;
-using Microsoft.Win32;
 using SimpleBlobUtility.Utils;
 using System;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
+using static SimpleBlobUtility.Constants;
 
 namespace SimpleBlobUtility.Windows
 {
@@ -27,15 +24,10 @@ namespace SimpleBlobUtility.Windows
 
             if (chkSaveToRegistry.IsChecked == true)
             {
-                RegUtils.SaveValueToRegistry("BlobConnection", connString);
+                RegUtils.SaveValueToRegistry(RegNameBlobConnectionKey, connString);
             }
 
             this.Close();
-        }
-
-        private void SaveButtonViewbox_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using static SimpleBlobUtility.Constants.UIMessages;
+using static SimpleBlobUtility.Constants;
 
 namespace SimpleBlobUtility.Utils
 {
@@ -15,7 +16,7 @@ namespace SimpleBlobUtility.Utils
 
         public static void InitializeBlobConnStringFromEnvVariable()
         {
-            BlobConnectionString = Environment.GetEnvironmentVariable("AzureBlobConnectionString");
+            BlobConnectionString = Environment.GetEnvironmentVariable(EnvironmentVariableNameAzureBlobConnectionString);
         }
 
         public static async Task<(bool, string)> SaveFile(string fileName, string filePath, string containerName)

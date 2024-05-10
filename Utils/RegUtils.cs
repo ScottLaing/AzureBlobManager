@@ -20,7 +20,7 @@ namespace AzureBlobManager.Utils
 
         public static string? GetValueFromRegistry(string keyName)
         {
-            string? valueAsString = "";
+            string? valueAsString = string.Empty;
 
             try
             {

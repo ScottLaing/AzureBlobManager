@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
 using static SimpleBlobUtility.Constants;
 using static SimpleBlobUtility.Constants.UIMessages;
 
@@ -23,7 +22,7 @@ namespace SimpleBlobUtility.Windows
             InitializeComponent();
 
             _currentContainer = currentContainer;
-            lblResult.Content = "";
+            lblResult.Content = String.Empty;
         }
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
@@ -71,15 +70,13 @@ namespace SimpleBlobUtility.Windows
         private static OpenFileDialog SetupDialog()
         {
             var dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.Filter = "";
+            dlg.Filter = String.Empty;
 
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-            string sep = string.Empty;
 
             var filter = string.Empty;
             filter = TextDocuments; // Filter files by extension
             filter += UIMessages.SetupDialogAllFilesSettings;
-            sep = "|";
 
             foreach (var codec in codecs)
             {
@@ -87,9 +84,8 @@ namespace SimpleBlobUtility.Windows
                 {
                     continue;
                 }
-                string codecName = codec.CodecName.Substring(8).Replace("Codec", "Files").Trim();
-                filter += String.Format("{0}{1} ({2})|{2}", sep, codecName, codec.FilenameExtension?.ToLower() ?? "");
-                sep = "|";
+                string codecName = codec.CodecName.Substring(8).Replace(FileDialogMsgs.CodecName, FileDialogMsgs.Files).Trim();
+                filter += String.Format(FileDialogMsgs.FileDialogFilterString, FileDialogMsgs.Sep, codecName, codec.FilenameExtension?.ToLower() ?? String.Empty);
             }
 
             dlg.Filter = filter;

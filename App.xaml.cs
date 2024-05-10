@@ -3,6 +3,7 @@ using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using static SimpleBlobUtility.Constants;
 
 namespace SimpleBlobUtility
 {
@@ -11,6 +12,7 @@ namespace SimpleBlobUtility
     /// </summary>
     public partial class App : Application
     {
+        // these are temp files for viewing, they can be removed when app closes.
         public Dictionary<string, string> currentViewFilesWithTempLocations = new Dictionary<string, string>();
 
         private bool _cleanedup = false;
@@ -28,7 +30,7 @@ namespace SimpleBlobUtility
             // if not found, then check the registry for any saved connection settings.
             if (string.IsNullOrWhiteSpace(BlobUtility.BlobConnectionString))
             {
-                var result = RegUtils.GetValueFromRegistry("BlobConnection");
+                var result = RegUtils.GetValueFromRegistry(RegNameBlobConnectionKey);
                 if (!string.IsNullOrWhiteSpace(result))
                 {
                     BlobUtility.BlobConnectionString = result;
