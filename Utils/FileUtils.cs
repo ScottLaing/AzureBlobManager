@@ -99,15 +99,15 @@ namespace SimpleBlobUtility.Utils
         public static string GetFileUsingFileDialog(string fileName)
         {
             string chosenFileName;
-            SaveFileDialog saveFileDialog1;
-            saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = FileDialogMsgs.AllFiles;
-            saveFileDialog1.Title = FileDialogMsgs.SaveFileToLocal;
-            saveFileDialog1.FileName = fileName;
-            var choice = saveFileDialog1.ShowDialog();
+            SaveFileDialog saveFileDialog;
+            saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = FileDialogMsgs.AllFiles;
+            saveFileDialog.Title = FileDialogMsgs.SaveFileToLocal;
+            saveFileDialog.FileName = fileName;
+            var choice = saveFileDialog.ShowDialog();
             if (choice == true)
             {
-                chosenFileName = saveFileDialog1.FileName;
+                chosenFileName = saveFileDialog.FileName;
             }
             else
             {

@@ -51,8 +51,8 @@ namespace SimpleBlobUtility.Utils
                 var connectionString = BlobConnectionString;
                 string blobName = fileName;
 
-                BlobContainerClient containerClient = new BlobContainerClient(connectionString, containerName);
-                BlobClient blobClient = containerClient.GetBlobClient(blobName);
+                var containerClient = new BlobContainerClient(connectionString, containerName);
+                var blobClient = containerClient.GetBlobClient(blobName);
 
                 // This will delete the blob if it exists and include snapshots (optional)
                 bool deleted = await blobClient.DeleteIfExistsAsync(Azure.Storage.Blobs.Models.DeleteSnapshotsOption.IncludeSnapshots);
@@ -90,8 +90,8 @@ namespace SimpleBlobUtility.Utils
             try
             {
                 BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+                var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                var blobClient = containerClient.GetBlobClient(fileName);
 
                 using (FileStream downloadFileStream = File.OpenWrite(downloadFilePath))
                 {
@@ -116,8 +116,8 @@ namespace SimpleBlobUtility.Utils
             try
             {
 
-                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                var blobServiceClient = new BlobServiceClient(connectionString);
+                var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 
                 await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
                 {

@@ -75,8 +75,8 @@ namespace SimpleBlobUtility.Windows
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
 
             var filter = string.Empty;
-            filter = TextDocuments; // Filter files by extension
-            filter += UIMessages.SetupDialogAllFilesSettings;
+            filter = FileDialogMsgs.TextDocuments; // Filter files by extension
+            filter += FileDialogMsgs.SetupDialogAllFilesSettings;
 
             foreach (var codec in codecs)
             {

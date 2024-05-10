@@ -6,7 +6,7 @@ namespace AzureBlobManager.Utils
 {
     public class RegUtils
     {
-        public static string RegSubKey => $"Software\\{Constants.CompanyName}\\{Constants.RegistryAppName}";
+        public static string RegSubKey => $"Software\\{Constants.RegistryCompanyName}\\{Constants.RegistryAppName}";
 
         public static void SaveValueToRegistry(string keyName, string keyValue)
         {

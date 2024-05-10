@@ -41,7 +41,6 @@ namespace SimpleBlobUtility.Windows
             else
             {
                 MessageBox.Show(TroubleGettingContainers);
-                //MessageBox.Show(errs);
                 ResetToEmptyDefaults();
             }
         }
@@ -124,7 +123,7 @@ namespace SimpleBlobUtility.Windows
             }
             else
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
+                var startInfo = new ProcessStartInfo();
                 startInfo.FileName = downloadFileResult.downloadedFilePath;
                 startInfo.UseShellExecute = true; // Let the OS handle opening with default app
 
