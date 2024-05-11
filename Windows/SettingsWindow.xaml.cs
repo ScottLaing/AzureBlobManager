@@ -24,7 +24,14 @@ namespace SimpleBlobUtility.Windows
 
             if (chkSaveToRegistry.IsChecked == true)
             {
-                RegUtils.SaveValueToRegistry(RegNameBlobConnectionKey, connString);
+                App? currentApp = Application.Current as App;
+                if (currentApp == null)
+                {
+                    MessageBox.Show("Trouble getting application reference, cannot save to registry.");
+                    return;
+                }
+                string encConnString = CryptUtils.EncryptString2(connString, currentApp.EncryptionKey, currentApp.EncryptionSalt);
+                RegUtils.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);
             }
 
             this.Close();

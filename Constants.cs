@@ -11,7 +11,9 @@ namespace SimpleBlobUtility
         public static string RegistryCompanyName = "BrotwurstSoftware";
         public static string RegistryAppName = "AzureBlobManager62";
         public const string RegNameBlobConnectionKey = "BlobConnection";
-        public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString";
+        public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
+        public const string RegNameEncryptionKey = "BobAndAlice";
+        public const string RegSaltEncryptionKey = "SodChloride";
 
         public class FileDialogMsgs
         {
