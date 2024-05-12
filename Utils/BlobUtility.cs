@@ -4,9 +4,10 @@ using SimpleBlobUtility.Dtos;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
-using static SimpleBlobUtility.Constants.UIMessages;
 using static SimpleBlobUtility.Constants;
+using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Utils
 {
@@ -108,9 +109,41 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
-        public static async Task<(List<FileListItemDto> fileItemsList, string errors)> ListFiles(string containerName)
+        // data prefers the term artificial person
+        public static async Task<(Dictionary<string,string> metaData, string errors)> GetBlobMetadata(string containerName, string blobName)
         {
-            string connectionString = BlobConnectionString;
+            string connectionString = BlobConnectionString ?? throw new Exception("connection is null");
+            var result = new Dictionary<string, string>();
+
+            try
+            {
+                var blobServiceClient = new BlobServiceClient(connectionString);
+                var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                var blobClient = containerClient.GetBlobClient(blobName);
+                var properties = await blobClient.GetPropertiesAsync();
+
+                result["$contentLength"] = properties.Value.ContentLength.ToString();
+                result["$contentType"] = properties.Value.ContentType;
+                result["$lastModified"] = properties.Value.LastModified.ToString();
+                result["$metadata"] = JsonSerializer.Serialize(properties.Value.Metadata);
+
+                // Access user-defined metadata (if any)
+                foreach (var kvp in properties.Value.Metadata)
+                {
+                    result[kvp.Key] = kvp.Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                return (new Dictionary<string, string>(), $"Error getting blob metadata: {ex.Message}");
+            }
+
+            return (result, "");
+        }
+
+        public static async Task<(List<FileListItemDto> fileItemsList, string errors)> GetContainersFileList(string containerName)
+        {
+            string connectionString = BlobConnectionString ?? throw new Exception("connection is null");
             var result = new List<FileListItemDto>();
             string errors = String.Empty;
             try

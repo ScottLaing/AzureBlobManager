@@ -63,7 +63,7 @@ namespace SimpleBlobUtility.Windows
             string? containerName = this.cmbContainers.SelectedItem as string;
             if (containerName != null)
             {
-                var listFilesInfo = await BlobUtility.ListFiles(containerName);
+                var listFilesInfo = await BlobUtility.GetContainersFileList(containerName);
                 if (!string.IsNullOrWhiteSpace(listFilesInfo.errors))
                 {
                     MessageBox.Show(string.Format(ErrorGettingFilesList, listFilesInfo.errors));

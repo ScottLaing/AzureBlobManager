@@ -1,0 +1,57 @@
+﻿<Window x:Class="SimpleBlobUtility.Windows.BlobMetadataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleBlobUtility"
+                xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
+        
+        mc:Ignorable="d"
+        Icon="/Images/CloudFileServiceConfiguration.ico"
+        Background="#B3C5D7"
+        Title="Blob Metadata" Height="360" Width="713">
+    <Grid>
+        <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <TextBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="70,20,0,0" VerticalAlignment="Top" Width="250" FontSize="16" Height="32" IsReadOnly="True" Background="LightGray"/>
+
+        <!--<Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <controls:OpenFileViewbox></controls:OpenFileViewbox>
+        </Button>
+
+        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="430,20,0,0" Width="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
+        </Button>
+
+        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="470,20,0,0" Width="35" ToolTip="Download Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
+        </Button>
+        
+        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
+            <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
+        </Button>
+
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh Blobs"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="553,20,0,0" >
+            <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
+        </Button>
+
+        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="596,20,0,0" >
+            <controls:SettingsViewbox Height="31" Width="35"></controls:SettingsViewbox>
+        </Button>-->
+
+        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,10,20" FontSize="16" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Height" Value="27" ></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="BorderBrush" Value="Black"></Setter>
+                    <Setter Property="Padding" Value="2 0 2 0"></Setter>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding KeyName}" Header="Name" Width="200" />
+                <DataGridTextColumn Binding="{Binding KeyValue}" Header="Value" Width="380"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
