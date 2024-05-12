@@ -7,7 +7,6 @@ namespace SimpleBlobUtility
         public const string Salt = "EA5493F2-DAF0-42A5-82A8-4C5B0235CA53";
         public const string EncryptionKey = "F965F15A-DC1B-4F27-A27C-AB9C20EBC06E";
         public const int GuidLength = 36;
-        public static bool EncryptNotes = true;
         public static string RegistryCompanyName = "BrotwurstSoftware";
         public static string RegistryAppName = "AzureBlobManager62";
         public const string RegNameBlobConnectionKey = "BlobConnection";
