@@ -226,5 +226,33 @@ namespace SimpleBlobUtility.Windows
             var resp = settingsWindow.ShowDialog();
             RefreshContainersListDropDown();
         }
+
+        private async void btnViewBlobMetadata_Click(object sender, RoutedEventArgs e)
+        {
+            var result = GetSelectedFileAndContainerName();
+
+            if (result.errors)
+            {
+                if (!string.IsNullOrWhiteSpace(result.errorMsg))
+                {
+                    MessageBox.Show(result.errorMsg);
+                }
+                else
+                {
+                    MessageBox.Show(SomeErrorOccurred);
+                }
+                return;
+            }
+
+            var metadata = await BlobUtility.GetBlobMetadata(result.containerName, result.fileName);
+            if (!string.IsNullOrWhiteSpace(metadata.errors))
+            {
+                MessageBox.Show(string.Format(MetadataError, result.fileName, metadata.errors));
+                return;
+            }
+
+            var blobMetadataWindow = new BlobMetadataWindow(result.fileName, MetadataDto.fromDictionary(metadata.metaData));
+            blobMetadataWindow.ShowDialog();
+        }
     }
 }

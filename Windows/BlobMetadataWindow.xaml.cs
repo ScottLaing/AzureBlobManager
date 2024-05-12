@@ -10,7 +10,7 @@ using static SimpleBlobUtility.Constants.UIMessages;
 namespace SimpleBlobUtility.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BlobMetadataWindow.xaml
     /// </summary>
     public partial class BlobMetadataWindow : Window
     {
@@ -19,11 +19,12 @@ namespace SimpleBlobUtility.Windows
 
         public App? App =>  Application.Current as App;
 
-        public BlobMetadataWindow(List<MetadataDto> sourceCollection)
+        public BlobMetadataWindow(string fileName, List<MetadataDto> sourceCollection)
         {
             InitializeComponent();
 
             dgMetadataList.ItemsSource = sourceCollection;
+            this.txtBlobName.Text = fileName;
         }
 
     }

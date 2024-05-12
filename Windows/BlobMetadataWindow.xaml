@@ -9,10 +9,10 @@
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#B3C5D7"
-        Title="Blob Metadata" Height="360" Width="713">
+        Title="Blob Metadata [My Azure Blob Manager]" Height="360" Width="713">
     <Grid>
         <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="70,20,0,0" VerticalAlignment="Top" Width="250" FontSize="16" Height="32" IsReadOnly="True" Background="LightGray"/>
+        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="70,23,0,0" VerticalAlignment="Top" Width="372" FontSize="16" Height="27" IsReadOnly="True" Background="LightGray"/>
 
         <!--<Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
             <controls:OpenFileViewbox></controls:OpenFileViewbox>
@@ -49,8 +49,8 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding KeyName}" Header="Name" Width="200" />
-                <DataGridTextColumn Binding="{Binding KeyValue}" Header="Value" Width="380"/>
+                <DataGridTextColumn Binding="{Binding KeyName}" Header="Name" Width="200" IsReadOnly="True" />
+                <DataGridTextColumn Binding="{Binding Value}" Header="Value" Width="380" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

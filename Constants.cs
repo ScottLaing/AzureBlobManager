@@ -51,6 +51,7 @@ namespace SimpleBlobUtility
             public const string DownloadedSuccessfully = "{0} downloaded successfully";
             public const string ErrorWithDownloading = "Error with downloading {0}: {1}";
             public const string CouldNotGetTempFilePath = "could not get temp file path";
+            public const string MetadataError = "Error getting metadata for Blob [{0}], error: {1}.";
         }
 
         public class TokenOptions
