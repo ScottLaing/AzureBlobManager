@@ -12,29 +12,22 @@ namespace AzureBlobManager.Utils
 
         public static string EncryptString(string plainText)
         {
-            // Convert plain text into a byte array
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
 
-            // Create a new Aes object with key and IV
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(defaultKey);
                 aes.IV = Encoding.UTF8.GetBytes(defaultIv);
                 aes.Mode = CipherMode.CBC; // Set the cipher mode (CBC is common)
 
-                // Create an encryptor
                 using (var encryptor = aes.CreateEncryptor())
                 {
-                    // Create a memory stream to store the encrypted data
                     using (var memoryStream = new MemoryStream())
                     {
-                        // Create a crypto stream using the encryptor
                         using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
                         {
-                            // Write the plain text bytes to the crypto stream
                             cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
                         }
-                        // Convert the encrypted data from memory stream to a base64 string
                         return Convert.ToBase64String(memoryStream.ToArray());
                     }
                 }
@@ -43,31 +36,23 @@ namespace AzureBlobManager.Utils
 
         public static string DecryptString(string encryptedText)
         {
-            // Convert the base64 string to a byte array
             byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
 
-            // Create a new Aes object with the same key and IV
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(defaultKey);
                 aes.IV = Encoding.UTF8.GetBytes(defaultIv);
                 aes.Mode = CipherMode.CBC; // Set the same cipher mode
 
-                // Create a decryptor
                 using (var decryptor = aes.CreateDecryptor())
                 {
-                    // Create a memory stream to store the decrypted data
                     using (var memoryStream = new MemoryStream(encryptedBytes))
                     {
-                        // Create a crypto stream using the decryptor
                         using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
                         {
-                            // Create a byte array to hold the decrypted data
                             var decryptedBytes = new byte[encryptedBytes.Length];
-                            // Read the decrypted data from the crypto stream
                             int decryptedCount = cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
 
-                            // Convert the decrypted byte array to a string
                             return Encoding.UTF8.GetString(decryptedBytes, 0, decryptedCount);
                         }
                     }
@@ -88,30 +73,22 @@ namespace AzureBlobManager.Utils
 
             if (key.Length != 16) throw new ArgumentException("Key must be 16 characters long.");
 
-
-            // Convert plain text into a byte array
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
 
-            // Create a new Aes object with key and IV
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
                 aes.IV = Encoding.UTF8.GetBytes(salt);
                 aes.Mode = CipherMode.CBC; // Set the cipher mode (CBC is common)
 
-                // Create an encryptor
                 using (var encryptor = aes.CreateEncryptor())
                 {
-                    // Create a memory stream to store the encrypted data
                     using (var memoryStream = new MemoryStream())
                     {
-                        // Create a crypto stream using the encryptor
                         using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
                         {
-                            // Write the plain text bytes to the crypto stream
                             cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
                         }
-                        // Convert the encrypted data from memory stream to a base64 string
                         return Convert.ToBase64String(memoryStream.ToArray());
                     }
                 }
@@ -131,31 +108,22 @@ namespace AzureBlobManager.Utils
 
             if (key.Length != 16) throw new ArgumentException("Key must be 16 characters long.");
 
-            // Convert the base64 string to a byte array
             byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
 
-            // Create a new Aes object with the same key and IV
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
                 aes.IV = Encoding.UTF8.GetBytes(defaultIv);
                 aes.Mode = CipherMode.CBC; // Set the same cipher mode
 
-                // Create a decryptor
                 using (var decryptor = aes.CreateDecryptor())
                 {
-                    // Create a memory stream to store the decrypted data
                     using (var memoryStream = new MemoryStream(encryptedBytes))
                     {
-                        // Create a crypto stream using the decryptor
                         using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
                         {
-                            // Create a byte array to hold the decrypted data
                             var decryptedBytes = new byte[encryptedBytes.Length];
-                            // Read the decrypted data from the crypto stream
                             int decryptedCount = cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
-
-                            // Convert the decrypted byte array to a string
                             return Encoding.UTF8.GetString(decryptedBytes, 0, decryptedCount);
                         }
                     }
