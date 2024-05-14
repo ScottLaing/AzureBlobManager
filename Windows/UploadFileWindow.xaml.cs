@@ -17,6 +17,9 @@ namespace SimpleBlobUtility.Windows
     {
         private string _currentContainer;
 
+        /// Initializes a new instance of the UploadFileWindow class.
+        /// </summary>
+        /// <param name="currentContainer">The current container.</param>
         public UploadFileWindow(string currentContainer)
         {
             InitializeComponent();
@@ -25,6 +28,11 @@ namespace SimpleBlobUtility.Windows
             lblResult.Content = String.Empty;
         }
 
+        /// <summary>
+        /// Handles the event when the user clicks the "Upload File" button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
             var txtVal = this.txtFilePath.Text;
@@ -39,7 +47,7 @@ namespace SimpleBlobUtility.Windows
 
             if (!File.Exists(txtVal))
             {
-                MessageBox.Show( FileDoesNotExist );
+                MessageBox.Show(FileDoesNotExist);
                 return;
             }
             var fileName = Path.GetFileName(txtVal);
@@ -56,6 +64,11 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Handles the event when the user clicks the "Select" button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = SetupDialog();
@@ -67,6 +80,10 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Sets up the file dialog with the appropriate filter settings.
+        /// </summary>
+        /// <returns>The configured file dialog.</returns>
         private static OpenFileDialog SetupDialog()
         {
             var dlg = new Microsoft.Win32.OpenFileDialog();

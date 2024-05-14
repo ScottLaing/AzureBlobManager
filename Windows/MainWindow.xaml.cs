@@ -17,7 +17,7 @@ namespace SimpleBlobUtility.Windows
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
 
-        public App? App =>  Application.Current as App;
+        public App? App => Application.Current as App;
 
         public MainWindow()
         {
@@ -26,6 +26,9 @@ namespace SimpleBlobUtility.Windows
             RefreshContainersListDropDown();
         }
 
+        /// <summary>
+        /// Refreshes the containers list drop-down with the available containers.
+        /// </summary>
         private async void RefreshContainersListDropDown()
         {
             var containers = BlobUtility.GetContainers(out string errs);
@@ -45,6 +48,9 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Resets the drop-downs and data grid to empty defaults.
+        /// </summary>
         private void ResetToEmptyDefaults()
         {
             cmbContainers.ItemsSource = new List<string>();
@@ -52,11 +58,14 @@ namespace SimpleBlobUtility.Windows
             _lastUsedContainer = "";
         }
 
+        /// <summary>
+        /// Lists the files in the selected container and populates the data grid.
+        /// </summary>
         private async Task ListContainerFiles()
         {
             if (this.cmbContainers.SelectedIndex == -1)
             {
-                MessageBox.Show( ContainerNotSelected);
+                MessageBox.Show(ContainerNotSelected);
                 return;
             }
 
@@ -74,6 +83,11 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Downloads the selected file from the selected container.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
         {
             var result = GetSelectedFileAndContainerName();
@@ -86,16 +100,31 @@ namespace SimpleBlobUtility.Windows
             await loading;
         }
 
+        /// <summary>
+        /// Handles the double-click event on the data grid to trigger the file download.
+        /// </summary>
+        /// <param name="sender">The data grid that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void dgFilesList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             btnDownloadSelectedFile_Click(new object(), new RoutedEventArgs());
         }
 
+        /// <summary>
+        /// Handles the selection change event of the containers drop-down to list the files in the selected container.
+        /// </summary>
+        /// <param name="sender">The containers drop-down that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void cmbContainers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             await ListContainerFiles();
         }
 
+        /// <summary>
+        /// Opens the selected file in the default application for viewing.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void btnViewFile_Click(object sender, RoutedEventArgs e)
         {
             var result = GetSelectedFileAndContainerName();
@@ -118,7 +147,7 @@ namespace SimpleBlobUtility.Windows
             }
             else if (string.IsNullOrEmpty(downloadFileResult.downloadedFilePath))
             {
-                MessageBox.Show( NotGetTempFilePathError);
+                MessageBox.Show(NotGetTempFilePathError);
                 return;
             }
             else
@@ -131,11 +160,16 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Opens the upload file window to upload a file to the selected container.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(_lastUsedContainer))
             {
-                MessageBox.Show( NoContainerSelected);
+                MessageBox.Show(NoContainerSelected);
                 return;
             }
             var uploadFileWindow = new UploadFileWindow(_lastUsedContainer);
@@ -143,11 +177,21 @@ namespace SimpleBlobUtility.Windows
             await ListContainerFiles();
         }
 
+        /// <summary>
+        /// Refreshes the files in the selected container.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             await ListContainerFiles();
         }
 
+        /// <summary>
+        /// Deletes the selected file from the selected container.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var result = GetSelectedFileAndContainerName();
@@ -177,6 +221,10 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Retrieves the selected file name and container name from the data grid.
+        /// </summary>
+        /// <returns>A tuple containing the error flag, error message, file name, and container name.</returns>
         private (bool errors, string errorMsg, string fileName, string containerName) GetSelectedFileAndContainerName()
         {
             bool errors = false;
@@ -211,6 +259,11 @@ namespace SimpleBlobUtility.Windows
             return (errors, errorMsg, fileName, containerName);
         }
 
+        /// <summary>
+        /// Cleans up the application resources when the window is closing.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var app = App;
@@ -220,6 +273,11 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
+        /// <summary>
+        /// Opens the settings window.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             var settingsWindow = new SettingsWindow();
@@ -227,6 +285,11 @@ namespace SimpleBlobUtility.Windows
             RefreshContainersListDropDown();
         }
 
+        /// <summary>
+        /// Opens the blob metadata window for the selected file.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private async void btnViewBlobMetadata_Click(object sender, RoutedEventArgs e)
         {
             var result = GetSelectedFileAndContainerName();

@@ -13,13 +13,26 @@ namespace SimpleBlobUtility.Utils
 {
     public class BlobUtility
     {
+        /// <summary>
+        /// Gets or sets the connection string for the Azure Blob Storage.
+        /// </summary>
         public static string? BlobConnectionString { get; set; } = String.Empty;
 
+        /// <summary>
+        /// Initializes the BlobConnectionString property from the environment variable.
+        /// </summary>
         public static void InitializeBlobConnStringFromEnvVariable()
         {
             BlobConnectionString = Environment.GetEnvironmentVariable(EnvironmentVariableNameAzureBlobConnectionString);
         }
 
+        /// <summary>
+        /// Saves a file to the specified container in Azure Blob Storage.
+        /// </summary>
+        /// <param name="fileName">The name of the file.</param>
+        /// <param name="filePath">The path of the file to be saved.</param>
+        /// <param name="containerName">The name of the container.</param>
+        /// <returns>A tuple indicating the success status and any error information.</returns>
         public static async Task<(bool, string)> SaveFile(string fileName, string filePath, string containerName)
         {
             bool res = true;
@@ -43,6 +56,12 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
+        /// <summary>
+        /// Deletes a blob file from the specified container in Azure Blob Storage.
+        /// </summary>
+        /// <param name="containerName">The name of the container.</param>
+        /// <param name="fileName">The name of the file to be deleted.</param>
+        /// <returns>A tuple indicating the success status and any error information.</returns>
         public static async Task<(bool success, string errorInfo)> DeleteBlobFile(string containerName, string fileName)
         {
             bool res = true;
@@ -75,6 +94,13 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
+        /// <summary>
+        /// Downloads a blob file from the specified container in Azure Blob Storage.
+        /// </summary>
+        /// <param name="containerName">The name of the container.</param>
+        /// <param name="fileName">The name of the file to be downloaded.</param>
+        /// <param name="downloadFilePath">The path where the file will be downloaded.</param>
+        /// <returns>A tuple indicating the success status and any error information.</returns>
         public static async Task<(bool success, string errorInfo)> DownloadBlobFile(string containerName, string fileName, string downloadFilePath)
         {
             bool res = false;
@@ -109,8 +135,13 @@ namespace SimpleBlobUtility.Utils
             return (res, errors);
         }
 
-        // data prefers the term artificial person
-        public static async Task<(Dictionary<string,string> metaData, string errors)> GetBlobMetadata(string containerName, string blobName)
+        /// <summary>
+        /// Retrieves the metadata of a blob file from the specified container in Azure Blob Storage.
+        /// </summary>
+        /// <param name="containerName">The name of the container.</param>
+        /// <param name="blobName">The name of the blob file.</param>
+        /// <returns>A tuple containing the metadata dictionary and any error information.</returns>
+        public static async Task<(Dictionary<string, string> metaData, string errors)> GetBlobMetadata(string containerName, string blobName)
         {
             string connectionString = BlobConnectionString ?? throw new Exception("connection is null");
             var result = new Dictionary<string, string>();
@@ -141,6 +172,11 @@ namespace SimpleBlobUtility.Utils
             return (result, "");
         }
 
+        /// <summary>
+        /// Retrieves the list of files in the specified container in Azure Blob Storage.
+        /// </summary>
+        /// <param name="containerName">The name of the container.</param>
+        /// <returns>A tuple containing the list of file items and any error information.</returns>
         public static async Task<(List<FileListItemDto> fileItemsList, string errors)> GetContainersFileList(string containerName)
         {
             string connectionString = BlobConnectionString ?? throw new Exception("connection is null");
@@ -175,6 +211,11 @@ namespace SimpleBlobUtility.Utils
             return (result, errors);
         }
 
+        /// <summary>
+        /// Retrieves the list of containers in Azure Blob Storage.
+        /// </summary>
+        /// <param name="errors">Any error information.</param>
+        /// <returns>The list of container names.</returns>
         public static List<string> GetContainers(out string errors)
         {
             var result = new List<string>();
