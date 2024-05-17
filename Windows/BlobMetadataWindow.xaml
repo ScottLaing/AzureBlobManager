@@ -14,29 +14,15 @@
         <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="70,23,0,0" VerticalAlignment="Top" Width="372" FontSize="16" Height="27" IsReadOnly="True" Background="LightGray"/>
 
-        <!--<Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
-            <controls:OpenFileViewbox></controls:OpenFileViewbox>
-        </Button>
-
-        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="430,20,0,0" Width="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
-            <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
-        </Button>
-
-        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="470,20,0,0" Width="35" ToolTip="Download Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
-            <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
+        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,9,70,0" Width="35" Height="35" ToolTip="Add Metadata Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:AddViewbox></controls:AddViewbox>
         </Button>
         
-        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
-            <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
+        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,20,0" Width="35" Height="35" ToolTip="Save Changes"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
+        
 
-        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh Blobs"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="553,20,0,0" >
-            <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
-        </Button>
-
-        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="596,20,0,0" >
-            <controls:SettingsViewbox Height="31" Width="35"></controls:SettingsViewbox>
-        </Button>-->
 
         <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,10,20" FontSize="16" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
             <DataGrid.Resources>

@@ -27,5 +27,14 @@ namespace SimpleBlobUtility.Windows
             this.txtBlobName.Text = fileName;
         }
 
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
