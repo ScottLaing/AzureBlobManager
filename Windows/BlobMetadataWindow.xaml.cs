@@ -1,10 +1,6 @@
 ﻿using SimpleBlobUtility.Dtos;
-using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
-using static SimpleBlobUtility.Constants.UIMessages;
 
 
 namespace SimpleBlobUtility.Windows
@@ -29,12 +25,10 @@ namespace SimpleBlobUtility.Windows
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }
