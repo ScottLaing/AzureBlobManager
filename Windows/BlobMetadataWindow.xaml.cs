@@ -11,6 +11,7 @@ namespace SimpleBlobUtility.Windows
     public partial class BlobMetadataWindow : Window
     {
         public List<MetadataDto> SourceCollection = new List<MetadataDto>();
+        public bool DialogWasSaved = false;
         private string _lastUsedContainer = "";
 
         public App? App =>  Application.Current as App;
@@ -21,14 +22,26 @@ namespace SimpleBlobUtility.Windows
 
             dgMetadataList.ItemsSource = sourceCollection;
             this.txtBlobName.Text = fileName;
+
+            SourceCollection = sourceCollection;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            SourceCollection.Add(new MetadataDto()
+            {
+                KeyName = "New Key",
+                Value = "New Value"
+            });
+            dgMetadataList.ItemsSource = null;
+            dgMetadataList.ItemsSource = SourceCollection;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            DialogWasSaved = true;
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }
