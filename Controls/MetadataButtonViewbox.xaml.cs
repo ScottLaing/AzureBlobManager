@@ -3,7 +3,7 @@
 namespace SimpleBlobUtility.Controls
 {
     /// <summary>
-    /// Interaction logic for RefreshButtonViewbox.xaml
+    /// Interaction logic for MetadataButtonViewbox.xaml
     /// </summary>
     public partial class MetadataButtonViewbox : UserControl
     {

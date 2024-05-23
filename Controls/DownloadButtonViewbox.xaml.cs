@@ -3,7 +3,7 @@
 namespace SimpleBlobUtility.Controls
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for DownloadButtonViewbox.xaml
     /// </summary>
     public partial class DownloadButtonViewbox : UserControl
     {

@@ -1,6 +1,5 @@
 ﻿using AzureBlobManager.Utils;
 using SimpleBlobUtility.Utils;
-using System;
 using System.Windows;
 using static SimpleBlobUtility.Constants;
 
@@ -11,6 +10,7 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        public const string TroubleGettingApplicationReference = "Trouble getting application reference, cannot save to registry.";
         public SettingsWindow()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace SimpleBlobUtility.Windows
                 App? currentApp = Application.Current as App;
                 if (currentApp == null)
                 {
-                    MessageBox.Show("Trouble getting application reference, cannot save to registry.");
+                    MessageBox.Show(TroubleGettingApplicationReference);
                     return;
                 }
                 string encConnString = CryptUtils.EncryptString2(connString, currentApp.EncryptionKey, currentApp.EncryptionSalt);

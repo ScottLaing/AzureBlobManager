@@ -3,7 +3,7 @@
 namespace SimpleBlobUtility.Controls
 {
     /// <summary>
-    /// Interaction logic for OpenFileViewbox.xaml
+    /// Interaction logic for DeleteFileViewbox.xaml
     /// </summary>
     public partial class DeleteFileViewbox : UserControl
     {
