@@ -13,6 +13,10 @@ namespace SimpleBlobUtility.Utils
 {
     public class BlobUtility
     {
+
+        public const string ConnectionIsNull = "connection is null";
+        public const string ErrorGettingBlobMetadata = "Error getting blob metadata: {0}";
+
         /// <summary>
         /// Gets or sets the connection string for the Azure Blob Storage.
         /// </summary>
@@ -143,7 +147,7 @@ namespace SimpleBlobUtility.Utils
         /// <returns>A tuple containing the metadata dictionary and any error information.</returns>
         public static async Task<(Dictionary<string, string> metaData, string errors)> GetBlobMetadata(string containerName, string blobName)
         {
-            string connectionString = BlobConnectionString ?? throw new Exception("connection is null");
+            string connectionString = BlobConnectionString ?? throw new Exception(ConnectionIsNull);
             var result = new Dictionary<string, string>();
 
             try
@@ -166,7 +170,7 @@ namespace SimpleBlobUtility.Utils
             }
             catch (Exception ex)
             {
-                return (new Dictionary<string, string>(), $"Error getting blob metadata: {ex.Message}");
+                return (new Dictionary<string, string>(), string.Format(ErrorGettingBlobMetadata, ex.Message));
             }
 
             return (result, "");
@@ -179,7 +183,7 @@ namespace SimpleBlobUtility.Utils
         /// <returns>A tuple containing the list of file items and any error information.</returns>
         public static async Task<(List<FileListItemDto> fileItemsList, string errors)> GetContainersFileList(string containerName)
         {
-            string connectionString = BlobConnectionString ?? throw new Exception("connection is null");
+            string connectionString = BlobConnectionString ?? throw new Exception(ConnectionIsNull);
             var result = new List<FileListItemDto>();
             string errors = String.Empty;
             try

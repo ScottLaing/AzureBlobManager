@@ -7,6 +7,11 @@ namespace SimpleBlobUtility.Utils
 {
     public class CryptUtils
     {
+        public const string StringDidNotContainProperlyFormattedByteArray = "Stream did not contain properly formatted byte array";
+        public const string DidNotReadByteArrayProperly = "Did not read byte array properly";
+        public const string PlainText = "plainText";
+        public const string CipherText = "cipherText";
+
         //While an app specific salt is not the best practice for
         //password based encryption, it's probably safe enough as long as
         //it is truly uncommon. Also too much work to alter this answer otherwise.
@@ -22,7 +27,7 @@ namespace SimpleBlobUtility.Utils
         {
             string sharedSecret = Constants.EncryptionKey;
             if (string.IsNullOrEmpty(plainText))
-                throw new ArgumentNullException("plainText");
+                throw new ArgumentNullException(PlainText);
 
             plainText = AddPadding(plainText);
 
@@ -80,7 +85,7 @@ namespace SimpleBlobUtility.Utils
         {
             if (string.IsNullOrEmpty(plainText))
             {
-                throw new ArgumentNullException("plainText");
+                throw new ArgumentNullException(PlainText);
             }
             
             if (string.IsNullOrEmpty(sharedSecret))
@@ -156,7 +161,7 @@ namespace SimpleBlobUtility.Utils
             string sharedSecret = Constants.EncryptionKey;
             if (string.IsNullOrEmpty(cipherText))
             {
-                throw new ArgumentNullException("cipherText");
+                throw new ArgumentNullException(CipherText);
             }
 
             // Declare the RijndaelManaged object
@@ -217,7 +222,7 @@ namespace SimpleBlobUtility.Utils
         {
             if (string.IsNullOrEmpty(cipherText))
             {
-                throw new ArgumentNullException("cipherText");
+                throw new ArgumentNullException(CipherText);
             }
 
             if (string.IsNullOrEmpty(sharedSecret))
@@ -291,13 +296,13 @@ namespace SimpleBlobUtility.Utils
             byte[] rawLength = new byte[sizeof(int)];
             if (s.Read(rawLength, 0, rawLength.Length) != rawLength.Length)
             {
-                throw new SystemException("Stream did not contain properly formatted byte array");
+                throw new SystemException(StringDidNotContainProperlyFormattedByteArray);
             }
 
             byte[] buffer = new byte[BitConverter.ToInt32(rawLength, 0)];
             if (s.Read(buffer, 0, buffer.Length) != buffer.Length)
             {
-                throw new SystemException("Did not read byte array properly");
+                throw new SystemException(DidNotReadByteArrayProperly);
             }
 
             return buffer;
