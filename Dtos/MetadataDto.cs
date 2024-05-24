@@ -15,6 +15,17 @@ namespace SimpleBlobUtility.Dtos
                 metadataDtos.Add(new MetadataDto() { KeyName = keyValuePair.Key, Value = keyValuePair.Value });
             }
             return metadataDtos;
-        }   
+        }
+
+        public static Dictionary<string, string> toDictionary(List<MetadataDto> metadataList)
+        {
+            var dictout = new Dictionary<string, string>();
+
+            foreach (var item in metadataList)
+            {
+                dictout[item.KeyName] = item.Value;
+            }
+            return dictout;
+        }
     }
 }

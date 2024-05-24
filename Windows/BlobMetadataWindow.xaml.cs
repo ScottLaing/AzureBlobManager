@@ -12,7 +12,6 @@ namespace SimpleBlobUtility.Windows
     {
         public List<MetadataDto> SourceCollection = new List<MetadataDto>();
         public bool DialogWasSaved = false;
-        private string _lastUsedContainer = "";
 
         public App? App =>  Application.Current as App;
 

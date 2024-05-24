@@ -16,6 +16,13 @@ namespace SimpleBlobUtility.Utils
 
         public const string ConnectionIsNull = "connection is null";
         public const string ErrorGettingBlobMetadata = "Error getting blob metadata: {0}";
+        private static readonly List<string> FixedMetadata = new List<string>()
+                {
+                    "$contentLength",
+                    "$contentType",
+                    "$lastModified",
+                    "$metadata"
+                };
 
         /// <summary>
         /// Gets or sets the connection string for the Azure Blob Storage.
@@ -174,6 +181,37 @@ namespace SimpleBlobUtility.Utils
             }
 
             return (result, "");
+        }
+
+        public static async Task<string> SetBlobMetadata(string containerName, string blobName, Dictionary<string, string> newMetadata)
+        {
+            string connectionString = BlobConnectionString ?? throw new Exception(ConnectionIsNull);
+
+            try
+            {
+                var blobServiceClient = new BlobServiceClient(connectionString);
+                var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+                var blobClient = containerClient.GetBlobClient(blobName);
+
+                var updateDictionary = new Dictionary<string, string>();
+
+                foreach (var key in newMetadata.Keys)
+                {
+                    if (FixedMetadata.Contains(key))
+                    {
+                        continue;
+                    }
+                    updateDictionary[key] = newMetadata[key];
+                }
+
+                await blobClient.SetMetadataAsync(updateDictionary);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "";
         }
 
         /// <summary>

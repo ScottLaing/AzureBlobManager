@@ -52,6 +52,10 @@ namespace SimpleBlobUtility.Utils
             var app = App;
             string tempFilePath;
 
+            if (app == null)
+            {
+                return (false, "App not defined cannot continue with AttemptDownloadFileToTempFolder", "") ;
+            }
             // Check if the file is already present in the temporary folder.
             if (app.currentViewFilesWithTempLocations.ContainsKey(fileName) && File.Exists(app.currentViewFilesWithTempLocations[fileName]))
             {

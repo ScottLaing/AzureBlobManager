@@ -90,14 +90,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
         {
-            var result = GetSelectedFileAndContainerName();
-
-            if (result.errors)
-            {
-                return;
-            }
-            var loading = FileUtils.AttemptDownloadFile(result.fileName, result.containerName);
-            await loading;
+            await DownloadSelFile();
         }
 
         /// <summary>
@@ -107,7 +100,22 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void dgFilesList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            btnDownloadSelectedFile_Click(new object(), new RoutedEventArgs());
+            await DownloadSelFile();
+        }
+
+        /// <summary>
+        /// Downloads the selected file from the selected container.
+        /// </summary>
+        private async Task DownloadSelFile()
+        {
+            var result = GetSelectedFileAndContainerName();
+
+            if (result.errors)
+            {
+                return;
+            }
+            var loading = FileUtils.AttemptDownloadFile(result.fileName, result.containerName);
+            await loading;
         }
 
         /// <summary>
@@ -316,6 +324,22 @@ namespace SimpleBlobUtility.Windows
 
             var blobMetadataWindow = new BlobMetadataWindow(result.fileName, MetadataDto.fromDictionary(metadata.metaData));
             blobMetadataWindow.ShowDialog();
+
+            if (blobMetadataWindow.DialogWasSaved)
+            {
+                var modifiedMetadata = blobMetadataWindow.SourceCollection;
+                if (modifiedMetadata == null)
+                {
+                    MessageBox.Show("Attempting to update metadata but update value is null, cannot update.");
+                    return;
+                }
+                var modifiedAsDictionary = MetadataDto.toDictionary(modifiedMetadata);
+                string errorInUpdating = await BlobUtility.SetBlobMetadata(result.containerName, result.fileName, modifiedAsDictionary);
+                if (!string.IsNullOrWhiteSpace(errorInUpdating))
+                {
+                    MessageBox.Show( string.Format("Error with updating metadata: {0}", errorInUpdating));
+                }
+            }
         }
     }
 }

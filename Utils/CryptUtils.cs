@@ -3,6 +3,8 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
+#pragma warning disable SYSLIB0022 // Type or member is obsolete
+
 namespace SimpleBlobUtility.Utils
 {
     public class CryptUtils
@@ -31,8 +33,8 @@ namespace SimpleBlobUtility.Utils
 
             plainText = AddPadding(plainText);
 
-            string outStr = null;                       // Encrypted string to return
-            RijndaelManaged aesAlg = null;              // RijndaelManaged object used to encrypt the data.
+            string? outStr = null;                       // Encrypted string to return
+            RijndaelManaged? aesAlg = null;              // RijndaelManaged object used to encrypt the data.
 
             try
             {
@@ -100,8 +102,8 @@ namespace SimpleBlobUtility.Utils
 
             plainText = AddPadding(plainText);
 
-            string outStr = null;                       // Encrypted string to return
-            RijndaelManaged aesAlg = null;              // RijndaelManaged object used to encrypt the data.
+            string? outStr = null;                       // Encrypted string to return
+            RijndaelManaged? aesAlg = null;              // RijndaelManaged object used to encrypt the data.
 
             try
             {
@@ -166,11 +168,11 @@ namespace SimpleBlobUtility.Utils
 
             // Declare the RijndaelManaged object
             // used to decrypt the data.
-            RijndaelManaged aesAlg = null;
+            RijndaelManaged? aesAlg = null;
 
             // Declare the string used to hold
             // the decrypted text.
-            string plaintext = null;
+            string? plaintext = null;
 
             try
             {
@@ -237,11 +239,12 @@ namespace SimpleBlobUtility.Utils
 
             // Declare the RijndaelManaged object
             // used to decrypt the data.
-            RijndaelManaged aesAlg = null;
+            RijndaelManaged? aesAlg = null;
+
 
             // Declare the string used to hold
             // the decrypted text.
-            string plaintext = null;
+            string? plaintext = null;
 
             try
             {
@@ -309,3 +312,4 @@ namespace SimpleBlobUtility.Utils
         }
     }
 }
+#pragma warning restore SYSLIB0022 // Type or member is obsolete
