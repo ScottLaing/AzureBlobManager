@@ -105,5 +105,28 @@ namespace SimpleBlobUtility.Windows
         {
 
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var currItem = dgMetadataList.SelectedItem as MetadataDto;
+            if (currItem == null)
+            {
+                MessageBox.Show("No metadata item selected, please select a metadata item to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            bool isSystemSetting = Constants.BlobSystemKeyNames.Contains(currItem.KeyName);
+            if (isSystemSetting)
+            {
+                MessageBox.Show("Cannot delete system metadata items.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var newList = SourceCollection.Where(m => m.KeyName != currItem.KeyName).ToList();
+
+            SourceCollection = newList;
+            dgMetadataList.ItemsSource = null;
+            dgMetadataList.ItemsSource = SourceCollection;
+        }
     }
 }

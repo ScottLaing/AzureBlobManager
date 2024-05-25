@@ -49,6 +49,14 @@ namespace SimpleBlobUtility.Windows
             BlobItemName = txtBlobItemName.Text;
             string trimmed = BlobItemName.Trim();
 
+            if (isSystemData)
+            {
+                DialogWasSaved = false;
+                DialogResult = false;
+                BlobItemValue = this.txtBlobItemValue.Text;
+                this.Close();
+            }
+
             bool hasWhitespace = Regex.IsMatch(trimmed, @"\s");
             if (hasWhitespace)
             {

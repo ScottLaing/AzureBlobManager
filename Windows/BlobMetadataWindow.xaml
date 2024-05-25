@@ -14,15 +14,19 @@
         <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="70,19,0,0" VerticalAlignment="Top" Width="372" FontSize="16" Height="27" IsReadOnly="True" Background="LightGray"/>
 
-        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,12,110,0" Width="35" Height="35" ToolTip="Edit Metadata Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,12,150,0" Width="35" Height="35" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:EditViewbox></controls:EditViewbox>
         </Button>
 
-        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,12,65,0" Width="35" Height="35" ToolTip="Add Metadata Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,12,110,0" Width="35" Height="35" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:AddViewbox></controls:AddViewbox>
         </Button>
 
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,12,20,0" Width="35" Height="35" ToolTip="Save Changes"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnDelete" Click="btnDelete_Click"  Margin="0,12,70,0" Width="35" Height="35" ToolTip="Remove Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:DeleteFileViewbox></controls:DeleteFileViewbox>
+        </Button>
+
+        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,12,15,0" Width="35" Height="35" ToolTip="Save"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox Loaded="SaveButtonViewbox_Loaded"></controls:SaveButtonViewbox>
         </Button>
         

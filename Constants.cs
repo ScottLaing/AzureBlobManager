@@ -17,16 +17,16 @@ namespace SimpleBlobUtility
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {
-                    "$contentLength",
-                    "$contentType",
-                    "$lastModified",
-                    "$metadata"
+                    BlobContentLength,
+                    BlobContentType,
+                    BlobLastModified,
+                    BlobMetaDataJson
                 };
 
-        public const string BlobContentLength = "$contentLength";
-        public const string BlobContentType = "$contentType";
-        public const string BlobLastModified = "$lastModified";
-        public const string BlobMetaDataJson = "$metadata";
+        public const string BlobContentLength = "$ContentLength";
+        public const string BlobContentType = "$ContentType";
+        public const string BlobLastModified = "$LastModified";
+        public const string BlobMetaDataJson = "$Metadata";
 
 
 
