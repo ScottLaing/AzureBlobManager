@@ -52,7 +52,7 @@ namespace SimpleBlobUtility.Windows
             }
             var fileName = Path.GetFileName(txtVal);
 
-            var result = Task.Run(() => BlobUtility.SaveFile(fileName, txtVal, _currentContainer)).Result;
+            var result = Task.Run(() => BlobUtility.SaveFileAsync(fileName, txtVal, _currentContainer)).Result;
             if (!result.Item1)
             {
                 string msg = string.Format(TroubleSavingFile, result.Item2);

@@ -1,4 +1,5 @@
 ﻿using SimpleBlobUtility.Dtos;
+using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -13,10 +14,11 @@ namespace SimpleBlobUtility.Windows
     {
         public List<MetadataDto> SourceCollection = new List<MetadataDto>();
         public bool DialogWasSaved = false;
+        private string containerName = string.Empty;
 
         public App? App =>  Application.Current as App;
 
-        public BlobMetadataWindow(string fileName, List<MetadataDto> sourceCollection)
+        public BlobMetadataWindow(string containerName, string fileName, List<MetadataDto> sourceCollection)
         {
             InitializeComponent();
 
@@ -24,11 +26,12 @@ namespace SimpleBlobUtility.Windows
             this.txtBlobName.Text = fileName;
 
             SourceCollection = sourceCollection;
+            this.containerName = containerName;
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var blobItemChangeWindow = new BlobItemChangeWindow("New Key", "New Value", false);
+            var blobItemChangeWindow = new BlobItemChangeWindow(false, "New Key", "New Value", false);
             blobItemChangeWindow.ShowDialog();
             if (blobItemChangeWindow.DialogWasSaved)
             {
@@ -55,10 +58,17 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            DialogWasSaved = true;
+            this.DialogWasSaved = true;
             this.DialogResult = true;
+
+            var setResult = await BlobUtility.SetBlobMetadataAsync(this.containerName, txtBlobName.Text, MetadataDto.toDictionary(SourceCollection));
+            if (!string.IsNullOrWhiteSpace(setResult))
+            {
+                MessageBox.Show(string.Format("Error saving metadata: {0}", setResult), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             this.Close();
         }
 
@@ -70,7 +80,9 @@ namespace SimpleBlobUtility.Windows
                 MessageBox.Show("No metadata item selected, please select a metadata item to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            var blobItemChangeWindow = new BlobItemChangeWindow(currItem.KeyName, currItem.Value, true);
+
+            bool isSystemSetting = Constants.BlobSystemKeyNames.Contains(currItem.KeyName);
+            var blobItemChangeWindow = new BlobItemChangeWindow(isSystemSetting, currItem.KeyName, currItem.Value, true);
 
             blobItemChangeWindow.ShowDialog();
             
@@ -87,6 +99,11 @@ namespace SimpleBlobUtility.Windows
                 dgMetadataList.ItemsSource = null;
                 dgMetadataList.ItemsSource = SourceCollection;
             }
+        }
+
+        private void SaveButtonViewbox_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

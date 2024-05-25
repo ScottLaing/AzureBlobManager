@@ -30,7 +30,7 @@
             <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnViewBlobMetadata" Click="btnViewBlobMetadata_Click"   ToolTip="View Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="553,20,0,0" >
+        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="553,20,0,0" >
             <controls:MetadataButtonViewbox Height="31" Width="35"></controls:MetadataButtonViewbox>
         </Button>
 

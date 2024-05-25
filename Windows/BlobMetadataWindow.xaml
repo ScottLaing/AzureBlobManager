@@ -23,7 +23,7 @@
         </Button>
 
         <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,12,20,0" Width="35" Height="35" ToolTip="Save Changes"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
+            <controls:SaveButtonViewbox Loaded="SaveButtonViewbox_Loaded"></controls:SaveButtonViewbox>
         </Button>
         
 

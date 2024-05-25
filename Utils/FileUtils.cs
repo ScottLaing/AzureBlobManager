@@ -28,7 +28,7 @@ namespace SimpleBlobUtility.Utils
             if (!string.IsNullOrWhiteSpace(chosenFileName))
             {
                 // Download the file from the container and save it to the chosen file location.
-                var downloadFile = BlobUtility.DownloadBlobFile(containerName, fileName, chosenFileName);
+                var downloadFile = BlobUtility.DownloadBlobFileAsync(containerName, fileName, chosenFileName);
                 var results = await downloadFile;
                 if (results.success)
                 {
@@ -71,7 +71,7 @@ namespace SimpleBlobUtility.Utils
             if (!string.IsNullOrEmpty(tempFilePath))
             {
                 // Download the file from the container and save it to the temporary file path.
-                var results = await BlobUtility.DownloadBlobFile(containerName, fileName, tempFilePath);
+                var results = await BlobUtility.DownloadBlobFileAsync(containerName, fileName, tempFilePath);
                 if (results.Item1)
                 {
                     app.currentViewFilesWithTempLocations[fileName] = tempFilePath;

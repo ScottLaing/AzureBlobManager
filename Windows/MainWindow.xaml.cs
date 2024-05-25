@@ -19,6 +19,7 @@ namespace SimpleBlobUtility.Windows
 
         public App? App => Application.Current as App;
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -72,7 +73,7 @@ namespace SimpleBlobUtility.Windows
             string? containerName = this.cmbContainers.SelectedItem as string;
             if (containerName != null)
             {
-                var listFilesInfo = await BlobUtility.GetContainersFileList(containerName);
+                var listFilesInfo = await BlobUtility.GetContainersFileListAsync(containerName);
                 if (!string.IsNullOrWhiteSpace(listFilesInfo.errors))
                 {
                     MessageBox.Show(string.Format(ErrorGettingFilesList, listFilesInfo.errors));
@@ -217,7 +218,7 @@ namespace SimpleBlobUtility.Windows
                 return;
             }
 
-            var deleteResult = await BlobUtility.DeleteBlobFile(result.containerName, result.fileName);
+            var deleteResult = await BlobUtility.DeleteBlobFileAsync(result.containerName, result.fileName);
             if (deleteResult.success)
             {
                 MessageBox.Show(FileDeletedSuccess);
@@ -298,7 +299,7 @@ namespace SimpleBlobUtility.Windows
         /// </summary>
         /// <param name="sender">The button that triggered the event.</param>
         /// <param name="e">The event arguments.</param>
-        private async void btnViewBlobMetadata_Click(object sender, RoutedEventArgs e)
+        private async void btnEditBlobMetadata_Click(object sender, RoutedEventArgs e)
         {
             var result = GetSelectedFileAndContainerName();
 
@@ -315,14 +316,14 @@ namespace SimpleBlobUtility.Windows
                 return;
             }
 
-            var metadata = await BlobUtility.GetBlobMetadata(result.containerName, result.fileName);
+            var metadata = await BlobUtility.GetBlobMetadataAsync(result.containerName, result.fileName);
             if (!string.IsNullOrWhiteSpace(metadata.errors))
             {
                 MessageBox.Show(string.Format(MetadataError, result.fileName, metadata.errors));
                 return;
             }
 
-            var blobMetadataWindow = new BlobMetadataWindow(result.fileName, MetadataDto.fromDictionary(metadata.metaData));
+            var blobMetadataWindow = new BlobMetadataWindow(result.containerName, result.fileName, MetadataDto.fromDictionary(metadata.metaData));
             blobMetadataWindow.ShowDialog();
 
             if (blobMetadataWindow.DialogWasSaved)
@@ -334,7 +335,7 @@ namespace SimpleBlobUtility.Windows
                     return;
                 }
                 var modifiedAsDictionary = MetadataDto.toDictionary(modifiedMetadata);
-                string errorInUpdating = await BlobUtility.SetBlobMetadata(result.containerName, result.fileName, modifiedAsDictionary);
+                string errorInUpdating = await BlobUtility.SetBlobMetadataAsync(result.containerName, result.fileName, modifiedAsDictionary);
                 if (!string.IsNullOrWhiteSpace(errorInUpdating))
                 {
                     MessageBox.Show( string.Format("Error with updating metadata: {0}", errorInUpdating));

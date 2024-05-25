@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SimpleBlobUtility
 {
@@ -13,6 +14,21 @@ namespace SimpleBlobUtility
         public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
         public const string RegNameEncryptionKey = "BobAndAlice";
         public const string RegSaltEncryptionKey = "SodChloride";
+
+        public static readonly List<string> BlobSystemKeyNames = new List<string>()
+                {
+                    "$contentLength",
+                    "$contentType",
+                    "$lastModified",
+                    "$metadata"
+                };
+
+        public const string BlobContentLength = "$contentLength";
+        public const string BlobContentType = "$contentType";
+        public const string BlobLastModified = "$lastModified";
+        public const string BlobMetaDataJson = "$metadata";
+
+
 
         public class FileDialogMsgs
         {

@@ -1,7 +1,6 @@
-﻿using SimpleBlobUtility.Dtos;
-using System.Collections.Generic;
+﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Media.Animation;
 
 
 namespace SimpleBlobUtility.Windows
@@ -11,21 +10,23 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class BlobItemChangeWindow : Window
     {
-        public bool DialogWasSaved = false;
+        public bool DialogWasSaved = false; 
         public string BlobItemName { get; set; } = string.Empty;
         public string BlobItemValue { get; set; } = string.Empty;
 
         private bool isEditting = false;
+        private bool isSystemData = false;
 
-        public App? App =>  Application.Current as App;
+        public App? App =>  System.Windows.Application.Current as App;
 
-        public BlobItemChangeWindow(string keyName, string keyValue, bool isEditting)
+        public BlobItemChangeWindow(bool isSystemData, string keyName, string keyValue, bool isEditting)
         {
             InitializeComponent();
 
             this.txtBlobItemName.Text = keyName;
             this.txtBlobItemValue.Text = keyValue;
             this.isEditting = isEditting;
+            this.isSystemData = isSystemData;
 
             // if editting don't allow them to change the keyname
             if (isEditting)
@@ -33,14 +34,45 @@ namespace SimpleBlobUtility.Windows
                 this.txtBlobItemName.IsReadOnly = true;
                 this.txtBlobItemName.Background = System.Windows.Media.Brushes.LightGray;
             }
+
+            if (isSystemData)
+            {
+                this.txtBlobItemName.IsReadOnly = true;
+                this.txtBlobItemName.Background = System.Windows.Media.Brushes.LightGray;
+                this.txtBlobItemValue.IsReadOnly = true;
+                this.txtBlobItemValue.Background = System.Windows.Media.Brushes.LightGray;
+            }
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            BlobItemName = txtBlobItemName.Text;
+            string trimmed = BlobItemName.Trim();
+
+            bool hasWhitespace = Regex.IsMatch(trimmed, @"\s");
+            if (hasWhitespace)
+            {
+                MessageBox.Show("Key name cannot contain whitespace.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!isSystemData)
+            {
+                if (Constants.BlobSystemKeyNames.Contains(trimmed)) 
+                {
+                    MessageBox.Show("Key name is a reserved system key name, cannot be used. Please use another keyname.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (trimmed.Contains("$"))
+                {
+                    MessageBox.Show("Key name contains unallowed characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+
             DialogWasSaved = true;
             this.DialogResult = true;
-
-            BlobItemName = this.txtBlobItemName.Text;
             BlobItemValue = this.txtBlobItemValue.Text;
             this.Close();
         }
