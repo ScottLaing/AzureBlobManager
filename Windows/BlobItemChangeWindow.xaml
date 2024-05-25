@@ -12,10 +12,10 @@
         Title="Modify Blob Item [My Azure Blob Manager]" Height="184" Width="723">
     <Grid>
         <Label Content="Blob Item Name:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="150,23,0,0" VerticalAlignment="Top" Width="466" FontSize="16" Height="27" IsReadOnly="True" Background="LightGray"/>
+        <TextBox x:Name="txtBlobItemName" HorizontalAlignment="Left" Margin="150,23,0,0" VerticalAlignment="Top" Width="466" FontSize="16" Height="27" IsReadOnly="False" />
 
         <Label Content="Blob Value:" HorizontalAlignment="Left" Margin="15,62,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="txtBlobValue" HorizontalAlignment="Left" Margin="150,63,0,0" VerticalAlignment="Top" Width="466" FontSize="16" Height="27" IsReadOnly="True" Background="LightGray"/>
+        <TextBox x:Name="txtBlobItemValue" HorizontalAlignment="Left" Margin="150,63,0,0" VerticalAlignment="Top" Width="466" FontSize="16" Height="27" IsReadOnly="False" />
 
         <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,20,0" Width="35" Height="35" ToolTip="Save Changes"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>

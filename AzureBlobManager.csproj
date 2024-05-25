@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\EditViewbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\AddViewbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
