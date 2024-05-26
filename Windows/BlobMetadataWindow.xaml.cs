@@ -31,7 +31,7 @@ namespace SimpleBlobUtility.Windows
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var blobItemChangeWindow = new BlobItemChangeWindow(false, "New Key", "New Value", false);
+            var blobItemChangeWindow = new BlobItemChangeWindow(false, "NewKey", "New Value", false);
             blobItemChangeWindow.ShowDialog();
             if (blobItemChangeWindow.DialogWasSaved)
             {

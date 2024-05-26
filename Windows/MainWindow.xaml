@@ -9,36 +9,38 @@
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#7392B7"
+        MinWidth="622" MinHeight="228"
+        MouseDoubleClick="Window_MouseDoubleClick"
         Title="My Azure Blob Manager" Height="360" Width="713">
     <Grid>
         <Label Content="Container:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
         <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="105,20,0,0" VerticalAlignment="Top" Width="214" FontSize="16" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
 
-        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="390,20,0,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,20,247,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:OpenFileViewbox></controls:OpenFileViewbox>
         </Button>
 
-        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="430,20,0,0" Width="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,20,211,0" Width="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
-        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="470,20,0,0" Width="35" ToolTip="Download Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="0,20,175,0" Width="35" ToolTip="Download Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
         </Button>
         
-        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="510,20,0,0" >
+        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,135,0" >
             <controls:DeleteFileViewbox Height="31" Width="35"></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="553,20,0,0" >
+        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,95,0" >
             <controls:MetadataButtonViewbox Height="31" Width="35"></controls:MetadataButtonViewbox>
         </Button>
 
-        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh Blobs"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="596,20,0,0" >
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh Blobs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,55,0" >
             <controls:RefreshButtonViewbox Height="31" Width="35"></controls:RefreshButtonViewbox>
         </Button>
 
-        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="639,20,0,0" >
+        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,10,0" >
             <controls:SettingsViewbox Height="31" Width="35"></controls:SettingsViewbox>
         </Button>
 

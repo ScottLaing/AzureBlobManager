@@ -203,6 +203,13 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+
+            bool confirming = ShowConfirmationMessageBox();
+            if (!confirming)
+            {
+                return;
+            }
+
             var result = GetSelectedFileAndContainerName();
 
             if (result.errors)
@@ -217,6 +224,7 @@ namespace SimpleBlobUtility.Windows
                 }
                 return;
             }
+
 
             var deleteResult = await BlobUtility.DeleteBlobFileAsync(result.containerName, result.fileName);
             if (deleteResult.success)
@@ -341,6 +349,24 @@ namespace SimpleBlobUtility.Windows
                     MessageBox.Show( string.Format("Error with updating metadata: {0}", errorInUpdating));
                 }
             }
+        }
+
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            string sizeInfo = $"Width: {this.Width}, Height: {this.Height}";
+            MessageBox.Show(sizeInfo, "Window Size", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        }
+        // Inside the MainWindow class
+
+        /// <summary>
+        /// Shows a message box asking if the user is sure.
+        /// </summary>
+        /// <returns>True if the user is sure, false otherwise.</returns>
+        private bool ShowConfirmationMessageBox()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            return result == MessageBoxResult.Yes;
         }
     }
 }

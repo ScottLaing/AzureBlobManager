@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Controls;
 
 
 namespace SimpleBlobUtility.Windows
@@ -33,6 +34,13 @@ namespace SimpleBlobUtility.Windows
             {
                 this.txtBlobItemName.IsReadOnly = true;
                 this.txtBlobItemName.Background = System.Windows.Media.Brushes.LightGray;
+                txtBlobItemValue.SelectAll();
+                this.txtBlobItemValue.Focus();
+            }
+            else
+            {
+                txtBlobItemName.SelectAll();
+                this.txtBlobItemName.Focus();
             }
 
             if (isSystemData)
@@ -83,6 +91,11 @@ namespace SimpleBlobUtility.Windows
             this.DialogResult = true;
             BlobItemValue = this.txtBlobItemValue.Text;
             this.Close();
+        }
+
+        private void txtBlobItemValue_GotFocus(object sender, RoutedEventArgs e)
+        {
+            this.txtBlobItemValue.SelectAll();
         }
     }
 }

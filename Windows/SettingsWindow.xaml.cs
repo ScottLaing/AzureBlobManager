@@ -36,5 +36,11 @@ namespace SimpleBlobUtility.Windows
 
             this.Close();
         }
+
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            string sizeInfo = $"Width: {this.Width}, Height: {this.Height}";
+            MessageBox.Show(sizeInfo, "Window Size", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }
