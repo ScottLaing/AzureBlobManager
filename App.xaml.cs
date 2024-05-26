@@ -1,4 +1,6 @@
-﻿using AzureBlobManager.Utils;
+﻿using AzureBlobManager;
+using AzureBlobManager.Utils;
+using Serilog.Core;
 using SimpleBlobUtility.Utils;
 using System;
 using System.Collections.Generic;
@@ -24,13 +26,23 @@ namespace SimpleBlobUtility
 
         public bool ConnKeyIsEncrypted = true;
 
+        private Logger logger = LoggingConfig.CreateLogger();
+
+        /// <summary>
+        /// Event handler for the application startup event.
+        /// </summary>
+        /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
+            logger.Information("Application starting up.");
             GetEncryptionKeys();
             InitBlobConnString();
             base.OnStartup(e);
         }
 
+        /// <summary>
+        /// Retrieves the encryption keys from the registry or generates new ones if they are not found.
+        /// </summary>
         private void GetEncryptionKeys()
         {
             var encryptionKey = RegUtils.GetValueFromRegistry(RegNameEncryptionKey);
@@ -43,9 +55,11 @@ namespace SimpleBlobUtility
                 var newGuid = Guid.NewGuid();
                 EncryptionKey = newGuid.ToString();
                 RegUtils.SaveValueToRegistry(RegNameEncryptionKey, EncryptionKey); // save newly generated key to registry for future
+                logger.Debug($"Encryption key not found in registry, created new key: {EncryptionKey}");
             }
             else
             {
+                logger.Debug($"Encryption key found in registry {encryptionKey}");
                 EncryptionKey = encryptionKey;
             }
 
@@ -54,13 +68,18 @@ namespace SimpleBlobUtility
                 var newGuid = Guid.NewGuid();
                 EncryptionSalt = newGuid.ToString();
                 RegUtils.SaveValueToRegistry(RegSaltEncryptionKey, EncryptionSalt); // save newly generated salt to registry for future
+                logger.Debug($"Encryption salt not found in registry, created new salt: {EncryptionSalt}");
             }
             else
             {
+                logger.Debug($"Encryption key salt found in registry {encryptionSalt}");
                 EncryptionSalt = encryptionSalt;
             }
         }
 
+        /// <summary>
+        /// Initializes the Blob connection string from environment variables or registry.
+        /// </summary>
         private void InitBlobConnString()
         {
             BlobUtility.InitializeBlobConnStringFromEnvVariable(); // try to initialize the connection string, from environment variables first
@@ -69,9 +88,17 @@ namespace SimpleBlobUtility
             if (string.IsNullOrWhiteSpace(BlobUtility.BlobConnectionString))
             {
                 GetBlobConnStringFromRegistry();
+                logger.Information($"Attempting getting connection string from registry: {BlobUtility.BlobConnectionString}.");
+            }
+            else
+            {
+                logger.Information($"Using connection string from environment variables: {BlobUtility.BlobConnectionString}.");
             }
         }
 
+        /// <summary>
+        /// Retrieves the Blob connection string from the registry and decrypts it if necessary.
+        /// </summary>
         private void GetBlobConnStringFromRegistry()
         {
             var result = RegUtils.GetValueFromRegistry(RegNameBlobConnectionKey);
@@ -85,14 +112,22 @@ namespace SimpleBlobUtility
             }
         }
 
+        /// <summary>
+        /// Event handler for the session ending event.
+        /// </summary>
+        /// <param name="e">The <see cref="SessionEndingCancelEventArgs"/> instance containing the event data.</param>
         protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
         {
             Cleanup();
             base.OnSessionEnding(e);
         }
 
+        /// <summary>
+        /// Performs application cleanup by deleting temporary files.
+        /// </summary>
         public void Cleanup()
         {
+            logger.Information("Application cleanup going on.");
             if (_cleanedup)
             {
                 return;

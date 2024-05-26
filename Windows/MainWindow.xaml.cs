@@ -1,4 +1,6 @@
-﻿using SimpleBlobUtility.Dtos;
+﻿using AzureBlobManager;
+using Serilog.Core;
+using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,9 +21,11 @@ namespace SimpleBlobUtility.Windows
 
         public App? App => Application.Current as App;
 
+        private Logger logger = LoggingConfig.CreateLogger();
 
         public MainWindow()
         {
+            logger.Information("Opening mainwindow.");
             InitializeComponent();
 
             RefreshContainersListDropDown();
