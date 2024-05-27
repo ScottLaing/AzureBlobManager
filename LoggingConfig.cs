@@ -12,6 +12,8 @@ namespace AzureBlobManager
     /// </summary>
     public class LoggingConfig
     {
+        public const string LogLocation = "AzureBlobManager/logs";
+        public const string LogFileName = "abm.log";
         /// <summary>
         /// Creates and configures a logger instance for the AzureBlobManager application.
         /// </summary>
@@ -19,13 +21,13 @@ namespace AzureBlobManager
         public static Logger CreateLogger()
         {
             // Define the local data path for storing log files
-            string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AzureBlobManager/logs");
+            string localDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), LogLocation);
 
             // Configure the logger
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Debug() // Set the minimum log level to Debug
                 .WriteTo.Console() // Write log events to the console
-                .WriteTo.File(Path.Combine(localDataPath, "abm.log"), rollingInterval: RollingInterval.Day) // Write log events to a file with daily rolling
+                .WriteTo.File(Path.Combine(localDataPath, LogFileName), rollingInterval: RollingInterval.Day) // Write log events to a file with daily rolling
                 .CreateLogger();
 
             return logger;

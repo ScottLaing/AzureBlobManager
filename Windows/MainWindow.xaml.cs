@@ -18,6 +18,9 @@ namespace SimpleBlobUtility.Windows
     {
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
+        public const string AttemptingToUpdateMetadataButValueIsNull = "Attempting to update metadata but update value is null, cannot update.";
+        public const string ErrorWithUpdatingMetadata = "Error with updating metadata: {0}";
+        public const string OpeningMainWindow = "Opening Main Window.";
 
         public App? App => Application.Current as App;
 
@@ -25,7 +28,7 @@ namespace SimpleBlobUtility.Windows
 
         public MainWindow()
         {
-            logger.Information("Opening mainwindow.");
+            logger.Information(OpeningMainWindow);
             InitializeComponent();
 
             RefreshContainersListDropDown();
@@ -343,14 +346,14 @@ namespace SimpleBlobUtility.Windows
                 var modifiedMetadata = blobMetadataWindow.SourceCollection;
                 if (modifiedMetadata == null)
                 {
-                    MessageBox.Show("Attempting to update metadata but update value is null, cannot update.");
+                    MessageBox.Show(AttemptingToUpdateMetadataButValueIsNull);
                     return;
                 }
                 var modifiedAsDictionary = MetadataDto.toDictionary(modifiedMetadata);
                 string errorInUpdating = await BlobUtility.SetBlobMetadataAsync(result.containerName, result.fileName, modifiedAsDictionary);
                 if (!string.IsNullOrWhiteSpace(errorInUpdating))
                 {
-                    MessageBox.Show( string.Format("Error with updating metadata: {0}", errorInUpdating));
+                    MessageBox.Show( string.Format(ErrorWithUpdatingMetadata, errorInUpdating));
                 }
             }
         }
