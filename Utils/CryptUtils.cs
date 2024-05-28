@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using static SimpleBlobUtility.Constants;
 
 #pragma warning disable SYSLIB0022 // Type or member is obsolete
 
@@ -9,11 +10,6 @@ namespace SimpleBlobUtility.Utils
 {
     public class CryptUtils
     {
-        public const string StringDidNotContainProperlyFormattedByteArray = "Stream did not contain properly formatted byte array";
-        public const string DidNotReadByteArrayProperly = "Did not read byte array properly";
-        public const string PlainText = "plainText";
-        public const string CipherText = "cipherText";
-
         //While an app specific salt is not the best practice for
         //password based encryption, it's probably safe enough as long as
         //it is truly uncommon. Also too much work to alter this answer otherwise.

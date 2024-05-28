@@ -2,19 +2,17 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using static SimpleBlobUtility.Constants;
 
 namespace AzureBlobManager.Utils
 {
     public class AesCryptUtils
     {
-        private const string defaultKey = "76AA6E93-AB72-4B33-B382-ABF77FF64C83"; // Must be at least 16 characters
-        private static readonly string defaultIv = "55DCB9FA-32DB-4E"; // Must be 16 characters
-        private const string KeyAndSaltMustNotBeEmpty = "Key and salt must not be empty.";
-        private const string SaltMustBeAtLeast16Characters = "Salt must be at least 16 characters.";
-        private const string KeyMustBe16CharactersLong = "Key must be 16 characters long.";
-        private const string EncryptedTextMustNotBeBlank = "encryptedText must not be blank.";
-        private const string PlainTextMustNotBeBlank = "plainText must not be blank.";
-
+        /// <summary>
+        /// Encrypts a string using AES encryption with default key and IV.
+        /// </summary>
+        /// <param name="plainText">The plain text to be encrypted.</param>
+        /// <returns>The encrypted string.</returns>
         public static string EncryptString(string plainText)
         {
             if (string.IsNullOrWhiteSpace(plainText))
@@ -26,8 +24,8 @@ namespace AzureBlobManager.Utils
 
             using (var aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(defaultKey);
-                aes.IV = Encoding.UTF8.GetBytes(defaultIv);
+                aes.Key = Encoding.UTF8.GetBytes(AesDefaultKey);
+                aes.IV = Encoding.UTF8.GetBytes(AesDefaultIv);
                 aes.Mode = CipherMode.CBC; // Set the cipher mode (CBC is common)
 
                 using (var encryptor = aes.CreateEncryptor())
@@ -44,6 +42,13 @@ namespace AzureBlobManager.Utils
             }
         }
 
+        /// <summary>
+        /// Encrypts a string using AES encryption with a custom key and salt.
+        /// </summary>
+        /// <param name="plainText">The plain text to be encrypted.</param>
+        /// <param name="key">The encryption key.</param>
+        /// <param name="salt">The salt value.</param>
+        /// <returns>The encrypted string.</returns>
         public static string EncryptString(string plainText, string key, string salt)
         {
             if (string.IsNullOrWhiteSpace(plainText))
@@ -88,6 +93,11 @@ namespace AzureBlobManager.Utils
             }
         }
 
+        /// <summary>
+        /// Decrypts an encrypted string using AES encryption with default key and IV.
+        /// </summary>
+        /// <param name="encryptedText">The encrypted string to be decrypted.</param>
+        /// <returns>The decrypted string.</returns>
         public static string DecryptString(string encryptedText)
         {
             if (string.IsNullOrWhiteSpace(encryptedText))
@@ -99,8 +109,8 @@ namespace AzureBlobManager.Utils
 
             using (var aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(defaultKey);
-                aes.IV = Encoding.UTF8.GetBytes(defaultIv);
+                aes.Key = Encoding.UTF8.GetBytes(AesDefaultKey);
+                aes.IV = Encoding.UTF8.GetBytes(AesDefaultIv);
                 aes.Mode = CipherMode.CBC; // Set the same cipher mode
 
                 using (var decryptor = aes.CreateDecryptor())
@@ -119,6 +129,13 @@ namespace AzureBlobManager.Utils
             }
         }
 
+        /// <summary>
+        /// Decrypts an encrypted string using AES encryption with a custom key and salt.
+        /// </summary>
+        /// <param name="encryptedText">The encrypted string to be decrypted.</param>
+        /// <param name="key">The encryption key.</param>
+        /// <param name="salt">The salt value.</param>
+        /// <returns>The decrypted string.</returns>
         public static string DecryptString(string encryptedText, string key, string salt)
         {
             if (string.IsNullOrWhiteSpace(encryptedText))
@@ -146,7 +163,7 @@ namespace AzureBlobManager.Utils
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = Encoding.UTF8.GetBytes(defaultIv);
+                aes.IV = Encoding.UTF8.GetBytes(AesDefaultIv);
                 aes.Mode = CipherMode.CBC; // Set the same cipher mode
 
                 using (var decryptor = aes.CreateDecryptor())

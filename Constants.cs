@@ -14,6 +14,29 @@ namespace SimpleBlobUtility
         public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
         public const string RegNameEncryptionKey = "BobAndAlice";
         public const string RegSaltEncryptionKey = "SodChloride";
+        public const string AppNotDefined = "App not defined, cannot continue with AttemptDownloadFileToTempFolder";
+
+        public const string AesDefaultKey = "76AA6E93-AB72-4B33-B382-ABF77FF64C83"; // Must be at least 16 characters
+        public const string AesDefaultIv = "55DCB9FA-32DB-4E"; // Must be 16 characters
+        public const string KeyAndSaltMustNotBeEmpty = "Key and salt must not be empty.";
+        public const string SaltMustBeAtLeast16Characters = "Salt must be at least 16 characters.";
+        public const string KeyMustBe16CharactersLong = "Key must be 16 characters long.";
+        public const string EncryptedTextMustNotBeBlank = "EncryptedText must not be blank.";
+        public const string PlainTextMustNotBeBlank = "PlainText must not be blank.";
+
+        public const string ConnectionIsNull = "connection is null";
+        public const string ErrorGettingBlobMetadata = "Error getting blob metadata: {0}";
+
+        public const string StringDidNotContainProperlyFormattedByteArray = "Stream did not contain properly formatted byte array";
+        public const string DidNotReadByteArrayProperly = "Did not read byte array properly";
+        public const string PlainText = "plainText";
+        public const string CipherText = "cipherText";
+
+        public const string KeyNameCannotContainWhitespace = "Key name cannot contain whitespace.";
+        public const string Error = "Error";
+        public const string KeyNameIsReserved = "Key name is a reserved system key name, cannot be used. Please use another keyname.";
+        public const string KeyNameContainsUnallowedCharacters = "Key name contains unallowed characters.";
+
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {

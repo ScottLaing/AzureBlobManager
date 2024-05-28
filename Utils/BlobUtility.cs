@@ -13,9 +13,6 @@ namespace SimpleBlobUtility.Utils
 {
     public class BlobUtility
     {
-        public const string ConnectionIsNull = "connection is null";
-        public const string ErrorGettingBlobMetadata = "Error getting blob metadata: {0}";
-
         /// <summary>
         /// Gets or sets the connection string for the Azure Blob Storage.
         /// </summary>
