@@ -3,6 +3,7 @@ using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using static SimpleBlobUtility.Constants;
 
 
 namespace SimpleBlobUtility.Windows
@@ -44,7 +45,7 @@ namespace SimpleBlobUtility.Windows
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             // Create a new instance of BlobItemChangeWindow
-            var blobItemChangeWindow = new BlobItemChangeWindow(false, "NewKey", "New Value", false);
+            var blobItemChangeWindow = new BlobItemChangeWindow(false, BlobItemNewKey, BlobItemNewValue, false);
             blobItemChangeWindow.ShowDialog();
 
             // Check if the dialog was saved
@@ -55,14 +56,14 @@ namespace SimpleBlobUtility.Windows
                 // Check if the blob item name is empty
                 if (string.IsNullOrEmpty(blobItemName))
                 {
-                    MessageBox.Show("Key name cannot be empty, blob item not added.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameCannotBeEmpty, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 // Check if the key name already exists in the metadata items
                 if (SourceCollection.Any(m => m.KeyName.ToLower() == blobItemName.ToLower()))
                 {
-                    MessageBox.Show("Key name already exists in metadata items. To edit an existing metadata item, select item then click edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameAlreadyExists, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -95,7 +96,7 @@ namespace SimpleBlobUtility.Windows
             // Check if there was an error saving the metadata
             if (!string.IsNullOrWhiteSpace(setResult))
             {
-                MessageBox.Show(string.Format("Error saving metadata: {0}", setResult), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(TroubleSavingMetadata, setResult), Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -115,7 +116,7 @@ namespace SimpleBlobUtility.Windows
             // Check if no metadata item is selected
             if (currItem == null)
             {
-                MessageBox.Show("No metadata item selected, please select a metadata item to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(NoMetadataItemSelected, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -134,7 +135,7 @@ namespace SimpleBlobUtility.Windows
                 // Check if the blob item name is empty
                 if (string.IsNullOrEmpty(blobItemName))
                 {
-                    MessageBox.Show("Key name cannot be empty, blob item not edited.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameCannotBeEmptyEdited, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -164,7 +165,7 @@ namespace SimpleBlobUtility.Windows
             // Check if no metadata item is selected
             if (currItem == null)
             {
-                MessageBox.Show("No metadata item selected, please select a metadata item to edit.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(NoMetadataItemSelected, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -173,7 +174,7 @@ namespace SimpleBlobUtility.Windows
             // Check if the metadata item is a system setting
             if (isSystemSetting)
             {
-                MessageBox.Show("Cannot delete system metadata items.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(CannotDeleteSystemMetadataItems, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

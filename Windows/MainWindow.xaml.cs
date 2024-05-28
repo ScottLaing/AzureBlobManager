@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using static SimpleBlobUtility.Constants.UIMessages;
+using static SimpleBlobUtility.Constants;
 
 
 namespace SimpleBlobUtility.Windows
@@ -18,9 +19,6 @@ namespace SimpleBlobUtility.Windows
     {
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
-        public const string AttemptingToUpdateMetadataButValueIsNull = "Attempting to update metadata but update value is null, cannot update.";
-        public const string ErrorWithUpdatingMetadata = "Error with updating metadata: {0}";
-        public const string OpeningMainWindow = "Opening Main Window.";
 
         public App? App => Application.Current as App;
 

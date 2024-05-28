@@ -10,8 +10,6 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        // Constant string for the error message when trouble getting application reference
-        public const string TroubleGettingApplicationReference = "Trouble getting application reference, cannot save to registry.";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.

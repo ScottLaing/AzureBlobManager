@@ -37,6 +37,23 @@ namespace SimpleBlobUtility
         public const string KeyNameIsReserved = "Key name is a reserved system key name, cannot be used. Please use another keyname.";
         public const string KeyNameContainsUnallowedCharacters = "Key name contains unallowed characters.";
 
+        public const string TroubleSavingMetadata = "Error saving metadata: {0}";
+        public const string KeyNameCannotBeEmpty = "Key name cannot be empty, blob item not added.";
+        public const string KeyNameAlreadyExists = "Key name already exists in metadata items. To edit an existing metadata item, select item then click edit.";
+        public const string NoMetadataItemSelected = "No metadata item selected, please select a metadata item to edit.";
+        public const string KeyNameCannotBeEmptyEdited = "Key name cannot be empty, blob item not edited.";
+        public const string CannotDeleteSystemMetadataItems = "Cannot delete system metadata items.";
+
+        public const string BlobItemNewKey = "NewKey";
+        public const string BlobItemNewValue = "New Value";
+
+        public const string AttemptingToUpdateMetadataButValueIsNull = "Attempting to update metadata but update value is null, cannot update.";
+        public const string ErrorWithUpdatingMetadata = "Error with updating metadata: {0}";
+        public const string OpeningMainWindow = "Opening Main Window.";
+
+        // Constant string for the error message when trouble getting application reference
+        public const string TroubleGettingApplicationReference = "Trouble getting application reference, cannot save to registry.";
+
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {
@@ -111,6 +128,8 @@ namespace SimpleBlobUtility
 
         public class ConnectionStrings
         {
+            // connection string now put into environment variable or will be saved into registry in encrypted format, new conn string can be now entered via
+            // settings window.
             public static string LocalDBConnString = @"###############################################################";
             public static string AzureDBConnString = "################################################################";
         }
