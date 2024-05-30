@@ -17,6 +17,8 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
+        public const string AreYouSure = "Are you sure?";
+        public const string Confirmation = "Confirmation";
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
 
@@ -370,7 +372,7 @@ namespace SimpleBlobUtility.Windows
         /// <returns>True if the user is sure, false otherwise.</returns>
         private bool ShowConfirmationMessageBox()
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show(AreYouSure, Confirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
             return result == MessageBoxResult.Yes;
         }
     }

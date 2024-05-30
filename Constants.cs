@@ -54,6 +54,9 @@ namespace SimpleBlobUtility
         // Constant string for the error message when trouble getting application reference
         public const string TroubleGettingApplicationReference = "Trouble getting application reference, cannot save to registry.";
 
+        public const string WindowSize = "Window Size";
+        public const string WindowSizeInfo = "Width: {0}, Height: {1}";
+
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {

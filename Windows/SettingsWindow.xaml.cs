@@ -10,9 +10,6 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public const string WindowSize = "Window Size";
-        public const string WindowSizeInfo = "Width: {0}, Height: {1}";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
         /// </summary>
