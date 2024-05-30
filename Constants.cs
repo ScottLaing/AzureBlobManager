@@ -57,6 +57,9 @@ namespace SimpleBlobUtility
         public const string WindowSize = "Window Size";
         public const string WindowSizeInfo = "Width: {0}, Height: {1}";
 
+        public const string AreYouSure = "Are you sure?";
+        public const string Confirmation = "Confirmation";
+
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {

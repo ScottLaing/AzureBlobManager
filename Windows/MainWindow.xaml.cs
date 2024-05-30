@@ -17,8 +17,7 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        public const string AreYouSure = "Are you sure?";
-        public const string Confirmation = "Confirmation";
+
         public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
         private string _lastUsedContainer = "";
 
@@ -360,10 +359,10 @@ namespace SimpleBlobUtility.Windows
 
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            string sizeInfo = $"Width: {this.Width}, Height: {this.Height}";
-            MessageBox.Show(sizeInfo, "Window Size", MessageBoxButton.OK, MessageBoxImage.Information);
-
+            string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
+            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
         // Inside the MainWindow class
 
         /// <summary>

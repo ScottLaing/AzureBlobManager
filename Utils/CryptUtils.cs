@@ -142,6 +142,11 @@ namespace SimpleBlobUtility.Utils
             return outStr;
         }
 
+        /// <summary>
+        /// Adds padding to the plain text for encryption.
+        /// </summary>
+        /// <param name="plainText">The text to which padding will be added.</param>
+        /// <returns>The padded text.</returns>
         private static string AddPadding(string plainText)
         {
             plainText = Guid.NewGuid().ToString() + plainText + Guid.NewGuid().ToString();
@@ -281,7 +286,11 @@ namespace SimpleBlobUtility.Utils
 
             return plaintext;
         }
-
+        /// <summary>
+        /// Removes padding from the decrypted text.
+        /// </summary>
+        /// <param name="plaintext">The decrypted text from which padding will be removed.</param>
+        /// <returns>The text after removing padding.</returns>
         private static string RemovePadding(string plaintext)
         {
             plaintext = plaintext.Substring(Constants.GuidLength);
@@ -290,6 +299,12 @@ namespace SimpleBlobUtility.Utils
             return plaintext;
         }
 
+        /// <summary>
+        /// Reads a byte array from the given stream.
+        /// </summary>
+        /// <param name="s">The stream from which the byte array will be read.</param>
+        /// <returns>The byte array read from the stream.</returns>
+        /// <exception cref="SystemException">Thrown when the stream does not contain a properly formatted byte array or the byte array could not be read properly.</exception>
         private static byte[] ReadByteArray(Stream s)
         {
             byte[] rawLength = new byte[sizeof(int)];
