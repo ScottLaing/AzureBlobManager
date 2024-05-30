@@ -10,6 +10,8 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        public const string WindowSize = "Window Size";
+        public const string WindowSizeInfo = "Width: {0}, Height: {1}";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
@@ -66,10 +68,10 @@ namespace SimpleBlobUtility.Windows
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Create a string with information about the width and height of the window
-            string sizeInfo = $"Width: {this.Width}, Height: {this.Height}";
+            string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
 
             // Show a message box with the window size information
-            MessageBox.Show(sizeInfo, "Window Size", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
