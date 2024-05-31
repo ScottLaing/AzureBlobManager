@@ -7,9 +7,9 @@ using System.Text;
 
 namespace AzureBlobManager
 {
-
     /// <summary>
-    /// Represents the configuration for logging in the AzureBlobManager application.
+    /// Represents the Logging information and configuration for logging in the AzureBlobManager application.
+    /// Logging uses Serilog for logging to the console and to a file.
     /// </summary>
     public class Logging
     {
@@ -43,7 +43,7 @@ namespace AzureBlobManager
         public static string GetLogsText()
         {
             StringBuilder output = new StringBuilder();
-            string pattern = "*.log"; // Search for all files with .txt extension
+            string pattern = "*.log"; 
 
             string[] files = Directory.GetFiles(LogFilesPath, pattern);
             foreach (string file in files)
@@ -56,7 +56,8 @@ namespace AzureBlobManager
                 }
                 catch (Exception ex)
                 {
-                    output.AppendLine(string.Format("Error occurred: [{0}] file contents are likely inaccessible (may be current in-use log), try again later. Error details: {1}", file, ex.Message));
+                    output.AppendLine(string.Format("ERROR: [{0}] file contents are likely inaccessible (may be current or recently in-use log), please try again later.", file));
+                    output.AppendLine(string.Format("ERROR DETAILS: {0}.", ex.Message));
                 }
 
                 output.AppendLine();
