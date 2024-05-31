@@ -29,7 +29,7 @@ namespace SimpleBlobUtility
         // Flag indicating whether the connection key is encrypted.
         public bool ConnKeyIsEncrypted = true;
 
-        private Logger logger = LoggingConfig.CreateLogger();
+        private Logger logger = Logging.CreateLogger();
 
         /// <summary>
         /// Event handler for the application startup event.

@@ -23,7 +23,7 @@ namespace SimpleBlobUtility.Windows
 
         public App? App => Application.Current as App;
 
-        private Logger logger = LoggingConfig.CreateLogger();
+        private Logger logger = Logging.CreateLogger();
 
         public MainWindow()
         {
@@ -393,6 +393,9 @@ namespace SimpleBlobUtility.Windows
             // Display the window size information
             string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
             MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            var logViewerWindow = new LogViewerWindow();
+            logViewerWindow.ShowDialog();
         }
     }
 }

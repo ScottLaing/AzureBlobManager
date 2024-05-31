@@ -1,0 +1,22 @@
+﻿<Window x:Class="SimpleBlobUtility.Windows.LogViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleBlobUtility"
+                xmlns:controls="clr-namespace:SimpleBlobUtility.Controls"
+        
+        mc:Ignorable="d"
+        Icon="/Images/CloudFileServiceConfiguration.ico"
+        Background="#B3C5D7"
+        Title="Logs Info [My Azure Blob Manager]" Height="360" Width="713">
+    <Grid>
+
+        <Button x:Name="btnClose"  Margin="0,12,20,0" Width="35" Height="35" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:CloseViewbox ></controls:CloseViewbox>
+        </Button>
+        
+        <TextBox x:Name="txtLogsInfo" IsReadOnly="True"  Margin="20,59,20,20" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>
+
+    </Grid>
+</Window>
