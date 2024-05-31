@@ -18,12 +18,15 @@ namespace SimpleBlobUtility
         // these are temp files for viewing, they can be removed when app closes.
         public Dictionary<string, string> currentViewFilesWithTempLocations = new Dictionary<string, string>();
 
+        // Encryption key used for encryption and decryption operations.
         public string EncryptionKey { get; set; } = "";
 
+        // Salt used for encryption and decryption operations.
         public string EncryptionSalt { get; set; } = "";
 
         private bool _cleanedup = false;
 
+        // Flag indicating whether the connection key is encrypted.
         public bool ConnKeyIsEncrypted = true;
 
         private Logger logger = LoggingConfig.CreateLogger();
@@ -55,7 +58,7 @@ namespace SimpleBlobUtility
                 var newGuid = Guid.NewGuid();
                 EncryptionKey = newGuid.ToString();
                 RegUtils.SaveValueToRegistry(RegNameEncryptionKey, EncryptionKey); // save newly generated key to registry for future
-                logger.Debug( string.Format(EncryptionKeyNotFound, EncryptionKey));
+                logger.Debug(string.Format(EncryptionKeyNotFound, EncryptionKey));
             }
             else
             {
