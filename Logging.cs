@@ -3,9 +3,10 @@ using Serilog.Core;
 using System;
 using System.IO;
 using System.Text;
+using static SimpleBlobUtility.Constants;
 
 
-namespace AzureBlobManager
+namespace SimpleBlobUtility
 {
     /// <summary>
     /// Represents the Logging information and configuration for logging in the AzureBlobManager application.
@@ -13,9 +14,9 @@ namespace AzureBlobManager
     /// </summary>
     public class Logging
     {
-        public const string LogLocation = "AzureBlobManager/logs";
-        public const string LogFileName = "abm.log";
-
+        /// <summary>
+        /// Gets the path to the log files directory.
+        /// </summary>
         public static string LogFilesPath
         {
             get
@@ -40,24 +41,37 @@ namespace AzureBlobManager
             return logger;
         }
 
+        /// <summary>
+        /// Replaces forward slashes with backslashes in the input string.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns>The input string with forward slashes replaced by backslashes.</returns>
+        public static string FixSlashes(string input)
+        {
+            return input.Replace("/", "\\");
+        }
+
+        /// <summary>
+        /// Retrieves the text content of all log files in the log directory.
+        /// </summary>
+        /// <returns>The text content of all log files.</returns>
         public static string GetLogsText()
         {
             StringBuilder output = new StringBuilder();
-            string pattern = "*.log"; 
 
-            string[] files = Directory.GetFiles(LogFilesPath, pattern);
+            string[] files = Directory.GetFiles(LogFilesPath, LogPattern);
             foreach (string file in files)
             {
-                output.AppendLine(file.Replace("/","\\"));
-                output.AppendLine("===============================================");
+                output.AppendLine(FixSlashes(file));
+                output.AppendLine(LogSeparator);
                 try
                 {
                     output.AppendLine(File.ReadAllText(file));
                 }
                 catch (Exception ex)
                 {
-                    output.AppendLine(string.Format("ERROR: [{0}] file contents are likely inaccessible (may be current or recently in-use log), please try again later.", file));
-                    output.AppendLine(string.Format("ERROR DETAILS: {0}.", ex.Message));
+                    output.AppendLine(string.Format(ErrorFileContentsAreLikelyInaccessible, file));
+                    output.AppendLine(string.Format(ErrorDetails, ex.Message));
                 }
 
                 output.AppendLine();

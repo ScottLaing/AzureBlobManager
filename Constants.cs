@@ -69,6 +69,13 @@ namespace SimpleBlobUtility
         public const string AttemptingToGetConnectionString = "Attempting to get connection string from registry: {0}.";
         public const string UsingConnectionStringFromRegistry = "Using connection string from registry: {0}.";
 
+        public const string LogLocation = "AzureBlobManager/logs"; // The directory where log files are stored
+        public const string LogFileName = "abm.log"; // The name of the log file
+        public const string LogPattern = "*.log";
+        public const string LogSeparator = "===============================================";
+        public const string ErrorFileContentsAreLikelyInaccessible = "ERROR: [{0}] file contents are likely inaccessible (may be current or recently in-use log), please try again later.";
+        public const string ErrorDetails = "ERROR DETAILS: {0}.";
+
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {
