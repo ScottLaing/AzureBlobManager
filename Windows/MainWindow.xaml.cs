@@ -352,18 +352,10 @@ namespace SimpleBlobUtility.Windows
                 string errorInUpdating = await BlobUtility.SetBlobMetadataAsync(result.containerName, result.fileName, modifiedAsDictionary);
                 if (!string.IsNullOrWhiteSpace(errorInUpdating))
                 {
-                    MessageBox.Show( string.Format(ErrorWithUpdatingMetadata, errorInUpdating));
+                    MessageBox.Show(string.Format(ErrorWithUpdatingMetadata, errorInUpdating));
                 }
             }
         }
-
-        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
-            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        // Inside the MainWindow class
 
         /// <summary>
         /// Shows a message box asking if the user is sure.
@@ -373,6 +365,18 @@ namespace SimpleBlobUtility.Windows
         {
             MessageBoxResult result = MessageBox.Show(AreYouSure, Confirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
             return result == MessageBoxResult.Yes;
+        }
+
+        /// <summary>
+        /// Handles the double-click event on the window to display the window size information.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Display the window size information
+            string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
+            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

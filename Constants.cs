@@ -60,6 +60,15 @@ namespace SimpleBlobUtility
         public const string AreYouSure = "Are you sure?";
         public const string Confirmation = "Confirmation";
 
+        public const string EncryptionKeyNotFound = "Encryption key not found in registry, created new key: {0}";
+        public const string ApplicationStartup = "Application starting up.";
+        public const string EncryptionKeyFound = "Encryption key found in registry {0}";
+        public const string EncryptionSaltNotFound = "Encryption salt not found in registry, created new salt: {0}";
+        public const string EncryptionKeySaltFound = "Encryption key salt found in registry {0}";
+        public const string ApplicationCleanup = "Application cleanup going on.";
+        public const string AttemptingToGetConnectionString = "Attempting to get connection string from registry: {0}.";
+        public const string UsingConnectionStringFromRegistry = "Using connection string from registry: {0}.";
+
 
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
                 {

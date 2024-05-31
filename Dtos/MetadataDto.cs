@@ -4,9 +4,21 @@ namespace SimpleBlobUtility.Dtos
 {
     public class MetadataDto
     {
+        /// <summary>
+        /// Gets or sets the key name.
+        /// </summary>
         public string KeyName { get; set; } = "";
+
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
         public string Value { get; set; } = "";
 
+        /// <summary>
+        /// Converts a dictionary of key-value pairs to a list of MetadataDto objects.
+        /// </summary>
+        /// <param name="keyValuePairs">The dictionary of key-value pairs.</param>
+        /// <returns>A list of MetadataDto objects.</returns>
         public static List<MetadataDto> fromDictionary(Dictionary<string, string> keyValuePairs)
         {
             List<MetadataDto> metadataDtos = new List<MetadataDto>();
@@ -17,6 +29,11 @@ namespace SimpleBlobUtility.Dtos
             return metadataDtos;
         }
 
+        /// <summary>
+        /// Converts a list of MetadataDto objects to a dictionary of key-value pairs.
+        /// </summary>
+        /// <param name="metadataList">The list of MetadataDto objects.</param>
+        /// <returns>A dictionary of key-value pairs.</returns>
         public static Dictionary<string, string> toDictionary(List<MetadataDto> metadataList)
         {
             var dictout = new Dictionary<string, string>();

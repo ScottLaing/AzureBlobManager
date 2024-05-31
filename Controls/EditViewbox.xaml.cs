@@ -3,7 +3,7 @@
 namespace SimpleBlobUtility.Controls
 {
     /// <summary>
-    /// Interaction logic for AddViewbox.xaml
+    /// Interaction logic for EditViewbox.xaml
     /// </summary>
     public partial class EditViewbox : UserControl
     {
