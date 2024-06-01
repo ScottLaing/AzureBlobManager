@@ -1,6 +1,7 @@
 ﻿using AzureBlobManager;
 using AzureBlobManager.Utils;
 using Serilog.Core;
+using SimpleBlobUtility;
 using SimpleBlobUtility.Utils;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.IO;
 using System.Windows;
 using static SimpleBlobUtility.Constants;
 
-namespace SimpleBlobUtility
+namespace AzureBlobManager
 {
     /// <summary>
     /// Interaction logic for App.xaml

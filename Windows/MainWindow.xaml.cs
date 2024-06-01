@@ -6,9 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
-using static SimpleBlobUtility.Constants.UIMessages;
 using static SimpleBlobUtility.Constants;
-using Microsoft.Extensions.Logging;
+using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Windows
 {

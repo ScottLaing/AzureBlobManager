@@ -6,7 +6,7 @@ using System.Text;
 using static SimpleBlobUtility.Constants;
 
 
-namespace SimpleBlobUtility
+namespace AzureBlobManager
 {
     /// <summary>
     /// Represents the Logging information and configuration for logging in the AzureBlobManager application.
@@ -35,6 +35,7 @@ namespace SimpleBlobUtility
             var logger = new LoggerConfiguration()
                 .MinimumLevel.Debug() // Set the minimum log level to Debug
                 .WriteTo.Console() // Write log events to the console
+               // .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext} - {Method}:{LineNumber} - {Message}{NewLine}{Exception}")
                 .WriteTo.File(Path.Combine(LogFilesPath, LogFileName), rollingInterval: RollingInterval.Day) // Write log events to a file with daily rolling
                 .CreateLogger();
 

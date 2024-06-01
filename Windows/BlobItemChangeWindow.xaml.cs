@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using AzureBlobManager;
+using System.Text.RegularExpressions;
 using System.Windows;
 using static SimpleBlobUtility.Constants;
 
@@ -10,11 +11,11 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class BlobItemChangeWindow : Window
     {
+
         public bool DialogWasSaved = false;
         public string BlobItemName { get; set; } = string.Empty;
         public string BlobItemValue { get; set; } = string.Empty;
 
-        private bool isEditting = false;
         private bool isSystemData = false;
 
         public App? App => System.Windows.Application.Current as App;
@@ -32,7 +33,6 @@ namespace SimpleBlobUtility.Windows
 
             this.txtBlobItemName.Text = keyName;
             this.txtBlobItemValue.Text = keyValue;
-            this.isEditting = isEditting;
             this.isSystemData = isSystemData;
 
             // if editing don't allow them to change the keyname

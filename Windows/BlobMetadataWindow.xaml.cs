@@ -1,4 +1,5 @@
-﻿using SimpleBlobUtility.Dtos;
+﻿using AzureBlobManager;
+using SimpleBlobUtility.Dtos;
 using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,10 +149,6 @@ namespace SimpleBlobUtility.Windows
             }
         }
 
-        private void SaveButtonViewbox_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         /// <summary>
         /// Handles the click event of the "Delete" button.

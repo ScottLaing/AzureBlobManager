@@ -1,4 +1,5 @@
-﻿using AzureBlobManager.Utils;
+﻿using AzureBlobManager;
+using AzureBlobManager.Utils;
 using Serilog.Core;
 using SimpleBlobUtility.Utils;
 using System.Windows;

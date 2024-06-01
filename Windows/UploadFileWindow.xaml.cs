@@ -1,13 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AzureBlobManager;
 using Microsoft.Win32;
 using Serilog.Core;
 using SimpleBlobUtility.Utils;
 using System;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
 using static SimpleBlobUtility.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Windows
@@ -75,43 +73,13 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = SetupDialog();
+            OpenFileDialog dlg = UiUtils.SetupDialog();
             bool? result = dlg.ShowDialog();
 
             if (result == true)
             {
                 txtFilePath.Text = dlg.FileName;
             }
-        }
-
-        /// <summary>
-        /// Sets up the file dialog with the appropriate filter settings.
-        /// </summary>
-        /// <returns>The configured file dialog.</returns>
-        private static OpenFileDialog SetupDialog()
-        {
-            var dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.Filter = String.Empty;
-
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-
-            var filter = string.Empty;
-            filter = FileDialogMsgs.TextDocuments; // Filter files by extension
-            filter += FileDialogMsgs.SetupDialogAllFilesSettings;
-
-            foreach (var codec in codecs)
-            {
-                if (string.IsNullOrWhiteSpace(codec.CodecName))
-                {
-                    continue;
-                }
-                string codecName = codec.CodecName.Substring(8).Replace(FileDialogMsgs.CodecName, FileDialogMsgs.Files).Trim();
-                filter += String.Format(FileDialogMsgs.FileDialogFilterString, FileDialogMsgs.Sep, codecName, codec.FilenameExtension?.ToLower() ?? String.Empty);
-            }
-
-            dlg.Filter = filter;
-            dlg.FilterIndex = 2;
-            return dlg;
         }
 
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
