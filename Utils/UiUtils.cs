@@ -11,6 +11,10 @@ namespace AzureBlobManager.Utils
     {
         private static Logger logger = Logging.CreateLogger();
 
+        /// <summary>
+        /// Displays the size of the window.
+        /// </summary>
+        /// <param name="window">The window to display the size of.</param>
         public static void ShowWindowSize(Window window)
         {
             logger.Debug("ShowWindowSize call");

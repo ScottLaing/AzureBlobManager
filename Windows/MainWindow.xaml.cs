@@ -380,6 +380,12 @@ namespace AzureBlobManager.Windows
             UiUtils.ShowWindowSize(this);
         }
 
+
+        /// <summary>
+        /// Handles the click event of the logs button to open the log viewer window.
+        /// </summary>
+        /// <param name="sender">The button that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void btnLogs_Click(object sender, RoutedEventArgs e)
         {
             var logViewerWindow = new LogViewerWindow();

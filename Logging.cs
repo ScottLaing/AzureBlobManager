@@ -17,13 +17,7 @@ namespace AzureBlobManager
         /// <summary>
         /// Gets the path to the log files directory.
         /// </summary>
-        public static string LogFilesPath
-        {
-            get
-            {
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), LogLocation);
-            }
-        }
+        public static string LogFilesPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), LogLocation);
 
         /// <summary>
         /// Creates and configures a logger instance for the AzureBlobManager application.

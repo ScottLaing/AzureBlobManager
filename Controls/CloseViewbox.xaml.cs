@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for SaveButtonViewbox.xaml
+    /// Interaction logic for CloseViewbox.xaml
     /// </summary>
     public partial class CloseViewbox : UserControl
     {
