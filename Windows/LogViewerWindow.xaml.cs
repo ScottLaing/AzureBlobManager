@@ -1,8 +1,7 @@
-﻿using AzureBlobManager;
-using System.Windows;
+﻿using System.Windows;
 
 
-namespace SimpleBlobUtility.Windows
+namespace AzureBlobManager.Windows
 {
     /// <summary>
     /// Interaction logic for LogViewerWindow.xaml

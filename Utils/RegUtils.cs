@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using SimpleBlobUtility;
 using System;
 
 namespace AzureBlobManager.Utils

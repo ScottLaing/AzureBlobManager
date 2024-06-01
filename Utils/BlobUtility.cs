@@ -1,6 +1,6 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using SimpleBlobUtility.Dtos;
+using AzureBlobManager.Dtos;
 using System;
 using System.Collections.Generic;
 using System.IO;

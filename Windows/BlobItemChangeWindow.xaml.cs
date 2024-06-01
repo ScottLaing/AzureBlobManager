@@ -1,10 +1,9 @@
-﻿using AzureBlobManager;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
 
-namespace SimpleBlobUtility.Windows
+namespace AzureBlobManager.Windows
 {
     /// <summary>
     /// Interaction logic for BlobItemChangeWindow.xaml

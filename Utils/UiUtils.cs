@@ -1,10 +1,9 @@
 ﻿using Microsoft.Win32;
 using Serilog.Core;
-using System.Drawing.Imaging;
 using System;
+using System.Drawing.Imaging;
 using System.Windows;
 using static AzureBlobManager.Constants;
-using AzureBlobManager;
 
 namespace AzureBlobManager.Utils
 {

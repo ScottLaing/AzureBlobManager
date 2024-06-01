@@ -1,5 +1,4 @@
-﻿using AzureBlobManager;
-using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Utils;
 using Microsoft.Win32;
 using Serilog.Core;
 using System;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using static AzureBlobManager.Constants.UIMessages;
 
-namespace SimpleBlobUtility.Windows
+namespace AzureBlobManager.Windows
 {
     /// <summary>
     /// Interaction logic for UploadFileWindow.xaml

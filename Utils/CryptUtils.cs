@@ -4,8 +4,6 @@ using System.Security.Cryptography;
 using System.Text;
 using static AzureBlobManager.Constants;
 
-using AzureBlobManager;
-
 #pragma warning disable SYSLIB0022 // Type or member is obsolete
 
 namespace AzureBlobManager.Utils

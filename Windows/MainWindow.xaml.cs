@@ -1,7 +1,6 @@
-﻿using AzureBlobManager;
+﻿using AzureBlobManager.Dtos;
 using AzureBlobManager.Utils;
 using Serilog.Core;
-using SimpleBlobUtility.Dtos;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using System.Windows;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
 
-namespace SimpleBlobUtility.Windows
+namespace AzureBlobManager.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

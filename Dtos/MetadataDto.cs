@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SimpleBlobUtility.Dtos
+namespace AzureBlobManager.Dtos
 {
     public class MetadataDto
     {

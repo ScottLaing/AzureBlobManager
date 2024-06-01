@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleBlobUtility.Dtos
+namespace AzureBlobManager.Dtos
 {
     public class FileListItemDto
     {

@@ -1,10 +1,9 @@
-﻿using AzureBlobManager;
-using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Utils;
 using Serilog.Core;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
-namespace SimpleBlobUtility.Windows
+namespace AzureBlobManager.Windows
 {
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml

@@ -1,13 +1,12 @@
-﻿using AzureBlobManager;
+﻿using AzureBlobManager.Dtos;
 using AzureBlobManager.Utils;
-using SimpleBlobUtility.Dtos;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
 
-namespace SimpleBlobUtility.Windows
+namespace AzureBlobManager.Windows
 {
     /// <summary>
     /// Interaction logic for BlobMetadataWindow.xaml
