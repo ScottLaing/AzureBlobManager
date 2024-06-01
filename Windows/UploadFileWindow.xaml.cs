@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
+using Serilog.Core;
 using SimpleBlobUtility.Utils;
 using System;
 using System.Drawing.Imaging;
@@ -16,6 +18,8 @@ namespace SimpleBlobUtility.Windows
     public partial class UploadFileWindow : Window
     {
         private string _currentContainer;
+
+        private Logger logger = Logging.CreateLogger();
 
         /// Initializes a new instance of the UploadFileWindow class.
         /// </summary>
@@ -108,6 +112,13 @@ namespace SimpleBlobUtility.Windows
             dlg.Filter = filter;
             dlg.FilterIndex = 2;
             return dlg;
+        }
+
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            logger.Debug("Window_MouseDoubleClick call");
+
+            UiUtils.ShowWindowSize(this);
         }
     }
 }

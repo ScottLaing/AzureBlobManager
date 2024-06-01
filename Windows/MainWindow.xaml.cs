@@ -38,7 +38,7 @@ namespace SimpleBlobUtility.Windows
         /// </summary>
         private async void RefreshContainersListDropDown()
         {
-            logger.Information("Refreshing containers list drop-down.");
+            logger.Debug("Refreshing containers list drop-down.");
             var containers = BlobUtility.GetContainers(out string errs);
             if (string.IsNullOrWhiteSpace(errs))
             {
@@ -61,7 +61,7 @@ namespace SimpleBlobUtility.Windows
         /// </summary>
         private void ResetToEmptyDefaults()
         {
-            logger.Information("ResetToEmptyDefaults call");
+            logger.Debug("ResetToEmptyDefaults call");
             cmbContainers.ItemsSource = new List<string>();
             dgFilesList.ItemsSource = new List<FileListItemDto>();
             _lastUsedContainer = "";
@@ -72,7 +72,7 @@ namespace SimpleBlobUtility.Windows
         /// </summary>
         private async Task ListContainerFiles()
         {
-            logger.Information("ListContainerFiles call");
+            logger.Debug("ListContainerFiles call");
             if (this.cmbContainers.SelectedIndex == -1)
             {
                 MessageBox.Show(ContainerNotSelected);
@@ -100,7 +100,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnDownloadSelectedFile_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnDownloadSelectedFile_Click call");
+            logger.Debug("btnDownloadSelectedFile_Click call");
             await DownloadSelFile();
         }
 
@@ -111,7 +111,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void dgFilesList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            logger.Information("dgFilesList_MouseDoubleClick call");
+            logger.Debug("dgFilesList_MouseDoubleClick call");
             await DownloadSelFile();
         }
 
@@ -120,7 +120,7 @@ namespace SimpleBlobUtility.Windows
         /// </summary>
         private async Task DownloadSelFile()
         {
-            logger.Information("DownloadSelFile call");
+            logger.Debug("DownloadSelFile call");
             var result = GetSelectedFileAndContainerName();
 
             if (result.errors)
@@ -138,7 +138,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void cmbContainers_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            logger.Information("cmbContainers_SelectionChanged call");
+            logger.Debug("cmbContainers_SelectionChanged call");
             await ListContainerFiles();
         }
 
@@ -149,7 +149,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnViewFile_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnViewFile_Click call");
+            logger.Debug("btnViewFile_Click call");
             var result = GetSelectedFileAndContainerName();
 
             if (result.errors)
@@ -190,7 +190,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnUploadFile_Click call");
+            logger.Debug("btnUploadFile_Click call");
             if (string.IsNullOrWhiteSpace(_lastUsedContainer))
             {
                 MessageBox.Show(NoContainerSelected);
@@ -208,7 +208,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnRefresh_Click call");
+            logger.Debug("btnRefresh_Click call");
             await ListContainerFiles();
         }
 
@@ -219,9 +219,8 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnDelete_Click call");
-            bool confirming = ShowConfirmationMessageBox();
-            if (!confirming)
+            logger.Debug("btnDelete_Click call");
+            if (!UiUtils.ShowConfirmationMessageBox())
             {
                 return;
             }
@@ -260,7 +259,7 @@ namespace SimpleBlobUtility.Windows
         /// <returns>A tuple containing the error flag, error message, file name, and container name.</returns>
         private (bool errors, string errorMsg, string fileName, string containerName) GetSelectedFileAndContainerName()
         {
-            logger.Information("GetSelectedFileAndContainerName call");
+            logger.Debug("GetSelectedFileAndContainerName call");
             bool errors = false;
             string fileName = "";
             string errorMsg = "";
@@ -300,7 +299,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            logger.Information("Window_Closing call");
+            logger.Debug("Window_Closing call");
             var app = App;
             if (app != null)
             {
@@ -315,7 +314,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnSettings_Click call");
+            logger.Debug("btnSettings_Click call");
             var settingsWindow = new SettingsWindow();
             var resp = settingsWindow.ShowDialog();
             RefreshContainersListDropDown();
@@ -328,7 +327,7 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private async void btnEditBlobMetadata_Click(object sender, RoutedEventArgs e)
         {
-            logger.Information("btnEditBlobMetadata_Click call");
+            logger.Debug("btnEditBlobMetadata_Click call");
             var result = GetSelectedFileAndContainerName();
 
             if (result.errors)
@@ -372,28 +371,19 @@ namespace SimpleBlobUtility.Windows
         }
 
         /// <summary>
-        /// Shows a message box asking if the user is sure.
-        /// </summary>
-        /// <returns>True if the user is sure, false otherwise.</returns>
-        private bool ShowConfirmationMessageBox()
-        {
-            logger.Information("ShowConfirmationMessageBox call");
-            MessageBoxResult result = MessageBox.Show(AreYouSure, Confirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
-            return result == MessageBoxResult.Yes;
-        }
-
-        /// <summary>
         /// Handles the double-click event on the window to display the window size information.
         /// </summary>
         /// <param name="sender">The window that triggered the event.</param>
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            logger.Information("Window_MouseDoubleClick call");
-            // Display the window size information
-            string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
-            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
+            logger.Debug("Window_MouseDoubleClick call");
+            
+            UiUtils.ShowWindowSize(this);
+        }
 
+        private void btnLogs_Click(object sender, RoutedEventArgs e)
+        {
             var logViewerWindow = new LogViewerWindow();
             logViewerWindow.ShowDialog();
         }

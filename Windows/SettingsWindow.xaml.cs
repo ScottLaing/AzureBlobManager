@@ -1,4 +1,5 @@
 ﻿using AzureBlobManager.Utils;
+using Serilog.Core;
 using SimpleBlobUtility.Utils;
 using System.Windows;
 using static SimpleBlobUtility.Constants;
@@ -10,6 +11,8 @@ namespace SimpleBlobUtility.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
+        private Logger logger = Logging.CreateLogger();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
         /// </summary>
@@ -64,11 +67,9 @@ namespace SimpleBlobUtility.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Create a string with information about the width and height of the window
-            string sizeInfo = string.Format(WindowSizeInfo, this.Width, this.Height);
+            logger.Debug("Window_MouseDoubleClick call");
 
-            // Show a message box with the window size information
-            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
+            UiUtils.ShowWindowSize(this);
         }
     }
 }

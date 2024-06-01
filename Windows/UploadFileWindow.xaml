@@ -10,6 +10,7 @@
         MinWidth="200"
         MinHeight="175"
         MaxHeight="175"
+        MouseDoubleClick="Window_MouseDoubleClick"
         Background="#7392B7"
         Title="Upload Blob [My Azure Blob Manager]" Height="175" Width="573" WindowStyle="ToolWindow">
     <Grid>
