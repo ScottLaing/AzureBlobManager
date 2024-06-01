@@ -389,7 +389,7 @@ namespace AzureBlobManager.Windows
         private void btnLogs_Click(object sender, RoutedEventArgs e)
         {
             var logViewerWindow = new LogViewerWindow();
-            logViewerWindow.ShowDialog();
+            logViewerWindow.Show();
         }
     }
 }

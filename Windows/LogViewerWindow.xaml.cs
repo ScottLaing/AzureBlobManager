@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Serilog.Core;
+using System.Windows;
 
 
 namespace AzureBlobManager.Windows
@@ -9,6 +10,7 @@ namespace AzureBlobManager.Windows
     public partial class LogViewerWindow : Window
     {
         public App? App => Application.Current as App;
+        private Logger logger = Logging.CreateLogger();
 
         public LogViewerWindow()
         {
@@ -25,5 +27,18 @@ namespace AzureBlobManager.Windows
         {
             this.Close();
         }
+
+        /// <summary>
+        /// Handles the double-click event on the window to display the window size information.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            logger.Debug("Window_MouseDoubleClick call");
+
+            Utils.UiUtils.ShowWindowSize(this);
+        }
+
     }
 }

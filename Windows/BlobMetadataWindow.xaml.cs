@@ -1,5 +1,6 @@
 ﻿using AzureBlobManager.Dtos;
 using AzureBlobManager.Utils;
+using Serilog.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -13,12 +14,11 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class BlobMetadataWindow : Window
     {
-
         public List<MetadataDto> SourceCollection = new List<MetadataDto>();
         public bool DialogWasSaved = false;
         private string containerName = string.Empty;
-
         public App? App => Application.Current as App;
+        private Logger logger = Logging.CreateLogger();
 
         /// <summary>
         /// Initializes a new instance of the BlobMetadataWindow class.
@@ -94,7 +94,11 @@ namespace AzureBlobManager.Windows
             var setResult = await BlobUtility.SetBlobMetadataAsync(this.containerName, txtBlobName.Text, MetadataDto.toDictionary(SourceCollection));
 
             // Check if there was an error saving the metadata
-            if (!string.IsNullOrWhiteSpace(setResult))
+            if (string.IsNullOrWhiteSpace(setResult))
+            {
+                MessageBox.Show("Metadata saved successfully!");
+            }
+            else
             {
                 MessageBox.Show(string.Format(TroubleSavingMetadata, setResult), Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -181,6 +185,18 @@ namespace AzureBlobManager.Windows
             // Refresh the data grid
             dgMetadataList.ItemsSource = null;
             dgMetadataList.ItemsSource = SourceCollection;
+        }
+
+        /// <summary>
+        /// Handles the double-click event on the window to display the window size information.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            logger.Debug("Window_MouseDoubleClick call");
+
+            UiUtils.ShowWindowSize(this);
         }
     }
 }

@@ -10,15 +10,15 @@
         MinHeight="250"
         MouseDoubleClick="Window_MouseDoubleClick"
                Background="#7392B7"
-        Title="Settings [My Azure Blob Manager]" Height="273" Width="573" WindowStyle="ToolWindow">
+        Title="Settings - My Azure Blob Manager" Height="273" Width="573" WindowStyle="ToolWindow">
     <Grid>
         <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,15,0" Width="35" Height="35" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
 
-        <Label Content="Blob Connection String:" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
-        <TextBox x:Name="txtAzureConnString" Margin="15,53,15,50" Text="" VerticalAlignment="Stretch" FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-        <CheckBox x:Name="chkSaveToRegistry" Content="Save Connection to Registry (Encrypted)" HorizontalAlignment="Left" Margin="185,0,0,24" VerticalAlignment="Bottom" IsChecked="True"/>
+        <Label Content="Blob Connection String:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="12" Foreground="White"/>
+        <TextBox x:Name="txtAzureConnString" Margin="15,53,15,50" Text="" VerticalAlignment="Stretch" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+        <CheckBox x:Name="chkSaveToRegistry" Content="Save Connection to Registry (Encrypted)" HorizontalAlignment="Left" Margin="25,0,0,24" VerticalAlignment="Bottom" IsChecked="True" FontSize="12"/>
 
     </Grid>
 </Window>

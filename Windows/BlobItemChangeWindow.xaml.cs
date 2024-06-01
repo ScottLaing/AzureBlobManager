@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using AzureBlobManager.Utils;
+using Serilog.Core;
+using System.Text.RegularExpressions;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
@@ -16,6 +18,7 @@ namespace AzureBlobManager.Windows
         public string BlobItemValue { get; set; } = string.Empty;
 
         private bool isSystemData = false;
+        private Logger logger = Logging.CreateLogger();
 
         public App? App => System.Windows.Application.Current as App;
 
@@ -50,6 +53,7 @@ namespace AzureBlobManager.Windows
 
             if (isSystemData)
             {
+                this.btnSave.Visibility = Visibility.Hidden;
                 this.txtBlobItemName.IsReadOnly = true;
                 this.txtBlobItemName.Background = System.Windows.Media.Brushes.LightGray;
                 this.txtBlobItemValue.IsReadOnly = true;
@@ -115,6 +119,18 @@ namespace AzureBlobManager.Windows
         {
             // Select all text when the textbox gets focus
             this.txtBlobItemValue.SelectAll();
+        }
+
+        /// <summary>
+        /// Handles the double-click event on the window to display the window size information.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            logger.Debug("Window_MouseDoubleClick call");
+
+            UiUtils.ShowWindowSize(this);
         }
     }
 }
