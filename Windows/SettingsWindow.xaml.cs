@@ -1,9 +1,8 @@
 ﻿using AzureBlobManager;
 using AzureBlobManager.Utils;
 using Serilog.Core;
-using SimpleBlobUtility.Utils;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
 
 namespace SimpleBlobUtility.Windows
 {

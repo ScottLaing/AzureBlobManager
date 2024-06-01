@@ -2,11 +2,13 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
+
+using AzureBlobManager;
 
 #pragma warning disable SYSLIB0022 // Type or member is obsolete
 
-namespace SimpleBlobUtility.Utils
+namespace AzureBlobManager.Utils
 {
     public class CryptUtils
     {

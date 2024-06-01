@@ -3,7 +3,7 @@ using Serilog.Core;
 using System;
 using System.IO;
 using System.Text;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
 
 
 namespace AzureBlobManager

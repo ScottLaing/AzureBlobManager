@@ -1,7 +1,7 @@
 ﻿using AzureBlobManager;
 using System.Text.RegularExpressions;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
 
 
 namespace SimpleBlobUtility.Windows

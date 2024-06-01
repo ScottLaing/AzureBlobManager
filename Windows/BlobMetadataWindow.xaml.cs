@@ -1,10 +1,10 @@
 ﻿using AzureBlobManager;
+using AzureBlobManager.Utils;
 using SimpleBlobUtility.Dtos;
-using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
 
 
 namespace SimpleBlobUtility.Windows

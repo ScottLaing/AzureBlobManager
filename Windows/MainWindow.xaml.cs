@@ -1,13 +1,13 @@
 ﻿using AzureBlobManager;
+using AzureBlobManager.Utils;
 using Serilog.Core;
 using SimpleBlobUtility.Dtos;
-using SimpleBlobUtility.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
-using static SimpleBlobUtility.Constants.UIMessages;
+using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Windows
 {

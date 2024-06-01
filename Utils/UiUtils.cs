@@ -3,10 +3,10 @@ using Serilog.Core;
 using System.Drawing.Imaging;
 using System;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
 using AzureBlobManager;
 
-namespace SimpleBlobUtility.Utils
+namespace AzureBlobManager.Utils
 {
     public class UiUtils
     {

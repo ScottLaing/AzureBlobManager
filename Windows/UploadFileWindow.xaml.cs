@@ -1,12 +1,12 @@
 ﻿using AzureBlobManager;
+using AzureBlobManager.Utils;
 using Microsoft.Win32;
 using Serilog.Core;
-using SimpleBlobUtility.Utils;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using static SimpleBlobUtility.Constants.UIMessages;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace SimpleBlobUtility.Windows
 {

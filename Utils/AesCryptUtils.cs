@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using static SimpleBlobUtility.Constants;
+using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Utils
 {

@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using static SimpleBlobUtility.Constants;
-using static SimpleBlobUtility.Constants.UIMessages;
+using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
-namespace SimpleBlobUtility.Utils
+namespace AzureBlobManager.Utils
 {
     public class BlobUtility
     {

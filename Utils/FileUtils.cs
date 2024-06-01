@@ -1,13 +1,14 @@
 ﻿using AzureBlobManager;
 using Microsoft.Win32;
+using AzureBlobManager.Utils;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
-using static SimpleBlobUtility.Constants;
-using static SimpleBlobUtility.Constants.UIMessages;
+using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
-namespace SimpleBlobUtility.Utils
+namespace AzureBlobManager.Utils
 {
     public class FileUtils
     {
