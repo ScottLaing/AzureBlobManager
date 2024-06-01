@@ -27,10 +27,11 @@ namespace AzureBlobManager.Utils
         /// Shows a message box asking if the user is sure.
         /// </summary>
         /// <returns>True if the user is sure, false otherwise.</returns>
-        public static bool ShowConfirmationMessageBox()
+        public static bool ShowConfirmationMessageBox(string message = "")
         {
             logger.Debug("ShowConfirmationMessageBox call");
-            MessageBoxResult result = MessageBox.Show(AreYouSure, Confirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var warning = string.Format("{0} {1}", message, AreYouSure).Trim();
+            MessageBoxResult result = MessageBox.Show(warning, Confirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
             return result == MessageBoxResult.Yes;
         }
 

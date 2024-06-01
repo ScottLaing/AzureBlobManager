@@ -218,11 +218,6 @@ namespace AzureBlobManager.Windows
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("btnDelete_Click call");
-            if (!UiUtils.ShowConfirmationMessageBox())
-            {
-                return;
-            }
-
             var result = GetSelectedFileAndContainerName();
 
             if (result.errors)
@@ -238,6 +233,11 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
+            string warning = string.Format("You are about to delete the blob '{0}' from the container '{1}'.", result.fileName, result.containerName);
+            if (!UiUtils.ShowConfirmationMessageBox(warning))
+            {
+                return;
+            }
 
             var deleteResult = await BlobUtility.DeleteBlobFileAsync(result.containerName, result.fileName);
             if (deleteResult.success)
