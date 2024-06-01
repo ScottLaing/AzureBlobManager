@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SimpleBlobUtility.Controls
+namespace AzureBlobManager.Controls
 {
     /// <summary>
     /// Interaction logic for DownloadButtonViewbox.xaml
