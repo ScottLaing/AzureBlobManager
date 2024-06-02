@@ -1,4 +1,5 @@
-﻿using Serilog.Core;
+﻿using AzureBlobManager.Services;
+using Serilog.Core;
 using System.Windows;
 
 
@@ -11,11 +12,13 @@ namespace AzureBlobManager.Windows
     {
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
+        private IFileService fileService;
 
-        public LogViewerWindow()
+        public LogViewerWindow(IFileService fileService)
         {
             InitializeComponent();
             this.txtLogsInfo.Text = Logging.GetLogsText();
+            this.fileService = fileService;
         }
 
         /// <summary>

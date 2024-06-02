@@ -5,6 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using static AzureBlobManager.Constants;
+using Microsoft.Extensions.DependencyInjection;
+using FluentAssertions.Common;
+using System.Collections;
+using AzureBlobManager.Windows;
+using Microsoft.Extensions.Hosting;
+using AzureBlobManager.Services;
 
 namespace AzureBlobManager
 {
@@ -29,17 +35,39 @@ namespace AzureBlobManager
 
         private Logger logger = Logging.CreateLogger();
 
+        public static IHost? AppHost { get; private set; }
+
+        public static IServiceProvider Services => AppHost?.Services ?? throw new Exception("dependency injection setup error");
+
         /// <summary>
         /// Event handler for the application startup event.
         /// </summary>
         /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
         protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
             logger.Information(ApplicationStartup);
+
             GetEncryptionKeys();
             InitBlobConnString();
-            base.OnStartup(e);
+
+            AppHost = Host.CreateDefaultBuilder(e.Args)
+               .ConfigureServices((_, services) => ConfigureMyServices(services))
+               .Build();
+
+            // Initialize main window
+            var mainWindow = Services.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+
         }
+
+        private void ConfigureMyServices(IServiceCollection services)
+        {
+            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<MainWindow>();
+            services.AddTransient<LogViewerWindow>();
+        }
+
 
         /// <summary>
         /// Retrieves the encryption keys from the registry or generates new ones if they are not found.

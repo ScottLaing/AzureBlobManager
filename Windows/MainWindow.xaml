@@ -14,7 +14,7 @@
     <Grid>
         <Label Content="Container:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
         
-        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="105,20,0,0" VerticalAlignment="Top" Width="214" FontSize="14" Height="32" SelectionChanged="cmbContainers_SelectionChanged"/>
+        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="95,22,0,0" VerticalAlignment="Top" Width="214" FontSize="14" Height="29" SelectionChanged="cmbContainers_SelectionChanged"/>
 
         <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,20,281,0" Width="35" ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:OpenFileViewbox></controls:OpenFileViewbox>
@@ -48,7 +48,7 @@
             <controls:SettingsViewbox Height="31" Width="35"></controls:SettingsViewbox>
         </Button>
 
-        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,10,20" MouseDoubleClick="dgFilesList_MouseDoubleClick" FontSize="14" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
+        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,10,20" MouseDoubleClick="dgFilesList_MouseDoubleClick" FontSize="12" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />

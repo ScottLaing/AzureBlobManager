@@ -1,6 +1,9 @@
 ﻿using AzureBlobManager.Dtos;
+using AzureBlobManager.Services;
 using AzureBlobManager.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -21,14 +24,19 @@ namespace AzureBlobManager.Windows
 
         public App? App => Application.Current as App;
 
+        public IServiceProvider Services => App.Services;
+
         private Logger logger = Logging.CreateLogger();
 
-        public MainWindow()
+        private IFileService FileService;
+
+        public MainWindow(IFileService fileService)
         {
             logger.Information(OpeningMainWindow);
             InitializeComponent();
 
             RefreshContainersListDropDown();
+            FileService = fileService;
         }
 
         /// <summary>
@@ -388,8 +396,8 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void btnLogs_Click(object sender, RoutedEventArgs e)
         {
-            var logViewerWindow = new LogViewerWindow();
-            logViewerWindow.Show();
+            var mainWindow = Services.GetRequiredService<LogViewerWindow>();
+            mainWindow.Show();
         }
     }
 }
