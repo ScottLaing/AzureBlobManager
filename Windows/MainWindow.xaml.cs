@@ -28,15 +28,18 @@ namespace AzureBlobManager.Windows
 
         private Logger logger = Logging.CreateLogger();
 
-        private IFileService FileService;
+        private IFileService FileService { get; init; }
 
-        public MainWindow(IFileService fileService)
+        private IBlobService BlobService { get; init; }
+
+        public MainWindow(IFileService fileService, IBlobService blobService)
         {
             logger.Information(OpeningMainWindow);
+            FileService = fileService;
+            BlobService = blobService;
             InitializeComponent();
 
             RefreshContainersListDropDown();
-            FileService = fileService;
         }
 
         /// <summary>
@@ -45,7 +48,7 @@ namespace AzureBlobManager.Windows
         private async void RefreshContainersListDropDown()
         {
             logger.Debug("Refreshing containers list drop-down.");
-            var containers = BlobUtility.GetContainers(out string errs);
+            var containers = BlobService.GetBlobContainers(out string errs);
             if (string.IsNullOrWhiteSpace(errs))
             {
                 cmbContainers.ItemsSource = containers;
@@ -88,7 +91,7 @@ namespace AzureBlobManager.Windows
             string? containerName = this.cmbContainers.SelectedItem as string;
             if (containerName != null)
             {
-                var listFilesInfo = await BlobUtility.GetContainersFileListAsync(containerName);
+                var listFilesInfo = await BlobService.GetContainersFileListAsync(containerName);
                 if (!string.IsNullOrWhiteSpace(listFilesInfo.errors))
                 {
                     MessageBox.Show(string.Format(ErrorGettingFilesList, listFilesInfo.errors));
@@ -247,7 +250,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            var deleteResult = await BlobUtility.DeleteBlobFileAsync(result.containerName, result.fileName);
+            var deleteResult = await BlobService.DeleteBlobFileAsync(result.containerName, result.fileName);
             if (deleteResult.success)
             {
                 MessageBox.Show(FileDeletedSuccess);
@@ -349,7 +352,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            var metadata = await BlobUtility.GetBlobMetadataAsync(result.containerName, result.fileName);
+            var metadata = await BlobService.GetBlobMetadataAsync(result.containerName, result.fileName);
             if (!string.IsNullOrWhiteSpace(metadata.errors))
             {
                 MessageBox.Show(string.Format(MetadataError, result.fileName, metadata.errors));
@@ -368,7 +371,7 @@ namespace AzureBlobManager.Windows
                     return;
                 }
                 var modifiedAsDictionary = MetadataDto.toDictionary(modifiedMetadata);
-                string errorInUpdating = await BlobUtility.SetBlobMetadataAsync(result.containerName, result.fileName, modifiedAsDictionary);
+                string errorInUpdating = await BlobService.SetBlobMetadataAsync(result.containerName, result.fileName, modifiedAsDictionary);
                 if (!string.IsNullOrWhiteSpace(errorInUpdating))
                 {
                     MessageBox.Show(string.Format(ErrorWithUpdatingMetadata, errorInUpdating));

@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using AzureBlobManager.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,6 +17,8 @@ namespace AzureBlobManager.Utils
         // Retrieves the current application instance.
         public static App? App => Application.Current as App;
 
+        public static IBlobService BlobService => App.Services.GetRequiredService<IBlobService>();
+
         // Attempts to download a file from the specified container.
         // Parameters:
         //   fileName: The name of the file to download.
@@ -28,7 +32,7 @@ namespace AzureBlobManager.Utils
             if (!string.IsNullOrWhiteSpace(chosenFileName))
             {
                 // Download the file from the container and save it to the chosen file location.
-                var downloadFile = BlobUtility.DownloadBlobFileAsync(containerName, fileName, chosenFileName);
+                var downloadFile = BlobService.DownloadBlobFileAsync(containerName, fileName, chosenFileName);
                 var results = await downloadFile;
                 if (results.success)
                 {
@@ -71,7 +75,7 @@ namespace AzureBlobManager.Utils
             if (!string.IsNullOrEmpty(tempFilePath))
             {
                 // Download the file from the container and save it to the temporary file path.
-                var results = await BlobUtility.DownloadBlobFileAsync(containerName, fileName, tempFilePath);
+                var results = await BlobService.DownloadBlobFileAsync(containerName, fileName, tempFilePath);
                 if (results.Item1)
                 {
                     app.currentViewFilesWithTempLocations[fileName] = tempFilePath;

@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
 
-namespace AzureBlobManager.Utils
+namespace AzureBlobManager.Services
 {
-    public class BlobUtility
+    public class BlobService : IBlobService
     {
         /// <summary>
         /// Gets or sets the connection string for the Azure Blob Storage.
         /// </summary>
-        public static string? BlobConnectionString { get; set; } = String.Empty;
+        public string? BlobConnectionString { get; set; } = String.Empty;
 
         /// <summary>
         /// Initializes the BlobConnectionString property from the environment variable.
         /// </summary>
-        public static void InitializeBlobConnStringFromEnvVariable()
+        public void InitializeBlobConnStringFromEnvVariable()
         {
             BlobConnectionString = Environment.GetEnvironmentVariable(EnvironmentVariableNameAzureBlobConnectionString);
         }
@@ -33,7 +33,7 @@ namespace AzureBlobManager.Utils
         /// <param name="filePath">The path of the file to be saved.</param>
         /// <param name="containerName">The name of the container.</param>
         /// <returns>A tuple indicating the success status and any error information.</returns>
-        public static async Task<(bool, string)> SaveFileAsync(string fileName, string filePath, string containerName)
+        public async Task<(bool, string)> SaveFileAsync(string fileName, string filePath, string containerName)
         {
             // Method comments
             // Saves a file to the specified container in Azure Blob Storage.
@@ -78,7 +78,7 @@ namespace AzureBlobManager.Utils
         /// <param name="containerName">The name of the container.</param>
         /// <param name="fileName">The name of the file to be deleted.</param>
         /// <returns>A tuple indicating the success status and any error information.</returns>
-        public static async Task<(bool success, string errorInfo)> DeleteBlobFileAsync(string containerName, string fileName)
+        public async Task<(bool success, string errorInfo)> DeleteBlobFileAsync(string containerName, string fileName)
         {
             // Method comments
             // Deletes a blob file from the specified container in Azure Blob Storage.
@@ -130,7 +130,7 @@ namespace AzureBlobManager.Utils
         /// <param name="fileName">The name of the file to be downloaded.</param>
         /// <param name="downloadFilePath">The path where the file will be downloaded.</param>
         /// <returns>A tuple indicating the success status and any error information.</returns>
-        public static async Task<(bool success, string errorInfo)> DownloadBlobFileAsync(string containerName, string fileName, string downloadFilePath)
+        public async Task<(bool success, string errorInfo)> DownloadBlobFileAsync(string containerName, string fileName, string downloadFilePath)
         {
             // Method comments
             // Downloads a blob file from the specified container in Azure Blob Storage.
@@ -186,7 +186,7 @@ namespace AzureBlobManager.Utils
         /// <param name="containerName">The name of the container.</param>
         /// <param name="blobName">The name of the blob file.</param>
         /// <returns>A tuple containing the metadata dictionary and any error information.</returns>
-        public static async Task<(Dictionary<string, string> metaData, string errors)> GetBlobMetadataAsync(string containerName, string blobName)
+        public async Task<(Dictionary<string, string> metaData, string errors)> GetBlobMetadataAsync(string containerName, string blobName)
         {
             // Method comments
             // Retrieves the metadata of a blob file from the specified container in Azure Blob Storage.
@@ -237,7 +237,7 @@ namespace AzureBlobManager.Utils
         /// <param name="blobName">The name of the blob file.</param>
         /// <param name="newMetadata">The new metadata dictionary.</param>
         /// <returns>Any error information.</returns>
-        public static async Task<string> SetBlobMetadataAsync(string containerName, string blobName, Dictionary<string, string> newMetadata)
+        public async Task<string> SetBlobMetadataAsync(string containerName, string blobName, Dictionary<string, string> newMetadata)
         {
             // Method comments
             // Sets the metadata of a blob file in the specified container in Azure Blob Storage.
@@ -289,7 +289,7 @@ namespace AzureBlobManager.Utils
         /// </summary>
         /// <param name="containerName">The name of the container.</param>
         /// <returns>A tuple containing the list of file items and any error information.</returns>
-        public static async Task<(List<FileListItemDto> fileItemsList, string errors)> GetContainersFileListAsync(string containerName)
+        public async Task<(List<FileListItemDto> fileItemsList, string errors)> GetContainersFileListAsync(string containerName)
         {
             // Method comments
             // Retrieves the list of files in the specified container in Azure Blob Storage.
@@ -338,7 +338,7 @@ namespace AzureBlobManager.Utils
         /// </summary>
         /// <param name="errors">Any error information.</param>
         /// <returns>The list of container names.</returns>
-        public static List<string> GetContainers(out string errors)
+        public List<string> GetBlobContainers(out string errors)
         {
             // Method comments
             // Retrieves the list of containers in Azure Blob Storage.

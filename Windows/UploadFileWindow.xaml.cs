@@ -1,4 +1,6 @@
-﻿using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Services;
+using AzureBlobManager.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using Serilog.Core;
 using System;
@@ -17,6 +19,7 @@ namespace AzureBlobManager.Windows
         private string _currentContainer;
 
         private Logger logger = Logging.CreateLogger();
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
 
         /// Initializes a new instance of the UploadFileWindow class.
         /// </summary>
@@ -53,7 +56,7 @@ namespace AzureBlobManager.Windows
             }
             var fileName = Path.GetFileName(txtVal);
 
-            var result = Task.Run(() => BlobUtility.SaveFileAsync(fileName, txtVal, _currentContainer)).Result;
+            var result = Task.Run(() => BlobService.SaveFileAsync(fileName, txtVal, _currentContainer)).Result;
             if (!result.Item1)
             {
                 string msg = string.Format(TroubleSavingFile, result.Item2);

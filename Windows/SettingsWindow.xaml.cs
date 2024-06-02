@@ -1,5 +1,8 @@
-﻿using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Services;
+using AzureBlobManager.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
+using System;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
@@ -11,6 +14,7 @@ namespace AzureBlobManager.Windows
     public partial class SettingsWindow : Window
     {
         private Logger logger = Logging.CreateLogger();
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
@@ -18,7 +22,7 @@ namespace AzureBlobManager.Windows
         public SettingsWindow()
         {
             InitializeComponent();
-            this.txtAzureConnString.Text = BlobUtility.BlobConnectionString;
+            this.txtAzureConnString.Text = BlobService.BlobConnectionString;
         }
 
         /// <summary>
@@ -32,7 +36,7 @@ namespace AzureBlobManager.Windows
             var connString = this.txtAzureConnString.Text.Trim();
 
             // Update the BlobConnectionString property in the BlobUtility class
-            BlobUtility.BlobConnectionString = connString;
+            BlobService.BlobConnectionString = connString;
 
             // Check if the "Save to Registry" checkbox is checked
             if (chkSaveToRegistry.IsChecked == true)

@@ -1,6 +1,9 @@
 ﻿using AzureBlobManager.Dtos;
+using AzureBlobManager.Services;
 using AzureBlobManager.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -19,6 +22,7 @@ namespace AzureBlobManager.Windows
         private string containerName = string.Empty;
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
 
         /// <summary>
         /// Initializes a new instance of the BlobMetadataWindow class.
@@ -91,7 +95,7 @@ namespace AzureBlobManager.Windows
             this.DialogResult = true;
 
             // Set the blob metadata asynchronously
-            var setResult = await BlobUtility.SetBlobMetadataAsync(this.containerName, txtBlobName.Text, MetadataDto.toDictionary(SourceCollection));
+            var setResult = await BlobService.SetBlobMetadataAsync(this.containerName, txtBlobName.Text, MetadataDto.toDictionary(SourceCollection));
 
             // Check if there was an error saving the metadata
             if (string.IsNullOrWhiteSpace(setResult))

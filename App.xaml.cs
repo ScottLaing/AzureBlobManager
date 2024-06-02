@@ -1,16 +1,14 @@
-﻿using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Services;
+using AzureBlobManager.Utils;
+using AzureBlobManager.Windows;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using static AzureBlobManager.Constants;
-using Microsoft.Extensions.DependencyInjection;
-using FluentAssertions.Common;
-using System.Collections;
-using AzureBlobManager.Windows;
-using Microsoft.Extensions.Hosting;
-using AzureBlobManager.Services;
 
 namespace AzureBlobManager
 {
@@ -39,6 +37,8 @@ namespace AzureBlobManager
 
         public static IServiceProvider Services => AppHost?.Services ?? throw new Exception("dependency injection setup error");
 
+        private IBlobService BlobService { get; set; } = null!;
+
         /// <summary>
         /// Event handler for the application startup event.
         /// </summary>
@@ -48,12 +48,20 @@ namespace AzureBlobManager
             base.OnStartup(e);
             logger.Information(ApplicationStartup);
 
-            GetEncryptionKeys();
-            InitBlobConnString();
-
             AppHost = Host.CreateDefaultBuilder(e.Args)
                .ConfigureServices((_, services) => ConfigureMyServices(services))
                .Build();
+
+            var blobServices = Services.GetRequiredService<IBlobService>();
+            if (blobServices == null)
+            {
+                MessageBox.Show("could not get blob service dependency injection class. critical error.");
+                Environment.Exit(1);
+            }
+            BlobService = blobServices;
+
+            GetEncryptionKeys();
+            InitBlobConnString();
 
             // Initialize main window
             var mainWindow = Services.GetRequiredService<MainWindow>();
@@ -61,11 +69,17 @@ namespace AzureBlobManager
 
         }
 
+
+        /// <summary>
+        /// Configures the services for dependency injection.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/> instance to configure.</param>
         private void ConfigureMyServices(IServiceCollection services)
         {
-            services.AddSingleton<IFileService, FileService>();
-            services.AddSingleton<MainWindow>();
-            services.AddTransient<LogViewerWindow>();
+            services.AddSingleton<IFileService, FileService>(); // Register the FileService as a singleton
+            services.AddSingleton<IBlobService, BlobService>(); // Register the BlobService as a singleton
+            services.AddSingleton<MainWindow>(); // Register the MainWindow as a singleton
+            services.AddTransient<LogViewerWindow>(); // Register the LogViewerWindow as a transient
         }
 
 
@@ -111,17 +125,21 @@ namespace AzureBlobManager
         /// </summary>
         private void InitBlobConnString()
         {
-            BlobUtility.InitializeBlobConnStringFromEnvVariable(); // try to initialize the connection string, from environment variables first
-                                                                   // if not found, then check the registry for any saved connection settings.
+            if (BlobService == null)
+            {
+                throw new Exception("dependency injection error getting blob service");
+            }
+            BlobService.InitializeBlobConnStringFromEnvVariable();
 
-            if (string.IsNullOrWhiteSpace(BlobUtility.BlobConnectionString))
+
+            if (string.IsNullOrWhiteSpace(BlobService.BlobConnectionString))
             {
                 GetBlobConnStringFromRegistry();
-                logger.Information(string.Format(AttemptingToGetConnectionString, BlobUtility.BlobConnectionString));
+                logger.Information(string.Format(AttemptingToGetConnectionString, BlobService.BlobConnectionString));
             }
             else
             {
-                logger.Information(string.Format(UsingConnectionStringFromRegistry, BlobUtility.BlobConnectionString));
+                logger.Information(string.Format(UsingConnectionStringFromRegistry, BlobService.BlobConnectionString));
             }
         }
 
@@ -137,7 +155,8 @@ namespace AzureBlobManager
                 {
                     result = CryptUtils.DecryptString2(result, EncryptionKey, EncryptionSalt);
                 }
-                BlobUtility.BlobConnectionString = result;
+
+                BlobService.BlobConnectionString = result;
             }
         }
 
