@@ -1,5 +1,4 @@
-﻿using AzureBlobManager.Services;
-using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using Serilog.Core;
@@ -98,7 +97,7 @@ namespace AzureBlobManager.Windows
             // Add your code here to handle the event when the user double-clicks the window
             logger.Debug("Window_MouseDoubleClick call");
 
-            UiUtils.ShowWindowSize(this);
+            UiService.ShowWindowSize(this);
         }
 
         /// <summary>

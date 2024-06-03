@@ -6,7 +6,7 @@ using System.Windows;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
 
-namespace AzureBlobManager.Services
+namespace AzureBlobManager.Interfaces
 {
     public interface IFileService
     {
@@ -15,6 +15,6 @@ namespace AzureBlobManager.Services
         public long GetRandomLongInt(int min, int max);
 
         public string GetFileUsingFileDialog(string fileName);
-  
+
     }
 }

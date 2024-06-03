@@ -1,6 +1,5 @@
 ﻿using AzureBlobManager.Dtos;
-using AzureBlobManager.Services;
-using AzureBlobManager.Utils;
+using AzureBlobManager.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using System;
@@ -23,6 +22,7 @@ namespace AzureBlobManager.Windows
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
+        private IUiService uiService;
 
         /// <summary>
         /// Initializes a new instance of the BlobMetadataWindow class.
@@ -30,9 +30,10 @@ namespace AzureBlobManager.Windows
         /// <param name="containerName">The name of the container.</param>
         /// <param name="fileName">The name of the file.</param>
         /// <param name="sourceCollection">The collection of metadata items.</param>
-        public BlobMetadataWindow(string containerName, string fileName, List<MetadataDto> sourceCollection)
+        public BlobMetadataWindow(string containerName, string fileName, List<MetadataDto> sourceCollection, IUiService uiService)
         {
             InitializeComponent();
+            this.uiService = uiService;
 
             dgMetadataList.ItemsSource = sourceCollection;
             this.txtBlobName.Text = fileName;
@@ -49,7 +50,7 @@ namespace AzureBlobManager.Windows
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             // Create a new instance of BlobItemChangeWindow
-            var blobItemChangeWindow = new BlobItemChangeWindow(false, BlobItemNewKey, BlobItemNewValue, false);
+            var blobItemChangeWindow = new BlobItemChangeWindow(false, BlobItemNewKey, BlobItemNewValue, false, uiService);
             blobItemChangeWindow.ShowDialog();
 
             // Check if the dialog was saved
@@ -131,7 +132,7 @@ namespace AzureBlobManager.Windows
             bool isSystemSetting = Constants.BlobSystemKeyNames.Contains(currItem.KeyName);
 
             // Create a new instance of BlobItemChangeWindow
-            var blobItemChangeWindow = new BlobItemChangeWindow(isSystemSetting, currItem.KeyName, currItem.Value, true);
+            var blobItemChangeWindow = new BlobItemChangeWindow(isSystemSetting, currItem.KeyName, currItem.Value, true, uiService);
 
             blobItemChangeWindow.ShowDialog();
 
@@ -200,7 +201,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
 
-            UiUtils.ShowWindowSize(this);
+            uiService.ShowWindowSize(this);
         }
     }
 }

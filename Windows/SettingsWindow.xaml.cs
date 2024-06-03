@@ -1,4 +1,4 @@
-﻿using AzureBlobManager.Services;
+﻿using AzureBlobManager.Interfaces;
 using AzureBlobManager.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
@@ -16,12 +16,15 @@ namespace AzureBlobManager.Windows
         private Logger logger = Logging.CreateLogger();
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
 
+        private IUiService uiService;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
         /// </summary>
-        public SettingsWindow()
+        public SettingsWindow(IUiService uiService)
         {
             InitializeComponent();
+            this.uiService = uiService;
             this.txtAzureConnString.Text = BlobService.BlobConnectionString;
         }
 
@@ -72,7 +75,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
 
-            UiUtils.ShowWindowSize(this);
+            uiService.ShowWindowSize(this);
         }
     }
 }

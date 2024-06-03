@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
-namespace AzureBlobManager.Services
+namespace AzureBlobManager.Interfaces
 {
     public interface IUiService
     {

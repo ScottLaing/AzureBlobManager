@@ -1,5 +1,5 @@
 ﻿using AzureBlobManager.Dtos;
-using AzureBlobManager.Services;
+using AzureBlobManager.Interfaces;
 using AzureBlobManager.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
@@ -328,7 +328,7 @@ namespace AzureBlobManager.Windows
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("btnSettings_Click call");
-            var settingsWindow = new SettingsWindow();
+            var settingsWindow = new SettingsWindow(UiService);
             var resp = settingsWindow.ShowDialog();
             RefreshContainersListDropDown();
         }
@@ -363,7 +363,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            var blobMetadataWindow = new BlobMetadataWindow(result.containerName, result.fileName, MetadataDto.fromDictionary(metadata.metaData));
+            var blobMetadataWindow = new BlobMetadataWindow(result.containerName, result.fileName, MetadataDto.fromDictionary(metadata.metaData), UiService);
             blobMetadataWindow.ShowDialog();
 
             if (blobMetadataWindow.DialogWasSaved)

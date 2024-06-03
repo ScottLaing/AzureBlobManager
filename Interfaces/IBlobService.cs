@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AzureBlobManager.Services
+namespace AzureBlobManager.Interfaces
 {
     public interface IBlobService
     {
@@ -40,7 +40,7 @@ namespace AzureBlobManager.Services
         /// <param name="fileName">The name of the file to be downloaded.</param>
         /// <param name="downloadFilePath">The path where the file will be downloaded.</param>
         /// <returns>A tuple indicating the success status and any error information.</returns>
-        public  Task<(bool success, string errorInfo)> DownloadBlobFileAsync(string containerName, string fileName, string downloadFilePath);
+        public Task<(bool success, string errorInfo)> DownloadBlobFileAsync(string containerName, string fileName, string downloadFilePath);
 
         /// <summary>
         /// Retrieves the metadata of a blob file from the specified container in Azure Blob Storage.
@@ -48,7 +48,7 @@ namespace AzureBlobManager.Services
         /// <param name="containerName">The name of the container.</param>
         /// <param name="blobName">The name of the blob file.</param>
         /// <returns>A tuple containing the metadata dictionary and any error information.</returns>
-        public  Task<(Dictionary<string, string> metaData, string errors)> GetBlobMetadataAsync(string containerName, string blobName);
+        public Task<(Dictionary<string, string> metaData, string errors)> GetBlobMetadataAsync(string containerName, string blobName);
 
         /// <summary>
         /// Sets the metadata of a blob file in the specified container in Azure Blob Storage.
@@ -57,7 +57,7 @@ namespace AzureBlobManager.Services
         /// <param name="blobName">The name of the blob file.</param>
         /// <param name="newMetadata">The new metadata dictionary.</param>
         /// <returns>Any error information.</returns>
-        public  Task<string> SetBlobMetadataAsync(string containerName, string blobName, Dictionary<string, string> newMetadata);
+        public Task<string> SetBlobMetadataAsync(string containerName, string blobName, Dictionary<string, string> newMetadata);
 
         /// <summary>
         /// Retrieves the list of files in the specified container in Azure Blob Storage.

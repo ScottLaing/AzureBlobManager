@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using AzureBlobManager.Interfaces;
+using Microsoft.Win32;
 using Serilog.Core;
 using System;
 using System.Drawing.Imaging;

@@ -1,5 +1,4 @@
-﻿using AzureBlobManager.Services;
-using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Interfaces;
 using Serilog.Core;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -22,6 +21,7 @@ namespace AzureBlobManager.Windows
         private Logger logger = Logging.CreateLogger();
 
         public App? App => System.Windows.Application.Current as App;
+        private IUiService uiService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlobItemChangeWindow"/> class.
@@ -30,10 +30,11 @@ namespace AzureBlobManager.Windows
         /// <param name="keyName">The key name.</param>
         /// <param name="keyValue">The key value.</param>
         /// <param name="isEditting">Indicates whether the window is in editing mode.</param>
-        public BlobItemChangeWindow(bool isSystemData, string keyName, string keyValue, bool isEditting)
+        public BlobItemChangeWindow(bool isSystemData, string keyName, string keyValue, bool isEditting, IUiService uiService)
         {
             InitializeComponent();
 
+            this.uiService = uiService;
             this.txtBlobItemName.Text = keyName;
             this.txtBlobItemValue.Text = keyValue;
             this.isSystemData = isSystemData;
@@ -131,7 +132,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
 
-            UiUtils.ShowWindowSize(this);
+            uiService.ShowWindowSize(this);
         }
     }
 }

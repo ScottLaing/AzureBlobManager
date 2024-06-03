@@ -1,4 +1,4 @@
-﻿using AzureBlobManager.Services;
+﻿using AzureBlobManager.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using System;

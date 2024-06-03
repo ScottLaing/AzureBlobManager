@@ -1,4 +1,4 @@
-﻿using AzureBlobManager.Services;
+﻿using AzureBlobManager.Interfaces;
 using Serilog.Core;
 using System.Windows;
 
@@ -13,10 +13,12 @@ namespace AzureBlobManager.Windows
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
         private IFileService fileService;
+        private IUiService UiService;
 
-        public LogViewerWindow(IFileService fileService)
+        public LogViewerWindow(IFileService fileService, IUiService uiService)
         {
             InitializeComponent();
+            UiService = uiService;
             this.txtLogsInfo.Text = Logging.GetLogsText();
             this.fileService = fileService;
         }
@@ -40,7 +42,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
 
-            Utils.UiUtils.ShowWindowSize(this);
+            UiService.ShowWindowSize(this);
         }
 
     }
