@@ -21,12 +21,16 @@ namespace AzureBlobManager.Windows
         private Logger logger = Logging.CreateLogger();
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
 
+        private IUiService UiService;
+
         /// Initializes a new instance of the UploadFileWindow class.
         /// </summary>
         /// <param name="currentContainer">The current container.</param>
-        public UploadFileWindow(string currentContainer)
+        public UploadFileWindow(string currentContainer, IUiService uiService)
         {
             InitializeComponent();
+
+            UiService = uiService;
 
             _currentContainer = currentContainer;
             lblResult.Content = String.Empty;
@@ -75,7 +79,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = UiUtils.SetupDialog();
+            OpenFileDialog dlg = UiService.SetupDialog();
             bool? result = dlg.ShowDialog();
 
             if (result == true)

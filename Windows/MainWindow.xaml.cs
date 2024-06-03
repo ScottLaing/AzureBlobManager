@@ -32,11 +32,15 @@ namespace AzureBlobManager.Windows
 
         private IBlobService BlobService { get; init; }
 
-        public MainWindow(IFileService fileService, IBlobService blobService)
+        private IUiService UiService { get; init; }
+
+        public MainWindow(IFileService fileService, IBlobService blobService, IUiService iUiService)
         {
             logger.Information(OpeningMainWindow);
             FileService = fileService;
             BlobService = blobService;
+            UiService = iUiService;
+
             InitializeComponent();
 
             RefreshContainersListDropDown();
@@ -205,7 +209,7 @@ namespace AzureBlobManager.Windows
                 MessageBox.Show(NoContainerSelected);
                 return;
             }
-            var uploadFileWindow = new UploadFileWindow(_lastUsedContainer);
+            var uploadFileWindow = new UploadFileWindow(_lastUsedContainer, UiService);
             var resp = uploadFileWindow.ShowDialog();
             await ListContainerFiles();
         }
@@ -245,7 +249,7 @@ namespace AzureBlobManager.Windows
             }
 
             string warning = string.Format("You are about to delete the blob '{0}' from the container '{1}'.", result.fileName, result.containerName);
-            if (!UiUtils.ShowConfirmationMessageBox(warning))
+            if (!UiService.ShowConfirmationMessageBox(warning))
             {
                 return;
             }
@@ -388,7 +392,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
             
-            UiUtils.ShowWindowSize(this);
+            UiService.ShowWindowSize(this);
         }
 
 

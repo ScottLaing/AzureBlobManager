@@ -78,6 +78,7 @@ namespace AzureBlobManager
         {
             services.AddSingleton<IFileService, FileService>(); // Register the FileService as a singleton
             services.AddSingleton<IBlobService, BlobService>(); // Register the BlobService as a singleton
+            services.AddSingleton<IUiService, UiService>(); // Register the UiService as a singleton
             services.AddSingleton<MainWindow>(); // Register the MainWindow as a singleton
             services.AddTransient<LogViewerWindow>(); // Register the LogViewerWindow as a transient
         }
