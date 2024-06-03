@@ -140,7 +140,7 @@ namespace AzureBlobManager.Windows
             {
                 return;
             }
-            var loading = FileUtils.AttemptDownloadFile(result.fileName, result.containerName);
+            var loading = FileService.AttemptDownloadFile(result.fileName, result.containerName);
             await loading;
         }
 
@@ -174,7 +174,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            var downloadFileResult = await FileUtils.AttemptDownloadFileToTempFolder(result.fileName, result.containerName);
+            var downloadFileResult = await FileService.AttemptDownloadFileToTempFolder(result.fileName, result.containerName);
 
             if (!downloadFileResult.success)
             {

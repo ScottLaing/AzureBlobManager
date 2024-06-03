@@ -1,4 +1,6 @@
 ﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -15,6 +17,82 @@ namespace AzureBlobManager.Services
 
         // Retrieves the current application instance.
         public App? App => Application.Current as App;
+
+        public static IBlobService BlobService => App.Services.GetRequiredService<IBlobService>();
+
+        // Attempts to download a file from the specified container.
+        // Parameters:
+        //   fileName: The name of the file to download.
+        //   containerName: The name of the container where the file is stored.
+        public async Task AttemptDownloadFile(string fileName, string containerName)
+        {
+            // Prompt the user to choose a file location to save the downloaded file.
+            string chosenFileName = this.GetFileUsingFileDialog(fileName);
+
+            // If the file name is not an empty string, open it for saving.
+            if (!string.IsNullOrWhiteSpace(chosenFileName))
+            {
+                // Download the file from the container and save it to the chosen file location.
+                var downloadFile = BlobService.DownloadBlobFileAsync(containerName, fileName, chosenFileName);
+                var results = await downloadFile;
+                if (results.success)
+                {
+                    MessageBox.Show(string.Format(DownloadedSuccessfully, fileName));
+                }
+                else
+                {
+                    MessageBox.Show(string.Format(ErrorWithDownloading, fileName, results.errorInfo));
+                }
+            }
+        }
+
+        // Attempts to download a file to the temporary folder.
+        // Parameters:
+        //   fileName: The name of the file to download.
+        //   containerName: The name of the container where the file is stored.
+        // Returns:
+        //   A tuple containing the success status, additional information, and the downloaded file path.
+        public async Task<(bool success, string moreInfo, string downloadedFilePath)> AttemptDownloadFileToTempFolder(string fileName, string containerName)
+        {
+            var app = App;
+            string tempFilePath;
+
+            if (app == null)
+            {
+                return (false, AppNotDefined, "");
+            }
+            // Check if the file is already present in the temporary folder.
+            if (app.currentViewFilesWithTempLocations.ContainsKey(fileName) && File.Exists(app.currentViewFilesWithTempLocations[fileName]))
+            {
+                tempFilePath = app.currentViewFilesWithTempLocations[fileName];
+                return (true, String.Empty, tempFilePath);
+            }
+            else
+            {
+                tempFilePath = this.GetTempFilePath(fileName);
+            }
+
+            // If the file name is not an empty string, open it for saving.
+            if (!string.IsNullOrEmpty(tempFilePath))
+            {
+                // Download the file from the container and save it to the temporary file path.
+                var results = await BlobService.DownloadBlobFileAsync(containerName, fileName, tempFilePath);
+                if (results.Item1)
+                {
+                    app.currentViewFilesWithTempLocations[fileName] = tempFilePath;
+                    return (true, String.Empty, tempFilePath);
+                }
+                else
+                {
+                    return (false, results.Item2, String.Empty);
+                }
+            }
+            else
+            {
+                return (false, CouldNotGetTempFilePath, String.Empty);
+            }
+        }
+
 
         // Generates a temporary file path for the given filename.
         // Parameters:
