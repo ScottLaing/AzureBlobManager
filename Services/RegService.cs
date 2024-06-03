@@ -1,18 +1,19 @@
-﻿using Microsoft.Win32;
+﻿using AzureBlobManager.Interfaces;
+using Microsoft.Win32;
 using System;
 
-namespace AzureBlobManager.Utils
+namespace AzureBlobManager.Services
 {
-    public class RegUtils
+    public class RegService : IRegService
     {
-        public static string RegSubKey => $"Software\\{Constants.RegistryCompanyName}\\{Constants.RegistryAppName}";
+        public string RegSubKey => $"Software\\{Constants.RegistryCompanyName}\\{Constants.RegistryAppName}";
 
         /// <summary>
         /// Saves a value to the Windows Registry under the specified key name.
         /// </summary>
         /// <param name="keyName">The name of the registry key.</param>
         /// <param name="keyValue">The value to be saved.</param>
-        public static void SaveValueToRegistry(string keyName, string keyValue)
+        public void SaveValueToRegistry(string keyName, string keyValue)
         {
             // Create the subkey if it doesn't exist
             using (RegistryKey key = Registry.CurrentUser.CreateSubKey(RegSubKey))
@@ -27,7 +28,7 @@ namespace AzureBlobManager.Utils
         /// </summary>
         /// <param name="keyName">The name of the registry key.</param>
         /// <returns>The value retrieved from the registry, or an empty string if the key does not exist.</returns>
-        public static string? GetValueFromRegistry(string keyName)
+        public string? GetValueFromRegistry(string keyName)
         {
             string? valueAsString = string.Empty;
 

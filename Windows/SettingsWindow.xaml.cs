@@ -14,7 +14,10 @@ namespace AzureBlobManager.Windows
     public partial class SettingsWindow : Window
     {
         private Logger logger = Logging.CreateLogger();
-        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get IBlobService service DI object");
+
+        public IRegService RegService => App.Services.GetService<IRegService>() ?? throw new Exception("could not get IRegService service DI object");
+
 
         private IUiService uiService;
 
@@ -59,7 +62,7 @@ namespace AzureBlobManager.Windows
                 string encConnString = CryptUtils.EncryptString2(connString, currentApp.EncryptionKey, currentApp.EncryptionSalt);
 
                 // Save the encrypted connection string to the registry
-                RegUtils.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);
+                RegService.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);
             }
 
             // Close the SettingsWindow

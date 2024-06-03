@@ -40,6 +40,8 @@ namespace AzureBlobManager
 
         private IBlobService BlobService { get; set; } = null!;
 
+        private IRegService RegService { get; set; } = null!;
+
         /// <summary>
         /// Event handler for the application startup event.
         /// </summary>
@@ -53,13 +55,7 @@ namespace AzureBlobManager
                .ConfigureServices((_, services) => ConfigureMyServices(services))
                .Build();
 
-            var blobServices = Services.GetRequiredService<IBlobService>();
-            if (blobServices == null)
-            {
-                MessageBox.Show("could not get blob service dependency injection class. critical error.");
-                Environment.Exit(1);
-            }
-            BlobService = blobServices;
+            SetupServices();
 
             GetEncryptionKeys();
             InitBlobConnString();
@@ -68,6 +64,25 @@ namespace AzureBlobManager
             var mainWindow = Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
+        }
+
+        private void SetupServices()
+        {
+            var blobServices = Services.GetRequiredService<IBlobService>();
+            if (blobServices == null)
+            {
+                MessageBox.Show("could not get blob service dependency injection class. critical error.");
+                Environment.Exit(1);
+            }
+            BlobService = blobServices;
+
+            var regService = Services.GetRequiredService<IRegService>();
+            if (regService == null)
+            {
+                MessageBox.Show("could not get IRegService service dependency injection class. critical error.");
+                Environment.Exit(1);
+            }
+            RegService = regService;
         }
 
 
@@ -79,6 +94,7 @@ namespace AzureBlobManager
         {
             services.AddSingleton<IFileService, FileService>(); // Register the FileService as a singleton
             services.AddSingleton<IBlobService, BlobService>(); // Register the BlobService as a singleton
+            services.AddSingleton<IRegService, RegService>(); // Register the BlobService as a singleton
             services.AddSingleton<IUiService, UiService>(); // Register the UiService as a singleton
             services.AddSingleton<MainWindow>(); // Register the MainWindow as a singleton
             services.AddTransient<LogViewerWindow>(); // Register the LogViewerWindow as a transient
@@ -90,8 +106,8 @@ namespace AzureBlobManager
         /// </summary>
         private void GetEncryptionKeys()
         {
-            var encryptionKey = RegUtils.GetValueFromRegistry(RegNameEncryptionKey);
-            var encryptionSalt = RegUtils.GetValueFromRegistry(RegSaltEncryptionKey);
+            var encryptionKey = RegService.GetValueFromRegistry(RegNameEncryptionKey);
+            var encryptionSalt = RegService.GetValueFromRegistry(RegSaltEncryptionKey);
 
             // if there is no encryption key, then create one and save it to the registry.
             // similar, if there is no salt, then create one and save it to the registry.
@@ -99,7 +115,7 @@ namespace AzureBlobManager
             {
                 var newGuid = Guid.NewGuid();
                 EncryptionKey = newGuid.ToString();
-                RegUtils.SaveValueToRegistry(RegNameEncryptionKey, EncryptionKey); // save newly generated key to registry for future
+                RegService.SaveValueToRegistry(RegNameEncryptionKey, EncryptionKey); // save newly generated key to registry for future
                 logger.Debug(string.Format(EncryptionKeyNotFound, EncryptionKey));
             }
             else
@@ -112,7 +128,7 @@ namespace AzureBlobManager
             {
                 var newGuid = Guid.NewGuid();
                 EncryptionSalt = newGuid.ToString();
-                RegUtils.SaveValueToRegistry(RegSaltEncryptionKey, EncryptionSalt); // save newly generated salt to registry for future
+                RegService.SaveValueToRegistry(RegSaltEncryptionKey, EncryptionSalt); // save newly generated salt to registry for future
                 logger.Debug(string.Format(EncryptionSaltNotFound, EncryptionSalt));
             }
             else
@@ -150,7 +166,7 @@ namespace AzureBlobManager
         /// </summary>
         private void GetBlobConnStringFromRegistry()
         {
-            var result = RegUtils.GetValueFromRegistry(RegNameBlobConnectionKey);
+            var result = RegService.GetValueFromRegistry(RegNameBlobConnectionKey);
             if (!string.IsNullOrWhiteSpace(result))
             {
                 if (ConnKeyIsEncrypted)
