@@ -19,7 +19,7 @@ namespace AzureBlobManager.Windows
         public IRegService RegService => App.Services.GetService<IRegService>() ?? throw new Exception("could not get IRegService service DI object");
 
 
-        private IUiService uiService;
+        private IUiService UiService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
@@ -27,7 +27,7 @@ namespace AzureBlobManager.Windows
         public SettingsWindow(IUiService uiService)
         {
             InitializeComponent();
-            this.uiService = uiService;
+            this.UiService = uiService;
             this.txtAzureConnString.Text = BlobService.BlobConnectionString;
         }
 
@@ -78,7 +78,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
 
-            uiService.ShowWindowSize(this);
+            UiService.ShowWindowSize(this);
         }
     }
 }

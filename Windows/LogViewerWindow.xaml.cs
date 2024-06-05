@@ -12,7 +12,7 @@ namespace AzureBlobManager.Windows
     {
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
-        private IFileService fileService;
+        private IFileService FileService;
         private IUiService UiService;
 
         public LogViewerWindow(IFileService fileService, IUiService uiService)
@@ -20,7 +20,7 @@ namespace AzureBlobManager.Windows
             InitializeComponent();
             UiService = uiService;
             this.txtLogsInfo.Text = Logging.GetLogsText();
-            this.fileService = fileService;
+            this.FileService = fileService;
         }
 
         /// <summary>

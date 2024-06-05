@@ -13,15 +13,20 @@ namespace AzureBlobManager.Windows
     public partial class BlobItemChangeWindow : Window
     {
 
+        // Indicates whether the dialog was saved
         public bool DialogWasSaved = false;
+
+        // The name of the blob item
         public string BlobItemName { get; set; } = string.Empty;
+
+        // The value of the blob item
         public string BlobItemValue { get; set; } = string.Empty;
 
         private bool isSystemData = false;
         private Logger logger = Logging.CreateLogger();
 
         public App? App => System.Windows.Application.Current as App;
-        private IUiService uiService;
+        private IUiService UiService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BlobItemChangeWindow"/> class.
@@ -34,7 +39,7 @@ namespace AzureBlobManager.Windows
         {
             InitializeComponent();
 
-            this.uiService = uiService;
+            this.UiService = uiService;
             this.txtBlobItemName.Text = keyName;
             this.txtBlobItemValue.Text = keyValue;
             this.isSystemData = isSystemData;
@@ -132,7 +137,7 @@ namespace AzureBlobManager.Windows
         {
             logger.Debug("Window_MouseDoubleClick call");
 
-            uiService.ShowWindowSize(this);
+            UiService.ShowWindowSize(this);
         }
     }
 }
