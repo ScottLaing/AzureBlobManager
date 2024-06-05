@@ -18,29 +18,35 @@ namespace AzureBlobManager
     /// </summary>
     public partial class App : Application
     {
-        // these are temp files for viewing, they can be removed when app closes.
-        public Dictionary<string, string> currentViewFilesWithTempLocations = new Dictionary<string, string>();
-
         // Encryption key used for encryption and decryption operations.
         public string EncryptionKey { get; set; } = "";
 
         // Salt used for encryption and decryption operations.
         public string EncryptionSalt { get; set; } = "";
 
-        private bool _cleanedup = false;
+        // Application startup message.
+        public static IHost? AppHost { get; private set; }
+
+        // Dependency injection service provider.
+        public static IServiceProvider Services => AppHost?.Services ?? throw new Exception("dependency injection setup error");
+
+        // Dependency injection service for file operations.
+        private IBlobService BlobService { get; set; } = null!;
+
+        // Dependency injection service for registry operations.
+        private IRegService RegService { get; set; } = null!;
+
+        // these are temp files for viewing, they can be removed when app closes.
+        public Dictionary<string, string> currentViewFilesWithTempLocations = new Dictionary<string, string>();
 
         // Flag indicating whether the connection key is encrypted.
         public bool ConnKeyIsEncrypted = true;
 
+        // Encryption key used for encryption and decryption operations.
+        private bool _cleanedup = false;
+
+        // Logger instance.
         private Logger logger = Logging.CreateLogger();
-
-        public static IHost? AppHost { get; private set; }
-
-        public static IServiceProvider Services => AppHost?.Services ?? throw new Exception("dependency injection setup error");
-
-        private IBlobService BlobService { get; set; } = null!;
-
-        private IRegService RegService { get; set; } = null!;
 
         /// <summary>
         /// Event handler for the application startup event.
@@ -66,6 +72,9 @@ namespace AzureBlobManager
 
         }
 
+        /// <summary>
+        /// Sets up the services for dependency injection.
+        /// </summary>
         private void SetupServices()
         {
             var blobServices = Services.GetRequiredService<IBlobService>();

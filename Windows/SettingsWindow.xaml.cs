@@ -13,12 +13,24 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private Logger logger = Logging.CreateLogger();
+        /// <summary>
+        /// BlobService reference.
+        /// </summary>
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get IBlobService service DI object");
 
+        /// <summary>
+        /// RegService reference.
+        /// </summary>
         public IRegService RegService => App.Services.GetService<IRegService>() ?? throw new Exception("could not get IRegService service DI object");
 
+        /// <summary>
+        /// Logger instance.
+        /// </summary>
+        private Logger logger = Logging.CreateLogger();
 
+        /// <summary>
+        /// UI service reference.
+        /// </summary>
         private IUiService UiService;
 
         /// <summary>

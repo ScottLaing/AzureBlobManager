@@ -17,22 +17,53 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
-        private string _lastUsedContainer = "";
-
+        /// <summary>
+        /// Gets the application instance.
+        /// </summary>
         public App? App => Application.Current as App;
 
+        /// <summary>
+        /// Gets the dependency injection service provider.
+        /// </summary>
         public IServiceProvider Services => App.Services;
 
-        private Logger logger = Logging.CreateLogger();
-
+        /// <summary>
+        /// Gets the file service dependency injection.
+        /// </summary>
         private IFileService FileService { get; init; }
 
+        /// <summary>
+        /// Gets the blob service dependency injection.
+        /// </summary>
         private IBlobService BlobService { get; init; }
 
+        /// <summary>
+        /// Gets the UI service dependency injection.
+        /// </summary>
         private IUiService UiService { get; init; }
 
+        /// <summary>
+        /// Gets or sets the source collection of file list items.
+        /// </summary>
+        public List<FileListItemDto> SourceCollection = new List<FileListItemDto>();
+
+        /// <summary>
+        /// Logger instance.
+        /// </summary>
+        private Logger logger = Logging.CreateLogger();
+
+        /// <summary>
+        /// Last used container name.
+        /// </summary>
+        private string _lastUsedContainer = "";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
+        /// <param name="fileService">The file service dependency injection.</param>
+        /// <param name="blobService">The blob service dependency injection.</param>
+        /// <param name="iUiService">The UI service dependency injection.</param>
+        /// <exception cref="ArgumentNullException">Thrown when any of the dependencies are null.</exception>
         public MainWindow(IFileService fileService, IBlobService blobService, IUiService iUiService)
         {
             logger.Information(OpeningMainWindow);
