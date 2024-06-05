@@ -1,6 +1,5 @@
 ﻿using AzureBlobManager.Dtos;
 using AzureBlobManager.Interfaces;
-using AzureBlobManager.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using System;
