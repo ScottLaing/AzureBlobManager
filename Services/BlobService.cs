@@ -73,6 +73,20 @@ namespace AzureBlobManager.Services
             return (res, errors);
         }
 
+        // BlobClient class
+        // method Task<Azure.Response<BlobContentInfo>> UploadAsync(FileStream, bool) 
+        // method Task<Azure.Response<bool>> DeleteIfExistsAsync(Azure.Storage.Blobs.Models.DeleteSnapshotsOption)
+
+        // BlobContainerClient class
+        // method BlobClient GetBlobClient(string blobName)
+
+        // BlobServiceClient class
+        // method BlobContainerClient GetBlobContainerClient(string containerName)
+
+        // Factory class
+        // returns BlobServiceClient object, initialized with connection string.
+
+
         /// <summary>
         /// Deletes a blob file from the specified container in Azure Blob Storage.
         /// </summary>
