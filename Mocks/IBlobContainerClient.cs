@@ -1,4 +1,6 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace AzureBlobManager.Mocks
     public interface IBlobContainerClient
     {
         IBlobClient GetBlobClient(string blobName);
+
+        AsyncPageable<IBlobItem> GetBlobsAsync();
 
     }
 }

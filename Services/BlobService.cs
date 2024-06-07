@@ -337,7 +337,9 @@ namespace AzureBlobManager.Services
             try
             {
 
-                var blobServiceClient = new BlobServiceClient(connectionString);
+                //var blobServiceClient = _blobServiceClientFactory.CreateBlobServiceClient(connectionString);
+
+                var blobServiceClient =  new BlobServiceClient(connectionString);
                 var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
 
                 await foreach (BlobItem blobItem in containerClient.GetBlobsAsync())
