@@ -1,4 +1,5 @@
 ﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.Mocks;
 using AzureBlobManager.Services;
 using AzureBlobManager.Utils;
 using AzureBlobManager.Windows;
@@ -105,6 +106,7 @@ namespace AzureBlobManager
             services.AddSingleton<IBlobService, BlobService>(); // Register the BlobService as a singleton
             services.AddSingleton<IRegService, RegService>(); // Register the BlobService as a singleton
             services.AddSingleton<IUiService, UiService>(); // Register the UiService as a singleton
+            services.AddSingleton<IBlobServiceClientFactory, SimpleBlobServiceClientFactory>(); // Register the SimpleBlobServiceClientFactory as a singleton
             services.AddSingleton<MainWindow>(); // Register the MainWindow as a singleton
             services.AddTransient<LogViewerWindow>(); // Register the LogViewerWindow as a transient
         }

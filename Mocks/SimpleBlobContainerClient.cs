@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AzureBlobManager.Mocks
 {
-    class SimpleBlobContainerClient : IBlobContainerClient
+    public class SimpleBlobContainerClient : IBlobContainerClient
     {
         private string _containerName;
 

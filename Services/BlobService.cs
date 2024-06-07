@@ -2,6 +2,7 @@
 using Azure.Storage.Blobs.Models;
 using AzureBlobManager.Dtos;
 using AzureBlobManager.Interfaces;
+using AzureBlobManager.Mocks;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,20 @@ namespace AzureBlobManager.Services
         /// Gets or sets the connection string for the Azure Blob Storage.
         /// </summary>
         public string? BlobConnectionString { get; set; } = String.Empty;
+
+        IBlobServiceClientFactory _blobServiceClientFactory;
+
+        public BlobService(IBlobServiceClientFactory? blobServiceClientFactory = null)
+        {
+            if (blobServiceClientFactory == null)
+            {
+                _blobServiceClientFactory = new SimpleBlobServiceClientFactory();
+            }
+            else
+            {
+                _blobServiceClientFactory = blobServiceClientFactory;
+            }
+        }
 
         /// <summary>
         /// Initializes the BlobConnectionString property from the environment variable.

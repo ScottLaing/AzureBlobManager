@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AzureBlobManager.Mocks
 {
-    interface IBlobServiceClient
+    public interface IBlobServiceClient
     {
         IBlobContainerClient GetBlobContainerClient(string containerName);
     }
