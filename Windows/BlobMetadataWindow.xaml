@@ -12,8 +12,8 @@
         Background="#B3C5D7"
         Title="Blob Metadata - My Azure Blob Manager" Height="360" Width="713">
     <Grid>
-        <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="70,19,0,0" VerticalAlignment="Top" Width="372" FontSize="16" Height="27" IsReadOnly="True" Background="LightGray"/>
+        <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" FontSize="12" Foreground="White"/>
+        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="55,20,0,0" VerticalAlignment="Top" Width="372" FontSize="12" Height="22" IsReadOnly="True" Background="LightGray"/>
 
         <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,12,142,0" Width="35" Height="35" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:EditViewbox></controls:EditViewbox>
@@ -33,7 +33,9 @@
         
 
 
-        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false" Margin="15,62,15,20" FontSize="14" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
+        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false"
+                  FontSize="12" 
+                  Margin="15,62,15,20" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />
