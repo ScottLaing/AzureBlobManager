@@ -1,11 +1,14 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure;
+using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Azure.Storage.Blobs.Specialized;
 using AzureBlobManager.Dtos;
 using AzureBlobManager.Interfaces;
 using AzureBlobManager.Mocks;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static AzureBlobManager.Constants;
@@ -209,6 +212,45 @@ namespace AzureBlobManager.Services
             }
             return (res, errors);
         }
+
+    //    public async Task UpdateVersionedBlobMetadata(BlobContainerClient blobContainerClient, string blobName)
+    //    {
+    //        // Create the container if it doesn't exist
+    //        await blobContainerClient.CreateIfNotExistsAsync();
+
+    //        // Upload a block blob
+    //        BlockBlobClient blockBlobClient = blobContainerClient.GetBlockBlobClient(blobName);
+    //        string blobContents = $"Block blob created at {DateTime.Now}";
+    //        byte[] byteArray = Encoding.ASCII.GetBytes(blobContents);
+
+    //        using (MemoryStream stream = new MemoryStream(byteArray))
+    //        {
+    //            Response<BlobContentInfo> uploadResponse = await blockBlobClient.UploadAsync(stream, null, default);
+    //            string initialVersionId = uploadResponse.Value.VersionId;
+    //        }
+
+    //        // Update the blob's metadata to trigger a new version
+    //        Dictionary<string, string> metadata = new Dictionary<string, string>
+    //{
+    //    { "key", "value" },
+    //    { "key1", "value1" }
+    //};
+    //        await blockBlobClient.SetMetadataAsync(metadata);
+
+    //        // Get the version ID for the new current version
+    //        string newVersionId = metadataResponse.Value.VersionId;
+
+    //        // Request metadata on the previous version
+    //        BlockBlobClient initialVersionBlob = blockBlobClient.WithVersion(initialVersionId);
+    //        Response<BlobProperties> propertiesResponse = await initialVersionBlob.GetPropertiesAsync();
+    //        PrintMetadata(propertiesResponse);
+
+    //        // Request metadata on the current version
+    //        BlockBlobClient newVersionBlob = blockBlobClient.WithVersion(newVersionId);
+    //        Response<BlobProperties> newPropertiesResponse = await newVersionBlob.GetPropertiesAsync();
+    //        PrintMetadata(newPropertiesResponse);
+    //    }
+
 
         /// <summary>
         /// Retrieves the metadata of a blob file from the specified container in Azure Blob Storage.
