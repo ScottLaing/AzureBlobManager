@@ -28,11 +28,11 @@
         <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="372" IsReadOnly="True" Background="LightGray"/>
 
-        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,15,142,0" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,15,140,0" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:EditViewbox></controls:EditViewbox>
         </Button>
 
-        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,15,106,0" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,15,105,0" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:AddViewbox></controls:AddViewbox>
         </Button>
 

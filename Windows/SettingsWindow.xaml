@@ -11,13 +11,25 @@
         MouseDoubleClick="Window_MouseDoubleClick"
                Background="#7392B7"
         Title="Settings - My Azure Blob Manager" Height="273" Width="573" WindowStyle="ToolWindow">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/LabelStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,15,0" Width="35" Height="35" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,15,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
 
-        <Label Content="Blob Connection String:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" FontSize="12" Foreground="White"/>
-        <TextBox x:Name="txtAzureConnString" Margin="15,53,15,50" Text="" VerticalAlignment="Stretch" FontSize="14" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+        <Label Content="Blob Connection String:" HorizontalAlignment="Left" Margin="15,22,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtAzureConnString" Margin="15,53,15,50" Text="" Style="{StaticResource MultilineTextBox}" VerticalAlignment="Stretch" />
         <CheckBox x:Name="chkSaveToRegistry" Content="Save Connection to Registry (Encrypted)" HorizontalAlignment="Left" Margin="25,0,0,24" VerticalAlignment="Bottom" IsChecked="True" FontSize="12"/>
 
     </Grid>

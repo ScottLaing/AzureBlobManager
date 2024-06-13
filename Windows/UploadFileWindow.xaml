@@ -12,20 +12,32 @@
         MouseDoubleClick="Window_MouseDoubleClick"
         Background="#7392B7"
         Title="Upload Blob - My Azure Blob Manager" Height="153" Width="573" WindowStyle="ToolWindow">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/LabelStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid>
 
-        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,55,0" Width="35" Height="35" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,55,0" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
-        <Button x:Name="btnClose"  Margin="0,9,15,0" Width="35" Height="35" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnClose"  Margin="0,9,15,0" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:CloseViewbox ></controls:CloseViewbox>
         </Button>
 
-        <Label Content="File:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-        <TextBox x:Name="txtFilePath" Margin="44,53,50,0" Text="" VerticalAlignment="Top"  Height="30" FontSize="14" HorizontalAlignment="Stretch"/>
+        <Label Content="File:" HorizontalAlignment="Left" Margin="15,50,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtFilePath" Margin="44,53,40,0" Text="" VerticalAlignment="Top"  HorizontalAlignment="Stretch"/>
 
-        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,53,15,0" Width="30" ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,53,15,0" Width="23" Height="23" ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
         </Button>
 
