@@ -8,33 +8,44 @@
         MinWidth="642"
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
-        MouseDoubleClick="Window_MouseDoubleClick"
         Background="#B3C5D7"
         Title="Blob Metadata - My Azure Blob Manager" Height="360" Width="713">
+        <!--
+        MouseDoubleClick="Window_MouseDoubleClick" 
+        -->
+       
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/LabelStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" FontSize="12" Foreground="White"/>
-        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="55,20,0,0" VerticalAlignment="Top" Width="372" FontSize="12" Height="22" IsReadOnly="True" Background="LightGray"/>
+        <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="372" IsReadOnly="True" Background="LightGray"/>
 
-        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,12,142,0" Width="35" Height="35" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,15,142,0" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:EditViewbox></controls:EditViewbox>
         </Button>
 
-        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,12,106,0" Width="35" Height="35" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,15,106,0" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:AddViewbox></controls:AddViewbox>
         </Button>
 
-        <Button x:Name="btnDelete" Click="btnDelete_Click"  Margin="0,12,70,0" Width="35" Height="35" ToolTip="Remove Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnDelete" Click="btnDelete_Click"  Margin="0,15,70,0"  ToolTip="Remove Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:DeleteFileViewbox></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,12,15,0" Width="35" Height="35" ToolTip="Save"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,15,15,0"  ToolTip="Save"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
-        
 
-
-        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" AlternatingRowBackground="Bisque" CanUserAddRows="false"
-                  FontSize="12" 
+        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" CanUserAddRows="false"
+                  
                   Margin="15,62,15,20" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -46,8 +57,13 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding KeyName}" Header="Name" Width="200" IsReadOnly="True" />
-                <DataGridTextColumn Binding="{Binding Value}" Header="Value" Width="380" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding KeyName}" Header="Name" Width="200" 
+                                    ElementStyle="{StaticResource DataGridTextColumnTextBlockStyle}"
+                                    EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}"
+                                    />
+                <DataGridTextColumn Binding="{Binding Value}" Header="Value" Width="380"
+                                    ElementStyle="{StaticResource DataGridTextColumnTextBlockStyle}"
+                                    EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}"  />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

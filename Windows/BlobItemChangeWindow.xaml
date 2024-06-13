@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        MouseDoubleClick="Window_MouseDoubleClick"
+       
         xmlns:controls="clr-namespace:AzureBlobManager.Controls"
         mc:Ignorable="d"
         MinWidth="211"
@@ -11,17 +11,27 @@
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#7395D7" WindowStyle="ToolWindow"
         Title="Modify Blob Metadata Item - My Azure Blob Manager" Height="184" Width="500">
+        <!--MouseDoubleClick="Window_MouseDoubleClick"-->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/LabelStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,5,15,0" Width="35" Height="35" ToolTip="Save Changes"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,5,20,0" ToolTip="Save Changes"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="15,52,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-        <TextBox x:Name="txtBlobItemName" HorizontalAlignment="Stretch" Margin="75,53,15,0" VerticalAlignment="Top" FontSize="14" Height="27" IsReadOnly="False" />
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="17,53,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtBlobItemName" HorizontalAlignment="Stretch" Margin="67,55,20,0" VerticalAlignment="Top"  />
 
-        <Label Content="Value:" HorizontalAlignment="Left" Margin="15,92,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-        <TextBox x:Name="txtBlobItemValue" HorizontalAlignment="Stretch" Margin="75,93,15,0" VerticalAlignment="Top" FontSize="14" Height="27" IsReadOnly="False"
-                 GotFocus="txtBlobItemValue_GotFocus" />
+        <Label Content="Value:" HorizontalAlignment="Left" Margin="20,90,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtBlobItemValue" HorizontalAlignment="Stretch" Margin="67,92,20,0" VerticalAlignment="Top" GotFocus="txtBlobItemValue_GotFocus" />
 
     </Grid>
 </Window>
