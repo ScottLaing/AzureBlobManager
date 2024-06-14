@@ -37,11 +37,11 @@
         <Label Content="File:" HorizontalAlignment="Left" Margin="15,50,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="txtFilePath" Margin="44,53,40,0" Text="" VerticalAlignment="Top"  HorizontalAlignment="Stretch"/>
 
-        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,53,15,0" Width="23" Height="23" ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,53,15,0" Style="{StaticResource SmallButtonStyle}"  ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
         </Button>
 
-        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Stretch" Margin="20,85,20,0" VerticalAlignment="Top" Background="#7392B7" Foreground="Cyan" FontSize="14" />
+        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Stretch" Margin="20,85,20,0" VerticalAlignment="Top" Background="#7392B7" Foreground="Purple"  />
 
     </Grid>
 </Window>

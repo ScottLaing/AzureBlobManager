@@ -44,9 +44,8 @@
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
 
-        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  AlternationCount="2" CanUserAddRows="false"
-                  
-                  Margin="15,62,15,20" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
+        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  
+                  Margin="15,62,15,20"  AutoGenerateColumns="False" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />

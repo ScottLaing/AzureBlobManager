@@ -7,6 +7,13 @@
         <Setter Property="Height" Value="23" />
     </Style>
 
+    <Style TargetType="CheckBox">
+        <Setter Property="IsEnabled" Value="True" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Height" Value="23" />
+    </Style>
+  
+
     <Style TargetType="ComboBox">
         <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="FontSize" Value="12" />

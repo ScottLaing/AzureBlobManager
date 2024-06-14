@@ -11,13 +11,23 @@
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#B3C5D7"
         Title="Logs Info - My Azure Blob Manager" Height="360" Width="713">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/LabelStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="../Styles/TextBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
 
-        <Button x:Name="btnClose"  Margin="0,12,20,0" Width="35" Height="35" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnClose"  Margin="0,12,20,0" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:CloseViewbox ></controls:CloseViewbox>
         </Button>
-        
-        <TextBox x:Name="txtLogsInfo" IsReadOnly="True"  Margin="20,59,20,20" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>
+
+        <TextBox x:Name="txtLogsInfo" Style="{StaticResource MultilineTextBox}"   IsReadOnly="True"  Margin="20,59,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
     </Grid>
 </Window>

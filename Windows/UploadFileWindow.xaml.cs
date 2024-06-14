@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Windows
@@ -84,6 +85,7 @@ namespace AzureBlobManager.Windows
             if (result == true)
             {
                 txtFilePath.Text = dlg.FileName;
+                MessageBox.Show(FileNotUploadedYetWarning);
             }
         }
 

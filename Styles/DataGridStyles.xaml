@@ -6,6 +6,9 @@
         <Setter Property="FontSize" Value="11" />
         <Setter Property="AlternatingRowBackground" Value="Bisque" />
         <Setter Property="AlternationCount" Value="2" />
+        <Setter Property="CanUserAddRows" Value="False" />
+        <Setter Property="FontFamily" Value="Arial" />
+        
     </Style>
 
     <Style TargetType="DataGridTextColumn">

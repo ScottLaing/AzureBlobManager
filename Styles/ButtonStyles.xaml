@@ -7,5 +7,10 @@
         <Setter Property="Width" Value="35" />
         <Setter Property="Height" Value="35" />
     </Style>
+
+    <Style x:Key="SmallButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="23" />
+        <Setter Property="Height" Value="23" />
+    </Style>
     
 </ResourceDictionary>
