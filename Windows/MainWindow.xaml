@@ -62,7 +62,7 @@
         </Button>
 
         <!--MouseDoubleClick="dgFilesList_MouseDoubleClick"-->
-        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column"  CanUserAddRows="false" Margin="15,50,15,20"  FontSize="12" FontFamily="Arial" AutoGenerateColumns="False" ColumnWidth="50" >
+        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column" Margin="15,50,15,20" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />
@@ -78,12 +78,10 @@
                                     EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}" />
                 <DataGridTextColumn Binding="{Binding FileSize}" Header="Size" Width="100" 
                                     ElementStyle="{StaticResource DataGridTextColumnTextBlockStyle}"
-                                    EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}"  />
+                                    EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}" />
                 <DataGridTextColumn Binding="{Binding LastModified}" Header="Last Modified" Width="175" 
                                     ElementStyle="{StaticResource DataGridTextColumnTextBlockStyle}"
-                                    EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}" 
-                                   
-                                    />
+                                    EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}" />
                 <DataGridTextColumn Binding="{Binding Container}" Header="Container" Width="200" 
                                     ElementStyle="{StaticResource DataGridTextColumnTextBlockStyle}"
                                     EditingElementStyle="{StaticResource DataGridTextColumnTextBoxStyle}" />

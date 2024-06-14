@@ -8,7 +8,8 @@
         <Setter Property="AlternationCount" Value="2" />
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="FontFamily" Value="Arial" />
-        
+        <Setter Property="AutoGenerateColumns" Value="False" />
+
     </Style>
 
     <Style TargetType="DataGridTextColumn">

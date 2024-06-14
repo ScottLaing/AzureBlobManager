@@ -9,10 +9,9 @@
         MinWidth="200"
         MinHeight="150"
         MaxHeight="175"
-        MouseDoubleClick="Window_MouseDoubleClick"
         Background="#7392B7"
         Title="Upload Blob - My Azure Blob Manager" Height="153" Width="573" WindowStyle="ToolWindow">
-
+    <!--MouseDoubleClick="Window_MouseDoubleClick"-->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -41,7 +40,7 @@
             <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
         </Button>
 
-        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Stretch" Margin="20,85,20,0" VerticalAlignment="Top" Background="#7392B7" Foreground="Purple"  />
+        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Stretch" Margin="40,85,20,0" VerticalAlignment="Top" Background="#7392B7" Foreground="LightCoral"  />
 
     </Grid>
 </Window>
