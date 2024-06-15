@@ -25,27 +25,27 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Label Content="Blob:" HorizontalAlignment="Left" Margin="15,17,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="372" IsReadOnly="True" Background="LightGray"/>
+        <Label Content="Blob:" HorizontalAlignment="Left" Margin="20,17,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="372" Style="{StaticResource ReadonlyTextBox}"/>
 
-        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,15,140,0" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,15,145,0" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:EditViewbox></controls:EditViewbox>
         </Button>
 
-        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,15,105,0" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,15,110,0" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:AddViewbox></controls:AddViewbox>
         </Button>
 
-        <Button x:Name="btnDelete" Click="btnDelete_Click"  Margin="0,15,70,0"  ToolTip="Remove Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnDelete" Click="btnDelete_Click"  Margin="0,15,75,0"  ToolTip="Remove Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:DeleteFileViewbox></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,15,15,0"  ToolTip="Save"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,15,20,0"  ToolTip="Save"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
 
-        <DataGrid x:Name="dgMetadataList"  HeadersVisibility="Column"  
-                  Margin="15,62,15,20"  AutoGenerateColumns="False" ColumnWidth="50" >
+        <DataGrid x:Name="dgMetadataList"    
+                  Margin="20,62,20,20"  ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />

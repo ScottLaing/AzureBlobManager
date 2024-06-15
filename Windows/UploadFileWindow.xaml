@@ -40,7 +40,7 @@
             <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
         </Button>
 
-        <Label x:Name="lblResult" Content="                    " HorizontalAlignment="Stretch" Margin="40,85,20,0" VerticalAlignment="Top" Background="#7392B7" Foreground="LightCoral"  />
+        <Label x:Name="lblResult" HorizontalAlignment="Stretch" Margin="40,85,20,0" VerticalAlignment="Top" Foreground="LightCoral"  />
 
     </Grid>
 </Window>

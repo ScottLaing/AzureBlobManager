@@ -11,7 +11,7 @@
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#7395D7" WindowStyle="ToolWindow"
         Title="Modify Blob Metadata Item - My Azure Blob Manager" Height="184" Width="500">
-        <!--MouseDoubleClick="Window_MouseDoubleClick"-->
+    <!--MouseDoubleClick="Window_MouseDoubleClick"-->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -27,10 +27,10 @@
             <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
         </Button>
 
-        <Label Content="Name:" HorizontalAlignment="Left" Margin="17,53,0,0" VerticalAlignment="Top" />
+        <Label Content="Name:" HorizontalAlignment="Left" Margin="26,53,0,0" VerticalAlignment="Top" Padding="2,5,0,5" />
         <TextBox x:Name="txtBlobItemName" HorizontalAlignment="Stretch" Margin="67,55,20,0" VerticalAlignment="Top"  />
 
-        <Label Content="Value:" HorizontalAlignment="Left" Margin="20,90,0,0" VerticalAlignment="Top" />
+        <Label Content="Value:" HorizontalAlignment="Left" Margin="26,91,0,0" VerticalAlignment="Top" Padding="5,2,0,5" />
         <TextBox x:Name="txtBlobItemValue" HorizontalAlignment="Stretch" Margin="67,92,20,0" VerticalAlignment="Top" GotFocus="txtBlobItemValue_GotFocus" />
 
     </Grid>

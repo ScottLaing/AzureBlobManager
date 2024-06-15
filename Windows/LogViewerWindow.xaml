@@ -27,7 +27,7 @@
             <controls:CloseViewbox ></controls:CloseViewbox>
         </Button>
 
-        <TextBox x:Name="txtLogsInfo" Style="{StaticResource MultilineTextBox}"   IsReadOnly="True"  Margin="20,59,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="txtLogsInfo" Style="{StaticResource MultilineTextBox}" IsReadOnly="True"  Margin="20,59,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
     </Grid>
 </Window>

@@ -25,19 +25,19 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Container:" HorizontalAlignment="Left" Margin="15,14,0,0" VerticalAlignment="Top" />
+        <Label Content="Container:" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" />
         
-        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="80,16,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="cmbContainers_SelectionChanged"/>
+        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="82,16,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="cmbContainers_SelectionChanged"/>
 
-        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,7,280,0"  ToolTip="Open Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:OpenFileViewbox></controls:OpenFileViewbox>
+        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,7,280,0"  ToolTip="View Copy of Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:EditorViewbox></controls:EditorViewbox>
         </Button>
 
-        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,7,245,0"  ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,7,245,0"  ToolTip="Upload New Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
         </Button>
 
-        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="0,7,210,0"  ToolTip="Download Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="0,7,210,0"  ToolTip="Download Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:DownloadButtonViewbox></controls:DownloadButtonViewbox>
         </Button>
         
@@ -45,28 +45,28 @@
             <controls:DeleteFileViewbox ></controls:DeleteFileViewbox>
         </Button>
 
-        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,129,0" >
+        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Selected Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,129,0" >
             <controls:MetadataButtonViewbox ></controls:MetadataButtonViewbox>
         </Button>
 
-        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh Blobs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,94,0" >
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh List of Blobs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,94,0" >
             <controls:RefreshButtonViewbox ></controls:RefreshButtonViewbox>
         </Button>
 
-        <Button x:Name="btnLogs" Click="btnLogs_Click"  ToolTip="View Logs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,59,0" >
+        <Button x:Name="btnLogs" Click="btnLogs_Click"  ToolTip="View App Logs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,59,0" >
             <controls:LogViewbox ></controls:LogViewbox>
         </Button>
 
-        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,15,0" >
+        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,20,0" >
             <controls:SettingsViewbox></controls:SettingsViewbox>
         </Button>
 
         <!--MouseDoubleClick="dgFilesList_MouseDoubleClick"-->
-        <DataGrid x:Name="dgFilesList"  HeadersVisibility="Column" Margin="15,50,15,20" ColumnWidth="50" >
+        <DataGrid x:Name="dgFilesList"  Margin="20,50,20,20" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />
-                    <Setter Property="Height" Value="27" ></Setter>
+                    <Setter Property="Height" Value="25" ></Setter>
                     <Setter Property="BorderThickness" Value="1"></Setter>
                     <Setter Property="BorderBrush" Value="Black"></Setter>
                     <Setter Property="Padding" Value="2 0 2 0"></Setter>

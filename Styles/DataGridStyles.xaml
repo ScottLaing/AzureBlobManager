@@ -9,11 +9,8 @@
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="FontFamily" Value="Arial" />
         <Setter Property="AutoGenerateColumns" Value="False" />
+        <Setter Property="HeadersVisibility" Value="Column" />
 
-    </Style>
-
-    <Style TargetType="DataGridTextColumn">
-        <Setter Property="IsReadOnly" Value="True" />
     </Style>
 
     <Style x:Key="DataGridTextColumnTextBoxStyle" TargetType="TextBox">

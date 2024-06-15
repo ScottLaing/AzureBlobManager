@@ -28,4 +28,11 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
     </Style>
 
+    <Style x:Key="ReadonlyTextBox" TargetType="TextBox">
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Background" Value="LightGray" />
+    </Style>
+    
+    
 </ResourceDictionary>
