@@ -81,6 +81,11 @@ namespace AzureBlobManager.Utils
         /// <param name="sharedSecret">A password used to generate a key for encryption.</param>
         public static string EncryptString2(string plainText, string? sharedSecret, string? salt)
         {
+            if (plainText?.Trim() == string.Empty)
+            {
+                return string.Empty;
+            }
+
             if (string.IsNullOrEmpty(plainText))
             {
                 throw new ArgumentNullException(PlainText);
@@ -223,6 +228,10 @@ namespace AzureBlobManager.Utils
         /// <param name="sharedSecret">A password used to generate a key for decryption.</param>
         public static string DecryptString2(string cipherText, string? sharedSecret, string? salt)
         {
+            if (cipherText?.Trim() == string.Empty)
+            {
+                return string.Empty;
+            }
             if (string.IsNullOrEmpty(cipherText))
             {
                 throw new ArgumentNullException(CipherText);

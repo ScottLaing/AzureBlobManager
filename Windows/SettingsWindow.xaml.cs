@@ -36,10 +36,17 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
         /// </summary>
-        public SettingsWindow(IUiService uiService)
+        public SettingsWindow(IUiService uiService = null)
         {
             InitializeComponent();
-            this.UiService = uiService;
+            if (uiService == null)
+            {
+                this.UiService = App.Services.GetService<IUiService>() ?? throw new Exception("could not get IUiService service DI object");
+            }
+            else
+            {
+                this.UiService = uiService;
+            }
             this.txtAzureConnString.Text = BlobService.BlobConnectionString;
         }
 
