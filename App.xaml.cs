@@ -68,14 +68,10 @@ namespace AzureBlobManager
             InitBlobConnString();
 
             // work in progress below - on actions to help users to first time setup their azure connection string
-
-            //BlobService.BlobConnectionString = string.Empty;
-            //if (string.IsNullOrEmpty(BlobService.BlobConnectionString))
-            //{
-            //    MessageBox.Show("Blob connection string is not set. The Settings Window will now display, please enter a valid blob connection string there.");
-            //    var settingsWindow = new SettingsWindow();
-            //    settingsWindow.ShowDialog();
-            //}
+            if (string.IsNullOrEmpty(BlobService.BlobConnectionString))
+            {
+                MessageBox.Show(MissingBlobConnString, MyAzureBlobManager);
+            }
 
             // Initialize main window
             var mainWindow = Services.GetRequiredService<MainWindow>();

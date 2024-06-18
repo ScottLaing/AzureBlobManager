@@ -24,6 +24,13 @@ namespace AzureBlobManager
         public const string EncryptedTextMustNotBeBlank = "EncryptedText must not be blank.";
         public const string PlainTextMustNotBeBlank = "PlainText must not be blank.";
 
+        public const string MissingBlobConnString = "Your Blob connection string does not appear to be set.\n\n" +
+                    "The main application window will be empty of blob and container listings because of this - it will be blank. \n\n To fix this issue, " +
+                    "open the Settings Window (top right icon on main window) and then enter your correct Blob connection string there.  thanks!";
+
+        public const string MyAzureBlobManager = "My Azure Blob Manager";
+
+
         public const string FileNotUploadedYetWarning = "Quick note: any progress bar that may have just displayed is a behavior of the File Dialog chooser relating to windows file and security checks when choosing a file.  The file is Not Uploaded to Azure yet! \n\nYou may now upload the file to an Azure blob (if chosen file and path is correct) via the \"Up Arrow\" upload button near top right of window. Thanks!";
 
         public const string ConnectionIsNull = "connection is null";
