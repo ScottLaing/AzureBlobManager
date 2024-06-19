@@ -115,6 +115,8 @@ namespace AzureBlobManager
             services.AddSingleton<IBlobServiceClientFactory, SimpleBlobServiceClientFactory>(); // Register the SimpleBlobServiceClientFactory as a singleton
             services.AddSingleton<MainWindow>(); // Register the MainWindow as a singleton
             services.AddTransient<LogViewerWindow>(); // Register the LogViewerWindow as a transient
+            services.AddTransient<EncryptWindow>();
+            
         }
 
 

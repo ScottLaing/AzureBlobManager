@@ -30,7 +30,7 @@
         <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="82,16,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="cmbContainers_SelectionChanged"/>
 
         <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,7,280,0"  ToolTip="View Copy of Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:EditorViewbox></controls:EditorViewbox>
+            <controls:EditorViewbox/>
         </Button>
 
         <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,7,245,0"  ToolTip="Upload New Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
@@ -59,6 +59,10 @@
 
         <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,20,0" >
             <controls:SettingsViewbox></controls:SettingsViewbox>
+        </Button>
+
+        <Button x:Name="btnEncrypt" Visibility="Hidden" Click="btnEncrypt_Click"  Margin="0,7,330,0"  ToolTip="Encryption Utility Window"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:DecryptButtonViewbox/>
         </Button>
 
         <!--MouseDoubleClick="dgFilesList_MouseDoubleClick"-->

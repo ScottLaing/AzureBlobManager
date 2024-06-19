@@ -436,5 +436,11 @@ namespace AzureBlobManager.Windows
             var mainWindow = Services.GetRequiredService<LogViewerWindow>();
             mainWindow.Show();
         }
+
+        private void btnEncrypt_Click(object sender, RoutedEventArgs e)
+        {
+            var encWindow = Services.GetRequiredService<EncryptWindow>();
+            encWindow.Show();
+        }
     }
 }
