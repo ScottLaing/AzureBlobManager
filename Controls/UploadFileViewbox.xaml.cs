@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for LogViewbox.xaml
+    /// Interaction logic for UploadFileViewbox.xaml
     /// </summary>
     public partial class UploadFileViewbox : UserControl
     {

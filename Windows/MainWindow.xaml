@@ -61,7 +61,7 @@
             <controls:SettingsViewbox></controls:SettingsViewbox>
         </Button>
 
-        <Button x:Name="btnEncrypt" Visibility="Hidden" Click="btnEncrypt_Click"  Margin="0,7,330,0"  ToolTip="Encryption Utility Window"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <Button x:Name="btnEncrypt" Visibility="Visible" Click="btnEncrypt_Click"  Margin="0,7,330,0"  ToolTip="Encryption Utility Window"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:DecryptButtonViewbox/>
         </Button>
 

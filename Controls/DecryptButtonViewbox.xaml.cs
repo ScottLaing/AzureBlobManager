@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for CloseViewbox.xaml
+    /// Interaction logic for DecryptButtonViewbox.xaml
     /// </summary>
     public partial class DecryptButtonViewbox : UserControl
     {

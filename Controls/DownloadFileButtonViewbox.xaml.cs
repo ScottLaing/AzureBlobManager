@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for DownloadButtonViewbox.xaml
+    /// Interaction logic for DownloadFileButtonViewbox.xaml
     /// </summary>
     public partial class DownloadFileButtonViewbox : UserControl
     {
