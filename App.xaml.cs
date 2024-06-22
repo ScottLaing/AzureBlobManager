@@ -29,7 +29,7 @@ namespace AzureBlobManager
         public static IHost? AppHost { get; private set; }
 
         // Dependency injection service provider.
-        public static IServiceProvider Services => AppHost?.Services ?? throw new Exception("dependency injection setup error");
+        public static IServiceProvider Services => AppHost?.Services ?? throw new Exception(DependencyInjectionError);
 
         // Dependency injection service for file operations.
         private IBlobService BlobService { get; set; } = null!;
@@ -87,7 +87,7 @@ namespace AzureBlobManager
             var blobServices = Services.GetRequiredService<IBlobService>();
             if (blobServices == null)
             {
-                MessageBox.Show("could not get blob service dependency injection class. critical error.");
+                MessageBox.Show(DependencyInjectionError);
                 Environment.Exit(1);
             }
             BlobService = blobServices;
@@ -95,7 +95,7 @@ namespace AzureBlobManager
             var regService = Services.GetRequiredService<IRegService>();
             if (regService == null)
             {
-                MessageBox.Show("could not get IRegService service dependency injection class. critical error.");
+                MessageBox.Show(DependencyInjectionError);
                 Environment.Exit(1);
             }
             RegService = regService;
@@ -116,7 +116,6 @@ namespace AzureBlobManager
             services.AddSingleton<MainWindow>(); // Register the MainWindow as a singleton
             services.AddTransient<LogViewerWindow>(); // Register the LogViewerWindow as a transient
             services.AddTransient<EncryptWindow>();
-            
         }
 
 
@@ -164,7 +163,7 @@ namespace AzureBlobManager
         {
             if (BlobService == null)
             {
-                throw new Exception("dependency injection error getting blob service");
+                throw new Exception(DependencyInjectionError);
             }
             BlobService.InitializeBlobConnStringFromEnvVariable();
 

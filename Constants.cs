@@ -24,6 +24,8 @@ namespace AzureBlobManager
         public const string EncryptedTextMustNotBeBlank = "EncryptedText must not be blank.";
         public const string PlainTextMustNotBeBlank = "PlainText must not be blank.";
 
+        public const string DependencyInjectionError = "dependency injection setup error";
+
         public const string MissingBlobConnString = "Your Blob connection string does not appear to be set.\n\n" +
                     "The main application window will be empty of blob and container listings because of this - it will be blank. \n\n To fix this issue, " +
                     "open the Settings Window (top right icon on main window) and then enter your correct Blob connection string there.  thanks!";
