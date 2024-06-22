@@ -12,7 +12,6 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class BlobItemChangeWindow : Window
     {
-
         // Indicates whether the dialog was saved
         public bool DialogWasSaved = false;
 
@@ -22,10 +21,19 @@ namespace AzureBlobManager.Windows
         // The value of the blob item
         public string BlobItemValue { get; set; } = string.Empty;
 
+        // Whether blob item is a system data blob item.
         private bool isSystemData = false;
+
+        // Logger for the class.
         private Logger logger = Logging.CreateLogger();
 
+
+        /// <summary>
+        /// Gets the reference to the current application instance.
+        /// </summary>
         public App? App => System.Windows.Application.Current as App;
+
+        // Dependency injection service for UI operations.
         private IUiService UiService;
 
         /// <summary>
@@ -135,7 +143,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            logger.Debug("Window_MouseDoubleClick call");
+            logger.Debug(WindowMouseDoubleClickCall);
 
             UiService.ShowWindowSize(this);
         }

@@ -22,7 +22,7 @@ namespace AzureBlobManager.Windows
         private string containerName = string.Empty;
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
-        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
         private IUiService UiService;
 
         /// <summary>
