@@ -19,7 +19,7 @@ namespace AzureBlobManager.Windows
         private string _currentContainer;
 
         private Logger logger = Logging.CreateLogger();
-        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get blob service DI object");
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
 
         private IUiService UiService;
 
@@ -97,7 +97,7 @@ namespace AzureBlobManager.Windows
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Add your code here to handle the event when the user double-clicks the window
-            logger.Debug("Window_MouseDoubleClick call");
+            logger.Debug(WindowMouseDoubleClickCall);
 
             UiService.ShowWindowSize(this);
         }

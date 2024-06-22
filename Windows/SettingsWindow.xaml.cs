@@ -16,12 +16,12 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// BlobService reference.
         /// </summary>
-        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception("could not get IBlobService service DI object");
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
 
         /// <summary>
         /// RegService reference.
         /// </summary>
-        public IRegService RegService => App.Services.GetService<IRegService>() ?? throw new Exception("could not get IRegService service DI object");
+        public IRegService RegService => App.Services.GetService<IRegService>() ?? throw new Exception(DependencyInjectionError);
 
         /// <summary>
         /// Logger instance.
@@ -41,7 +41,7 @@ namespace AzureBlobManager.Windows
             InitializeComponent();
             if (uiService == null)
             {
-                this.UiService = App.Services.GetService<IUiService>() ?? throw new Exception("could not get IUiService service DI object");
+                this.UiService = App.Services.GetService<IUiService>() ?? throw new Exception(DependencyInjectionError);
             }
             else
             {
@@ -95,7 +95,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            logger.Debug("Window_MouseDoubleClick call");
+            logger.Debug(WindowMouseDoubleClickCall);
 
             UiService.ShowWindowSize(this);
         }
