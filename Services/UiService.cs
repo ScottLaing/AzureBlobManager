@@ -7,8 +7,14 @@ using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Services
 {
+    /// <summary>
+    /// Service for UI operations.
+    /// </summary>
     public class UiService : IUiService
     {
+        /// <summary>
+        /// class logger
+        /// </summary>
         private Logger logger = Logging.CreateLogger();
 
         /// <summary>

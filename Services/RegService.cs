@@ -4,8 +4,14 @@ using System;
 
 namespace AzureBlobManager.Services
 {
+    /// <summary>
+    /// Provides methods for saving and retrieving values from the Windows Registry.
+    /// </summary>
     public class RegService : IRegService
     {
+        /// <summary>
+        /// Property to get the registry subkey string.
+        /// </summary>
         public string RegSubKey => $"Software\\{Constants.RegistryCompanyName}\\{Constants.RegistryAppName}";
 
         /// <summary>

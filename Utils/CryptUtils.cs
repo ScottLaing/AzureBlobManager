@@ -8,6 +8,9 @@ using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Utils
 {
+    /// <summary>
+    /// Provides methods for encrypting and decrypting strings using RijndaelManaged.
+    /// </summary>
     public class CryptUtils
     {
         //While an app specific salt is not the best practice for

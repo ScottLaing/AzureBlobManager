@@ -1,14 +1,11 @@
-﻿using Azure;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using Azure.Storage.Blobs.Specialized;
 using AzureBlobManager.Dtos;
 using AzureBlobManager.Interfaces;
 using AzureBlobManager.Mocks;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static AzureBlobManager.Constants;
@@ -16,6 +13,9 @@ using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Services
 {
+    /// <summary>
+    /// A service class for interacting with Azure Blob Storage.
+    /// </summary>
     public class BlobService : IBlobService
     {
         /// <summary>
@@ -23,8 +23,15 @@ namespace AzureBlobManager.Services
         /// </summary>
         public string? BlobConnectionString { get; set; } = String.Empty;
 
+        /// <summary>
+        /// Gets or sets the factory for creating BlobServiceClient objects.
+        /// </summary>
         IBlobServiceClientFactory _blobServiceClientFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the BlobService class.
+        /// </summary>
+        /// <param name="blobServiceClientFactory"></param>
         public BlobService(IBlobServiceClientFactory? blobServiceClientFactory = null)
         {
             if (blobServiceClientFactory == null)

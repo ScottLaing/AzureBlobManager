@@ -10,13 +10,18 @@ using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Services
 {
+    /// <summary>
+    /// Service for file operations.
+    /// </summary>
     public class FileService : IFileService
     {
+        // Random number generator.
         private Random random = new Random();
 
         // Retrieves the current application instance.
         public App? App => Application.Current as App;
 
+        // Retrieves the blob service instance.
         public static IBlobService BlobService => App.Services.GetRequiredService<IBlobService>();
 
         // Attempts to download a file from the specified container.

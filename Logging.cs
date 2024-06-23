@@ -5,7 +5,6 @@ using System.IO;
 using System.Text;
 using static AzureBlobManager.Constants;
 
-
 namespace AzureBlobManager
 {
     /// <summary>

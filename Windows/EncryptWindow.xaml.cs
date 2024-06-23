@@ -1,10 +1,5 @@
-﻿using AzureBlobManager.Interfaces;
-using AzureBlobManager.Utils;
-using Microsoft.Extensions.DependencyInjection;
-using Serilog.Core;
-using System;
+﻿using AzureBlobManager.Utils;
 using System.Windows;
-using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Windows
 {

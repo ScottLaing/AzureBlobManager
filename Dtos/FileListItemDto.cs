@@ -2,6 +2,9 @@
 
 namespace AzureBlobManager.Dtos
 {
+    /// <summary>
+    /// Represents a file list item.
+    /// </summary>
     public class FileListItemDto
     {
         /// <summary>

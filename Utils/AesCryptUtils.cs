@@ -6,6 +6,9 @@ using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Utils
 {
+    /// <summary>
+    /// Utility class for AES encryption and decryption.
+    /// </summary>
     public class AesCryptUtils
     {
         /// <summary>

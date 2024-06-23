@@ -2,6 +2,9 @@
 
 namespace AzureBlobManager.Dtos
 {
+    /// <summary>
+    /// Represents a metadata key-value pair.
+    /// </summary>
     public class MetadataDto
     {
         /// <summary>
