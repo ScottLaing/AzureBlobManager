@@ -1,7 +1,13 @@
 ﻿namespace AzureBlobManager.Interfaces
 {
+    /// <summary>
+    /// Interface for saving and retrieving values from the Windows Registry.
+    /// </summary>
     public interface IRegService
     {
+        /// <summary>
+        /// The name of the registry key.
+        /// </summary>
         public string RegSubKey { get; }
 
         /// <summary>

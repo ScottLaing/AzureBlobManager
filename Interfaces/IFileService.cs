@@ -2,6 +2,9 @@
 
 namespace AzureBlobManager.Interfaces
 {
+    /// <summary>
+    /// Interface for the file service.
+    /// </summary>
     public interface IFileService
     {
         /// <summary>

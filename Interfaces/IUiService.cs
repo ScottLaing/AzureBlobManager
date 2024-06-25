@@ -3,6 +3,9 @@ using System.Windows;
 
 namespace AzureBlobManager.Interfaces
 {
+    /// <summary>
+    /// Interface for the UI service.
+    /// </summary>
     public interface IUiService
     {
         /// <summary>

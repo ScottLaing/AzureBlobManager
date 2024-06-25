@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace AzureBlobManager.Interfaces
 {
+    /// <summary>
+    /// Interface for the BlobService class.
+    /// </summary>
     public interface IBlobService
     {
         /// <summary>
