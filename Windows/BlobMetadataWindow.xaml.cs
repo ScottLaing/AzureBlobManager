@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 
 namespace AzureBlobManager.Windows

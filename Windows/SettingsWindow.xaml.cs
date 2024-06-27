@@ -36,7 +36,7 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
         /// </summary>
-        public SettingsWindow(IUiService uiService = null)
+        public SettingsWindow(IUiService? uiService = null)
         {
             InitializeComponent();
             if (uiService == null)

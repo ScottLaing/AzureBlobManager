@@ -48,14 +48,10 @@ namespace AzureBlobManager
         public const string TroubleSavingMetadata = "Error saving metadata: {0}";
         public const string KeyNameCannotBeEmpty = "Key name cannot be empty, blob item not added.";
         public const string KeyNameAlreadyExists = "Key name already exists in metadata items. To edit an existing metadata item, select item then click edit.";
-        public const string NoMetadataItemSelected = "No metadata item selected, please select a metadata item to edit.";
-        public const string KeyNameCannotBeEmptyEdited = "Key name cannot be empty, blob item not edited.";
-        public const string CannotDeleteSystemMetadataItems = "Cannot delete system metadata items.";
 
         public const string BlobItemNewKey = "NewKey";
         public const string BlobItemNewValue = "New Value";
 
-        public const string AttemptingToUpdateMetadataButValueIsNull = "Attempting to update metadata but update value is null, cannot update.";
         public const string ErrorWithUpdatingMetadata = "Error with updating metadata: {0}";
         public const string OpeningMainWindow = "Opening Main Window.";
 
@@ -113,6 +109,12 @@ namespace AzureBlobManager
 
         public class UIMessages
         {
+            public const string NoMetadataItemSelected = "No metadata item selected, please select a metadata item to edit.";
+            public const string KeyNameCannotBeEmptyEdited = "Key name cannot be empty, blob item not edited.";
+            public const string CannotDeleteSystemMetadataItems = "Cannot delete system metadata items.";
+
+            public const string AttemptingToUpdateMetadataButValueIsNull = "Attempting to update metadata but update value is null, cannot update.";
+
             public const string MissingBlobConnString = "Your Blob connection string does not appear to be set.\n\n" +
                         "The main application window will be empty of blob and container listings because of this - it will be blank. \n\n To fix this issue, " +
                         "open the Settings Window (top right icon on main window) and then enter your correct Blob connection string there.  thanks!";
