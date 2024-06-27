@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Text;
 using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager
 {

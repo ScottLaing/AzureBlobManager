@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager
 {

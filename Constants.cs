@@ -14,7 +14,6 @@ namespace AzureBlobManager
         public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
         public const string RegNameEncryptionKey = "BobAndAlice";
         public const string RegSaltEncryptionKey = "SodChloride";
-        public const string AppNotDefined = "App not defined, cannot continue with AttemptDownloadFileToTempFolder";
 
         public const string AesDefaultKey = "76AA6E93-AB72-4B33-B382-ABF77FF64C83"; // Must be at least 16 characters
         public const string AesDefaultIv = "55DCB9FA-32DB-4E"; // Must be 16 characters
@@ -26,9 +25,6 @@ namespace AzureBlobManager
 
         public const string DependencyInjectionError = "dependency injection setup error";
 
-        public const string MissingBlobConnString = "Your Blob connection string does not appear to be set.\n\n" +
-                    "The main application window will be empty of blob and container listings because of this - it will be blank. \n\n To fix this issue, " +
-                    "open the Settings Window (top right icon on main window) and then enter your correct Blob connection string there.  thanks!";
 
         public const string MyAzureBlobManager = "My Azure Blob Manager";
 
@@ -85,7 +81,6 @@ namespace AzureBlobManager
         public const string LogFileName = "abm.log"; // The name of the log file
         public const string LogPattern = "*.log";
         public const string LogSeparator = "===============================================";
-        public const string ErrorFileContentsAreLikelyInaccessible = "ERROR: [{0}] file contents are likely inaccessible (may be current or recently in-use log), please try again later.";
         public const string ErrorDetails = "ERROR DETAILS: {0}.";
 
 
@@ -118,6 +113,12 @@ namespace AzureBlobManager
 
         public class UIMessages
         {
+            public const string MissingBlobConnString = "Your Blob connection string does not appear to be set.\n\n" +
+                        "The main application window will be empty of blob and container listings because of this - it will be blank. \n\n To fix this issue, " +
+                        "open the Settings Window (top right icon on main window) and then enter your correct Blob connection string there.  thanks!";
+
+            public const string ErrorFileContentsAreLikelyInaccessible = "ERROR: [{0}] file contents are likely inaccessible (may be current or recently in-use log), please try again later.";
+            public const string AppNotDefined = "App not defined, cannot continue with AttemptDownloadFileToTempFolder";
             public const string GridRowEmptyError = "Could not get blob, valid container not selected or no blob item selected or blob items are empty.";
             public const string GridRowObjectNotValid = "Blob item does not appear to be a valid Cloud Blob object.";
             public const string FileItemNoContainerName = "Could not get the container name from blob item.";
