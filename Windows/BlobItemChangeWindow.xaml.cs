@@ -3,7 +3,7 @@ using Serilog.Core;
 using System.Text.RegularExpressions;
 using System.Windows;
 using static AzureBlobManager.Constants;
-
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Windows
 {

@@ -25,12 +25,7 @@ namespace AzureBlobManager
 
         public const string DependencyInjectionError = "dependency injection setup error";
 
-
-        public const string MyAzureBlobManager = "My Azure Blob Manager";
-
         public const string WindowMouseDoubleClickCall = "Window_MouseDoubleClick call";
-
-        public const string FileNotUploadedYetWarning = "Quick note: any progress bar that may have just displayed is a behavior of the File Dialog chooser relating to windows file and security checks when choosing a file.  The file is Not Uploaded to Azure yet! \n\nYou may now upload the file to an Azure blob (if chosen file and path is correct) via the \"Up Arrow\" upload button near top right of window. Thanks!";
 
         public const string ConnectionIsNull = "connection is null";
         public const string ErrorGettingBlobMetadata = "Error getting blob metadata: {0}";
@@ -40,19 +35,13 @@ namespace AzureBlobManager
         public const string PlainText = "plainText";
         public const string CipherText = "cipherText";
 
-        public const string KeyNameCannotContainWhitespace = "Key name cannot contain whitespace.";
         public const string Error = "Error";
         public const string KeyNameIsReserved = "Key name is a reserved system key name, cannot be used. Please use another keyname.";
         public const string KeyNameContainsUnallowedCharacters = "Key name contains unallowed characters.";
 
-        public const string TroubleSavingMetadata = "Error saving metadata: {0}";
-        public const string KeyNameCannotBeEmpty = "Key name cannot be empty, blob item not added.";
-        public const string KeyNameAlreadyExists = "Key name already exists in metadata items. To edit an existing metadata item, select item then click edit.";
-
         public const string BlobItemNewKey = "NewKey";
         public const string BlobItemNewValue = "New Value";
 
-        public const string ErrorWithUpdatingMetadata = "Error with updating metadata: {0}";
         public const string OpeningMainWindow = "Opening Main Window.";
 
         // Constant string for the error message when trouble getting application reference
@@ -60,9 +49,6 @@ namespace AzureBlobManager
 
         public const string WindowSize = "Window Size";
         public const string WindowSizeInfo = "Width: {0}, Height: {1}";
-
-        public const string AreYouSure = "Are you sure?";
-        public const string Confirmation = "Confirmation";
 
         public const string EncryptionKeyNotFound = "Encryption key not found in registry, created new key: {0}";
         public const string ApplicationStartup = "Application starting up.";
@@ -109,6 +95,18 @@ namespace AzureBlobManager
 
         public class UIMessages
         {
+            public const string MyAzureBlobManager = "My Azure Blob Manager";
+
+            public const string KeyNameCannotContainWhitespace = "Key name cannot contain whitespace.";
+            public const string AreYouSure = "Are you sure?";
+
+            public const string Confirmation = "Confirmation";
+            public const string FileNotUploadedYetWarning = "Quick note: any progress bar that may have just displayed is a behavior of the File Dialog chooser relating to windows file and security checks when choosing a file.  The file is Not Uploaded to Azure yet! \n\nYou may now upload the file to an Azure blob (if chosen file and path is correct) via the \"Up Arrow\" upload button near top right of window. Thanks!";
+            public const string TroubleSavingMetadata = "Error saving metadata: {0}";
+            public const string KeyNameCannotBeEmpty = "Key name cannot be empty, blob item not added.";
+            public const string KeyNameAlreadyExists = "Key name already exists in metadata items. To edit an existing metadata item, select item then click edit.";
+
+            public const string ErrorWithUpdatingMetadata = "Error with updating metadata: {0}";
             public const string NoMetadataItemSelected = "No metadata item selected, please select a metadata item to edit.";
             public const string KeyNameCannotBeEmptyEdited = "Key name cannot be empty, blob item not edited.";
             public const string CannotDeleteSystemMetadataItems = "Cannot delete system metadata items.";

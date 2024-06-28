@@ -94,7 +94,7 @@ namespace AzureBlobManager.Windows
             }
             else
             {
-                MessageBox.Show(TroubleGettingContainers);
+                MessageBox.Show(TroubleGettingContainers, MyAzureBlobManager);
                 ResetToEmptyDefaults();
             }
         }
@@ -118,7 +118,7 @@ namespace AzureBlobManager.Windows
             logger.Debug("ListContainerFiles call");
             if (this.cmbContainers.SelectedIndex == -1)
             {
-                MessageBox.Show(ContainerNotSelected);
+                MessageBox.Show(ContainerNotSelected, MyAzureBlobManager);
                 return;
             }
 
@@ -128,7 +128,7 @@ namespace AzureBlobManager.Windows
                 var listFilesInfo = await BlobService.GetContainersFileListAsync(containerName);
                 if (!string.IsNullOrWhiteSpace(listFilesInfo.errors))
                 {
-                    MessageBox.Show(string.Format(ErrorGettingFilesList, listFilesInfo.errors));
+                    MessageBox.Show(string.Format(ErrorGettingFilesList, listFilesInfo.errors), MyAzureBlobManager);
                     return;
                 }
                 dgFilesList.ItemsSource = listFilesInfo.fileItemsList;
@@ -199,7 +199,7 @@ namespace AzureBlobManager.Windows
             {
                 if (!string.IsNullOrWhiteSpace(result.errorMsg))
                 {
-                    MessageBox.Show(result.errorMsg);
+                    MessageBox.Show(result.errorMsg, MyAzureBlobManager);
                 }
                 return;
             }
@@ -208,12 +208,12 @@ namespace AzureBlobManager.Windows
 
             if (!downloadFileResult.success)
             {
-                MessageBox.Show(downloadFileResult.moreInfo);
+                MessageBox.Show(downloadFileResult.moreInfo, MyAzureBlobManager);
                 return;
             }
             else if (string.IsNullOrEmpty(downloadFileResult.downloadedFilePath))
             {
-                MessageBox.Show(NotGetTempFilePathError);
+                MessageBox.Show(NotGetTempFilePathError, MyAzureBlobManager);
                 return;
             }
             else
@@ -236,7 +236,7 @@ namespace AzureBlobManager.Windows
             logger.Debug("btnUploadFile_Click call");
             if (string.IsNullOrWhiteSpace(_lastUsedContainer))
             {
-                MessageBox.Show(NoContainerSelected);
+                MessageBox.Show(NoContainerSelected, MyAzureBlobManager);
                 return;
             }
             var uploadFileWindow = new UploadFileWindow(_lastUsedContainer, UiService);
@@ -269,11 +269,11 @@ namespace AzureBlobManager.Windows
             {
                 if (!string.IsNullOrWhiteSpace(result.errorMsg))
                 {
-                    MessageBox.Show(result.errorMsg);
+                    MessageBox.Show(result.errorMsg, MyAzureBlobManager);
                 }
                 else
                 {
-                    MessageBox.Show(SomeErrorOccurred);
+                    MessageBox.Show(SomeErrorOccurred, MyAzureBlobManager);
                 }
                 return;
             }
@@ -287,12 +287,12 @@ namespace AzureBlobManager.Windows
             var deleteResult = await BlobService.DeleteBlobFileAsync(result.containerName, result.fileName);
             if (deleteResult.success)
             {
-                MessageBox.Show(FileDeletedSuccess);
+                MessageBox.Show(FileDeletedSuccess, MyAzureBlobManager);
                 await ListContainerFiles();
             }
             else
             {
-                MessageBox.Show(string.Format(DeletionError, deleteResult.errorInfo));
+                MessageBox.Show(string.Format(DeletionError, deleteResult.errorInfo), MyAzureBlobManager);
             }
         }
 
@@ -377,11 +377,11 @@ namespace AzureBlobManager.Windows
             {
                 if (!string.IsNullOrWhiteSpace(result.errorMsg))
                 {
-                    MessageBox.Show(result.errorMsg);
+                    MessageBox.Show(result.errorMsg, MyAzureBlobManager);
                 }
                 else
                 {
-                    MessageBox.Show(SomeErrorOccurred);
+                    MessageBox.Show(SomeErrorOccurred, MyAzureBlobManager);
                 }
                 return;
             }
@@ -389,7 +389,7 @@ namespace AzureBlobManager.Windows
             var metadata = await BlobService.GetBlobMetadataAsync(result.containerName, result.fileName);
             if (!string.IsNullOrWhiteSpace(metadata.errors))
             {
-                MessageBox.Show(string.Format(MetadataError, result.fileName, metadata.errors));
+                MessageBox.Show(string.Format(MetadataError, result.fileName, metadata.errors), MyAzureBlobManager);
                 return;
             }
 
@@ -401,14 +401,14 @@ namespace AzureBlobManager.Windows
                 var modifiedMetadata = blobMetadataWindow.SourceCollection;
                 if (modifiedMetadata == null)
                 {
-                    MessageBox.Show(AttemptingToUpdateMetadataButValueIsNull);
+                    MessageBox.Show(AttemptingToUpdateMetadataButValueIsNull, MyAzureBlobManager);
                     return;
                 }
                 var modifiedAsDictionary = MetadataDto.toDictionary(modifiedMetadata);
                 string errorInUpdating = await BlobService.SetBlobMetadataAsync(result.containerName, result.fileName, modifiedAsDictionary);
                 if (!string.IsNullOrWhiteSpace(errorInUpdating))
                 {
-                    MessageBox.Show(string.Format(ErrorWithUpdatingMetadata, errorInUpdating));
+                    MessageBox.Show(string.Format(ErrorWithUpdatingMetadata, errorInUpdating), MyAzureBlobManager);
                 }
             }
         }

@@ -4,6 +4,7 @@ using Serilog.Core;
 using System.Drawing.Imaging;
 using System.Windows;
 using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Services
 {

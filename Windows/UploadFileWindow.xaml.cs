@@ -47,7 +47,7 @@ namespace AzureBlobManager.Windows
 
             if (string.IsNullOrWhiteSpace(txtVal))
             {
-                MessageBox.Show(PleaseSelectFile);
+                MessageBox.Show(PleaseSelectFile, MyAzureBlobManager);
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace AzureBlobManager.Windows
 
             if (!File.Exists(txtVal))
             {
-                MessageBox.Show(FileDoesNotExist);
+                MessageBox.Show(FileDoesNotExist, MyAzureBlobManager);
                 return;
             }
             var fileName = Path.GetFileName(txtVal);
@@ -85,7 +85,7 @@ namespace AzureBlobManager.Windows
             if (result == true)
             {
                 txtFilePath.Text = dlg.FileName;
-                MessageBox.Show(FileNotUploadedYetWarning);
+                MessageBox.Show(FileNotUploadedYetWarning, MyAzureBlobManager);
             }
         }
 

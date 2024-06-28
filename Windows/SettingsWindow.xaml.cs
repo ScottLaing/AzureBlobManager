@@ -5,6 +5,7 @@ using Serilog.Core;
 using System;
 using System.Windows;
 using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Windows
 {
@@ -73,7 +74,7 @@ namespace AzureBlobManager.Windows
                 if (currentApp == null)
                 {
                     // Show an error message if the currentApp is null
-                    MessageBox.Show(TroubleGettingApplicationReference);
+                    MessageBox.Show(TroubleGettingApplicationReference, MyAzureBlobManager);
                     return;
                 }
 

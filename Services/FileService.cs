@@ -41,11 +41,11 @@ namespace AzureBlobManager.Services
                 var results = await downloadFile;
                 if (results.success)
                 {
-                    MessageBox.Show(string.Format(DownloadedSuccessfully, fileName));
+                    MessageBox.Show(string.Format(DownloadedSuccessfully, fileName), MyAzureBlobManager);
                 }
                 else
                 {
-                    MessageBox.Show(string.Format(ErrorWithDownloading, fileName, results.errorInfo));
+                    MessageBox.Show(string.Format(ErrorWithDownloading, fileName, results.errorInfo), MyAzureBlobManager);
                 }
             }
         }

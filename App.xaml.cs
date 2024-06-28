@@ -88,7 +88,7 @@ namespace AzureBlobManager
             var blobServices = Services.GetRequiredService<IBlobService>();
             if (blobServices == null)
             {
-                MessageBox.Show(DependencyInjectionError);
+                MessageBox.Show(DependencyInjectionError, MyAzureBlobManager);
                 Environment.Exit(1);
             }
             BlobService = blobServices;
@@ -96,7 +96,7 @@ namespace AzureBlobManager
             var regService = Services.GetRequiredService<IRegService>();
             if (regService == null)
             {
-                MessageBox.Show(DependencyInjectionError);
+                MessageBox.Show(DependencyInjectionError, MyAzureBlobManager);
                 Environment.Exit(1);
             }
             RegService = regService;

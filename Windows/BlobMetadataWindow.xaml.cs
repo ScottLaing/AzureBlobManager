@@ -103,7 +103,7 @@ namespace AzureBlobManager.Windows
             // Check if there was an error saving the metadata
             if (string.IsNullOrWhiteSpace(setResult))
             {
-                MessageBox.Show("Metadata saved successfully!");
+                MessageBox.Show("Metadata saved successfully!", MyAzureBlobManager);
             }
             else
             {
