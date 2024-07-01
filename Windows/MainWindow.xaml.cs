@@ -1,5 +1,6 @@
 ﻿using AzureBlobManager.Dtos;
 using AzureBlobManager.Interfaces;
+using AzureBlobManager.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using System;
@@ -218,11 +219,25 @@ namespace AzureBlobManager.Windows
             }
             else
             {
-                var startInfo = new ProcessStartInfo();
-                startInfo.FileName = downloadFileResult.downloadedFilePath;
-                startInfo.UseShellExecute = true; // Let the OS handle opening with default app
+                try
+                {
+                    if (UiState.ShowViewBlobPreWarning)
+                    {
+                        var moreInfoWindow = new MoreInfoWindow(string.Format("Note: You are about to view a COPY of the Blob [{0}] in your temporary files folder. \nChanging this file will not affect the Blob stored in Azure. \nTo change a Blob in Azure you must reupload a modified version, using the exact same file name, back to Azure. \nThat would then overwrite the Azure Blob and update the Blob.", result.fileName));
+                        moreInfoWindow.ShowDialog();
+                    }
 
-                Process.Start(startInfo);
+                    var startInfo = new ProcessStartInfo();
+                    startInfo.FileName = downloadFileResult.downloadedFilePath;
+                    startInfo.UseShellExecute = true; // Let the OS handle opening with default app
+
+                    Process.Start(startInfo);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("Trouble with viewing file, error: {0}", ex.Message), MyAzureBlobManager);
+                }
             }
         }
 

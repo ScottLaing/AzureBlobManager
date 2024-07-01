@@ -112,7 +112,7 @@ namespace AzureBlobManager.Services
             long runaway = 0;
             while (runaway < long.MaxValue)
             {
-                string temp2 = rootFileName + "_" + GetRandomLongInt().ToString() + ext;
+                string temp2 = rootFileName + "_Copy_" + GetRandomLongInt().ToString() + ext;
                 string temp3 = Path.Combine(tempPath, temp2);
                 if (!File.Exists(temp3))
                 {
