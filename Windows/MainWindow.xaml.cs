@@ -223,7 +223,7 @@ namespace AzureBlobManager.Windows
                 {
                     if (UiState.ShowViewBlobPreWarning)
                     {
-                        var moreInfoWindow = new MoreInfoWindow(string.Format("Note: You are about to view a COPY of the Blob [{0}] in your temporary files folder. \nChanging this file will not affect the Blob stored in Azure. \nTo change a Blob in Azure you must reupload a modified version, using the exact same file name, back to Azure. \nThat would then overwrite the Azure Blob and update the Blob.", result.fileName));
+                        var moreInfoWindow = new MoreInfoWindow(string.Format(NoteYouAreAboutToViewCopy, result.fileName));
                         moreInfoWindow.ShowDialog();
                     }
 
@@ -236,7 +236,7 @@ namespace AzureBlobManager.Windows
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Trouble with viewing file, error: {0}", ex.Message), MyAzureBlobManager);
+                    MessageBox.Show(string.Format(TroubleWithViewingFile, ex.Message), MyAzureBlobManager);
                 }
             }
         }
@@ -293,7 +293,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            string warning = string.Format("You are about to delete the blob '{0}' from the container '{1}'.", result.fileName, result.containerName);
+            string warning = string.Format(YouAreAboutToDeleteTheBlob, result.fileName, result.containerName);
             if (!UiService.ShowConfirmationMessageBox(warning))
             {
                 return;

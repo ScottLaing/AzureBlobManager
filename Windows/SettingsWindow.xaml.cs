@@ -19,6 +19,7 @@ namespace AzureBlobManager.Windows
         /// </summary>
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
 
+
         /// <summary>
         /// RegService reference.
         /// </summary>
@@ -39,7 +40,7 @@ namespace AzureBlobManager.Windows
         /// </summary>
         public SettingsWindow(IUiService? uiService = null)
         {
-            logger.Debug("Starting Settings Window.");
+            logger.Debug(StartingSettingsWindow);
             InitializeComponent();
             if (uiService == null)
             {
@@ -59,7 +60,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            logger.Debug("Saving Settings.");
+            logger.Debug(SavingSettings);
 
             // Get the connection string from the text box and trim any leading or trailing whitespace
             var connString = this.txtAzureConnString.Text.Trim();
@@ -87,7 +88,7 @@ namespace AzureBlobManager.Windows
                 // Save the encrypted connection string to the registry
                 RegService.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);
 
-                logger.Debug("Saved settings to registry.");
+                logger.Debug(SavedSettingsToRegistry);
 
             }
 

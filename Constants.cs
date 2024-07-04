@@ -139,6 +139,14 @@ namespace AzureBlobManager
             public const string UploadFileDialogFileBeingUploaded = "Upload file dialog - file being uploaded.";
             public const string UploadFileSelectingFile = "Upload file selecting file.";
 
+            public const string StartingSettingsWindow = "Starting Settings Window.";
+            public const string SavingSettings = "Saving Settings.";
+            public const string SavedSettingsToRegistry = "Saved settings to registry.";
+
+            public const string YouAreAboutToDeleteTheBlob = "You are about to delete the blob '{0}' from the container '{1}'.";
+            public const string TroubleWithViewingFile = "Trouble with viewing file, Error: {0}";
+            public const string NoteYouAreAboutToViewCopy = "Note: You are about to view a COPY of the Blob [{0}] in your temporary files folder. \nChanging this file will not affect the Blob stored in Azure. \nTo change a Blob in Azure you must reupload a modified version, using the exact same file name, back to Azure. \nThat would then overwrite the Azure Blob and update the Blob.";
+
         }
 
         // Constants for token options
