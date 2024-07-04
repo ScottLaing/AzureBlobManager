@@ -146,32 +146,5 @@ namespace AzureBlobManager
             public const string TroubleWithViewingFile = "Trouble with viewing file, Error: {0}";
             public const string NoteYouAreAboutToViewCopy = "Note: You are about to view a COPY of the Blob [{0}] in your temporary files folder. \nChanging this file will not affect the Blob stored in Azure. \nTo change a Blob in Azure you must reupload a modified version, using the exact same file name, back to Azure. \nThat would then overwrite the Azure Blob and update the Blob.";
         }
-
-        // Constants for token options
-        public class TokenOptions
-        {
-            public const int TokenExpireHours = 24;
-            public const int TokenExpireMinutes = 0;
-        }
-
-        // Constants for display strings
-        public class DisplayStrings
-        {
-            public static string NotAvailable = "N/A";
-        }
-
-        // Constants for REST strings
-        public class RestStrings
-        {
-            public static string RestParamsMissing = "missing parameters in rest call";
-        }
-
-        // Constants for connection strings
-        public class ConnectionStrings
-        {
-            // Connection strings for local and Azure databases
-            public static string LocalDBConnString = @"###############################################################";
-            public static string AzureDBConnString = "################################################################";
-        }
     }
 }
