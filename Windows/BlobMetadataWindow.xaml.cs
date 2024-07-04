@@ -21,6 +21,7 @@ namespace AzureBlobManager.Windows
         public List<MetadataDto> SourceCollection = new List<MetadataDto>();
         public bool DialogWasSaved = false;
         private string containerName = string.Empty;
+
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
@@ -78,7 +79,7 @@ namespace AzureBlobManager.Windows
                 SourceCollection.Add(new MetadataDto()
                 {
                     KeyName = blobItemChangeWindow.BlobItemName,
-                    Value = blobItemChangeWindow.BlobItemValue ?? ""
+                    Value = blobItemChangeWindow.BlobItemValue ?? string.Empty
                 });
 
                 // Refresh the data grid
@@ -103,7 +104,7 @@ namespace AzureBlobManager.Windows
             // Check if there was an error saving the metadata
             if (string.IsNullOrWhiteSpace(setResult))
             {
-                MessageBox.Show(string.Format("The metadata for blob [{0}] has been saved.", txtBlobName.Text), MyAzureBlobManager);
+                MessageBox.Show(string.Format(TheMetadataForBlobHasBeenSaved, txtBlobName.Text), MyAzureBlobManager);
             }
             else
             {
@@ -151,7 +152,7 @@ namespace AzureBlobManager.Windows
                 }
 
                 // Update the value of the current metadata item
-                currItem.Value = blobItemChangeWindow.BlobItemValue ?? "";
+                currItem.Value = blobItemChangeWindow.BlobItemValue ?? string.Empty;
 
                 // Refresh the data grid
                 dgMetadataList.ItemsSource = null;

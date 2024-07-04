@@ -28,7 +28,7 @@ namespace AzureBlobManager.Windows
         /// <param name="currentContainer">The current container.</param>
         public UploadFileWindow(string currentContainer, IUiService uiService)
         {
-            logger.Debug("Starting upload file window.");
+            logger.Debug(StartingUploadFileWindow);
 
             InitializeComponent();
 
@@ -45,7 +45,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
-            logger.Debug("Upload file dialog - file being uploaded.");
+            logger.Debug(UploadFileDialogFileBeingUploaded);
 
             var txtVal = this.txtFilePath.Text;
 
@@ -83,7 +83,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            logger.Debug("Upload file selecting file.");
+            logger.Debug(UploadFileSelectingFile);
 
             OpenFileDialog dlg = UiService.SetupDialog();
             bool? result = dlg.ShowDialog();

@@ -93,6 +93,7 @@ namespace AzureBlobManager
         // Constants for UI messages
         public class UIMessages
         {
+            public const string TheMetadataForBlobHasBeenSaved = "The metadata for blob [{0}] has been saved.";
             public const string MyAzureBlobManager = "My Azure Blob Manager";
             public const string KeyNameCannotContainWhitespace = "Key name cannot contain whitespace.";
             public const string AreYouSure = "Are you sure?";
@@ -133,6 +134,11 @@ namespace AzureBlobManager
             public const string ErrorWithDownloading = "Error with downloading {0}: {1}";
             public const string CouldNotGetTempFilePath = "could not get temp file path";
             public const string MetadataError = "Error getting metadata for Blob [{0}], error: {1}.";
+
+            public const string StartingUploadFileWindow = "Starting upload file window.";
+            public const string UploadFileDialogFileBeingUploaded = "Upload file dialog - file being uploaded.";
+            public const string UploadFileSelectingFile = "Upload file selecting file.";
+
         }
 
         // Constants for token options

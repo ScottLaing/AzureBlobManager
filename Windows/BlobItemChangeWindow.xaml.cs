@@ -15,6 +15,8 @@ namespace AzureBlobManager.Windows
         // Indicates whether the dialog was saved
         public bool DialogWasSaved = false;
 
+        public const string DollarSign = "$";
+
         // The name of the blob item
         public string BlobItemName { get; set; } = string.Empty;
 
@@ -111,7 +113,7 @@ namespace AzureBlobManager.Windows
                     return;
                 }
 
-                if (trimmed.Contains("$"))
+                if (trimmed.Contains(DollarSign))
                 {
                     // Show error message if key name contains unallowed characters
                     MessageBox.Show(KeyNameContainsUnallowedCharacters, Error, MessageBoxButton.OK, MessageBoxImage.Error);
