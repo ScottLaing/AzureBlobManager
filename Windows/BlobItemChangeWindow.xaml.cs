@@ -15,6 +15,7 @@ namespace AzureBlobManager.Windows
         // Indicates whether the dialog was saved
         public bool DialogWasSaved = false;
 
+        // The dollar sign character
         public const string DollarSign = "$";
 
         // The name of the blob item
@@ -28,7 +29,6 @@ namespace AzureBlobManager.Windows
 
         // Logger for the class.
         private Logger logger = Logging.CreateLogger();
-
 
         /// <summary>
         /// Gets the reference to the current application instance.

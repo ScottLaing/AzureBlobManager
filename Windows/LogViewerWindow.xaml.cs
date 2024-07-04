@@ -10,11 +10,31 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class LogViewerWindow : Window
     {
+        /// <summary>
+        /// Gets the App instance.
+        /// </summary>
         public App? App => Application.Current as App;
+
+        /// <summary>
+        /// Logger instance.
+        /// </summary>
         private Logger logger = Logging.CreateLogger();
+
+        /// <summary>
+        /// FileService reference.
+        /// </summary>
         private IFileService FileService;
+
+        /// <summary>
+        /// UI service reference.
+        /// </summary>
         private IUiService UiService;
 
+        /// <summary>
+        /// Initializes a new instance of the LogViewerWindow class.
+        /// </summary>
+        /// <param name="fileService"></param>
+        /// <param name="uiService"></param>
         public LogViewerWindow(IFileService fileService, IUiService uiService)
         {
             InitializeComponent();
@@ -44,6 +64,5 @@ namespace AzureBlobManager.Windows
 
             UiService.ShowWindowSize(this);
         }
-
     }
 }

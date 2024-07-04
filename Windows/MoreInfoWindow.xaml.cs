@@ -7,7 +7,6 @@ using System;
 using System.Windows;
 using static AzureBlobManager.Constants;
 
-
 namespace AzureBlobManager.Windows
 {
     /// <summary>
@@ -19,6 +18,9 @@ namespace AzureBlobManager.Windows
         private Logger logger = Logging.CreateLogger();
         private IUiService UiService => App.Services.GetService<UiService>() ?? throw new Exception(DependencyInjectionError);
 
+        /// <summary>
+        /// Initializes a new instance of the LogViewerWindow class.
+        /// </summary>
         public MoreInfoWindow(string message)
         {
             InitializeComponent();
@@ -50,6 +52,5 @@ namespace AzureBlobManager.Windows
 
             UiService.ShowWindowSize(this);
         }
-
     }
 }

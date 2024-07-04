@@ -452,6 +452,11 @@ namespace AzureBlobManager.Windows
             mainWindow.Show();
         }
 
+        /// <summary>
+        /// Opens the encrypt window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEncrypt_Click(object sender, RoutedEventArgs e)
         {
             var encWindow = Services.GetRequiredService<EncryptWindow>();

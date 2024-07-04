@@ -19,7 +19,6 @@ namespace AzureBlobManager.Windows
         /// </summary>
         public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
 
-
         /// <summary>
         /// RegService reference.
         /// </summary>
@@ -89,7 +88,6 @@ namespace AzureBlobManager.Windows
                 RegService.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);
 
                 logger.Debug(SavedSettingsToRegistry);
-
             }
 
             // Close the SettingsWindow
@@ -104,7 +102,6 @@ namespace AzureBlobManager.Windows
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             logger.Debug(WindowMouseDoubleClickCall);
-
             UiService.ShowWindowSize(this);
         }
     }

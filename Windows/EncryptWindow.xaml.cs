@@ -13,25 +13,46 @@ namespace AzureBlobManager.Windows
         /// </summary>
         public EncryptWindow()
         {
-
             InitializeComponent();
-
         }
 
+        /// <summary>
+        /// Handles the click event of the "Decrypt" button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDecrypt_Click(object sender, RoutedEventArgs e)
         {
-            var s1 = this.txtCypherText.Text;
-            var s2 = CryptUtils.DecryptString(s1);
-            this.txtPlainText.Text = s2;
+            var cypherText = this.txtCypherText.Text;
+            if (string.IsNullOrWhiteSpace(cypherText))
+            {
+                MessageBox.Show("Please enter a cypher text to decrypt.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var decrypted = CryptUtils.DecryptString(cypherText);
+            this.txtPlainText.Text = decrypted;
         }
 
+        /// <summary>
+        /// Handles the click event of the "Encrypt" button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEncrypt_Click(object sender, RoutedEventArgs e)
         {
-            var s1 = this.txtPlainText.Text;
-            var s2 = CryptUtils.EncryptString(s1);
-            this.txtCypherText.Text = s2;
+            var plainText = this.txtPlainText.Text;
+            if (string.IsNullOrWhiteSpace(plainText))
+            {
+                MessageBox.Show(plainText, "Please enter a plain text to encrypt.", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var cypherText = CryptUtils.EncryptString(plainText);
+            this.txtCypherText.Text = cypherText;
         }
 
+        /// <summary>
+        /// Handles the click event of the "Clear" button.
+        /// </summary>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             this.txtCypherText.Text = "";
