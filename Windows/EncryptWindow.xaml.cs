@@ -1,10 +1,12 @@
 ﻿using AzureBlobManager.Utils;
 using System.Windows;
+using static AzureBlobManager.Constants.UIMessages;
+using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Windows
 {
     /// <summary>
-    /// Interaction logic for SettingsWindow.xaml
+    /// Interaction logic for EncryptWindow.xaml
     /// </summary>
     public partial class EncryptWindow : Window
     {
@@ -26,7 +28,7 @@ namespace AzureBlobManager.Windows
             var cypherText = this.txtCypherText.Text;
             if (string.IsNullOrWhiteSpace(cypherText))
             {
-                MessageBox.Show("Please enter a cypher text to decrypt.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(PleaseEnterACypherTextToDecrypt, Error, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             var decrypted = CryptUtils.DecryptString(cypherText);
@@ -43,7 +45,7 @@ namespace AzureBlobManager.Windows
             var plainText = this.txtPlainText.Text;
             if (string.IsNullOrWhiteSpace(plainText))
             {
-                MessageBox.Show(plainText, "Please enter a plain text to encrypt.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(plainText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             var cypherText = CryptUtils.EncryptString(plainText);
@@ -57,6 +59,11 @@ namespace AzureBlobManager.Windows
         {
             this.txtCypherText.Text = "";
             this.txtPlainText.Text = "";
+        }
+
+        private void btnExportKey_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Feature creation in progress, check back soon.", MyAzureBlobManager + "- Export Key", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

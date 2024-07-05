@@ -11,7 +11,6 @@
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#7395D7" WindowStyle="ToolWindow"
         Title="Modify Blob Metadata Item - My Azure Blob Manager" Height="184" Width="500">
-    <!--MouseDoubleClick="Window_MouseDoubleClick"-->
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

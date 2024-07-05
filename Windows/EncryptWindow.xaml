@@ -26,8 +26,12 @@
 
         <Label Content="Plain Text" HorizontalAlignment="Left" Margin="20,8,0,0" VerticalAlignment="Top" Padding="2,5,5,5" />
         <TextBox x:Name="txtPlainText" Margin="20,33,20,0" Height="90" Style="{StaticResource MultilineTextBox}" VerticalAlignment="Top"  HorizontalAlignment="Stretch"    />
-        <Button x:Name="btnClear" Click="btnClear_Click"  Margin="0,135,100,0" ToolTip="Clear All Text"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+
+        <Button x:Name="btnClear" Click="btnClear_Click" Margin="0,135,140,0" ToolTip="Clear All Text"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:CloseViewbox />
+        </Button>
+        <Button x:Name="btnExportKey" Click="btnExportKey_Click"  Margin="0,135,100,0" ToolTip="Export Key"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:ExportKeyViewbox />
         </Button>
         <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,135,60,0" ToolTip="Encrypt"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:EncryptButtonViewbox />
@@ -35,6 +39,7 @@
         <Button x:Name="btnDecrypt" Click="btnDecrypt_Click"  Margin="0,135,20,0" ToolTip="Decrypt"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:DecryptButtonViewbox/>
         </Button>
+        
         <Label Content="Cypher Text" HorizontalAlignment="Left" Margin="20,160,0,0" VerticalAlignment="Top" Padding="2,5,5,5" />
         <TextBox x:Name="txtCypherText" Margin="20,186,20,15" Style="{StaticResource MultilineTextBox}" />
 

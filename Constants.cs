@@ -145,6 +145,10 @@ namespace AzureBlobManager
             public const string YouAreAboutToDeleteTheBlob = "You are about to delete the blob '{0}' from the container '{1}'.";
             public const string TroubleWithViewingFile = "Trouble with viewing file, Error: {0}";
             public const string NoteYouAreAboutToViewCopy = "Note: You are about to view a COPY of the Blob [{0}] in your temporary files folder. \nChanging this file will not affect the Blob stored in Azure. \nTo change a Blob in Azure you must reupload a modified version, using the exact same file name, back to Azure. \nThat would then overwrite the Azure Blob and update the Blob.";
+
+            public const string PleaseEnterAPlainTextToEncrypt = "Please enter a plain text to encrypt.";
+            public const string PleaseEnterACypherTextToDecrypt = "Please enter a cypher text to decrypt.";
+
         }
     }
 }
