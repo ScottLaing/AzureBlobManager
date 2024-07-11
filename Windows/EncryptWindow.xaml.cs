@@ -16,6 +16,8 @@ namespace AzureBlobManager.Windows
         public EncryptWindow()
         {
             InitializeComponent();
+
+            cmbPasswordSource.ItemsSource = new string[] { "Default", "Saved Password1", "Saved Password2", "Saved Password3" };
         }
 
         /// <summary>
