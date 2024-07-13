@@ -6,7 +6,6 @@
                 xmlns:controls="clr-namespace:AzureBlobManager.Controls"
         MinHeight="250"
         MinWidth="600"
-        MouseDoubleClick="Window_MouseDoubleClick"
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#7392b7"

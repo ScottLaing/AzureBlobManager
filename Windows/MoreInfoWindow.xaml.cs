@@ -16,7 +16,6 @@ namespace AzureBlobManager.Windows
     {
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
-        private IUiService UiService => App.Services.GetService<UiService>() ?? throw new Exception(DependencyInjectionError);
         public bool WasCanceled { get; set; } = false;
 
         /// <summary>
@@ -38,18 +37,6 @@ namespace AzureBlobManager.Windows
         {
             WasCanceled = true;
             this.Close();
-        }
-
-        /// <summary>
-        /// Handles the double-click event on the window to display the window size information.
-        /// </summary>
-        /// <param name="sender">The window that triggered the event.</param>
-        /// <param name="e">The event arguments.</param>
-        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            logger.Debug("Window_MouseDoubleClick call");
-
-            UiService.ShowWindowSize(this);
         }
 
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
