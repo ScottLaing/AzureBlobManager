@@ -221,18 +221,21 @@ namespace AzureBlobManager.Windows
             {
                 try
                 {
+                    MoreInfoWindow? moreInfoWindow = null;
                     if (UiState.ShowViewBlobPreWarning)
                     {
-                        var moreInfoWindow = new MoreInfoWindow(string.Format(NoteYouAreAboutToViewCopy, result.fileName));
+                        moreInfoWindow = new MoreInfoWindow(string.Format(NoteYouAreAboutToViewCopy, result.fileName));
                         moreInfoWindow.ShowDialog();
                     }
 
-                    var startInfo = new ProcessStartInfo();
-                    startInfo.FileName = downloadFileResult.downloadedFilePath;
-                    startInfo.UseShellExecute = true; // Let the OS handle opening with default app
+                    if (moreInfoWindow == null || !moreInfoWindow.WasCanceled)
+                    {
+                        var startInfo = new ProcessStartInfo();
+                        startInfo.FileName = downloadFileResult.downloadedFilePath;
+                        startInfo.UseShellExecute = true; // Let the OS handle opening with default app
 
-                    Process.Start(startInfo);
-
+                        Process.Start(startInfo);
+                    }
                 }
                 catch (Exception ex)
                 {

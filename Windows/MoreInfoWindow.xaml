@@ -23,11 +23,16 @@
     </Window.Resources>
     <Grid>
 
+       
+        <Button x:Name="btnViewBlob" Margin="0,12,60,0" Click="btnOpenFile_Click"  ToolTip="View Copy"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+            <controls:EditorViewbox/>
+        </Button>
+
         <Button x:Name="btnClose"  Margin="0,12,20,0" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:CloseViewbox ></controls:CloseViewbox>
         </Button>
 
-        <TextBox x:Name="txtLogsInfo" Style="{StaticResource MultilineTextBox}" IsReadOnly="True"  Margin="20,59,20,50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent"/>
+        <TextBox x:Name="txtLogsInfo" Style="{StaticResource MultilineTextBox}" IsReadOnly="True"  Margin="20,59,20,50" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#b3c5d7"/>
         <CheckBox x:Name="chkDoNotShowAgain" Content="Do Not Show Again" HorizontalAlignment="Left" Margin="30,0,0,20" VerticalAlignment="Bottom"/>
 
     </Grid>

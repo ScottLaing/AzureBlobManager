@@ -17,6 +17,7 @@ namespace AzureBlobManager.Windows
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
         private IUiService UiService => App.Services.GetService<UiService>() ?? throw new Exception(DependencyInjectionError);
+        public bool WasCanceled { get; set; } = false;
 
         /// <summary>
         /// Initializes a new instance of the MoreInfoWindow class.
@@ -24,7 +25,8 @@ namespace AzureBlobManager.Windows
         public MoreInfoWindow(string message)
         {
             InitializeComponent();
-            txtLogsInfo.Text = message; 
+            txtLogsInfo.Text = message;
+            btnViewBlob.Focus();
         }
 
         /// <summary>
@@ -34,10 +36,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            if (this.chkDoNotShowAgain.IsChecked != null)
-            {
-                UiState.ShowViewBlobPreWarning = ! (this.chkDoNotShowAgain.IsChecked ?? false);
-            }
+            WasCanceled = true;
             this.Close();
         }
 
@@ -51,6 +50,15 @@ namespace AzureBlobManager.Windows
             logger.Debug("Window_MouseDoubleClick call");
 
             UiService.ShowWindowSize(this);
+        }
+
+        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.chkDoNotShowAgain.IsChecked != null)
+            {
+                UiState.ShowViewBlobPreWarning = !(this.chkDoNotShowAgain.IsChecked ?? false);
+            }
+            this.Close();
         }
     }
 }
