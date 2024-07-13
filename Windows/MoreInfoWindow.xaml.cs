@@ -10,7 +10,7 @@ using static AzureBlobManager.Constants;
 namespace AzureBlobManager.Windows
 {
     /// <summary>
-    /// Interaction logic for LogViewerWindow.xaml
+    /// Interaction logic for MoreInfoWindow.xaml
     /// </summary>
     public partial class MoreInfoWindow : Window
     {
@@ -19,7 +19,7 @@ namespace AzureBlobManager.Windows
         private IUiService UiService => App.Services.GetService<UiService>() ?? throw new Exception(DependencyInjectionError);
 
         /// <summary>
-        /// Initializes a new instance of the LogViewerWindow class.
+        /// Initializes a new instance of the MoreInfoWindow class.
         /// </summary>
         public MoreInfoWindow(string message)
         {

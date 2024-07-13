@@ -11,7 +11,7 @@ namespace AzureBlobManager.Windows
     public partial class EncryptWindow : Window
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SettingsWindow"/> class.
+        /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
         public EncryptWindow()
         {
