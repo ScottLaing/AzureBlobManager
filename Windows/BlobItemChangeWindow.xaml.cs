@@ -145,9 +145,9 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            logger.Debug(WindowMouseDoubleClickCall);
+            //logger.Debug(WindowMouseDoubleClickCall);
 
-            UiService.ShowWindowSize(this);
+            //UiService.ShowWindowSize(this);
         }
     }
 }
