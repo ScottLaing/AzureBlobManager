@@ -16,8 +16,18 @@ namespace AzureBlobManager
         public static string RegistryAppName = "AzureBlobManager62";
         public const string RegNameBlobConnectionKey = "BlobConnection";
         public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
+
         public const string RegNameEncryptionKey = "BobAndAlice";
         public const string RegSaltEncryptionKey = "SodChloride";
+
+        public const string RegNameEncryptionKey2 = "BobAndAlice2";
+        public const string RegSaltEncryptionKey2 = "SodChloride2";
+
+        public const string RegNameEncryptionKey3 = "BobAndAlice3";
+        public const string RegSaltEncryptionKey3 = "SodChloride3";
+
+        public const string RegNameEncryptionKey4 = "BobAndAlice4";
+        public const string RegSaltEncryptionKey4 = "SodChloride4";
 
         // Constants for AES encryption
         public const string AesDefaultKey = "76AA6E93-AB72-4B33-B382-ABF77FF64C83"; // Must be at least 16 characters

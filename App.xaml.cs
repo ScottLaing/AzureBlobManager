@@ -67,6 +67,7 @@ namespace AzureBlobManager
 
             GetEncryptionKeys();
             InitBlobConnString();
+            CreateInitialEncryptionKeys();
 
             // work in progress below - on actions to help users to first time setup their azure connection string
             if (string.IsNullOrEmpty(BlobService.BlobConnectionString))
@@ -177,6 +178,42 @@ namespace AzureBlobManager
             else
             {
                 logger.Information(string.Format(UsingConnectionStringFromRegistry, BlobService.BlobConnectionString));
+            }
+        }
+
+        private void CreateInitialEncryptionKeys()
+        {
+            string newKey = "";
+            string newSalt = "";
+
+            if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey2)) ||
+                string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey2)))
+            {
+                newKey = Guid.NewGuid().ToString();
+                newSalt = Guid.NewGuid().ToString();
+
+                RegService.SaveValueToRegistry(RegNameEncryptionKey2, newKey);
+                RegService.SaveValueToRegistry(RegSaltEncryptionKey2, newSalt);
+            }
+
+            if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey3)) ||
+                string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey3)))
+            {
+                newKey = Guid.NewGuid().ToString();
+                newSalt = Guid.NewGuid().ToString();
+
+                RegService.SaveValueToRegistry(RegNameEncryptionKey3, newKey);
+                RegService.SaveValueToRegistry(RegSaltEncryptionKey3, newSalt);
+            }
+
+            if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey4)) ||
+                string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey4)))
+            {
+                newKey = Guid.NewGuid().ToString();
+                newSalt = Guid.NewGuid().ToString();
+
+                RegService.SaveValueToRegistry(RegNameEncryptionKey4, newKey);
+                RegService.SaveValueToRegistry(RegSaltEncryptionKey4, newSalt);
             }
         }
 
