@@ -186,34 +186,19 @@ namespace AzureBlobManager
             string newKey = "";
             string newSalt = "";
 
-            if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey2)) ||
-                string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey2)))
+            // keys 2-4 are secondary encryption keys to allow some choice in encryption.  values will be stored in the registry.
+            // New options on the encryption window will allow user to choose which encryption key they want to use.
+            for (int i = 2; i <5; i++)
             {
-                newKey = Guid.NewGuid().ToString();
-                newSalt = Guid.NewGuid().ToString();
+                if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey + i.ToString())) ||
+                    string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey + i.ToString())))
+                {
+                    newKey = Guid.NewGuid().ToString();
+                    newSalt = Guid.NewGuid().ToString();
 
-                RegService.SaveValueToRegistry(RegNameEncryptionKey2, newKey);
-                RegService.SaveValueToRegistry(RegSaltEncryptionKey2, newSalt);
-            }
-
-            if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey3)) ||
-                string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey3)))
-            {
-                newKey = Guid.NewGuid().ToString();
-                newSalt = Guid.NewGuid().ToString();
-
-                RegService.SaveValueToRegistry(RegNameEncryptionKey3, newKey);
-                RegService.SaveValueToRegistry(RegSaltEncryptionKey3, newSalt);
-            }
-
-            if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegNameEncryptionKey4)) ||
-                string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(RegSaltEncryptionKey4)))
-            {
-                newKey = Guid.NewGuid().ToString();
-                newSalt = Guid.NewGuid().ToString();
-
-                RegService.SaveValueToRegistry(RegNameEncryptionKey4, newKey);
-                RegService.SaveValueToRegistry(RegSaltEncryptionKey4, newSalt);
+                    RegService.SaveValueToRegistry(RegNameEncryptionKey + i.ToString(), newKey);
+                    RegService.SaveValueToRegistry(RegSaltEncryptionKey2 + i.ToString(), newSalt);
+                }
             }
         }
 
