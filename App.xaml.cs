@@ -183,8 +183,8 @@ namespace AzureBlobManager
 
         private void CreateInitialEncryptionKeys()
         {
-            string newKey = "";
-            string newSalt = "";
+            string newKey;
+            string newSalt;
 
             // keys 2-4 are secondary encryption keys to allow some choice in encryption.  values will be stored in the registry.
             // New options on the encryption window will allow user to choose which encryption key they want to use.
