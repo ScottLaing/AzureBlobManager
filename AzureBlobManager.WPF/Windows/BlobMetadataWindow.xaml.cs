@@ -17,14 +17,16 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class BlobMetadataWindow : Window
     {
+        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
 
         public List<MetadataDto> SourceCollection = new List<MetadataDto>();
+        
         public bool DialogWasSaved = false;
+        
         private string containerName = string.Empty;
-
-        public App? App => Application.Current as App;
+        
         private Logger logger = Logging.CreateLogger();
-        public IBlobService BlobService => App.Services.GetService<IBlobService>() ?? throw new Exception(DependencyInjectionError);
+        
         private IUiService UiService;
 
         /// <summary>
@@ -33,8 +35,11 @@ namespace AzureBlobManager.Windows
         /// <param name="containerName">The name of the container.</param>
         /// <param name="fileName">The name of the file.</param>
         /// <param name="sourceCollection">The collection of metadata items.</param>
+        /// <param name="uiService">The UI service.</param>
         public BlobMetadataWindow(string containerName, string fileName, List<MetadataDto> sourceCollection, IUiService uiService)
         {
+            logger.Debug("BlobMetadataWindow constructor called.");
+
             InitializeComponent();
             this.UiService = uiService;
 
