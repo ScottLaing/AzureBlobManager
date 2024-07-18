@@ -1,0 +1,9 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="AzureBlobManager.Msi" Manufacturer="TODO Manufacturer" Version="1.0.0.0" UpgradeCode="d02e88c1-4de1-4df0-93c8-20d41a7a980d">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+    <Feature Id="Main">
+      <ComponentGroupRef Id="ExampleComponents" />
+    </Feature>
+  </Package>
+</Wix>
