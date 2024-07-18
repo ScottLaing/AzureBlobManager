@@ -14,14 +14,14 @@ Otherwise you will have to go into settings dialog and reset the connection stri
 
 Sample screenshots of app (current versions may vary slightly as new features are added):
 
-https://scottclaing.net/img/azure-blob-main-page.png
-![main window](https://scottclaing.net/img/azure-blob-main-page.png "Main window")
+https://scottlaing.com/img/azure-blob-main-page.png
+![main window](https://scottlaing.com/img/azure-blob-main-page.png "Main window")
 
-https://scottclaing.net/img/azure-blob-settings-page.png
-![settings window](https://scottclaing.net/img/azure-blob-settings-page.png "Settings window")
+https://scottlaing.com/img/azure-blob-settings-page.png
+![settings window](https://scottlaing.com/img/azure-blob-settings-page.png "Settings window")
 
-https://scottclaing.net/img/azure-blob-upload-page.png
-![upload window](https://scottclaing.net/img/azure-blob-upload-page.png "Upload new blob window")
+https://scottlaing.com/img/azure-blob-upload-page.png
+![upload window](https://scottlaing.com/img/azure-blob-upload-page.png "Upload new blob window")
 
 
 :smiley: - Scott
