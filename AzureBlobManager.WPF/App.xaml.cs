@@ -67,7 +67,7 @@ namespace AzureBlobManager
 
             GetEncryptionKeys();
             InitBlobConnString();
-            CreateInitialEncryptionKeys();
+            RegService.CreateInitialEncryptionKeys();
 
             // work in progress below - on actions to help users to first time setup their azure connection string
             if (string.IsNullOrEmpty(BlobService.BlobConnectionString))
@@ -181,28 +181,6 @@ namespace AzureBlobManager
             }
         }
 
-        private void CreateInitialEncryptionKeys()
-        {
-            string newKey;
-            string newSalt;
-
-            // keys 2-4 are secondary encryption keys to allow some choice in encryption.  values will be stored in the registry.
-            // New options on the encryption window will allow user to choose which encryption key they want to use.
-            for (int i = 2; i <5; i++)
-            {
-                string keyName = $"{RegNameEncryptionKey}{i}";
-                string saltName = $"{RegSaltEncryptionKey}{i}";
-                if (string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(keyName)) ||
-                    string.IsNullOrWhiteSpace(RegService.GetValueFromRegistry(saltName)))
-                {
-                    newKey = Guid.NewGuid().ToString();
-                    newSalt = Guid.NewGuid().ToString();
-
-                    RegService.SaveValueToRegistry(keyName, newKey);
-                    RegService.SaveValueToRegistry(saltName, newSalt);
-                }
-            }
-        }
 
         /// <summary>
         /// Retrieves the Blob connection string from the registry and decrypts it if necessary.

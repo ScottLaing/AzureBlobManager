@@ -1,4 +1,6 @@
-﻿namespace AzureBlobManager.Interfaces
+﻿using System.Collections.Generic;
+
+namespace AzureBlobManager.Interfaces
 {
     /// <summary>
     /// Interface for saving and retrieving values from the Windows Registry.
@@ -24,6 +26,9 @@
         /// <param name="keyName">The name of the registry key.</param>
         /// <returns>The value retrieved from the registry, or an empty string if the key does not exist.</returns>
         public string? GetValueFromRegistry(string keyName);
-      
+
+        public void CreateInitialEncryptionKeys();
+
+        public List<string> GetEncryptionKeys(out List<string> salts);
     }
 }
