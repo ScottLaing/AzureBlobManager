@@ -82,7 +82,7 @@ namespace AzureBlobManager.Windows
                 }
 
                 // Encrypt the connection string using the encryption key and salt from the currentApp
-                string encConnString = CryptUtils.EncryptString2(connString, currentApp.EncryptionKey, currentApp.EncryptionSalt);
+                string encConnString = CryptUtils.EncryptString2(connString, currentApp.EncryptionKeyBlob, currentApp.EncryptionSaltBlob);
 
                 // Save the encrypted connection string to the registry
                 RegService.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);

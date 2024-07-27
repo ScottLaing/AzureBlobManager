@@ -2,6 +2,10 @@
 using System.Windows;
 using static AzureBlobManager.Constants.UIMessages;
 using static AzureBlobManager.Constants;
+using AzureBlobManager.Services;
+using AzureBlobManager.Interfaces;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace AzureBlobManager.Windows
 {
@@ -10,14 +14,28 @@ namespace AzureBlobManager.Windows
     /// </summary>
     public partial class EncryptWindow : Window
     {
+        private IRegService _regService;
+        private List<string> _keys;
+        private List<string> _salts;
+        private bool _debug = true;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
-        public EncryptWindow()
+        public EncryptWindow(IRegService regService)
         {
             InitializeComponent();
 
-            cmbPasswordSource.ItemsSource = new string[] { "Default", "Saved Password1", "Saved Password2", "Saved Password3" };
+            cmbPasswordSource.ItemsSource = new string[] { "Saved Password1", "Saved Password2", "Saved Password3", "Saved Password4" };
+            _regService = regService;
+
+            List<string> salts;
+            var keys = _regService.GetEncryptionKeys(out salts);
+
+            _keys = keys;
+            _salts = salts;
+
+            cmbPasswordSource.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -51,21 +69,14 @@ namespace AzureBlobManager.Windows
                 return;
             }
             string cypherText;
-            if (this.cmbPasswordSource.SelectedIndex == 0)
+            int selIndex = this.cmbPasswordSource.SelectedIndex;
+            if (selIndex >= 0)
             {
-                cypherText = CryptUtils.EncryptString(plainText);
-            }
-            else if (this.cmbPasswordSource.SelectedIndex == 1)
-            {
-                cypherText = CryptUtils.EncryptString(plainText);
-            }
-            else if (this.cmbPasswordSource.SelectedIndex == 2)
-            {
-                cypherText = CryptUtils.EncryptString(plainText);
-            }
-            else if (this.cmbPasswordSource.SelectedIndex == 3)
-            {
-                cypherText = CryptUtils.EncryptString(plainText);
+                cypherText = CryptUtils.EncryptString(plainText, _salts[selIndex], _keys[selIndex]);
+                if (_debug)
+                {
+                    MessageBox.Show($"{_salts[selIndex]} - {_keys[selIndex]}", "Salt and Key", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             else
             {

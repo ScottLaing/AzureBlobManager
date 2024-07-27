@@ -24,11 +24,14 @@ namespace AzureBlobManager
         public const string RegNameBlobConnectionKey = "BlobConnection";
         public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
         
+        public const string RegNameEncryptionKeyZebra = "BobAndAliceZebra";
+        public const string RegSaltEncryptionKeyZebra = "SodChlorideZebra";
+
         public const string RegNameEncryptionKeyRoot = "BobAndAlice";
         public const string RegSaltEncryptionKeyRoot = "SodChloride";
 
-        public const string RegNameEncryptionKey = "BobAndAlice1";
-        public const string RegSaltEncryptionKey = "SodChloride1";
+        public const string RegNameEncryptionKey1 = "BobAndAlice1";
+        public const string RegSaltEncryptionKey1 = "SodChloride1";
 
         public const string RegNameEncryptionKey2 = "BobAndAlice2";
         public const string RegSaltEncryptionKey2 = "SodChloride2";

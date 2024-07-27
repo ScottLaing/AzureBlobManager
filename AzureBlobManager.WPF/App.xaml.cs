@@ -21,10 +21,10 @@ namespace AzureBlobManager
     public partial class App : Application
     {
         // Encryption key used for encryption and decryption operations.
-        public string EncryptionKey { get; set; } = "";
+        public string EncryptionKeyBlob { get; set; } = "";
 
         // Salt used for encryption and decryption operations.
-        public string EncryptionSalt { get; set; } = "";
+        public string EncryptionSaltBlob { get; set; } = "";
 
         // Application startup message.
         public static IHost? AppHost { get; private set; }
@@ -126,35 +126,35 @@ namespace AzureBlobManager
         /// </summary>
         private void GetEncryptionKeys()
         {
-            var encryptionKey = RegService.GetValueFromRegistry(RegNameEncryptionKey);
-            var encryptionSalt = RegService.GetValueFromRegistry(RegSaltEncryptionKey);
+            var encryptionKeyBlob = RegService.GetValueFromRegistry(RegNameEncryptionKeyZebra);
+            var encryptionSaltBlob = RegService.GetValueFromRegistry(RegSaltEncryptionKeyZebra);
 
             // if there is no encryption key, then create one and save it to the registry.
             // similar, if there is no salt, then create one and save it to the registry.
-            if (string.IsNullOrWhiteSpace(encryptionKey))
+            if (string.IsNullOrWhiteSpace(encryptionKeyBlob))
             {
                 var newGuid = Guid.NewGuid();
-                EncryptionKey = newGuid.ToString();
-                RegService.SaveValueToRegistry(RegNameEncryptionKey, EncryptionKey); // save newly generated key to registry for future
-                logger.Debug(string.Format(EncryptionKeyNotFound, EncryptionKey));
+                EncryptionKeyBlob = newGuid.ToString();
+                RegService.SaveValueToRegistry(RegNameEncryptionKeyZebra, EncryptionKeyBlob); // save newly generated key to registry for future
+                logger.Debug(string.Format(EncryptionKeyNotFound, EncryptionKeyBlob));
             }
             else
             {
-                logger.Debug(string.Format(EncryptionKeyFound, encryptionKey));
-                EncryptionKey = encryptionKey;
+                logger.Debug(string.Format(EncryptionKeyFound, encryptionKeyBlob));
+                EncryptionKeyBlob = encryptionKeyBlob;
             }
 
-            if (string.IsNullOrWhiteSpace(encryptionSalt))
+            if (string.IsNullOrWhiteSpace(encryptionSaltBlob))
             {
                 var newGuid = Guid.NewGuid();
-                EncryptionSalt = newGuid.ToString();
-                RegService.SaveValueToRegistry(RegSaltEncryptionKey, EncryptionSalt); // save newly generated salt to registry for future
-                logger.Debug(string.Format(EncryptionSaltNotFound, EncryptionSalt));
+                EncryptionSaltBlob = newGuid.ToString();
+                RegService.SaveValueToRegistry(RegSaltEncryptionKeyZebra, EncryptionSaltBlob); // save newly generated salt to registry for future
+                logger.Debug(string.Format(EncryptionSaltNotFound, EncryptionSaltBlob));
             }
             else
             {
-                logger.Debug(string.Format(EncryptionKeySaltFound, encryptionSalt));
-                EncryptionSalt = encryptionSalt;
+                logger.Debug(string.Format(EncryptionKeySaltFound, encryptionSaltBlob));
+                EncryptionSaltBlob = encryptionSaltBlob;
             }
         }
 
@@ -192,7 +192,7 @@ namespace AzureBlobManager
             {
                 if (ConnKeyIsEncrypted)
                 {
-                    result = CryptUtils.DecryptString2(result, EncryptionKey, EncryptionSalt);
+                    result = CryptUtils.DecryptString2(result, EncryptionKeyBlob, EncryptionSaltBlob);
                 }
 
                 BlobService.BlobConnectionString = result;
