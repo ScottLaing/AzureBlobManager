@@ -165,15 +165,24 @@ namespace AzureBlobManager.Utils
             return plainText;
         }
 
+        public static string DecryptString(string cipherText, string salt)
+        {
+            if (salt == null)
+            {
+                salt = Constants.Salt;
+            }
+            return DecryptString(cipherText, salt, Constants.EncryptionKey);
+        }
+
         /// <summary>
         /// Decrypt the given string.  Assumes the string was encrypted using 
         /// EncryptStringAES(), using an identical sharedSecret.
         /// </summary>
         /// <param name="cipherText">The text to decrypt.</param>
+        /// <param name="salt">The salt used to generate a key for decryption.</param>
         /// <param name="sharedSecret">A password used to generate a key for decryption.</param>
-        public static string DecryptString(string cipherText, string salt = Constants.Salt)
+        public static string DecryptString(string cipherText, string salt, string sharedSecret)
         {
-            string sharedSecret = Constants.EncryptionKey;
             if (string.IsNullOrEmpty(cipherText))
             {
                 throw new ArgumentNullException(CipherText);

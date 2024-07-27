@@ -6,6 +6,7 @@ using AzureBlobManager.Services;
 using AzureBlobManager.Interfaces;
 using System.Windows.Documents;
 using System.Collections.Generic;
+using System;
 
 namespace AzureBlobManager.Windows
 {
@@ -45,14 +46,43 @@ namespace AzureBlobManager.Windows
         /// <param name="e"></param>
         private void btnDecrypt_Click(object sender, RoutedEventArgs e)
         {
-            var cypherText = this.txtCypherText.Text;
-            if (string.IsNullOrWhiteSpace(cypherText))
+            var inputText = this.txtPlainText.Text;
+            if (string.IsNullOrWhiteSpace(inputText))
             {
-                MessageBox.Show(PleaseEnterACypherTextToDecrypt, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            var decrypted = CryptUtils.DecryptString(cypherText);
-            this.txtPlainText.Text = decrypted;
+            string outputText;
+            int selIndex = this.cmbPasswordSource.SelectedIndex;
+            if (selIndex >= 0)
+            {
+                try
+                {
+                    outputText = CryptUtils.DecryptString(inputText, _salts[selIndex], _keys[selIndex]);
+                }
+                catch (System.Security.Cryptography.CryptographicException cex)
+                {
+                    MessageBox.Show($"Crypto exception: {cex.Message}.", UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error with decryption: {ex.Message}.", UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (_debug)
+                {
+                    MessageBox.Show($"{_keys[selIndex]} - {_salts[selIndex]}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select password to use.", PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            this.txtCypherText.Text = outputText;
         }
 
         /// <summary>
@@ -62,29 +92,29 @@ namespace AzureBlobManager.Windows
         /// <param name="e"></param>
         private void btnEncrypt_Click(object sender, RoutedEventArgs e)
         {
-            var plainText = this.txtPlainText.Text;
-            if (string.IsNullOrWhiteSpace(plainText))
+            var inputText = this.txtPlainText.Text;
+            if (string.IsNullOrWhiteSpace(inputText))
             {
-                MessageBox.Show(plainText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            string cypherText;
+            string outputText;
             int selIndex = this.cmbPasswordSource.SelectedIndex;
             if (selIndex >= 0)
             {
-                cypherText = CryptUtils.EncryptString(plainText, _salts[selIndex], _keys[selIndex]);
+                outputText = CryptUtils.EncryptString(inputText, _salts[selIndex], _keys[selIndex]);
                 if (_debug)
                 {
-                    MessageBox.Show($"{_salts[selIndex]} - {_keys[selIndex]}", "Salt and Key", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"{_keys[selIndex]} - {_salts[selIndex]}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Select password to use (Default or other).", PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Select password to use.", PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            this.txtCypherText.Text = cypherText;
+            this.txtCypherText.Text = outputText;
         }
 
         /// <summary>
@@ -104,6 +134,11 @@ namespace AzureBlobManager.Windows
         private void btnSample_Click(object sender, RoutedEventArgs e)
         {
             this.txtPlainText.Text = Constants.SampleLargeStrings.SampleSpeech;
+        }
+
+        private void EncryptButtonViewbox_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

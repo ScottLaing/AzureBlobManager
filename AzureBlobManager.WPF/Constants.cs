@@ -213,6 +213,7 @@ namespace AzureBlobManager
             "using the exact same file name, back to Azure. That would then overwrite the Azure Blob and update the Blob. To download a "
             + "Blob use the download button on the main window.";
             public const string PleaseEnterAPlainTextToEncrypt = "Please enter a plain text to encrypt.";
+            public const string PleaseEnterInputText = "Please enter an input text for operation.";
             public const string PleaseEnterACypherTextToDecrypt = "Please enter a cypher text to decrypt.";
 
         }
