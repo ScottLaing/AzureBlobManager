@@ -72,8 +72,8 @@ namespace AzureBlobManager.Services
             // New options on the encryption window will allow user to choose which encryption key they want to use.
             for (int i = 1; i < 5; i++)
             {
-                string keyName = $"{RegNameEncryptionKey}{i}";
-                string saltName = $"{RegSaltEncryptionKey}{i}";
+                string keyName = $"{RegNameEncryptionKeyRoot}{i}";
+                string saltName = $"{RegSaltEncryptionKeyRoot}{i}";
                 if (string.IsNullOrWhiteSpace(GetValueFromRegistry(keyName)) ||
                     string.IsNullOrWhiteSpace(GetValueFromRegistry(saltName)))
                 {
@@ -101,8 +101,8 @@ namespace AzureBlobManager.Services
 
             for (int i = 1; i < 5; i++)
             {
-                string keyName = $"{RegNameEncryptionKey}{i}";
-                string saltName = $"{RegSaltEncryptionKey}{i}";
+                string keyName = $"{RegNameEncryptionKeyRoot}{i}";
+                string saltName = $"{RegSaltEncryptionKeyRoot}{i}";
                 if (string.IsNullOrWhiteSpace(GetValueFromRegistry(keyName)) ||
                     string.IsNullOrWhiteSpace(GetValueFromRegistry(saltName)))
                 {

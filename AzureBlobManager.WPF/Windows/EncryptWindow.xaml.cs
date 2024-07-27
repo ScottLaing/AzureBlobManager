@@ -50,7 +50,29 @@ namespace AzureBlobManager.Windows
                 MessageBox.Show(plainText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            var cypherText = CryptUtils.EncryptString(plainText);
+            string cypherText;
+            if (this.cmbPasswordSource.SelectedIndex == 0)
+            {
+                cypherText = CryptUtils.EncryptString(plainText);
+            }
+            else if (this.cmbPasswordSource.SelectedIndex == 1)
+            {
+                cypherText = CryptUtils.EncryptString(plainText);
+            }
+            else if (this.cmbPasswordSource.SelectedIndex == 2)
+            {
+                cypherText = CryptUtils.EncryptString(plainText);
+            }
+            else if (this.cmbPasswordSource.SelectedIndex == 3)
+            {
+                cypherText = CryptUtils.EncryptString(plainText);
+            }
+            else
+            {
+                MessageBox.Show("Select password to use (Default or other).", PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             this.txtCypherText.Text = cypherText;
         }
 
@@ -66,6 +88,11 @@ namespace AzureBlobManager.Windows
         private void btnExportKey_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Feature creation in progress, check back soon.", MyAzureBlobManager + "- Export Key", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnSample_Click(object sender, RoutedEventArgs e)
+        {
+            this.txtPlainText.Text = Constants.SampleLargeStrings.GettysburgAddress;
         }
     }
 }

@@ -24,9 +24,13 @@ namespace AzureBlobManager.Utils
         /// </summary>
         /// <param name="plainText">The text to encrypt.</param>
         /// <param name="sharedSecret">A password used to generate a key for encryption.</param>
-        public static string EncryptString(string plainText, string salt = Constants.Salt)
+        public static string EncryptString(string plainText, string salt = Constants.Salt, string? sharedSecret = null)
         {
-            string sharedSecret = Constants.EncryptionKey;
+            if (sharedSecret == null)
+            {
+                sharedSecret = Constants.EncryptionKey;
+            }
+
             if (string.IsNullOrEmpty(plainText))
                 throw new ArgumentNullException(PlainText);
 
