@@ -1,5 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
+using System.Drawing;
+using System.Runtime.CompilerServices;
+using System.Windows.Documents;
+using System.Windows.Media.Media3D;
+using System.Windows.Shapes;
+using System.Windows;
 
 namespace AzureBlobManager
 {
@@ -104,15 +111,45 @@ namespace AzureBlobManager
 
         public class SampleLargeStrings
         {
-            public static readonly string [] _gettyParts = new string[] {
+            public static readonly string[] _gettyParts = new string[] {
                 "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that",
-                "all men are created equal. ",
+                " all men are created equal. ",
                 "Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this. ",
                 "But, in a larger sense, we can not dedicate -- we can not consecrate -- we can not hallow -- this ground. The brave men, living and dead, who struggled here, have consecrated it, far above our poor power to add or detract. The world will little note, nor long remember what we say here, but it can never forget what they did here. It is for us the living, rather, to be dedicated here ",
                 "to the unfinished work which they who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the great task remaining before us -- that from these honored dead we take increased devotion to that cause for which they gave the last full measure of devotion -- that we here highly resolve that these dead shall not have died in vain -- ",
                 "that this nation, under God, shall have a new birth of freedom -- and that government of the people, by the people, for the people, shall not perish from the earth. ",
                 "\n\n - Abraham Lincoln" };
             public static readonly string GettysburgAddress = string.Join("", _gettyParts);
+            public static readonly string[] _churchParts = new string[]
+            {
+                "What General Weygand called the Battle of France is over. I expect that the Battle of Britain is about to begin. ",
+                "Upon this battle depends the survival of Christian civilization. Upon it depends our own British life, and the long continuity of our ",
+                "institutions and our Empire. The whole fury and might of the enemy must very soon be turned on us. Hitler knows that he will have ",
+                "to break us in this Island or lose the war. If we can stand up to him, all Europe may be free and the life of the world may move forward ",
+                "into broad, sunlit uplands. But if we fail, then the whole world, including the United States, including all that we have known and cared ",
+                "for, will sink into the abyss of a new Dark Age made more sinister, and perhaps more protracted, by the lights of perverted science. Let us ",
+                "therefore brace ourselves to our duties, and so bear ourselves that, if the British Empire and its Commonwealth last for a thousand years, ",
+                "men will still say, 'This was their finest hour.' \n\n - Winston Churchill"
+            };
+            public static readonly string TheirFinestHour = string.Join("", _churchParts);
+
+            private static Random rand = new Random();
+
+            public static string SampleSpeech {
+                get
+                {
+                    int r = rand.Next(0, 2);
+                    if (r == 0)
+                    {
+                        return GettysburgAddress;
+                    }
+                    else
+                    {
+                        return TheirFinestHour;
+                    }
+                }
+
+            }
         }
 
         // Constants for UI messages
@@ -159,23 +196,19 @@ namespace AzureBlobManager
             public const string ErrorWithDownloading = "Error with downloading {0}: {1}";
             public const string CouldNotGetTempFilePath = "could not get temp file path";
             public const string MetadataError = "Error getting metadata for Blob [{0}], error: {1}.";
-
             public const string StartingUploadFileWindow = "Starting upload file window.";
             public const string UploadFileDialogFileBeingUploaded = "Upload file dialog - file being uploaded.";
             public const string UploadFileSelectingFile = "Upload file selecting file.";
-
             public const string StartingSettingsWindow = "Starting Settings Window.";
             public const string SavingSettings = "Saving Settings.";
             public const string SavedSettingsToRegistry = "Saved settings to registry.";
-
             public const string YouAreAboutToDeleteTheBlob = "You are about to delete the blob '{0}' from the container '{1}'.";
             public const string TroubleWithViewingFile = "Trouble with viewing file, Error: {0}";
             public const string NoteYouAreAboutToViewCopy = "Note: You are about to view a COPY of the latest version of the Blob [{0}]. " +
-                "Changing this file you are viewing will not change the Blob stored in Azure. " +
-                "To change a Blob in Azure you must reupload a modified version, " + 
-                "using the exact same file name, back to Azure. That would then overwrite the Azure Blob and update the Blob. To download a "
-                + "Blob use the download button on the main window.";
-
+            "Changing this file you are viewing will not change the Blob stored in Azure. " +
+            "To change a Blob in Azure you must reupload a modified version, " +
+            "using the exact same file name, back to Azure. That would then overwrite the Azure Blob and update the Blob. To download a "
+            + "Blob use the download button on the main window.";
             public const string PleaseEnterAPlainTextToEncrypt = "Please enter a plain text to encrypt.";
             public const string PleaseEnterACypherTextToDecrypt = "Please enter a cypher text to decrypt.";
 

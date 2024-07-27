@@ -92,7 +92,7 @@ namespace AzureBlobManager.Windows
 
         private void btnSample_Click(object sender, RoutedEventArgs e)
         {
-            this.txtPlainText.Text = Constants.SampleLargeStrings.GettysburgAddress;
+            this.txtPlainText.Text = Constants.SampleLargeStrings.SampleSpeech;
         }
     }
 }
