@@ -29,22 +29,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Password Source:" HorizontalAlignment="Right" Margin="0,13,365,0" VerticalAlignment="Top" Padding="2,5,5,5"   Grid.Row="0" />
-        <ComboBox x:Name="cmbPasswordSource" HorizontalAlignment="Right" Margin="0,13,223,0" VerticalAlignment="Top" Width="140" FontSize="14" Height="28"  Grid.Row="0"/>
+        <Label Content="Password Source:" HorizontalAlignment="Right" Margin="0,13,390,0" VerticalAlignment="Top" Padding="2,5,5,5"   Grid.Row="0" />
+        <ComboBox x:Name="cmbPasswordSource" HorizontalAlignment="Right" Margin="0,13,248,0" VerticalAlignment="Top" Width="140" FontSize="14" Height="28"  Grid.Row="0"/>
 
-        <Button x:Name="btnSample" Click="btnSample_Click"  Margin="0,10,180,0" ToolTip="Get Sample Text"  VerticalAlignment="Top" HorizontalAlignment="Right"
+        <Button x:Name="btnSample" Click="btnSample_Click"  Margin="0,10,210,0" ToolTip="Get Sample Text"  VerticalAlignment="Top" HorizontalAlignment="Right"
                 Grid.Row="0">
             <controls:AddSampleTextViewbox />
         </Button>
 
-        <Button x:Name="btnClear" Click="btnClear_Click" Margin="0,10,140,0" ToolTip="Clear All Text"  VerticalAlignment="Top" HorizontalAlignment="Right"
-                Grid.Row="0">
+        <Button x:Name="btnClear" Click="btnClear_Click" Margin="0,10,170,0" ToolTip="Clear All Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0">
             <controls:CloseViewbox />
         </Button>
-        <Button x:Name="btnExportKey" Click="btnExportKey_Click"  Margin="0,10,100,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
+        <Button x:Name="btnExportKeys" Click="btnExportKey_Click"  Margin="0,10,130,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
             <controls:ExportKeyViewbox />
         </Button>
-        <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,10,60,0" ToolTip="Encrypt"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0">
+        <Button x:Name="btnImportKeys" Click="btnImportKeys_Click"  Margin="0,10,95,0" ToolTip="Import Keys from Keys File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
+            <controls:ExportKeyViewbox />
+        </Button>
+        
+        <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,10,56,0" ToolTip="Encrypt"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0">
             <controls:EncryptButtonViewbox Loaded="EncryptButtonViewbox_Loaded" />
         </Button>
         <Button x:Name="btnDecrypt" Click="btnDecrypt_Click"  Margin="0,10,20,0" ToolTip="Decrypt"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" >

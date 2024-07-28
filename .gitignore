@@ -365,4 +365,5 @@ FodyWeavers.xsd
 secrets.json
 coding-notes-encryption.txt
 AzureBlobManager.WPF/coding-notes-encryption.txt
+**/XamlRef/*
 **/coding-notes-encryption.txt
