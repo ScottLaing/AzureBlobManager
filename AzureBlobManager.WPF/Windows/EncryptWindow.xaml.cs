@@ -57,9 +57,11 @@ namespace AzureBlobManager.Windows
             int selIndex = this.cmbPasswordSource.SelectedIndex;
             if (selIndex >= 0)
             {
+                var salt = _salts[selIndex];
+                var key = _keys[selIndex];
                 try
                 {
-                    outputText = CryptUtils.DecryptString(inputText, _salts[selIndex], _keys[selIndex]);
+                    outputText = CryptUtils.DecryptString(inputText, salt, key);
                 }
                 catch (System.Security.Cryptography.CryptographicException cex)
                 {
@@ -74,7 +76,7 @@ namespace AzureBlobManager.Windows
 
                 if (_debug)
                 {
-                    MessageBox.Show($"{_keys[selIndex]} - {_salts[selIndex]}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Debug.WriteLine($"{key} - {salt}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
