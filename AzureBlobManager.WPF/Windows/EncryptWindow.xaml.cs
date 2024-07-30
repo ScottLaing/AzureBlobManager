@@ -7,6 +7,7 @@ using AzureBlobManager.Interfaces;
 using System.Windows.Documents;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics;
 
 namespace AzureBlobManager.Windows
 {
@@ -102,10 +103,13 @@ namespace AzureBlobManager.Windows
             int selIndex = this.cmbPasswordSource.SelectedIndex;
             if (selIndex >= 0)
             {
-                outputText = CryptUtils.EncryptString(inputText, _salts[selIndex], _keys[selIndex]);
+                var salt = _salts[selIndex];
+                var key = _keys[selIndex];
+
+                outputText = CryptUtils.EncryptString(inputText, salt, key);
                 if (_debug)
                 {
-                    MessageBox.Show($"{_keys[selIndex]} - {_salts[selIndex]}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Debug.WriteLine($"{key} - {salt}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
