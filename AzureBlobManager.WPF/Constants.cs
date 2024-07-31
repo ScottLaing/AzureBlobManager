@@ -216,6 +216,8 @@ namespace AzureBlobManager
             public const string PleaseEnterInputText = "Please enter an input text for operation.";
             public const string PleaseEnterACypherTextToDecrypt = "Please enter a cypher text to decrypt.";
 
+            public const string FeatureCreationInProgress = "Feature creation in progress, check back soon.";
+
         }
     }
 }

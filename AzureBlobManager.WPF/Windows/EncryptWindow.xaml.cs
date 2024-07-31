@@ -134,12 +134,17 @@ namespace AzureBlobManager.Windows
 
         private void btnExportKey_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Feature creation in progress, check back soon.", MyAzureBlobManager + "- Export Key", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(FeatureCreationInProgress, string.Format("{0} - Export Keys", MyAzureBlobManager), MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void btnSample_Click(object sender, RoutedEventArgs e)
         {
             this.txtPlainText.Text = Constants.SampleLargeStrings.SampleSpeech;
+        }
+
+        private void btnImportKeys_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(FeatureCreationInProgress, string.Format("{0} - Import Keys", MyAzureBlobManager) , MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
