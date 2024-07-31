@@ -141,15 +141,5 @@ namespace AzureBlobManager.Windows
         {
             this.txtPlainText.Text = Constants.SampleLargeStrings.SampleSpeech;
         }
-
-        private void EncryptButtonViewbox_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnImportKeys_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
