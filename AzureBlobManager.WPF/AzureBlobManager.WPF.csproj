@@ -35,6 +35,12 @@
     <Compile Update="Controls\AddSampleText.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\ImportViewbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\ExportViewbox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\DownloadFileButtonViewbox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
