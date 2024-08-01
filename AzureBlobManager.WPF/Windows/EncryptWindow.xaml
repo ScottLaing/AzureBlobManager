@@ -48,7 +48,7 @@
         </Button>
         
         <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,10,56,0" ToolTip="Encrypt"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0">
-            <controls:EncryptButtonViewbox Loaded="EncryptButtonViewbox_Loaded" />
+            <controls:EncryptButtonViewbox />
         </Button>
         <Button x:Name="btnDecrypt" Click="btnDecrypt_Click"  Margin="0,10,20,0" ToolTip="Decrypt"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" >
             <controls:DecryptButtonViewbox/>

@@ -8,6 +8,8 @@ using System.Windows.Documents;
 using System.Collections.Generic;
 using System;
 using System.Diagnostics;
+using System.Reflection.Metadata;
+using System.IO;
 
 namespace AzureBlobManager.Windows
 {
@@ -134,7 +136,34 @@ namespace AzureBlobManager.Windows
 
         private void btnExportKey_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(FeatureCreationInProgress, string.Format("{0} - Export Keys", MyAzureBlobManager), MessageBoxButton.OK, MessageBoxImage.Information);
+            var dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = "abm-keys.txt", // Default file name
+                DefaultExt = ".txt", // Default file extension
+                Filter = "Text documents (.txt)|*.txt" // Filter files by extension
+            };
+
+            // Show save file dialog box
+            bool? result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+
+                try
+                {
+                    var keyString = string.Join("\n", _keys);
+                    var salts = string.Join("\n", _salts);
+                    var header = string.Format($"[{MyAzureBlobManager} - Key Backup - {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}]\n\n");
+                    File.WriteAllText(filename, string.Format("{0}[Keys]\n{1}\n[Salts]\n{2}", header, keyString, salts));
+                    MessageBox.Show($"Key file written successfully to {filename}!  Remember to back it up somewhere safe.", MyAzureBlobManager);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("Trouble writing results to {0}, error was {1}.", filename, ex.Message), MyAzureBlobManager);
+                }
+            }
         }
 
         private void btnSample_Click(object sender, RoutedEventArgs e)
