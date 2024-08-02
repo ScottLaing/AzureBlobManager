@@ -1,12 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.DirectoryServices.ActiveDirectory;
-using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Windows.Documents;
-using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
-using System.Windows;
 
 namespace AzureBlobManager
 {
@@ -25,23 +18,11 @@ namespace AzureBlobManager
         public const string RegNameBlobConnectionKey = "BlobConnection";
         public const string EnvironmentVariableNameAzureBlobConnectionString = "AzureBlobConnectionString1";
         
-        public const string RegNameEncryptionKeyZebra = "BobAndAliceZebra";
-        public const string RegSaltEncryptionKeyZebra = "SodChlorideZebra";
+        public const string RegNameEncryptionKeyZebra = "BobAndAliceZebra"; // key used for connection string
+        public const string RegSaltEncryptionKeyZebra = "SodChlorideZebra"; // salt used for connection string
 
         public const string RegNameEncryptionKeyRoot = "BobAndAlice";
         public const string RegSaltEncryptionKeyRoot = "SodChloride";
-
-        public const string RegNameEncryptionKey1 = "BobAndAlice1";
-        public const string RegSaltEncryptionKey1 = "SodChloride1";
-
-        public const string RegNameEncryptionKey2 = "BobAndAlice2";
-        public const string RegSaltEncryptionKey2 = "SodChloride2";
-
-        public const string RegNameEncryptionKey3 = "BobAndAlice3";
-        public const string RegSaltEncryptionKey3 = "SodChloride3";
-
-        public const string RegNameEncryptionKey4 = "BobAndAlice4";
-        public const string RegSaltEncryptionKey4 = "SodChloride4";
 
         // Constants for AES encryption
         public const string AesDefaultKey = "76AA6E93-AB72-4B33-B382-ABF77FF64C83"; // Must be at least 16 characters
@@ -91,8 +72,8 @@ namespace AzureBlobManager
         public const string TroubleWritingResults = "Trouble writing results to {0}, error was {1}.";
         public const string ImportKeys = "{0} - Import Keys";
         public const string KeysSalts = "{0}[Keys]\n{1}\n[Salts]\n{2}";
-        public const string KeyFileWrittenSuccessfully = "Key file written successfully to {0}!  Remember to back it up somewhere safe.";
-        public const string KeyBackup = "[{0} - Key Backup - {1}]\n\n";
+        public const string KeyFileWrittenSuccessfully = "Keys and salts backed up successfully to:\n{0}\n\nRemember to keep this backup somewhere safe, copy to safe network drive or save to a floppy and put in a safe, etc.";
+        public const string KeyBackup = "[{0}]\n[Keys and Salts Backup]\n[{1}]\n\n";
         public const string CryptoException = "Crypto exception: {0}";
         public const string ErrorWithDecryption = "Error with decryption: {0}";
         public const string Misc = "{0} - {1}";
@@ -223,10 +204,10 @@ namespace AzureBlobManager
             public const string YouAreAboutToDeleteTheBlob = "You are about to delete the blob '{0}' from the container '{1}'.";
             public const string TroubleWithViewingFile = "Trouble with viewing file, Error: {0}";
             public const string NoteYouAreAboutToViewCopy = "Note: You are about to view a COPY of the latest version of the Blob [{0}]. " +
-            "Changing this file you are viewing will not change the Blob stored in Azure. " +
-            "To change a Blob in Azure you must reupload a modified version, " +
-            "using the exact same file name, back to Azure. That would then overwrite the Azure Blob and update the Blob. To download a "
-            + "Blob use the download button on the main window.";
+                                                        "Changing this file you are viewing will not change the Blob stored in Azure. " +
+                                                        "To change a Blob in Azure you must reupload a modified version, " +
+                                                        "using the exact same file name, back to Azure. That would then overwrite the Azure Blob and update the Blob. To download a "
+                                                        + "Blob use the download button on the main window.";
             public const string PleaseEnterAPlainTextToEncrypt = "Please enter a plain text to encrypt.";
             public const string PleaseEnterInputText = "Please enter an input text for operation.";
             public const string PleaseEnterACypherTextToDecrypt = "Please enter a cypher text to decrypt.";

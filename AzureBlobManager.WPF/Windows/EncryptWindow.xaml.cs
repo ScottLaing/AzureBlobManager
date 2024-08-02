@@ -1,9 +1,11 @@
 ﻿using AzureBlobManager.Interfaces;
 using AzureBlobManager.Utils;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
@@ -136,7 +138,7 @@ namespace AzureBlobManager.Windows
         {
             var dlg = new Microsoft.Win32.SaveFileDialog
             {
-                FileName = "abm-keys.txt", // Default file name
+                FileName = "keys-backup.txt", // Default file name
                 DefaultExt = ".txt", // Default file extension
                 Filter = "Text documents (.txt)|*.txt" // Filter files by extension
             };
@@ -151,10 +153,26 @@ namespace AzureBlobManager.Windows
 
                 try
                 {
-                    var keyString = string.Join(NewLine, _keys);
-                    var salts = string.Join(NewLine, _salts);
+                    StringBuilder sbKeys = new StringBuilder();
+                    StringBuilder sbSalts = new StringBuilder();
+                    for (int n = 1; n<=4; n++)
+                    {
+                        sbKeys.AppendLine($"Password{n}:" + _keys[n-1]);
+                    }
+                    for (int n = 1; n <= 4; n++)
+                    {
+                        sbSalts.AppendLine($"Salt{n}:" + _salts[n-1]);
+                    }
+
+                    var keyString = sbKeys.ToString();
+                    var salts = sbSalts.ToString();
                     var header = string.Format(KeyBackup, MyAzureBlobManager, DateTime.Now.ToString(DdMmYyyyHhMmSs));
-                    File.WriteAllText(filename, string.Format(KeysSalts, header, keyString, salts));
+                    var output = string.Format(KeysSalts, header, keyString, salts);
+                    File.WriteAllText(filename, output );
+                    if (_debug)
+                    {
+                        MessageBox.Show(output, MyAzureBlobManager);
+                    }
                     MessageBox.Show(String.Format(KeyFileWrittenSuccessfully, filename), MyAzureBlobManager);
                 }
                 catch (Exception ex)
@@ -171,7 +189,33 @@ namespace AzureBlobManager.Windows
 
         private void btnImportKeys_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(FeatureCreationInProgress, string.Format(ImportKeys, MyAzureBlobManager) , MessageBoxButton.OK, MessageBoxImage.Information);
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)";
+            openFileDialog.Title = "Select a file";
+
+            if (openFileDialog.ShowDialog() ?? false)
+            {
+                string filename = openFileDialog.FileName;
+
+                // Do something with the selected file, like read its contents or display its path
+                if (_debug)
+                {
+                    MessageBox.Show("Selected file: " + filename);
+                }
+
+                try
+                {
+
+                    string[] lines = File.ReadAllLines(filename);
+                    // TODO process the new lines, save to internal passwords and salts
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format(TroubleWritingResults, filename, ex.Message), MyAzureBlobManager);
+                }
+            }
         }
     }
 }
