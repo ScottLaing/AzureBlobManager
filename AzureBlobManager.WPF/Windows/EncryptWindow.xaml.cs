@@ -1,15 +1,12 @@
-﻿using AzureBlobManager.Utils;
-using System.Windows;
-using static AzureBlobManager.Constants.UIMessages;
-using static AzureBlobManager.Constants;
-using AzureBlobManager.Services;
-using AzureBlobManager.Interfaces;
-using System.Windows.Documents;
-using System.Collections.Generic;
+﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.Utils;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection.Metadata;
 using System.IO;
+using System.Windows;
+using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Windows
 {
@@ -23,6 +20,7 @@ namespace AzureBlobManager.Windows
         private List<string> _salts;
         private bool _debug = true;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
@@ -30,7 +28,7 @@ namespace AzureBlobManager.Windows
         {
             InitializeComponent();
 
-            cmbPasswordSource.ItemsSource = new string[] { "Saved Password1", "Saved Password2", "Saved Password3", "Saved Password4" };
+            cmbPasswordSource.ItemsSource = SavedPasswordNames;
             _regService = regService;
 
             List<string> salts;
@@ -49,7 +47,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e"></param>
         private void btnDecrypt_Click(object sender, RoutedEventArgs e)
         {
-            var inputText = this.txtPlainText.Text;
+            var inputText = this.txtInputText.Text;
             if (string.IsNullOrWhiteSpace(inputText))
             {
                 MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -67,27 +65,27 @@ namespace AzureBlobManager.Windows
                 }
                 catch (System.Security.Cryptography.CryptographicException cex)
                 {
-                    MessageBox.Show($"Crypto exception: {cex.Message}.", UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(String.Format(CryptoException, cex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error with decryption: {ex.Message}.", UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(String.Format(ErrorWithDecryption, ex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 if (_debug)
                 {
-                    Debug.WriteLine($"{key} - {salt}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Debug.WriteLine(String.Format(Misc, key, salt), KeyAndSalt, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Select password to use.", PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            this.txtCypherText.Text = outputText;
+            this.txtOutputText.Text = outputText;
         }
 
         /// <summary>
@@ -97,7 +95,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e"></param>
         private void btnEncrypt_Click(object sender, RoutedEventArgs e)
         {
-            var inputText = this.txtPlainText.Text;
+            var inputText = this.txtInputText.Text;
             if (string.IsNullOrWhiteSpace(inputText))
             {
                 MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -113,16 +111,16 @@ namespace AzureBlobManager.Windows
                 outputText = CryptUtils.EncryptString(inputText, salt, key);
                 if (_debug)
                 {
-                    Debug.WriteLine($"{key} - {salt}", "Key and Salt", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Debug.WriteLine($"{key} - {salt}", KeyAndSalt, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Select password to use.", PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            this.txtCypherText.Text = outputText;
+            this.txtOutputText.Text = outputText;
         }
 
         /// <summary>
@@ -130,8 +128,8 @@ namespace AzureBlobManager.Windows
         /// </summary>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            this.txtCypherText.Text = "";
-            this.txtPlainText.Text = "";
+            this.txtOutputText.Text = String.Empty;
+            this.txtInputText.Text = String.Empty;
         }
 
         private void btnExportKey_Click(object sender, RoutedEventArgs e)
@@ -153,27 +151,27 @@ namespace AzureBlobManager.Windows
 
                 try
                 {
-                    var keyString = string.Join("\n", _keys);
-                    var salts = string.Join("\n", _salts);
-                    var header = string.Format($"[{MyAzureBlobManager} - Key Backup - {DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")}]\n\n");
-                    File.WriteAllText(filename, string.Format("{0}[Keys]\n{1}\n[Salts]\n{2}", header, keyString, salts));
-                    MessageBox.Show($"Key file written successfully to {filename}!  Remember to back it up somewhere safe.", MyAzureBlobManager);
+                    var keyString = string.Join(NewLine, _keys);
+                    var salts = string.Join(NewLine, _salts);
+                    var header = string.Format(KeyBackup, MyAzureBlobManager, DateTime.Now.ToString(DdMmYyyyHhMmSs));
+                    File.WriteAllText(filename, string.Format(KeysSalts, header, keyString, salts));
+                    MessageBox.Show(String.Format(KeyFileWrittenSuccessfully, filename), MyAzureBlobManager);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Trouble writing results to {0}, error was {1}.", filename, ex.Message), MyAzureBlobManager);
+                    MessageBox.Show(string.Format(TroubleWritingResults, filename, ex.Message), MyAzureBlobManager);
                 }
             }
         }
 
         private void btnSample_Click(object sender, RoutedEventArgs e)
         {
-            this.txtPlainText.Text = Constants.SampleLargeStrings.SampleSpeech;
+            this.txtInputText.Text = Constants.SampleLargeStrings.SampleSpeech;
         }
 
         private void btnImportKeys_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(FeatureCreationInProgress, string.Format("{0} - Import Keys", MyAzureBlobManager) , MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(FeatureCreationInProgress, string.Format(ImportKeys, MyAzureBlobManager) , MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

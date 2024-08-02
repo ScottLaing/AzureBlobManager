@@ -17,6 +17,7 @@ namespace AzureBlobManager
         public const string Salt = "EA5493F2-DAF0-42A5-82A8-4C5B0235CA53";
         public const string EncryptionKey = "F965F15A-DC1B-4F27-A27C-AB9C20EBC06E";
         public const int GuidLength = 36;
+        public const string NewLine = "\n";
 
         // Constants for registry settings
         public static string RegistryCompanyName = "BrotwurstSoftware";
@@ -84,6 +85,18 @@ namespace AzureBlobManager
         public const string LogPattern = "*.log";
         public const string LogSeparator = "===============================================";
         public const string ErrorDetails = "ERROR DETAILS: {0}.";
+
+        public const string SelectPasswordToUse = "Select password to use.";
+        public const string KeyAndSalt = "Key and Salt";
+        public const string TroubleWritingResults = "Trouble writing results to {0}, error was {1}.";
+        public const string ImportKeys = "{0} - Import Keys";
+        public const string KeysSalts = "{0}[Keys]\n{1}\n[Salts]\n{2}";
+        public const string KeyFileWrittenSuccessfully = "Key file written successfully to {0}!  Remember to back it up somewhere safe.";
+        public const string KeyBackup = "[{0} - Key Backup - {1}]\n\n";
+        public const string CryptoException = "Crypto exception: {0}";
+        public const string ErrorWithDecryption = "Error with decryption: {0}";
+        public const string Misc = "{0} - {1}";
+        public const string DdMmYyyyHhMmSs = "dd/MM/yyyy HH:mm:ss";
 
         // Constants for blob system key names
         public static readonly List<string> BlobSystemKeyNames = new List<string>()
@@ -158,6 +171,8 @@ namespace AzureBlobManager
         // Constants for UI messages
         public class UIMessages
         {
+            public static readonly string[] SavedPasswordNames = new string[] { "Saved Password1", "Saved Password2", "Saved Password3", "Saved Password4" };
+
             public const string TheMetadataForBlobHasBeenSaved = "The metadata for blob [{0}] has been saved.";
             public const string MyAzureBlobManager = "My Azure Blob Manager";
             public const string KeyNameCannotContainWhitespace = "Key name cannot contain whitespace.";
