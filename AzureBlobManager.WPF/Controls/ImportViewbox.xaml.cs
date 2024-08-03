@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for AddViewbox.xaml
+    /// Interaction logic for ImportViewbox.xaml
     /// </summary>
     public partial class ImportViewbox : UserControl
     {

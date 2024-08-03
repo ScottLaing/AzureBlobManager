@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using static AzureBlobManager.Constants;
@@ -20,8 +21,11 @@ namespace AzureBlobManager.Windows
         private IRegService _regService;
         private List<string> _keys;
         private List<string> _salts;
-        private bool _debug = true;
 
+        private List<string> _oldKeys = new List<string>();
+        private List<string> _oldSalts = new List<string>();
+
+        private bool _debug = true;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
@@ -157,11 +161,11 @@ namespace AzureBlobManager.Windows
                     StringBuilder sbSalts = new StringBuilder();
                     for (int n = 1; n<=4; n++)
                     {
-                        sbKeys.AppendLine($"Password{n}:" + _keys[n-1]);
+                        sbKeys.AppendLine(string.Format(Password, n) + _keys[n-1]);
                     }
                     for (int n = 1; n <= 4; n++)
                     {
-                        sbSalts.AppendLine($"Salt{n}:" + _salts[n-1]);
+                        sbSalts.AppendLine(string.Format(SaltDisplay, n) + _salts[n-1]);
                     }
 
                     var keyString = sbKeys.ToString();
@@ -189,6 +193,11 @@ namespace AzureBlobManager.Windows
 
         private void btnImportKeys_Click(object sender, RoutedEventArgs e)
         {
+            var id = MessageBox.Show(ThisWillOverwrite, MyAzureBlobManager, MessageBoxButton.YesNo);
+            if (id != MessageBoxResult.Yes)
+            {
+                return;
+            }
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)";
@@ -201,19 +210,42 @@ namespace AzureBlobManager.Windows
                 // Do something with the selected file, like read its contents or display its path
                 if (_debug)
                 {
-                    MessageBox.Show("Selected file: " + filename);
+                    MessageBox.Show(string.Format(SelectedFile, filename));
                 }
+
+                // backup current keys and salts for recovery
+                var oldSalts = _salts.ToList();
+                var oldKeys = _keys.ToList();
+
+                // also save old keys to class level for emergency backup type scenarios,tbd
+                _oldKeys = oldKeys;
+                _oldSalts = oldSalts;
 
                 try
                 {
 
                     string[] lines = File.ReadAllLines(filename);
-                    // TODO process the new lines, save to internal passwords and salts
-
+                    foreach (string line in lines)
+                    {
+                        string trimmedLine = line.Trim();
+                        if (trimmedLine.StartsWith("Password"))
+                        {
+                            int n = int.Parse(trimmedLine.Substring(8, 1));
+                            _keys[n - 1] = trimmedLine.Substring(10);
+                        }
+                        else if (trimmedLine.StartsWith("Salt"))
+                        {
+                            int n = int.Parse(trimmedLine.Substring(4, 1));
+                            _salts[n - 1] = trimmedLine.Substring(6);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format(TroubleWritingResults, filename, ex.Message), MyAzureBlobManager);
+                    MessageBox.Show(string.Format(TroubleReadingKeyFile, filename, ex.Message), MyAzureBlobManager);
+                    // restore old keys in case of error
+                    _salts = oldSalts.ToList();
+                    _keys = oldKeys.ToList();
                 }
             }
         }

@@ -152,6 +152,10 @@ namespace AzureBlobManager
         // Constants for UI messages
         public class UIMessages
         {
+            public const string Password = "Password:{0}";
+            public const string SaltDisplay = "Salt{0}:";
+            public const string SelectedFile = "Selected file: {0}";
+
             public static readonly string[] SavedPasswordNames = new string[] { "Saved Password1", "Saved Password2", "Saved Password3", "Saved Password4" };
 
             public const string TheMetadataForBlobHasBeenSaved = "The metadata for blob [{0}] has been saved.";
@@ -214,6 +218,8 @@ namespace AzureBlobManager
 
             public const string FeatureCreationInProgress = "Feature creation in progress, check back soon.";
 
+            public const string ThisWillOverwrite = "This will overwrite existing passwords and salts which will be lost.  Continue?";
+            public const string TroubleReadingKeyFile = "Trouble reading key file {0}: File format may be invalid, low level error: {1}";
         }
     }
 }
