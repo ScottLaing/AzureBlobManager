@@ -156,6 +156,9 @@ namespace AzureBlobManager
             public const string SaltDisplay = "Salt{0}:";
             public const string SelectedFile = "Selected file: {0}";
 
+            public const string PasswordPrefix = "Password";
+            public const string SaltPrefix = "Salt";
+
             public static readonly string[] SavedPasswordNames = new string[] { "Saved Password1", "Saved Password2", "Saved Password3", "Saved Password4" };
 
             public const string TheMetadataForBlobHasBeenSaved = "The metadata for blob [{0}] has been saved.";

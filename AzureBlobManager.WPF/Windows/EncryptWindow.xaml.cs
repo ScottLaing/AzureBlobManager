@@ -228,12 +228,12 @@ namespace AzureBlobManager.Windows
                     foreach (string line in lines)
                     {
                         string trimmedLine = line.Trim();
-                        if (trimmedLine.StartsWith("Password"))
+                        if (trimmedLine.StartsWith(PasswordPrefix))
                         {
                             int n = int.Parse(trimmedLine.Substring(8, 1));
                             _keys[n - 1] = trimmedLine.Substring(10);
                         }
-                        else if (trimmedLine.StartsWith("Salt"))
+                        else if (trimmedLine.StartsWith(SaltPrefix))
                         {
                             int n = int.Parse(trimmedLine.Substring(4, 1));
                             _salts[n - 1] = trimmedLine.Substring(6);
