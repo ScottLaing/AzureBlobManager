@@ -72,7 +72,7 @@ namespace AzureBlobManager
         public const string TroubleWritingResults = "Trouble writing results to {0}, error was {1}.";
         public const string ImportKeys = "{0} - Import Keys";
         public const string KeysSalts = "{0}[Keys]\n{1}\n[Salts]\n{2}";
-        public const string KeyFileWrittenSuccessfully = "Keys and salts backed up successfully to:\n{0}\n\nRemember to keep this backup somewhere safe, copy to safe network drive or save to a floppy and put in a safe, etc.";
+        public const string KeyFileWrittenSuccessfully = "Keys and salts now backed up successfully to:\n\n{0}\n\nRemember to keep this backup somewhere safe, e.g. copy this file to safe network drive or save to a floppy and put in a safe, etc.";
         public const string KeyBackup = "[{0}]\n[Keys and Salts Backup]\n[{1}]\n\n";
         public const string CryptoException = "Crypto exception: {0}";
         public const string ErrorWithDecryption = "Error with decryption: {0}";

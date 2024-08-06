@@ -1,4 +1,5 @@
 ﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.Services;
 using AzureBlobManager.Utils;
 using Microsoft.Win32;
 using System;
@@ -19,6 +20,7 @@ namespace AzureBlobManager.Windows
     public partial class EncryptWindow : Window
     {
         private IRegService _regService;
+        private IFileService _fileService;
         private List<string> _keys;
         private List<string> _salts;
 
@@ -30,12 +32,14 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
-        public EncryptWindow(IRegService regService)
+        public EncryptWindow(IRegService regService, IFileService fileService)
         {
             InitializeComponent();
 
             cmbPasswordSource.ItemsSource = SavedPasswordNames;
             _regService = regService;
+
+            _fileService = fileService;
 
             List<string> salts;
             var keys = _regService.GetEncryptionKeys(out salts);
@@ -247,6 +251,19 @@ namespace AzureBlobManager.Windows
                     _salts = oldSalts.ToList();
                     _keys = oldKeys.ToList();
                 }
+            }
+        }
+
+        private void btnSaveOutput_Click(object sender, RoutedEventArgs e)
+        {
+            string chosenFileName = _fileService.GetFileUsingFileDialog("output-text.txt");
+
+            // If the file name is not an empty string, open it for saving.
+            if (!string.IsNullOrWhiteSpace(chosenFileName))
+            {
+                var output = this.txtOutputText.Text;
+                File.WriteAllText(chosenFileName, output);
+                MessageBox.Show($"Output saved successfully to file: {chosenFileName}.", MyAzureBlobManager);
             }
         }
     }
