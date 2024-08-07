@@ -263,7 +263,7 @@ namespace AzureBlobManager.Windows
             {
                 var output = this.txtOutputText.Text;
                 File.WriteAllText(chosenFileName, output);
-                MessageBox.Show($"Output saved successfully to file: {chosenFileName}.", MyAzureBlobManager);
+                MessageBox.Show(string.Format(OutputSavedSuccess, chosenFileName), MyAzureBlobManager);
             }
         }
 

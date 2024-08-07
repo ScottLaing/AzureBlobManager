@@ -152,6 +152,10 @@ namespace AzureBlobManager
         // Constants for UI messages
         public class UIMessages
         {
+            public const string OpenFile = "Open File";
+            public const string OutputSavedSuccess = "Output saved successfully to file: {0}";
+
+
             public const string Password = "Password:{0}";
             public const string SaltDisplay = "Salt{0}:";
             public const string SelectedFile = "Selected file: {0}";

@@ -168,7 +168,7 @@ namespace AzureBlobManager.Services
             OpenFileDialog saveFileDialog;
             saveFileDialog = new OpenFileDialog();
             saveFileDialog.Filter = FileDialogMsgs.AllFiles;
-            saveFileDialog.Title = "Open File";
+            saveFileDialog.Title = OpenFile;
             saveFileDialog.FileName = fileName;
             var choice = saveFileDialog.ShowDialog();
             if (choice == true)
