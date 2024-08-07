@@ -31,7 +31,7 @@ namespace AzureBlobManager.Services
         public async Task AttemptDownloadFile(string fileName, string containerName)
         {
             // Prompt the user to choose a file location to save the downloaded file.
-            string chosenFileName = this.GetFileUsingFileDialog(fileName);
+            string chosenFileName = this.GetSaveFileUsingFileDialog(fileName);
 
             // If the file name is not an empty string, open it for saving.
             if (!string.IsNullOrWhiteSpace(chosenFileName))
@@ -142,13 +142,33 @@ namespace AzureBlobManager.Services
         //   fileName: The default file name for the file dialog.
         // Returns:
         //   The chosen file name or an empty string if no file was chosen.
-        public string GetFileUsingFileDialog(string fileName)
+        public string GetSaveFileUsingFileDialog(string defaultFileName)
         {
             string chosenFileName;
             SaveFileDialog saveFileDialog;
             saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = FileDialogMsgs.AllFiles;
             saveFileDialog.Title = FileDialogMsgs.SaveFileToLocal;
+            saveFileDialog.FileName = defaultFileName;
+            var choice = saveFileDialog.ShowDialog();
+            if (choice == true)
+            {
+                chosenFileName = saveFileDialog.FileName;
+            }
+            else
+            {
+                chosenFileName = String.Empty;
+            }
+            return chosenFileName;
+        }
+
+        public string GetOpenFileUsingFileDialog(string fileName)
+        {
+            string chosenFileName;
+            OpenFileDialog saveFileDialog;
+            saveFileDialog = new OpenFileDialog();
+            saveFileDialog.Filter = FileDialogMsgs.AllFiles;
+            saveFileDialog.Title = "Open File";
             saveFileDialog.FileName = fileName;
             var choice = saveFileDialog.ShowDialog();
             if (choice == true)

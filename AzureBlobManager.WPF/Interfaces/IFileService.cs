@@ -43,6 +43,9 @@ namespace AzureBlobManager.Interfaces
         /// </summary>
         /// <param name="fileName">The name of the file to select.</param>
         /// <returns>The selected file path.</returns>
-        public string GetFileUsingFileDialog(string fileName);
+        public string GetSaveFileUsingFileDialog(string fileName);
+
+        public string GetOpenFileUsingFileDialog(string fileName);
     }
+       
 }

@@ -256,7 +256,7 @@ namespace AzureBlobManager.Windows
 
         private void btnSaveOutput_Click(object sender, RoutedEventArgs e)
         {
-            string chosenFileName = _fileService.GetFileUsingFileDialog("output-text.txt");
+            string chosenFileName = _fileService.GetSaveFileUsingFileDialog("output-text.txt");
 
             // If the file name is not an empty string, open it for saving.
             if (!string.IsNullOrWhiteSpace(chosenFileName))
@@ -264,6 +264,19 @@ namespace AzureBlobManager.Windows
                 var output = this.txtOutputText.Text;
                 File.WriteAllText(chosenFileName, output);
                 MessageBox.Show($"Output saved successfully to file: {chosenFileName}.", MyAzureBlobManager);
+            }
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            string chosenFileName = _fileService.GetOpenFileUsingFileDialog("");
+
+            // If the file name is not an empty string, open it for saving.
+            if (!string.IsNullOrWhiteSpace(chosenFileName))
+            {
+                var output = File.ReadAllText(chosenFileName);
+                this.txtInputText.Text = output;
+                this.txtOutputText.Clear();
             }
         }
     }
