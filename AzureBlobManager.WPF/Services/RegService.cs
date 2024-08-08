@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Services
@@ -14,7 +15,7 @@ namespace AzureBlobManager.Services
         /// <summary>
         /// Property to get the registry subkey string.
         /// </summary>
-        public string RegSubKey => $"Software\\{Constants.RegistryCompanyName}\\{Constants.RegistryAppName}";
+        public string RegSubKey => $"Software\\{RegistryCompanyName}\\{RegistryAppName}";
 
         /// <summary>
         /// Saves a value to the Windows Registry under the specified key name.
@@ -67,21 +68,37 @@ namespace AzureBlobManager.Services
         {
             string newKey;
             string newSalt;
+            string keyName;
+            string saltName;
 
             // keys 2-4 are secondary encryption keys to allow some choice in encryption.  values will be stored in the registry.
             // New options on the encryption window will allow user to choose which encryption key they want to use.
             for (int i = 1; i < 5; i++)
             {
-                string keyName = $"{RegNameEncryptionKeyRoot}{i}";
-                string saltName = $"{RegSaltEncryptionKeyRoot}{i}";
-                if (string.IsNullOrWhiteSpace(GetValueFromRegistry(keyName)) ||
-                    string.IsNullOrWhiteSpace(GetValueFromRegistry(saltName)))
+                keyName = $"{RegNameEncryptionKeyRoot}{i}";
+                saltName = $"{RegSaltEncryptionKeyRoot}{i}";
+                try
                 {
-                    newKey = Guid.NewGuid().ToString();
-                    newSalt = Guid.NewGuid().ToString();
+                    if (string.IsNullOrWhiteSpace(GetValueFromRegistry(keyName)) ||
+                        string.IsNullOrWhiteSpace(GetValueFromRegistry(saltName)))
+                    {
+                        try
+                        {
+                            newKey = Guid.NewGuid().ToString();
+                            newSalt = Guid.NewGuid().ToString();
 
-                    SaveValueToRegistry(keyName, newKey);
-                    SaveValueToRegistry(saltName, newSalt);
+                            SaveValueToRegistry(keyName, newKey);
+                            SaveValueToRegistry(saltName, newSalt);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error creating initial encryption keys: " + ex.Message, $"Error with key:{i}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error with logic checking encryption keys: " + ex.Message, $"Error with key:{i}");
                 }
             }
         }
@@ -99,30 +116,36 @@ namespace AzureBlobManager.Services
             string newKey;
             string newSalt;
 
-            for (int i = 1; i < 5; i++)
+            try
             {
-                string keyName = $"{RegNameEncryptionKeyRoot}{i}";
-                string saltName = $"{RegSaltEncryptionKeyRoot}{i}";
-                if (string.IsNullOrWhiteSpace(GetValueFromRegistry(keyName)) ||
-                    string.IsNullOrWhiteSpace(GetValueFromRegistry(saltName)))
+                for (int i = 1; i < 5; i++)
                 {
-                    newKey = Guid.NewGuid().ToString();
-                    newSalt = Guid.NewGuid().ToString();
+                    string keyName = $"{RegNameEncryptionKeyRoot}{i}";
+                    string saltName = $"{RegSaltEncryptionKeyRoot}{i}";
+                    if (string.IsNullOrWhiteSpace(GetValueFromRegistry(keyName)) ||
+                        string.IsNullOrWhiteSpace(GetValueFromRegistry(saltName)))
+                    {
+                        newKey = Guid.NewGuid().ToString();
+                        newSalt = Guid.NewGuid().ToString();
 
-                    SaveValueToRegistry(keyName, newKey);
-                    SaveValueToRegistry(saltName, newSalt);
+                        SaveValueToRegistry(keyName, newKey);
+                        SaveValueToRegistry(saltName, newSalt);
 
-                    keys.Add(newKey);
-                    salts.Add(newSalt);
+                        keys.Add(newKey);
+                        salts.Add(newSalt);
+                    }
+                    else
+                    {
+                        keys.Add(GetValueFromRegistry(keyName) ?? "");
+                        salts.Add(GetValueFromRegistry(saltName) ?? "");
+                    }
                 }
-                else
-                {
-                    keys.Add(GetValueFromRegistry(keyName) ?? "");
-                    salts.Add(GetValueFromRegistry(saltName) ?? "");
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving encryption keys from the registry: " + ex.Message, "Error");
             }
             return keys;
         }
-
     }
 }

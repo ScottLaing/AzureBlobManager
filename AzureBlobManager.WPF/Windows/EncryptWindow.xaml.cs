@@ -28,6 +28,7 @@ namespace AzureBlobManager.Windows
         private List<string> _oldSalts = new List<string>();
 
         private bool _debug = true;
+        private bool _showMessageBoxes = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
@@ -75,12 +76,20 @@ namespace AzureBlobManager.Windows
                 }
                 catch (System.Security.Cryptography.CryptographicException cex)
                 {
-                    MessageBox.Show(String.Format(CryptoException, cex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (_showMessageBoxes)
+                    {
+                        MessageBox.Show(String.Format(CryptoException, cex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    this.txtOutputText.Text = "Decryption error!";
                     return;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(String.Format(ErrorWithDecryption, ex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    if (_showMessageBoxes)
+                    {
+                        MessageBox.Show(String.Format(ErrorWithDecryption, ex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    this.txtOutputText.Text = "Decryption error!";
                     return;
                 }
 

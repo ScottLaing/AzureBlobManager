@@ -145,7 +145,6 @@ namespace AzureBlobManager
                         return TheirFinestHour;
                     }
                 }
-
             }
         }
 
@@ -155,15 +154,14 @@ namespace AzureBlobManager
             public const string OpenFile = "Open File";
             public const string OutputSavedSuccess = "Output saved successfully to file: {0}";
 
-
-            public const string Password = "Password:{0}";
+            public const string Password = "Password{0}:";
             public const string SaltDisplay = "Salt{0}:";
             public const string SelectedFile = "Selected file: {0}";
 
             public const string PasswordPrefix = "Password";
             public const string SaltPrefix = "Salt";
 
-            public static readonly string[] SavedPasswordNames = new string[] { "Saved Password1", "Saved Password2", "Saved Password3", "Saved Password4" };
+            public static readonly string[] SavedPasswordNames = new string[] { "Password1", "Password2", "Password3", "Password4" };
 
             public const string TheMetadataForBlobHasBeenSaved = "The metadata for blob [{0}] has been saved.";
             public const string MyAzureBlobManager = "My Azure Blob Manager";
