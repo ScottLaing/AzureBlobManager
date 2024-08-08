@@ -288,5 +288,42 @@ namespace AzureBlobManager.Windows
                 this.txtOutputText.Clear();
             }
         }
+
+        private void btnEncryptFile_Click(object sender, RoutedEventArgs e)
+        {
+            string outputText;
+            int selIndex = this.cmbPasswordSource.SelectedIndex;
+            if (selIndex >= 0)
+            {
+                var salt = _salts[selIndex];
+                var key = _keys[selIndex];
+
+                string chosenFileName = _fileService.GetOpenBinaryFileUsingFileDialog("");
+
+                // If the file name is not an empty string, open it for saving.
+                if (!string.IsNullOrWhiteSpace(chosenFileName))
+                {
+                    byte[] fileBytes = File.ReadAllBytes(chosenFileName);
+                    string base64String = Convert.ToBase64String(fileBytes);
+
+                    outputText = CryptUtils.EncryptString(base64String, salt, key);
+
+                    var outputFile = chosenFileName + "_encrypted.txt";
+                    File.WriteAllText(outputFile, outputText);
+                    MessageBox.Show(string.Format("Encrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
+                }
+            }
+            else
+            {
+                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+        }
+
+        private void btnDecryptFile_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(string.Format("Feature under construction:\n\n {0}.", "coming soon"), MyAzureBlobManager);
+        }
     }
 }

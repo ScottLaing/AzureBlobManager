@@ -181,5 +181,26 @@ namespace AzureBlobManager.Services
             }
             return chosenFileName;
         }
+
+        public string GetOpenBinaryFileUsingFileDialog(string fileName)
+        {
+            string chosenFileName;
+            OpenFileDialog saveFileDialog;
+            saveFileDialog = new OpenFileDialog();
+            saveFileDialog.Filter = FileDialogMsgs.AllFiles;
+            saveFileDialog.Title = OpenFile;
+            saveFileDialog.FileName = fileName;
+            var choice = saveFileDialog.ShowDialog();
+            if (choice == true)
+            {
+                chosenFileName = saveFileDialog.FileName;
+            }
+            else
+            {
+                chosenFileName = String.Empty;
+            }
+            return chosenFileName;
+        }
+
     }
 }

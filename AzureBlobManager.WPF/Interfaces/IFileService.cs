@@ -46,6 +46,8 @@ namespace AzureBlobManager.Interfaces
         public string GetSaveFileUsingFileDialog(string fileName);
 
         public string GetOpenFileUsingFileDialog(string fileName);
+
+        public string GetOpenBinaryFileUsingFileDialog(string fileName);
     }
        
 }
