@@ -295,22 +295,44 @@ namespace AzureBlobManager.Windows
             int selIndex = this.cmbPasswordSource.SelectedIndex;
             if (selIndex >= 0)
             {
-                var salt = _salts[selIndex];
-                var key = _keys[selIndex];
+                string salt = _salts[selIndex];
+                string key = _keys[selIndex];
+
+                if (string.IsNullOrWhiteSpace(salt) || string.IsNullOrWhiteSpace(key))
+                {
+                    MessageBox.Show("Critical error encountered with file encryption operation.", MyAzureBlobManager);
+                    return;
+                }
 
                 string chosenFileName = _fileService.GetOpenBinaryFileUsingFileDialog("");
 
-                // If the file name is not an empty string, open it for saving.
-                if (!string.IsNullOrWhiteSpace(chosenFileName))
+                try
                 {
-                    byte[] fileBytes = File.ReadAllBytes(chosenFileName);
-                    string base64String = Convert.ToBase64String(fileBytes);
+                    // If the file name is not an empty string, open it for saving.
+                    if (!string.IsNullOrWhiteSpace(chosenFileName))
+                    {
+                        byte[] fileBytes = File.ReadAllBytes(chosenFileName);
 
-                    outputText = CryptUtils.EncryptString(base64String, salt, key);
+                        var ext = Path.GetExtension(chosenFileName);
 
-                    var outputFile = chosenFileName + "_encrypted.txt";
-                    File.WriteAllText(outputFile, outputText);
-                    MessageBox.Show(string.Format("Encrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
+                        ext = ext.Replace(".", "");
+
+                        ext = ext.Substring(0, Math.Min(ext.Length, 10));
+
+                        ext = ext.PadRight(10, '=');
+
+                        string base64String = Convert.ToBase64String(fileBytes);
+
+                        outputText = CryptUtils.EncryptString(ext + base64String, salt, key);
+
+                        var outputFile = chosenFileName + "_encrypted.txt";
+                        File.WriteAllText(outputFile, outputText);
+                        MessageBox.Show(string.Format("Encrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("Error encountered:\n\n {0}.", ex.Message), MyAzureBlobManager);
                 }
             }
             else
@@ -318,12 +340,65 @@ namespace AzureBlobManager.Windows
                 MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
         }
 
         private void btnDecryptFile_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(string.Format("Feature under construction:\n\n {0}.", "coming soon"), MyAzureBlobManager);
+            string outputText;
+            int selIndex = this.cmbPasswordSource.SelectedIndex;
+            if (selIndex >= 0)
+            {
+                string salt = _salts[selIndex];
+                string key = _keys[selIndex];
+
+                if (string.IsNullOrWhiteSpace(salt) || string.IsNullOrWhiteSpace(key))
+                {
+                    MessageBox.Show("Critical error encountered with file encryption operation.", MyAzureBlobManager);
+                    return;
+                }
+
+                string chosenFileName = _fileService.GetOpenFileUsingFileDialog("");
+
+                try
+                {
+                    // If the file name is not an empty string, open it for saving.
+                    if (!string.IsNullOrWhiteSpace(chosenFileName))
+                    {
+                        string fileContent = File.ReadAllText(chosenFileName);
+                        outputText = CryptUtils.DecryptString(fileContent, salt, key);
+                        string firstPart = outputText.Substring(0, 10);
+                        firstPart = firstPart.Replace("=", "");
+
+                        byte[] decodedBytes = Convert.FromBase64String(outputText.Substring(10));
+                        if (chosenFileName.EndsWith("_encrypted.txt"))
+                        {
+                            chosenFileName = chosenFileName.Substring(0, chosenFileName.Length - 14);
+                        }
+
+                        if (chosenFileName.EndsWith("." + firstPart))
+                        {
+                            chosenFileName = chosenFileName.Substring(0, chosenFileName.Length - (firstPart.Length + 1));
+                        }
+
+                        string outputFile = chosenFileName + "_decrypted." + firstPart;
+                        if (decodedBytes != null)
+                        {
+                            File.WriteAllBytes(outputFile, decodedBytes);
+                        }
+
+                        MessageBox.Show(string.Format("Decrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format("Error encountered:\n\n {0}.", ex.Message), MyAzureBlobManager);
+                }
+            }
+            else
+            {
+                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
     }
 }
