@@ -83,7 +83,7 @@ namespace AzureBlobManager.Windows
         private async void RefreshContainersListDropDown()
         {
             logger.Debug("Refreshing containers list drop-down.");
-            var containers = BlobService.GetBlobContainers(out string errs);
+            (List<string> containers, string errs) = await BlobService.GetBlobContainersAsync();
             if (string.IsNullOrWhiteSpace(errs))
             {
                 cmbContainers.ItemsSource = containers;

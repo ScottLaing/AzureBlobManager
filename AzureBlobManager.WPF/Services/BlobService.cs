@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure;
+using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using AzureBlobManager.Dtos;
 using AzureBlobManager.Interfaces;
@@ -419,26 +420,21 @@ namespace AzureBlobManager.Services
         /// </summary>
         /// <param name="errors">Any error information.</param>
         /// <returns>The list of container names.</returns>
-        public List<string> GetBlobContainers(out string errors)
+        public async Task<(List<string>, string errors)> GetBlobContainersAsync()
         {
-            // Method comments
-            // Retrieves the list of containers in Azure Blob Storage.
-            //
-            // Parameters:
-            //   errors:
-            //     Any error information.
-            //
-            // Returns:
-            //     The list of container names.
-
+            string errors = "";
             var result = new List<string>();
             errors = string.Empty;
             try
             {
                 var connectionString = BlobConnectionString;
                 var serviceClient = new BlobServiceClient(connectionString);
-                var containers = serviceClient.GetBlobContainers();
-                foreach (var cont in containers)
+                if (serviceClient == null)
+                {
+                    return (result, ConnectionIsNull);
+                }
+
+                await foreach (var cont in serviceClient.GetBlobContainersAsync())
                 {
                     result.Add(cont.Name);
                 }
@@ -447,7 +443,7 @@ namespace AzureBlobManager.Services
             {
                 errors = ex.Message;
             }
-            return result;
+            return (result, errors);
         }
     }
 }

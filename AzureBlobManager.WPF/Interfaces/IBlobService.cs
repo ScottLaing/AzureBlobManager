@@ -69,11 +69,6 @@ namespace AzureBlobManager.Interfaces
         /// <returns>A tuple containing the list of file items and any error information.</returns>
         public Task<(List<FileListItemDto> fileItemsList, string errors)> GetContainersFileListAsync(string containerName);
 
-        /// <summary>
-        /// Retrieves the list of containers in Azure Blob Storage.
-        /// </summary>
-        /// <param name="errors">Any error information.</param>
-        /// <returns>The list of container names.</returns>
-        public List<string> GetBlobContainers(out string errors);
+        public Task<(List<string>, string errors)> GetBlobContainersAsync();
     }
 }
