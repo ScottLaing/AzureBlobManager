@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using static AzureBlobManager.Constants;
 
 #pragma warning disable SYSLIB0022 // Type or member is obsolete
@@ -13,18 +14,16 @@ namespace AzureBlobManager.Utils
     /// </summary>
     public class CryptUtils
     {
-        //While an app specific salt is not the best practice for
-        //password based encryption, it's probably safe enough as long as
-        //it is truly uncommon. Also too much work to alter this answer otherwise.
-        public static byte[] _salt = Encoding.ASCII.GetBytes(Constants.Salt);
-
         /// <summary>
         /// Encrypt the given string using AES.  The string can be decrypted using 
         /// DecryptStringAES().  The sharedSecret parameters must match.
         /// </summary>
         /// <param name="plainText">The text to encrypt.</param>
+        /// <param name="salt">The salt used to generate a key for encryption.</param>
         /// <param name="sharedSecret">A password used to generate a key for encryption.</param>
-        public static string EncryptString(string plainText, string salt = Constants.Salt, string? sharedSecret = null)
+        /// <returns>The encrypted text.</returns>
+        /// <remarks>Async for speed.</remarks>
+        public static async Task<string> EncryptStringAsync(string plainText, string salt = Constants.Salt, string? sharedSecret = null)
         {
             if (sharedSecret == null)
             {
@@ -32,7 +31,9 @@ namespace AzureBlobManager.Utils
             }
 
             if (string.IsNullOrEmpty(plainText))
+            {
                 throw new ArgumentNullException(PlainText);
+            }
 
             plainText = AddPadding(plainText);
 
@@ -63,7 +64,8 @@ namespace AzureBlobManager.Utils
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
                             //Write all data to the stream.
-                            swEncrypt.Write(plainText);
+                            var writingTask = swEncrypt.WriteAsync(plainText);
+                            await writingTask;
                         }
                     }
                     outStr = Convert.ToBase64String(msEncrypt.ToArray());
@@ -73,7 +75,9 @@ namespace AzureBlobManager.Utils
             {
                 // Clear the RijndaelManaged object.
                 if (aesAlg != null)
+                {
                     aesAlg.Clear();
+                }
             }
 
             // Return the encrypted bytes from the memory stream.
@@ -165,15 +169,6 @@ namespace AzureBlobManager.Utils
             return plainText;
         }
 
-        public static string DecryptString(string cipherText, string salt)
-        {
-            if (salt == null)
-            {
-                salt = Constants.Salt;
-            }
-            return DecryptString(cipherText, salt, Constants.EncryptionKey);
-        }
-
         /// <summary>
         /// Decrypt the given string.  Assumes the string was encrypted using 
         /// EncryptStringAES(), using an identical sharedSecret.
@@ -181,7 +176,7 @@ namespace AzureBlobManager.Utils
         /// <param name="cipherText">The text to decrypt.</param>
         /// <param name="salt">The salt used to generate a key for decryption.</param>
         /// <param name="sharedSecret">A password used to generate a key for decryption.</param>
-        public static string DecryptString(string cipherText, string salt, string sharedSecret)
+        public static async Task<string> DecryptStringAsync(string cipherText, string salt, string sharedSecret)
         {
             if (string.IsNullOrEmpty(cipherText))
             {
@@ -217,10 +212,12 @@ namespace AzureBlobManager.Utils
                     using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
                         using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-
+                        {
                             // Read the decrypted bytes from the decrypting stream
                             // and place them in a string.
-                            plaintext = srDecrypt.ReadToEnd();
+                            var readerTask = srDecrypt.ReadToEndAsync();
+                            plaintext = await readerTask;
+                        }
                     }
                 }
             }
@@ -228,7 +225,9 @@ namespace AzureBlobManager.Utils
             {
                 // Clear the RijndaelManaged object.
                 if (aesAlg != null)
+                {
                     aesAlg.Clear();
+                }
             }
 
             plaintext = RemovePadding(plaintext);

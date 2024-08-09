@@ -1,5 +1,4 @@
 ﻿using AzureBlobManager.Interfaces;
-using AzureBlobManager.Services;
 using AzureBlobManager.Utils;
 using Microsoft.Win32;
 using System;
@@ -43,7 +42,7 @@ namespace AzureBlobManager.Windows
             _fileService = fileService;
 
             List<string> salts;
-            var keys = _regService.GetEncryptionKeys(out salts);
+            List<string> keys = _regService.GetEncryptionKeys(out salts);
 
             _keys = keys;
             _salts = salts;
@@ -56,9 +55,9 @@ namespace AzureBlobManager.Windows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnDecrypt_Click(object sender, RoutedEventArgs e)
+        private async void btnDecrypt_Click(object sender, RoutedEventArgs e)
         {
-            var inputText = this.txtInputText.Text;
+            string inputText = this.txtInputText.Text;
             if (string.IsNullOrWhiteSpace(inputText))
             {
                 MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -68,11 +67,12 @@ namespace AzureBlobManager.Windows
             int selIndex = this.cmbPasswordSource.SelectedIndex;
             if (selIndex >= 0)
             {
-                var salt = _salts[selIndex];
-                var key = _keys[selIndex];
+                string salt = _salts[selIndex];
+                string key = _keys[selIndex];
                 try
                 {
-                    outputText = CryptUtils.DecryptString(inputText, salt, key);
+                    var decryptTask = CryptUtils.DecryptStringAsync(inputText, salt, key);
+                    outputText = await decryptTask;
                 }
                 catch (System.Security.Cryptography.CryptographicException cex)
                 {
@@ -112,9 +112,9 @@ namespace AzureBlobManager.Windows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnEncrypt_Click(object sender, RoutedEventArgs e)
+        private async void btnEncrypt_Click(object sender, RoutedEventArgs e)
         {
-            var inputText = this.txtInputText.Text;
+            string inputText = this.txtInputText.Text;
             if (string.IsNullOrWhiteSpace(inputText))
             {
                 MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -124,10 +124,13 @@ namespace AzureBlobManager.Windows
             int selIndex = this.cmbPasswordSource.SelectedIndex;
             if (selIndex >= 0)
             {
-                var salt = _salts[selIndex];
-                var key = _keys[selIndex];
+                string salt = _salts[selIndex];
+                string key = _keys[selIndex];
 
-                outputText = CryptUtils.EncryptString(inputText, salt, key);
+                var encrypingTask = CryptUtils.EncryptStringAsync(inputText, salt, key);
+                await encrypingTask;
+                outputText = encrypingTask.Result;
+
                 if (_debug)
                 {
                     Debug.WriteLine($"{key} - {salt}", KeyAndSalt, MessageBoxButton.OK, MessageBoxImage.Information);
@@ -289,7 +292,7 @@ namespace AzureBlobManager.Windows
             }
         }
 
-        private void btnEncryptFile_Click(object sender, RoutedEventArgs e)
+        private async void btnEncryptFile_Click(object sender, RoutedEventArgs e)
         {
             string outputText;
             int selIndex = this.cmbPasswordSource.SelectedIndex;
@@ -316,17 +319,21 @@ namespace AzureBlobManager.Windows
                         var ext = Path.GetExtension(chosenFileName);
 
                         ext = ext.Replace(".", "");
-
                         ext = ext.Substring(0, Math.Min(ext.Length, 10));
-
                         ext = ext.PadRight(10, '=');
 
                         string base64String = Convert.ToBase64String(fileBytes);
 
-                        outputText = CryptUtils.EncryptString(ext + base64String, salt, key);
+                        var encryptingTask = CryptUtils.EncryptStringAsync(ext + base64String, salt, key);
+                        await encryptingTask;
+
+                        outputText = encryptingTask.Result;
 
                         var outputFile = chosenFileName + "_encrypted.txt";
-                        File.WriteAllText(outputFile, outputText);
+                        var writingTask = File.WriteAllTextAsync(outputFile, outputText);
+                        
+                        await writingTask;
+                        
                         MessageBox.Show(string.Format("Encrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
                     }
                 }
@@ -342,7 +349,7 @@ namespace AzureBlobManager.Windows
             }
         }
 
-        private void btnDecryptFile_Click(object sender, RoutedEventArgs e)
+        private async void btnDecryptFile_Click(object sender, RoutedEventArgs e)
         {
             string outputText;
             int selIndex = this.cmbPasswordSource.SelectedIndex;
@@ -365,7 +372,8 @@ namespace AzureBlobManager.Windows
                     if (!string.IsNullOrWhiteSpace(chosenFileName))
                     {
                         string fileContent = File.ReadAllText(chosenFileName);
-                        outputText = CryptUtils.DecryptString(fileContent, salt, key);
+                        var decryptingTask = CryptUtils.DecryptStringAsync(fileContent, salt, key);
+                        outputText = await decryptingTask;
                         string firstPart = outputText.Substring(0, 10);
                         firstPart = firstPart.Replace("=", "");
 
