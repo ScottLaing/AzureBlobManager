@@ -9,6 +9,7 @@ using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
@@ -54,7 +55,7 @@ namespace AzureBlobManager
         /// Event handler for the application startup event.
         /// </summary>
         /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             logger.Information(ApplicationStartup);
@@ -66,7 +67,7 @@ namespace AzureBlobManager
             SetupServices();
 
             GetEncryptionKeys();
-            InitBlobConnString();
+            await InitBlobConnString();
             RegService.CreateInitialEncryptionKeys();
 
             // work in progress below - on actions to help users to first time setup their azure connection string
@@ -161,7 +162,7 @@ namespace AzureBlobManager
         /// <summary>
         /// Initializes the Blob connection string from environment variables or registry.
         /// </summary>
-        private void InitBlobConnString()
+        private async Task InitBlobConnString()
         {
             if (BlobService == null)
             {
@@ -172,7 +173,7 @@ namespace AzureBlobManager
 
             if (string.IsNullOrWhiteSpace(BlobService.BlobConnectionString))
             {
-                GetBlobConnStringFromRegistry();
+                await GetBlobConnStringFromRegistry();
                 logger.Information(string.Format(AttemptingToGetConnectionString, BlobService.BlobConnectionString));
             }
             else
@@ -185,14 +186,14 @@ namespace AzureBlobManager
         /// <summary>
         /// Retrieves the Blob connection string from the registry and decrypts it if necessary.
         /// </summary>
-        private void GetBlobConnStringFromRegistry()
+        private async Task  GetBlobConnStringFromRegistry()
         {
             var result = RegService.GetValueFromRegistry(RegNameBlobConnectionKey);
             if (!string.IsNullOrWhiteSpace(result))
             {
                 if (ConnKeyIsEncrypted)
                 {
-                    result = CryptUtils.DecryptString2(result, EncryptionKeyBlob, EncryptionSaltBlob);
+                    result = await CryptUtils.DecryptStringAsync(result, EncryptionKeyBlob, EncryptionSaltBlob);
                 }
 
                 BlobService.BlobConnectionString = result;

@@ -3,6 +3,7 @@ using AzureBlobManager.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;
@@ -57,7 +58,8 @@ namespace AzureBlobManager.Windows
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        // how can I alter this method to return a Task?
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug(SavingSettings);
 
@@ -82,7 +84,7 @@ namespace AzureBlobManager.Windows
                 }
 
                 // Encrypt the connection string using the encryption key and salt from the currentApp
-                string encConnString = CryptUtils.EncryptString2(connString, currentApp.EncryptionKeyBlob, currentApp.EncryptionSaltBlob);
+                string encConnString = await CryptUtils.EncryptStringAsync(connString, currentApp.EncryptionKeyBlob, currentApp.EncryptionSaltBlob);
 
                 // Save the encrypted connection string to the registry
                 RegService.SaveValueToRegistry(RegNameBlobConnectionKey, encConnString);
