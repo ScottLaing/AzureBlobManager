@@ -279,14 +279,15 @@ namespace AzureBlobManager.Windows
             }
         }
 
-        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        private async void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             string chosenFileName = _fileService.GetOpenFileUsingFileDialog("");
 
             // If the file name is not an empty string, open it for saving.
             if (!string.IsNullOrWhiteSpace(chosenFileName))
             {
-                var output = File.ReadAllText(chosenFileName);
+                var readingTask = File.ReadAllTextAsync(chosenFileName);
+                string output = await readingTask;
                 this.txtInputText.Text = output;
                 this.txtOutputText.Clear();
             }
@@ -314,7 +315,8 @@ namespace AzureBlobManager.Windows
                     // If the file name is not an empty string, open it for saving.
                     if (!string.IsNullOrWhiteSpace(chosenFileName))
                     {
-                        byte[] fileBytes = File.ReadAllBytes(chosenFileName);
+                        var readingTask = File.ReadAllBytesAsync(chosenFileName);
+                        byte[] fileBytes = await readingTask;
 
                         var ext = Path.GetExtension(chosenFileName);
 
@@ -391,7 +393,7 @@ namespace AzureBlobManager.Windows
                         string outputFile = chosenFileName + "_decrypted." + firstPart;
                         if (decodedBytes != null)
                         {
-                            File.WriteAllBytes(outputFile, decodedBytes);
+                            await File.WriteAllBytesAsync(outputFile, decodedBytes);
                         }
 
                         MessageBox.Show(string.Format("Decrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
