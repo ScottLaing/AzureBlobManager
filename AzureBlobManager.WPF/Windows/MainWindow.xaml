@@ -25,49 +25,76 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Container:" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" />
+        <Label Content="Blob Container" HorizontalAlignment="Left" Margin="22,11,0,0" VerticalAlignment="Top" />
         
-        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="82,16,0,0" VerticalAlignment="Top" Width="214" SelectionChanged="cmbContainers_SelectionChanged"/>
+        <ComboBox x:Name="cmbContainers" HorizontalAlignment="Left" Margin="27,36,0,0" VerticalAlignment="Top" Width="205" SelectionChanged="cmbContainers_SelectionChanged"/>
 
-        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,7,330,0"  ToolTip="View Copy of Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:EditorViewbox/>
+        <Button x:Name="btnOpenFile" Click="btnViewFile_Click" Margin="0,7,350,0"  ToolTip="View Copy of Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:EditorViewbox/>
+                <TextBlock Text="View" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,7,295,0"  ToolTip="Upload New Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:UploadFileViewbox></controls:UploadFileViewbox>
+        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,7,310,0"  ToolTip="Upload New Blob"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:UploadFileViewbox></controls:UploadFileViewbox>
+                <TextBlock Text="Upload" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="0,7,260,0"  ToolTip="Download Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:DownloadFileButtonViewbox></controls:DownloadFileButtonViewbox>
-        </Button>
-        
-        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,225,0" >
-            <controls:DeleteDocumentViewbox Width="32" Height="32" ></controls:DeleteDocumentViewbox>
-        </Button>
-
-        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Selected Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,179,0" >
-            <controls:MetadataButtonViewbox ></controls:MetadataButtonViewbox>
+        <Button x:Name="btnDownload" Click="btnDownloadSelectedFile_Click" Margin="0,7,265,0" Padding="0,0,0,0" ToolTip="Download Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="44"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="35" Margin="0,0,0,0">
+                <controls:DownloadFileButtonViewbox Margin="0,0,0,0" Height="30" Width="30"></controls:DownloadFileButtonViewbox>
+                <TextBlock Text="Download" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh List of Blobs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,144,0" >
-            <controls:RefreshButtonViewbox ></controls:RefreshButtonViewbox>
+        <Button x:Name="btnDelete" Click="btnDelete_Click"   ToolTip="Delete Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,224,0"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="35" Margin="0,0,0,0">
+                <controls:DeleteDocumentViewbox Width="32" Height="31" ></controls:DeleteDocumentViewbox>
+                <TextBlock Text="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnLogs" Click="btnLogs_Click"  ToolTip="View App Logs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,109,0" >
-            <controls:LogViewbox ></controls:LogViewbox>
+        <Button x:Name="btnEditBlobMetadata" Click="btnEditBlobMetadata_Click"   ToolTip="View/Edit Selected Blob Metadata"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,183,0"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="35" Margin="0,0,0,0">
+                <controls:MetadataButtonViewbox Height="30" ></controls:MetadataButtonViewbox>
+                <TextBlock Text="MData" HorizontalAlignment="Center" Margin="0,1,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnEncrypt" Visibility="Visible" Click="btnEncrypt_Click"  Margin="0,7,65,0"  ToolTip="Encryption Utility Window"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:DecryptButtonViewbox/>
+        <Button x:Name="btnRefresh" Click="btnRefresh_Click"  ToolTip="Refresh List of Blobs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,143,0"   Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="35" Margin="0,0,0,0">
+                <controls:RefreshButtonViewbox Height="30" ></controls:RefreshButtonViewbox>
+                <TextBlock Text="Refresh" HorizontalAlignment="Center" Margin="0,1,0,0" FontSize="8"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="btnLogs" Click="btnLogs_Click"  ToolTip="View App Logs"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,102,0"   Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="35" Margin="0,0,0,0">
+                <controls:LogViewbox Height="30" ></controls:LogViewbox>
+                <TextBlock Text="Logs" HorizontalAlignment="Center" Margin="0,1,0,0" FontSize="8"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="btnEncrypt" Visibility="Visible" Click="btnEncrypt_Click"  Margin="0,7,61,0"  ToolTip="Encryption Utility Window"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:DecryptButtonViewbox/>
+                <TextBlock Text="Encrypt" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
 
-        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,20,0" >
-            <controls:SettingsViewbox></controls:SettingsViewbox>
+        <Button x:Name="btnSettings" Click="btnSettings_Click"   ToolTip="Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,7,20,0" Height="50" Width="40" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:SettingsViewbox></controls:SettingsViewbox>
+                <TextBlock Text="Settings" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
         <!--MouseDoubleClick="dgFilesList_MouseDoubleClick"-->
-        <DataGrid x:Name="dgFilesList"  Margin="20,50,20,20" ColumnWidth="50" >
+        <DataGrid x:Name="dgFilesList"  Margin="20,80,20,20" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="LightGray" />
