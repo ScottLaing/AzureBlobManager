@@ -11,8 +11,6 @@
         MinWidth="680" MinHeight="228"
         Title="My Azure Blob Manager" Height="360" Width="713">
 
-    <!--MouseDoubleClick="Window_MouseDoubleClick"-->
-
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -93,7 +91,6 @@
             </StackPanel>
         </Button>
 
-        <!--MouseDoubleClick="dgFilesList_MouseDoubleClick"-->
         <DataGrid x:Name="dgFilesList"  Margin="20,80,20,20" ColumnWidth="50" >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
