@@ -32,6 +32,7 @@ namespace AzureBlobManager.Windows
         private const string DecryptedFileCreated = "Decrypted file created, file location:\n\n {0}.";
         private const string ErrorEncountered = "Error encountered:\n\n {0}.";
         private const string DecryptionError = "Decryption error!";
+        private const string CriticalFileEncryptionError = "Critical error encountered with file encryption operation.";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
@@ -308,7 +309,7 @@ namespace AzureBlobManager.Windows
 
                 if (string.IsNullOrWhiteSpace(salt) || string.IsNullOrWhiteSpace(key))
                 {
-                    MessageBox.Show("Critical error encountered with file encryption operation.", MyAzureBlobManager);
+                    MessageBox.Show(CriticalFileEncryptionError, MyAzureBlobManager);
                     return;
                 }
 
@@ -366,7 +367,7 @@ namespace AzureBlobManager.Windows
 
                 if (string.IsNullOrWhiteSpace(salt) || string.IsNullOrWhiteSpace(key))
                 {
-                    MessageBox.Show("Critical error encountered with file encryption operation.", MyAzureBlobManager);
+                    MessageBox.Show(CriticalFileEncryptionError, MyAzureBlobManager);
                     return;
                 }
 
