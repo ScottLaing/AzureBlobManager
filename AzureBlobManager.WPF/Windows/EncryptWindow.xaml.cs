@@ -29,11 +29,6 @@ namespace AzureBlobManager.Windows
         private bool _debug = true;
         private bool _showMessageBoxes = false;
 
-        private const string DecryptedFileCreated = "Decrypted file created, file location:\n\n {0}.";
-        private const string ErrorEncountered = "Error encountered:\n\n {0}.";
-        private const string DecryptionError = "Decryption error!";
-        private const string CriticalFileEncryptionError = "Critical error encountered with file encryption operation.";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
@@ -163,9 +158,9 @@ namespace AzureBlobManager.Windows
         {
             var dlg = new Microsoft.Win32.SaveFileDialog
             {
-                FileName = "keys-backup.txt", // Default file name
-                DefaultExt = ".txt", // Default file extension
-                Filter = "Text documents (.txt)|*.txt" // Filter files by extension
+                FileName = DefaultKeyFileName, // Default file name
+                DefaultExt = TextExt, // Default file extension
+                Filter = TextDocsFilter // Filter files by extension
             };
 
             // Show save file dialog box
@@ -193,7 +188,7 @@ namespace AzureBlobManager.Windows
                     var salts = sbSalts.ToString();
                     var header = string.Format(KeyBackup, MyAzureBlobManager, DateTime.Now.ToString(DdMmYyyyHhMmSs));
                     var output = string.Format(KeysSalts, header, keyString, salts);
-                    File.WriteAllText(filename, output );
+                    File.WriteAllText(filename, output);
                     if (_debug)
                     {
                         MessageBox.Show(output, MyAzureBlobManager);
@@ -221,8 +216,8 @@ namespace AzureBlobManager.Windows
             }
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "All files (*.*)|*.*|Text files (*.txt)";
-            openFileDialog.Title = "Select a file";
+            openFileDialog.Filter = AllFilesTextFiles;
+            openFileDialog.Title = SelectFile;
 
             if (openFileDialog.ShowDialog() ?? false)
             {
@@ -273,7 +268,7 @@ namespace AzureBlobManager.Windows
 
         private void btnSaveOutput_Click(object sender, RoutedEventArgs e)
         {
-            string chosenFileName = _fileService.GetSaveFileUsingFileDialog("output-text.txt");
+            string chosenFileName = _fileService.GetSaveFileUsingFileDialog(DefaultOutputText);
 
             // If the file name is not an empty string, open it for saving.
             if (!string.IsNullOrWhiteSpace(chosenFileName))
@@ -286,7 +281,7 @@ namespace AzureBlobManager.Windows
 
         private async void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            string chosenFileName = _fileService.GetOpenFileUsingFileDialog("");
+            string chosenFileName = _fileService.GetOpenFileUsingFileDialog(String.Empty);
 
             // If the file name is not an empty string, open it for saving.
             if (!string.IsNullOrWhiteSpace(chosenFileName))
@@ -313,7 +308,7 @@ namespace AzureBlobManager.Windows
                     return;
                 }
 
-                string chosenFileName = _fileService.GetOpenBinaryFileUsingFileDialog("");
+                string chosenFileName = _fileService.GetOpenBinaryFileUsingFileDialog(String.Empty);
 
                 try
                 {
@@ -325,9 +320,9 @@ namespace AzureBlobManager.Windows
 
                         var ext = Path.GetExtension(chosenFileName);
 
-                        ext = ext.Replace(".", "");
-                        ext = ext.Substring(0, Math.Min(ext.Length, 10));
-                        ext = ext.PadRight(10, '=');
+                        ext = ext.Replace(Period, String.Empty);
+                        ext = ext.Substring(0, Math.Min(ext.Length, PaddingLengthFileSuffix));
+                        ext = ext.PadRight(PaddingLengthFileSuffix, EqualsChar);
 
                         string base64String = Convert.ToBase64String(fileBytes);
 
@@ -336,12 +331,12 @@ namespace AzureBlobManager.Windows
 
                         outputText = encryptingTask.Result;
 
-                        var outputFile = chosenFileName + "_encrypted.txt";
+                        var outputFile = chosenFileName + EncryptTextSuffix;
                         var writingTask = File.WriteAllTextAsync(outputFile, outputText);
                         
                         await writingTask;
                         
-                        MessageBox.Show(string.Format("Encrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
+                        MessageBox.Show(string.Format(EncryptedFileCreated, outputFile), MyAzureBlobManager);
                     }
                 }
                 catch (Exception ex)
@@ -371,7 +366,7 @@ namespace AzureBlobManager.Windows
                     return;
                 }
 
-                string chosenFileName = _fileService.GetOpenFileUsingFileDialog("");
+                string chosenFileName = _fileService.GetOpenFileUsingFileDialog(String.Empty);
 
                 try
                 {
@@ -381,21 +376,21 @@ namespace AzureBlobManager.Windows
                         string fileContent = File.ReadAllText(chosenFileName);
                         var decryptingTask = CryptUtils.DecryptStringAsync(fileContent, salt, key);
                         outputText = await decryptingTask;
-                        string firstPart = outputText.Substring(0, 10);
-                        firstPart = firstPart.Replace("=", "");
+                        string firstPart = outputText.Substring(0, PaddingLengthFileSuffix);
+                        firstPart = firstPart.Replace(EqualsString, String.Empty);
 
                         byte[] decodedBytes = Convert.FromBase64String(outputText.Substring(10));
-                        if (chosenFileName.EndsWith("_encrypted.txt"))
+                        if (chosenFileName.EndsWith(EncryptTextSuffix))
                         {
-                            chosenFileName = chosenFileName.Substring(0, chosenFileName.Length - 14);
+                            chosenFileName = chosenFileName.Substring(0, chosenFileName.Length - EncryptTextSuffix.Length);
                         }
 
-                        if (chosenFileName.EndsWith("." + firstPart))
+                        if (chosenFileName.EndsWith(Period + firstPart))
                         {
                             chosenFileName = chosenFileName.Substring(0, chosenFileName.Length - (firstPart.Length + 1));
                         }
 
-                        string outputFile = chosenFileName + "_decrypted." + firstPart;
+                        string outputFile = chosenFileName + DecryptedSuffix + firstPart;
                         if (decodedBytes != null)
                         {
                             await File.WriteAllBytesAsync(outputFile, decodedBytes);

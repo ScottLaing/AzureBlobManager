@@ -106,6 +106,25 @@ namespace AzureBlobManager
             public static readonly string SetupDialogAllFilesSettings = String.Format("{0} ({1})|{1}", "All Files", "*.*");
         }
 
+        public const string DecryptedFileCreated = "Decrypted file created, file location:\n\n {0}.";
+        public const string ErrorEncountered = "Error encountered:\n\n {0}.";
+        public const string DecryptionError = "Decryption error!";
+        public const string CriticalFileEncryptionError = "Critical error encountered with file encryption operation.";
+        public const string SelectFile = "Select a file";
+        public const string EncryptedFileCreated = "Encrypted file created, file location:\n\n {0}.";
+        public const int PaddingLengthFileSuffix = 10;
+        public const string EqualsString = "=";
+        public const char EqualsChar = '=';
+        public const string EncryptTextSuffix = "_encrypted.txt";
+        public const string DecryptedSuffix = "_decrypted.";
+        public const string DefaultKeyFileName = "keys-backup.txt";
+        public const string DefaultOutputText = "output-text.txt";
+        public const string AllFilesTextFiles = "All files (*.*)|*.*|Text files (*.txt)";
+        public const string TextExt = ".txt";
+        public const string TextDocsFilter = "Text documents (.txt)|*.txt";
+        public const string Period = ".";
+
+
         public class SampleLargeStrings
         {
             public static readonly string[] _gettyParts = new string[] {
