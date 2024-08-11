@@ -29,6 +29,10 @@ namespace AzureBlobManager.Windows
         private bool _debug = true;
         private bool _showMessageBoxes = false;
 
+        private const string DecryptedFileCreated = "Decrypted file created, file location:\n\n {0}.";
+        private const string ErrorEncountered = "Error encountered:\n\n {0}.";
+        private const string DecryptionError = "Decryption error!";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
@@ -80,7 +84,7 @@ namespace AzureBlobManager.Windows
                     {
                         MessageBox.Show(String.Format(CryptoException, cex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    this.txtOutputText.Text = "Decryption error!";
+                    this.txtOutputText.Text = DecryptionError;
                     return;
                 }
                 catch (Exception ex)
@@ -89,7 +93,7 @@ namespace AzureBlobManager.Windows
                     {
                         MessageBox.Show(String.Format(ErrorWithDecryption, ex.Message), UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    this.txtOutputText.Text = "Decryption error!";
+                    this.txtOutputText.Text = DecryptionError;
                     return;
                 }
 
@@ -341,7 +345,7 @@ namespace AzureBlobManager.Windows
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Error encountered:\n\n {0}.", ex.Message), MyAzureBlobManager);
+                    MessageBox.Show(string.Format(ErrorEncountered, ex.Message), MyAzureBlobManager);
                 }
             }
             else
@@ -396,12 +400,12 @@ namespace AzureBlobManager.Windows
                             await File.WriteAllBytesAsync(outputFile, decodedBytes);
                         }
 
-                        MessageBox.Show(string.Format("Decrypted file created, file location:\n\n {0}.", outputFile), MyAzureBlobManager);
+                        MessageBox.Show(string.Format(DecryptedFileCreated, outputFile), MyAzureBlobManager);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(string.Format("Error encountered:\n\n {0}.", ex.Message), MyAzureBlobManager);
+                    MessageBox.Show(string.Format(ErrorEncountered, ex.Message), MyAzureBlobManager);
                 }
             }
             else
