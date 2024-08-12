@@ -177,7 +177,9 @@ this will be done in the decade of the sixties. It may be done while some of you
 of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting
 a man on the moon as part of a great national effort of the United States of America. Many years ago the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he
 want to climb it. He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for
-knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you. \n\n - John F. Kennedy"
+knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you. 
+
+- John F. Kennedy"
                 
             };
 
@@ -187,22 +189,27 @@ knowledge and peace are there. And, therefore, as we set sail we ask God’s ble
 
             private static Random rand = new Random();
 
+            private static int lastIndex = 0;
+
             public static string SampleSpeech {
                 get
                 {
-                    int r = rand.Next(0, 3);
-                    if (r == 0)
+                    string result = "";
+                    if (lastIndex == 0)
                     {
-                        return GettysburgAddress;
+                        result = GettysburgAddress;
                     }
-                    else if (r ==1)
+                    else if (lastIndex ==1)
                     {
-                        return TheirFinestHour;
+                        result = TheirFinestHour;
                     }
                     else 
                     {
-                        return RaceToSpace;
+                        result = RaceToSpace;
                     }
+                    lastIndex++;
+                    lastIndex = lastIndex % 3;
+                    return result;
                 }
             }
         }
