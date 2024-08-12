@@ -60,7 +60,7 @@ namespace AzureBlobManager.Windows
             string inputText = this.txtInputText.Text;
             if (string.IsNullOrWhiteSpace(inputText))
             {
-                MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(PleaseEnterAPlainTextToEncrypt, UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             string outputText;
@@ -71,8 +71,7 @@ namespace AzureBlobManager.Windows
                 string key = _keys[selIndex];
                 try
                 {
-                    var decryptTask = CryptUtils.DecryptStringAsync(inputText, salt, key);
-                    outputText = await decryptTask;
+                    outputText = await CryptUtils.DecryptStringAsync(inputText, salt, key);
                 }
                 catch (System.Security.Cryptography.CryptographicException cex)
                 {
@@ -95,12 +94,12 @@ namespace AzureBlobManager.Windows
 
                 if (_debug)
                 {
-                    Debug.WriteLine(String.Format(Misc, key, salt), KeyAndSalt, MessageBoxButton.OK, MessageBoxImage.Information);
+                    Debug.WriteLine(String.Format(Misc, key, salt));
                 }
             }
             else
             {
-                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(SelectPasswordToUse, UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -117,7 +116,7 @@ namespace AzureBlobManager.Windows
             string inputText = this.txtInputText.Text;
             if (string.IsNullOrWhiteSpace(inputText))
             {
-                MessageBox.Show(inputText, PleaseEnterAPlainTextToEncrypt, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(PleaseEnterAPlainTextToEncrypt, UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             string outputText;
@@ -133,12 +132,12 @@ namespace AzureBlobManager.Windows
 
                 if (_debug)
                 {
-                    Debug.WriteLine($"{key} - {salt}", KeyAndSalt, MessageBoxButton.OK, MessageBoxImage.Information);
+                    Debug.WriteLine(string.Format($"{key} - {salt}", key, salt));
                 }
             }
             else
             {
-                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(SelectPasswordToUse, UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -154,7 +153,7 @@ namespace AzureBlobManager.Windows
             this.txtInputText.Text = String.Empty;
         }
 
-        private void btnExportKey_Click(object sender, RoutedEventArgs e)
+        private void btnExportKeys_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.SaveFileDialog
             {

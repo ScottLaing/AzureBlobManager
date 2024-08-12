@@ -40,7 +40,7 @@
             <controls:EncryptButtonViewbox />
         </Button>
 
-        <Button x:Name="btnExportKeys" Click="btnExportKey_Click"  Margin="0,10,135,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
+        <Button x:Name="btnExportKeys" Click="btnExportKeys_Click"  Margin="0,10,135,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
             <controls:ExportViewbox />
         </Button>
 

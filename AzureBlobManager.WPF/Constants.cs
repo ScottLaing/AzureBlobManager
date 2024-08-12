@@ -147,21 +147,61 @@ namespace AzureBlobManager
                 "therefore brace ourselves to our duties, and so bear ourselves that, if the British Empire and its Commonwealth last for a thousand years, ",
                 "men will still say, 'This was their finest hour.' \n\n - Winston Churchill"
             };
+
+            public static readonly string[] _raceToSpace = new string[]
+            {
+                "We choose to go to the Moon! We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard; because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one we intend to win, and the others, too. ",
+                "It is for these reasons that I regard the decision last year to shift our efforts in space from low to high gear as among the most important decisions that will be made during my incumbency in the office of the Presidency. ",
+                "In the last 24 hours we have seen facilities now being created for the greatest and most complex exploration",
+
+                "if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in",
+                "Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of",
+                "which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than",
+                "the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and",
+                "propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial",
+                @"body, and then return it safely to earth, re-entering the atmosphere at speeds of over 25,000 miles per hour,
+causing heat about half that of the temperature of the sun – almost as hot as it is here today – and do all this, and do it
+right, and do it first before this decade is out – then we must be bold. I’m the one who is doing all the work, so we just want you to stay cool for a minute. [laughter] Q7
+However, I think we’re going to do it, and I think that we ust pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And this will be done in the decade of the sixties. It may be done
+while some of you are still here at school at this college and university. It will be done during the term of office of some of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade.
+I am delighted that this university is playing a part in putting a man on the moon as part of a great national effort of the United States of America. Many years ago the great British explorer George Mallory,
+who was to die on Mount Everest, was asked why did he want to climb it. He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for
+knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked.
+Thank you.if I were to say, my fellow citizens, that we shall send to the moon, 240,000 miles away from the control station in Houston, a giant rocket more than 300 feet tall, the length of this football field, made of new metal alloys, some of
+which have not yet been invented, capable of standing heat and stresses several times more than have ever been experienced, fitted together with a precision better than
+the finest watch, carrying all the equipment needed for propulsion, guidance, control, communications, food and survival, on an untried mission, to an unknown celestial
+body, and then return it safely to earth, re-entering the atmosphere at speeds of over 25,000 miles per hour, causing heat about half that of the temperature of the sun –
+almost as hot as it is here today – and do all this, and do it right, and do it first before this decade is out – then we must be bold. I’m the one who is doing all the work, so we just want you to
+stay cool for a minute. [laughter] However, I think we’re going to do it, and I think that we must pay what needs to be paid. I don’t think we ought to waste any money, but I think we ought to do the job. And
+this will be done in the decade of the sixties. It may be done while some of you are still here at school at this college and university. It will be done during the term of office of some
+of the people who sit here on this platform. But it will be done. And it will be done before the end of this decade. I am delighted that this university is playing a part in putting
+a man on the moon as part of a great national effort of the United States of America. Many years ago the great British explorer George Mallory, who was to die on Mount Everest, was asked why did he
+want to climb it. He said, “Because it is there.” Well, space is there, and we’re going to climb it, and the moon and the planets are there, and new hopes for
+knowledge and peace are there. And, therefore, as we set sail we ask God’s blessing on the most hazardous and dangerous and greatest adventure on which man has ever embarked. Thank you. \n\n - John F. Kennedy"
+                
+            };
+
             public static readonly string TheirFinestHour = string.Join("", _churchParts);
+
+            public static readonly string RaceToSpace = string.Join("", _raceToSpace);
 
             private static Random rand = new Random();
 
             public static string SampleSpeech {
                 get
                 {
-                    int r = rand.Next(0, 2);
+                    int r = rand.Next(0, 3);
                     if (r == 0)
                     {
                         return GettysburgAddress;
                     }
-                    else
+                    else if (r ==1)
                     {
                         return TheirFinestHour;
+                    }
+                    else 
+                    {
+                        return RaceToSpace;
                     }
                 }
             }
