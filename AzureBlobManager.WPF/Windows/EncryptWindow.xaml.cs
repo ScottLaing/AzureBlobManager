@@ -153,6 +153,11 @@ namespace AzureBlobManager.Windows
             this.txtInputText.Text = String.Empty;
         }
 
+        /// <summary>
+        /// Export keys to a text file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExportKeys_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.SaveFileDialog
@@ -201,11 +206,21 @@ namespace AzureBlobManager.Windows
             }
         }
 
+        /// <summary>
+        /// Create some sample text for testing.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSample_Click(object sender, RoutedEventArgs e)
         {
             this.txtInputText.Text = Constants.SampleLargeStrings.SampleSpeech;
         }
 
+        /// <summary>
+        /// Import keys from a text file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnImportKeys_Click(object sender, RoutedEventArgs e)
         {
             var id = MessageBox.Show(ThisWillOverwrite, MyAzureBlobManager, MessageBoxButton.YesNo);
@@ -265,6 +280,11 @@ namespace AzureBlobManager.Windows
             }
         }
 
+        /// <summary>
+        /// Save output text to a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveOutput_Click(object sender, RoutedEventArgs e)
         {
             string chosenFileName = _fileService.GetSaveFileUsingFileDialog(DefaultOutputText);
@@ -278,6 +298,11 @@ namespace AzureBlobManager.Windows
             }
         }
 
+        /// <summary>
+        /// Open a file and read into input text box.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             string chosenFileName = _fileService.GetOpenFileUsingFileDialog(String.Empty);
@@ -286,12 +311,17 @@ namespace AzureBlobManager.Windows
             if (!string.IsNullOrWhiteSpace(chosenFileName))
             {
                 var readingTask = File.ReadAllTextAsync(chosenFileName);
-                string output = await readingTask;
-                this.txtInputText.Text = output;
+                string input = await readingTask;
+                this.txtInputText.Text = input;
                 this.txtOutputText.Clear();
             }
         }
 
+        /// <summary>
+        /// Encrypt a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnEncryptFile_Click(object sender, RoutedEventArgs e)
         {
             string outputText;
@@ -350,6 +380,11 @@ namespace AzureBlobManager.Windows
             }
         }
 
+        /// <summary>
+        /// Decrypt a file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnDecryptFile_Click(object sender, RoutedEventArgs e)
         {
             string outputText;
