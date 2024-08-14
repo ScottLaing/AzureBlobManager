@@ -285,7 +285,7 @@ namespace AzureBlobManager.Windows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnSaveOutput_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveOutput_Click(object sender, RoutedEventArgs e)
         {
             string chosenFileName = _fileService.GetSaveFileUsingFileDialog(DefaultOutputText);
 
@@ -293,7 +293,7 @@ namespace AzureBlobManager.Windows
             if (!string.IsNullOrWhiteSpace(chosenFileName))
             {
                 var output = this.txtOutputText.Text;
-                File.WriteAllText(chosenFileName, output);
+                await File.WriteAllTextAsync(chosenFileName, output);
                 MessageBox.Show(string.Format(OutputSavedSuccess, chosenFileName), MyAzureBlobManager);
             }
         }
