@@ -3,7 +3,6 @@ using AzureBlobManager.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using static AzureBlobManager.Constants;
 using static AzureBlobManager.Constants.UIMessages;

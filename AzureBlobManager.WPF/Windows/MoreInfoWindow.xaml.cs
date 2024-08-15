@@ -34,6 +34,11 @@ namespace AzureBlobManager.Windows
             this.Close();
         }
 
+        /// <summary>
+        /// Open file handler.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             if (this.chkDoNotShowAgain.IsChecked != null)
