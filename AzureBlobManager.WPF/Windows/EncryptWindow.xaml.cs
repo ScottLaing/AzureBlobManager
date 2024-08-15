@@ -32,6 +32,8 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
+        /// <param name="fileService"></param>
+        /// <param name="regService"></param>
         public EncryptWindow(IRegService regService, IFileService fileService)
         {
             InitializeComponent();
@@ -147,6 +149,8 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// Handles the click event of the "Clear" button.
         /// </summary>
+        /// <param name="e"></param>
+        /// <param name="sender"></param>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             this.txtOutputText.Text = String.Empty;

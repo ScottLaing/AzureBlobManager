@@ -33,6 +33,7 @@ namespace AzureBlobManager.Services
         /// <summary>
         /// Shows a message box asking if the user is sure.
         /// </summary>
+        /// <param name="message"></param>
         /// <returns>True if the user is sure, false otherwise.</returns>
         public bool ShowConfirmationMessageBox(string message = "")
         {

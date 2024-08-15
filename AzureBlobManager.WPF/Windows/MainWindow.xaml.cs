@@ -317,7 +317,8 @@ namespace AzureBlobManager.Windows
         /// <summary>
         /// Retrieves the selected file name and container name from the data grid.
         /// </summary>
-        /// <returns>A tuple containing the error flag, error message, file name, and container name.</returns>
+        /// <permission cref="System.Security.Permissions.FileIOPermission">The method requires FileIOPermission.</permission>
+        /// <returns>a tuple with information about the selected file and any errors.</returns> 
         private (bool errors, string errorMsg, string fileName, string containerName) GetSelectedFileAndContainerName()
         {
             logger.Debug("GetSelectedFileAndContainerName call");

@@ -187,6 +187,11 @@ namespace AzureBlobManager.Services
             return chosenFileName;
         }
 
+        /// <summary>
+        // Get open binary file using file dialog.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public string GetOpenBinaryFileUsingFileDialog(string fileName)
         {
             string chosenFileName;
@@ -206,6 +211,5 @@ namespace AzureBlobManager.Services
             }
             return chosenFileName;
         }
-
     }
 }

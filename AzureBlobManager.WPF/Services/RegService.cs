@@ -107,7 +107,7 @@ namespace AzureBlobManager.Services
         /// Retrieves the encryption keys from the registry or generates new ones if they are not found.
         /// </summary>
         /// <param name="salts">Matching salts list for returned encryption keys list.</param>
-        /// <returns></returns>
+        /// <returns>List of encryption keys</returns>
         public List<string> GetEncryptionKeys(out List<string> salts)
         {
             var keys = new List<string>();

@@ -45,6 +45,7 @@ namespace AzureBlobManager.Windows
         /// <param name="keyName">The key name.</param>
         /// <param name="keyValue">The key value.</param>
         /// <param name="isEditting">Indicates whether the window is in editing mode.</param>
+        /// <param name="uiService">The UI service.</param>
         public BlobItemChangeWindow(bool isSystemData, string keyName, string keyValue, bool isEditting, IUiService uiService)
         {
             InitializeComponent();

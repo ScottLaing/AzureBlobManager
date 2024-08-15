@@ -418,7 +418,7 @@ namespace AzureBlobManager.Services
         /// Retrieves the list of containers in Azure Blob Storage.
         /// </summary>
         /// <param name="errors">Any error information.</param>
-        /// <returns>The list of container names.</returns>
+        /// <returns>The list of container names, and an errors list for errors.</returns>
         public async Task<(List<string>, string errors)> GetBlobContainersAsync()
         {
             string errors = "";
