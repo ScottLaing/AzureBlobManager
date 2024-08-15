@@ -162,6 +162,11 @@ namespace AzureBlobManager.Services
             return chosenFileName;
         }
 
+        /// <summary>
+        /// Get file using open file dialog.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public string GetOpenFileUsingFileDialog(string fileName)
         {
             string chosenFileName;
