@@ -47,15 +47,18 @@
         </Button>
 
 
-        <Button x:Name="btnExportKeys" Click="btnExportKeys_Click"  Margin="0,10,190,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0"  Height="50" Width="48"  >
+        <Button x:Name="btnExportKeys" Click="btnExportKeys_Click"  Margin="0,10,200,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0"  Height="50" Width="48"  >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:ExportViewbox Width="32" />
                 <TextBlock Text="ExportKeys" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="38"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnImportKeys" Click="btnImportKeys_Click" Margin="0,10,100,0" ToolTip="Import Keys from Keys File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
-            <controls:ImportViewbox />
+        <Button x:Name="btnImportKeys" Click="btnImportKeys_Click" Margin="0,10,149,0" ToolTip="Import Keys from Keys File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Height="50" Width="48"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:ImportViewbox Width="32" />
+                <TextBlock Text="ImportKeys" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="40"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnEncryptFile" Click="btnEncryptFile_Click"  Margin="0,10,55,0" ToolTip="Encrypt a Selected File to an Output File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
