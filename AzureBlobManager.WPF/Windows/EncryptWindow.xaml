@@ -35,14 +35,14 @@
         <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,10,295,0" ToolTip="Encrypt Input Text (put encrypted value in Output Text)"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" Visibility="Visible"  Height="50" Width="48" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:EncryptButtonViewbox Width="32" />
-                <TextBlock Text="Encrypt" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="38" />
+                <TextBlock Text="Encrypt" HorizontalAlignment="Center" Margin="13,0,0,0" FontSize="8" Width="38" />
             </StackPanel>
         </Button>
 
         <Button x:Name="btnDecrypt" Click="btnDecrypt_Click"  Margin="0,10,245,0" ToolTip="Decrypt Input Text (put decrypted value in Output Text)"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" Visibility="Visible"  Height="50" Width="48"  >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:DecryptButtonViewbox Width="32"/>
-                <TextBlock Text="Decrypt" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"  Width="38"  />
+                <TextBlock Text="Decrypt" HorizontalAlignment="Center" Margin="13,0,0,0" FontSize="8"  Width="38"  />
             </StackPanel>
         </Button>
 
