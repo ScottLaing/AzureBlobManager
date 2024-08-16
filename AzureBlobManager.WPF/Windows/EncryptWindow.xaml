@@ -24,24 +24,34 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="46"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="190"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Key:" HorizontalAlignment="Right" Margin="0,13,395,0" VerticalAlignment="Top" Padding="2,5,5,5"   Grid.Row="0" />
-        <ComboBox x:Name="cmbPasswordSource" HorizontalAlignment="Right" Margin="0,13,260,0" VerticalAlignment="Top" Width="130" FontSize="14" Height="28"  Grid.Row="0"/>
+        <Label Content="Key:" HorizontalAlignment="Right" Margin="0,13,500,0" VerticalAlignment="Top" Padding="2,5,5,5"   Grid.Row="0" />
+        <ComboBox x:Name="cmbPasswordSource" HorizontalAlignment="Right" Margin="0,13,360,0" VerticalAlignment="Top" Width="130" FontSize="14" Height="28"  Grid.Row="0"/>
 
-        <Button x:Name="btnDecrypt" Click="btnDecrypt_Click"  Margin="0,10,175,0" ToolTip="Decrypt Input Text (put decrypted value in Output Text)"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" Visibility="Visible" >
-            <controls:DecryptButtonViewbox/>
+        <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,10,300,0" ToolTip="Encrypt Input Text (put encrypted value in Output Text)"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" Visibility="Visible"  Height="50" Width="40" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:EncryptButtonViewbox />
+                <TextBlock Text="Encrypt" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnEncrypt" Click="btnEncrypt_Click"  Margin="0,10,210,0" ToolTip="Encrypt Input Text (put encrypted value in Output Text)"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" Visibility="Visible">
-            <controls:EncryptButtonViewbox />
+        <Button x:Name="btnDecrypt" Click="btnDecrypt_Click"  Margin="0,10,255,0" ToolTip="Decrypt Input Text (put decrypted value in Output Text)"  VerticalAlignment="Top" HorizontalAlignment="Right"  Grid.Row="0" Visibility="Visible"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:DecryptButtonViewbox/>
+                <TextBlock Text="Decrypt" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnExportKeys" Click="btnExportKeys_Click"  Margin="0,10,135,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
-            <controls:ExportViewbox />
+
+        <Button x:Name="btnExportKeys" Click="btnExportKeys_Click"  Margin="0,10,190,0" ToolTip="Export Saved Keys to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0"  Height="50" Width="48"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:ExportViewbox Width="32" />
+                <TextBlock Text="ExportKeys" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="38"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnImportKeys" Click="btnImportKeys_Click" Margin="0,10,100,0" ToolTip="Import Keys from Keys File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" >
