@@ -91,7 +91,7 @@
         <Button x:Name="btnSample" Click="btnSample_Click"  Margin="0,0,125,0" ToolTip="Get Sample Text for Input Practice"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:AddSampleTextViewbox Width="32" />
-                <TextBlock Text="Open File" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="35"/>
+                <TextBlock Text="SampleText" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="40"/>
             </StackPanel>
         </Button>
 
