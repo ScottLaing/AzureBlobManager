@@ -81,26 +81,32 @@
         <TextBox x:Name="txtInputText" Margin="20,25,20,0" Height="195" Style="{StaticResource MultilineTextBox}" 
                  VerticalAlignment="Top"  HorizontalAlignment="Stretch" Grid.Row="1"   />
 
-        <Button x:Name="btnOpen" Click="btnOpen_Click"  Margin="0,0,180,0" ToolTip="Open local file for Input Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52" >
+        <Button x:Name="btnOpen" Click="btnOpen_Click"  Margin="0,0,185,0" ToolTip="Open local file for Input Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:OpenFileViewbox Width="32"  />
                 <TextBlock Text="Open File" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="35"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnSample" Click="btnSample_Click"  Margin="0,0,125,0" ToolTip="Get Sample Text for Input Practice"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+        <Button x:Name="btnSample" Click="btnSample_Click"  Margin="0,0,132,0" ToolTip="Get Sample Text for Input Practice"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:AddSampleTextViewbox Width="32" />
                 <TextBlock Text="SampleText" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="40"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="btnClear" Click="btnClear_Click" Margin="0,15,60,0" ToolTip="Clear Both Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2">
-            <controls:CloseViewbox />
+        <Button x:Name="btnClear" Click="btnClear_Click" Margin="0,0,73,0" ToolTip="Clear Both Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"   Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:CloseViewbox Width="32" />
+                <TextBlock Text="Clear All" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="32"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnSaveOutput" Click="btnSaveOutput_Click" Margin="0,15,20,0" ToolTip="Save Output Text to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2">
-            <controls:SaveButtonViewbox />
+        <Button x:Name="btnSaveOutput" Click="btnSaveOutput_Click" Margin="0,0,20,0" ToolTip="Save Output Text to File"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:SaveButtonViewbox Width="32" />
+                <TextBlock Text="SaveOutput" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="42"/>
+            </StackPanel>
         </Button>
 
         <Label Content="Output Text" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Padding="2,8,5,5" Grid.Row="2" />
