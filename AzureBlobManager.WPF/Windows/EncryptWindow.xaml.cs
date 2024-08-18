@@ -444,7 +444,7 @@ namespace AzureBlobManager.Windows
             }
             else
             {
-                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(SelectPasswordToUse, UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
