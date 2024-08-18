@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using static AzureBlobManager.Constants;
+using static AzureBlobManager.Constants.UIMessages;
 
 namespace AzureBlobManager.Services
 {
@@ -92,13 +93,13 @@ namespace AzureBlobManager.Services
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error creating initial encryption keys: " + ex.Message, $"Error with key:{i}");
+                            MessageBox.Show("Error creating initial encryption keys: " + ex.Message + "\n" + $"Error with key:{i}", MyAzureBlobManager);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error with logic checking encryption keys: " + ex.Message, $"Error with key:{i}");
+                    MessageBox.Show("Error with logic checking encryption keys: " + ex.Message + "\n" + $"Error with key:{i}", MyAzureBlobManager);
                 }
             }
         }
@@ -143,7 +144,7 @@ namespace AzureBlobManager.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error retrieving encryption keys from the registry: " + ex.Message, "Error");
+                MessageBox.Show("Error retrieving encryption keys from the registry: " + ex.Message, MyAzureBlobManager);
             }
             return keys;
         }

@@ -244,7 +244,7 @@ namespace AzureBlobManager.Windows
                 // Do something with the selected file, like read its contents or display its path
                 if (_debug)
                 {
-                    MessageBox.Show(string.Format(SelectedFile, filename));
+                    MessageBox.Show(string.Format(SelectedFile, filename), MyAzureBlobManager);
                 }
 
                 // backup current keys and salts for recovery
@@ -379,7 +379,7 @@ namespace AzureBlobManager.Windows
             }
             else
             {
-                MessageBox.Show(SelectPasswordToUse, PleaseEnterInputText, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(SelectPasswordToUse, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }

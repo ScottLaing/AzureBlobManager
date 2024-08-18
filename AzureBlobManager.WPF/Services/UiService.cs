@@ -27,7 +27,7 @@ namespace AzureBlobManager.Services
             logger.Debug("ShowWindowSize call");
             // Display the window size information
             string sizeInfo = string.Format(WindowSizeInfo, window.Width, window.Height);
-            MessageBox.Show(sizeInfo, WindowSize, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(sizeInfo, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace AzureBlobManager.Services
         {
             logger.Debug("ShowConfirmationMessageBox call");
             var warning = string.Format("{0} {1}", message, AreYouSure).Trim();
-            MessageBoxResult result = MessageBox.Show(warning, Confirmation, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show(warning, MyAzureBlobManager, MessageBoxButton.YesNo, MessageBoxImage.Question);
             return result == MessageBoxResult.Yes;
         }
 

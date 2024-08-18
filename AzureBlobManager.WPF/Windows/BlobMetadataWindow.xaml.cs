@@ -69,14 +69,14 @@ namespace AzureBlobManager.Windows
                 // Check if the blob item name is empty
                 if (string.IsNullOrEmpty(blobItemName))
                 {
-                    MessageBox.Show(KeyNameCannotBeEmpty, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameCannotBeEmpty, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 // Check if the key name already exists in the metadata items
                 if (SourceCollection.Any(m => m.KeyName.ToLower() == blobItemName.ToLower()))
                 {
-                    MessageBox.Show(KeyNameAlreadyExists, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameAlreadyExists, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -113,7 +113,7 @@ namespace AzureBlobManager.Windows
             }
             else
             {
-                MessageBox.Show(string.Format(TroubleSavingMetadata, setResult), Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(TroubleSavingMetadata, setResult), MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -133,7 +133,7 @@ namespace AzureBlobManager.Windows
             // Check if no metadata item is selected
             if (currItem == null)
             {
-                MessageBox.Show(NoMetadataItemSelected, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(NoMetadataItemSelected, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -152,7 +152,7 @@ namespace AzureBlobManager.Windows
                 // Check if the blob item name is empty
                 if (string.IsNullOrEmpty(blobItemName))
                 {
-                    MessageBox.Show(KeyNameCannotBeEmptyEdited, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameCannotBeEmptyEdited, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -178,7 +178,7 @@ namespace AzureBlobManager.Windows
             // Check if no metadata item is selected
             if (currItem == null)
             {
-                MessageBox.Show(NoMetadataItemSelected, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(NoMetadataItemSelected, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -187,7 +187,7 @@ namespace AzureBlobManager.Windows
             // Check if the metadata item is a system setting
             if (isSystemSetting)
             {
-                MessageBox.Show(CannotDeleteSystemMetadataItems, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(CannotDeleteSystemMetadataItems, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
