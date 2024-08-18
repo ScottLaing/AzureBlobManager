@@ -110,14 +110,14 @@ namespace AzureBlobManager.Windows
                 if (Constants.BlobSystemKeyNames.Contains(trimmed))
                 {
                     // Show error message if key name is reserved
-                    MessageBox.Show(KeyNameIsReserved, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameIsReserved, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 if (trimmed.Contains(DollarSign))
                 {
                     // Show error message if key name contains unallowed characters
-                    MessageBox.Show(KeyNameContainsUnallowedCharacters, Error, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(KeyNameContainsUnallowedCharacters, MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
