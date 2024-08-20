@@ -1,6 +1,8 @@
 ﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.Services;
 using AzureBlobManager.Utils;
 using Microsoft.Win32;
+using Serilog.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,14 +31,23 @@ namespace AzureBlobManager.Windows
         private bool _debug = true;
         private bool _showMessageBoxes = false;
 
+        // Constants for debug convenience messages
+        private const bool showWindowSize = false;
+
+        private IUiService UiService;
+
+        private Logger logger = Logging.CreateLogger();
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EncryptWindow"/> class.
         /// </summary>
         /// <param name="fileService"></param>
         /// <param name="regService"></param>
-        public EncryptWindow(IRegService regService, IFileService fileService)
+        public EncryptWindow(IRegService regService, IFileService fileService, IUiService uiService)
         {
             InitializeComponent();
+            this.UiService = uiService;
 
             cmbPasswordSource.ItemsSource = SavedPasswordNames;
             _regService = regService;
@@ -446,6 +457,20 @@ namespace AzureBlobManager.Windows
             {
                 MessageBox.Show(SelectPasswordToUse, UIMessages.MyAzureBlobManager, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
+        }
+
+        /// <summary>
+        /// Handles the double-click event on the window to display the window size information.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (showWindowSize)
+            {
+                logger.Debug(WindowMouseDoubleClickCall);
+                UiService.ShowWindowSize(this);
             }
         }
     }

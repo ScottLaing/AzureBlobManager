@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static AzureBlobManager.Constants;
 
-#pragma warning disable SYSLIB0022 // Type or member is obsolete
+#pragma warning disable SYSLIB0022 // Type or member is obsolete warning, disable for now
 
 namespace AzureBlobManager.Utils
 {
