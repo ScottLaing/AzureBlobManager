@@ -1,6 +1,11 @@
-﻿using AzureBlobManager.Utils;
+﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.Services;
+using AzureBlobManager.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
+using System;
 using System.Windows;
+using static AzureBlobManager.Constants;
 
 namespace AzureBlobManager.Windows
 {
@@ -12,6 +17,8 @@ namespace AzureBlobManager.Windows
         public App? App => Application.Current as App;
         private Logger logger = Logging.CreateLogger();
         public bool WasCanceled { get; set; } = false;
+
+        public IUiService UiService => App.Services.GetService<IUiService>() ?? throw new Exception(DependencyInjectionError);
 
         /// <summary>
         /// Initializes a new instance of the MoreInfoWindow class.
@@ -46,6 +53,20 @@ namespace AzureBlobManager.Windows
                 UiState.ShowViewBlobPreWarning = !(this.chkDoNotShowAgain.IsChecked ?? false);
             }
             this.Close();
+        }
+
+        /// <summary>
+        /// Handles the double-click event on the window to display the window size information.
+        /// </summary>
+        /// <param name="sender">The window that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (ShowWindowDoubleClickDebugMessageBox)
+            {
+                logger.Debug(WindowMouseDoubleClickCall);
+                UiService.ShowWindowSize(this);
+            }
         }
     }
 }

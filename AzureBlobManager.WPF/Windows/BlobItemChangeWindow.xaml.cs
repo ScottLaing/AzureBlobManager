@@ -27,9 +27,6 @@ namespace AzureBlobManager.Windows
         // Whether blob item is a system data blob item.
         private bool isSystemData = false;
 
-        // Constants for debug convenience messages
-        private const bool showWindowSize = false;
-
         // Logger for the class.
         private Logger logger = Logging.CreateLogger();
 
@@ -149,7 +146,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (showWindowSize) 
+            if (ShowWindowDoubleClickDebugMessageBox) 
             {
                 logger.Debug(WindowMouseDoubleClickCall);
                 UiService.ShowWindowSize(this); 

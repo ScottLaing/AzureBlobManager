@@ -1,6 +1,7 @@
 ﻿using AzureBlobManager.Interfaces;
 using Serilog.Core;
 using System.Windows;
+using static AzureBlobManager.Constants;
 
 
 namespace AzureBlobManager.Windows
@@ -60,9 +61,11 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            //logger.Debug("Window_MouseDoubleClick call");
-
-            //UiService.ShowWindowSize(this);
+            if (ShowWindowDoubleClickDebugMessageBox)
+            {
+                logger.Debug(WindowMouseDoubleClickCall);
+                UiService.ShowWindowSize(this);
+            }
         }
     }
 }

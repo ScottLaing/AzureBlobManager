@@ -12,6 +12,8 @@ namespace AzureBlobManager
         public const int GuidLength = 36;
         public const string NewLine = "\n";
 
+        public const bool ShowWindowDoubleClickDebugMessageBox = false;
+
         // Constants for registry settings
         public static string RegistryCompanyName = "BrotwurstSoftware";
         public static string RegistryAppName = "AzureBlobManager62";

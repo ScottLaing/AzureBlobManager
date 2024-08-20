@@ -29,9 +29,6 @@ namespace AzureBlobManager.Windows
         
         private IUiService UiService;
 
-        // Constants for debug convenience messages
-        private const bool showWindowSize = false;
-
 
         /// <summary>
         /// Initializes a new instance of the BlobMetadataWindow class.
@@ -211,7 +208,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (showWindowSize)
+            if (ShowWindowDoubleClickDebugMessageBox)
             {
                 logger.Debug(WindowMouseDoubleClickCall);
                 UiService.ShowWindowSize(this);
