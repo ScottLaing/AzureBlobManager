@@ -23,8 +23,11 @@
     </Window.Resources>
     <Grid>
 
-        <Button x:Name="btnClose"  Margin="0,12,20,0" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:CloseViewbox ></controls:CloseViewbox>
+        <Button x:Name="btnClose" Click="btnClose_Click" Margin="0,0,20,0" ToolTip="Close Window"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:CloseViewbox Width="32" />
+                <TextBlock Text="Close" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="20"/>
+            </StackPanel>
         </Button>
 
         <TextBox x:Name="txtLogsInfo" Style="{StaticResource MultilineTextBox}" IsReadOnly="True"  Margin="20,59,20,20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
