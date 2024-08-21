@@ -21,23 +21,12 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-
-       
-        <!--<Button x:Name="btnViewBlob" Margin="0,12,100,0" Click="btnOpenFile_Click"  ToolTip="View Copy"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:EditorViewbox/>
-        </Button>-->
-
         <Button x:Name="btnViewBlob" Click="btnOpenFile_Click" Margin="0,0,75,0"  ToolTip="View Copy of Selected Blob"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="49"  >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
                 <controls:EditorViewbox/>
                 <TextBlock Text="View" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
             </StackPanel>
         </Button>
-
-
-        <!--<Button x:Name="btnClose"  Margin="0,12,20,0" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:CloseViewbox ></controls:CloseViewbox>
-        </Button>-->
 
         <Button x:Name="btnClose" Click="btnClose_Click" Margin="0,0,20,0" ToolTip="Close Window"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Height="50" Width="52">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
