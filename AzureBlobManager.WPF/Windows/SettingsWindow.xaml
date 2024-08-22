@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:AzureBlobManager.Controls"
         Icon="/Images/CloudFileServiceConfiguration.ico"
+           MouseDoubleClick="Window_MouseDoubleClick"
         mc:Ignorable="d"
         MinWidth="400"
         MinHeight="250"
@@ -24,12 +25,16 @@
     </Window.Resources>
 
     <Grid>
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,9,20,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
+
+        <Button x:Name="btnSave" Click="btnSave_Click" Margin="0,0,20,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:SaveButtonViewbox Width="32" />
+                <TextBlock Text="Save" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="16"/>
+            </StackPanel>
         </Button>
 
-        <Label Content="Blob Connection String" HorizontalAlignment="Left" Margin="20,28,0,0" VerticalAlignment="Top" Padding="2,5,5,5" />
-        <TextBox x:Name="txtAzureConnString" Margin="20,53,20,50" Style="{StaticResource MultilineTextBox}" VerticalAlignment="Stretch" />
+        <Label Content="Blob Connection String" HorizontalAlignment="Left" Margin="20,32,0,0" VerticalAlignment="Top" Padding="2,5,5,5" />
+        <TextBox x:Name="txtAzureConnString" Margin="20,60,20,50" Style="{StaticResource MultilineTextBox}" VerticalAlignment="Stretch" />
         <CheckBox x:Name="chkSaveToRegistry" Content="Save Connection to Registry (Encrypted)" HorizontalAlignment="Left" Margin="25,0,0,18" VerticalAlignment="Bottom" IsChecked="True" />
 
     </Grid>

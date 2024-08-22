@@ -95,14 +95,20 @@ namespace AzureBlobManager.Windows
             this.Close();
         }
 
+
         /// <summary>
-        /// Event handler for the Window MouseDoubleClick event.
+        /// Handles the event when the user double-clicks the window.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
         private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
+            if (ShowWindowDoubleClickDebugMessageBox)
+            {
+                logger.Debug(WindowMouseDoubleClickCall);
+                UiService.ShowWindowSize(this);
+            }
         }
+
     }
 }
