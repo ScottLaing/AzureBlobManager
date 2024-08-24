@@ -1,4 +1,5 @@
 ﻿using AzureBlobManager.Interfaces;
+using AzureBlobManager.WPF.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using Serilog.Core;
@@ -14,7 +15,7 @@ namespace AzureBlobManager.Windows
     /// <summary>
     /// Interaction logic for UploadFileWindow.xaml
     /// </summary>
-    public partial class UploadFileWindow : Window
+    public partial class UploadFileWindow : Window, IDebugWindow
     {
         private string _currentContainer;
 
@@ -100,7 +101,7 @@ namespace AzureBlobManager.Windows
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
-        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (ShowWindowDoubleClickDebugMessageBox)
             {
