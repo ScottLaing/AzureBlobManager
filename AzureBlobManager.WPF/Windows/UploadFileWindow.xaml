@@ -25,20 +25,32 @@
     </Window.Resources>
     
     <Grid>
-
-        <Button x:Name="btnUploadFile" Click="btnUploadFile_Click"  Margin="0,9,55,0" ToolTip="Upload Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:UploadButtonViewbox></controls:UploadButtonViewbox>
+        <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,4,69,0"  ToolTip="Upload File to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="40"  >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
+                <controls:UploadFileViewbox></controls:UploadFileViewbox>
+                <TextBlock Text="Upload" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
+            </StackPanel>
+        </Button>
+        
+        <Button x:Name="btnClose" Click="btnClose_Click" Margin="0,4,20,0" ToolTip="Close Window"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Height="50" Width="45">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:CloseViewbox Width="32" />
+                <TextBlock Text="Close" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="20"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnClose"  Margin="0,9,15,0" ToolTip="Close" Click="btnClose_Click"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:CloseViewbox ></controls:CloseViewbox>
-        </Button>
+        <Label Content="File:" HorizontalAlignment="Left" Margin="15,72,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtFilePath" Margin="44,75,75,0" Text="" VerticalAlignment="Top"  HorizontalAlignment="Stretch"/>
 
-        <Label Content="File:" HorizontalAlignment="Left" Margin="15,50,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtFilePath" Margin="44,53,40,0" Text="" VerticalAlignment="Top"  HorizontalAlignment="Stretch"/>
-
-        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,53,15,0" Style="{StaticResource SmallButtonStyle}"  ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
+        <!--<Button x:Name="btnOpenDialogFile" Click="btnSelect_Click" Margin="0,63,15,0" Style="{StaticResource SmallButtonStyle}"  ToolTip="Select File to Upload to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right" >
             <controls:OpenFileDialogViewbox></controls:OpenFileDialogViewbox>
+        </Button>-->
+
+        <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click"  Margin="0,63,20,0" ToolTip="Open local file for Input Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="45" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:OpenFileViewbox Width="32"  />
+                <TextBlock Text="Open File" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="35"/>
+            </StackPanel>
         </Button>
 
         <Label x:Name="lblResult" HorizontalAlignment="Stretch" Margin="40,85,20,0" VerticalAlignment="Top" Foreground="LightCoral"  />
