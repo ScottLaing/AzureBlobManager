@@ -1,5 +1,6 @@
 ﻿using AzureBlobManager.Interfaces;
 using AzureBlobManager.Utils;
+using AzureBlobManager.WPF.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using System;
@@ -12,7 +13,7 @@ namespace AzureBlobManager.Windows
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow : Window, IDebugWindow
     {
         /// <summary>
         /// BlobService reference.
@@ -101,7 +102,7 @@ namespace AzureBlobManager.Windows
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
-        private void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void Window_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (ShowWindowDoubleClickDebugMessageBox)
             {
