@@ -12,7 +12,7 @@
         MaxHeight="175"
         Background="#7392B7"
         Title="Upload Blob - My Azure Blob Manager" 
-        Height="153" 
+        Height="180" 
         Width="573" 
         WindowStyle="ToolWindow">
     
@@ -42,17 +42,17 @@
             </StackPanel>
         </Button>
 
-        <Label Content="File:" HorizontalAlignment="Left" Margin="15,72,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="txtFilePath" Margin="44,75,75,0" Text="" VerticalAlignment="Top"  HorizontalAlignment="Stretch"/>
+        <Label Content="Choose File:" HorizontalAlignment="Left" Margin="15,72,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="txtFilePath" Margin="87,75,75,0" Text="" VerticalAlignment="Top"  HorizontalAlignment="Stretch"/>
 
         <Button x:Name="btnOpenDialogFile" Click="btnSelect_Click"  Margin="0,63,20,0" ToolTip="Open local file for Input Text"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="45" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:OpenFileViewbox Width="32"  />
-                <TextBlock Text="Open File" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="35"/>
+                <TextBlock Text="Select File" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="35"/>
             </StackPanel>
         </Button>
 
-        <Label x:Name="lblResult" HorizontalAlignment="Stretch" Margin="40,85,20,0" VerticalAlignment="Top" Foreground="LightCoral"  />
+        <Label x:Name="lblResult" HorizontalAlignment="Stretch" Margin="40,125,20,0" Content="Upload Result"  VerticalAlignment="Top" Foreground="Purple"  />
 
     </Grid>
 </Window>
