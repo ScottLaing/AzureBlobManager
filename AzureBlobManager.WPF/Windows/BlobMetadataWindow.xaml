@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:AzureBlobManager.Controls"
-               MouseDoubleClick="Window_MouseDoubleClick"
+        MouseDoubleClick="Window_MouseDoubleClick"
         MinHeight="243"
         MinWidth="642"
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#B3C5D7"
-        Title="Blob Metadata - My Azure Blob Manager" Height="360" Width="713">
+        Title="Blob Metadata - My Azure Blob Manager" 
+        Height="360" 
+        Width="713">
         <!--
         MouseDoubleClick="Window_MouseDoubleClick" 
         -->
@@ -29,20 +31,32 @@
         <Label Content="Blob:" HorizontalAlignment="Left" Margin="20,17,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="txtBlobName" HorizontalAlignment="Left" Margin="58,18,0,0" VerticalAlignment="Top" Width="372" Style="{StaticResource ReadonlyTextBox}" FontSize="18"/>
 
-        <Button x:Name="btnEdit" Click="btnEdit_Click"  Margin="0,15,145,0" ToolTip="Edit Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:EditViewbox></controls:EditViewbox>
+        <Button x:Name="btnEdit" Click="btnEdit_Click" Margin="0,0,179,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:EditViewbox Width="32" />
+                <TextBlock Text="Edit" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="16"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnAdd" Click="btnAdd_Click"  Margin="0,15,110,0" ToolTip="Add Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:AddViewbox></controls:AddViewbox>
+        <Button x:Name="btnAdd" Click="btnAdd_Click" Margin="0,0,126,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:AddViewbox Width="32" />
+                <TextBlock Text="Add" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="16"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnDelete" Click="btnDelete_Click"  Margin="0,15,75,0"  ToolTip="Remove Entry"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:DeleteFileViewbox></controls:DeleteFileViewbox>
+        <Button x:Name="btnDelete" Click="btnDelete_Click" Margin="0,0,73,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:DeleteFileViewbox Width="32" />
+                <TextBlock Text="Delete" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="23"/>
+            </StackPanel>
         </Button>
 
-        <Button x:Name="btnSave" Click="btnSave_Click"  Margin="0,15,20,0"  ToolTip="Save"  VerticalAlignment="Top" HorizontalAlignment="Right" >
-            <controls:SaveButtonViewbox></controls:SaveButtonViewbox>
+        <Button x:Name="btnSave" Click="btnSave_Click" Margin="0,0,20,0" ToolTip="Save Settings"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="2"  Height="50" Width="52">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
+                <controls:SaveButtonViewbox Width="32" />
+                <TextBlock Text="Save" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8" Width="16"/>
+            </StackPanel>
         </Button>
 
         <DataGrid x:Name="dgMetadataList"    
