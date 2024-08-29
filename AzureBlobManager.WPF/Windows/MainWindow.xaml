@@ -3,14 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:controls="clr-namespace:AzureBlobManager.Controls"
-                MouseDoubleClick="Window_MouseDoubleClick"
+        xmlns:controls="clr-namespace:AzureBlobManager.Controls"
+        MouseDoubleClick="Window_MouseDoubleClick"
         Closing="Window_Closing"
         mc:Ignorable="d"
         Icon="/Images/CloudFileServiceConfiguration.ico"
         Background="#7392B7"
-        MinWidth="680" MinHeight="228"
-        Title="My Azure Blob Manager" Height="360" Width="713">
+        MinWidth="680" 
+        MinHeight="228"
+        Title="My Azure Blob Manager" 
+        Height="360" 
+        Width="713">
 
     <Window.Resources>
         <ResourceDictionary>

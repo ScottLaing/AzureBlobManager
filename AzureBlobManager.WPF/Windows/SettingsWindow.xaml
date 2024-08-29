@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:AzureBlobManager.Controls"
         Icon="/Images/CloudFileServiceConfiguration.ico"
-           MouseDoubleClick="Window_MouseDoubleClick"
+        MouseDoubleClick="Window_MouseDoubleClick"
         mc:Ignorable="d"
         MinWidth="400"
         MinHeight="250"
         Background="#7392B7"
-        Title="Settings - My Azure Blob Manager" Height="273" Width="573" WindowStyle="ToolWindow">
-    <!--MouseDoubleClick="Window_MouseDoubleClick"-->
+        Title="Settings - My Azure Blob Manager" 
+        Height="273" 
+        Width="573" 
+        WindowStyle="ToolWindow">
 
     <Window.Resources>
         <ResourceDictionary>

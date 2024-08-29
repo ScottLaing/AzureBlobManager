@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         MinWidth="490"
         MinHeight="400"
-               MouseDoubleClick="Window_MouseDoubleClick"
+        MouseDoubleClick="Window_MouseDoubleClick"
         Background="#7392B7"
         Title="Encrypt Utility Window - My Azure Blob Manager" 
         Height="610" 

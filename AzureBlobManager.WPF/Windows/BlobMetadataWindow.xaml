@@ -13,9 +13,6 @@
         Title="Blob Metadata - My Azure Blob Manager" 
         Height="360" 
         Width="713">
-        <!--
-        MouseDoubleClick="Window_MouseDoubleClick" 
-        -->
        
     <Window.Resources>
         <ResourceDictionary>
