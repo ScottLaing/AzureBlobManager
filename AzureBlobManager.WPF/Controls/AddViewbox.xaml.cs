@@ -7,7 +7,7 @@ namespace AzureBlobManager.Controls
     /// </summary>
     public partial class AddViewbox : UserControl
     {
-        // constructor
+        // constructor for AddViewbox
         public AddViewbox()
         {
             InitializeComponent();
