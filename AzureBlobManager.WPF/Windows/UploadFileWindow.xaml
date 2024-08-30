@@ -15,7 +15,7 @@
         Height="180" 
         Width="573" 
         WindowStyle="ToolWindow">
-    
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,7 +26,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <Button x:Name="btnUpload" Click="btnUploadFile_Click" Margin="0,4,69,0"  ToolTip="Upload File to Blob"  VerticalAlignment="Top" HorizontalAlignment="Right"  Height="50" Width="40"  >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="30">
@@ -34,7 +34,7 @@
                 <TextBlock Text="Upload" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="8"/>
             </StackPanel>
         </Button>
-        
+
         <Button x:Name="btnClose" Click="btnClose_Click" Margin="0,4,20,0" ToolTip="Close Window"  VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0" Height="50" Width="45">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="50">
                 <controls:CloseViewbox Width="32" />
@@ -52,7 +52,7 @@
             </StackPanel>
         </Button>
 
-        <Label x:Name="lblResult" HorizontalAlignment="Stretch" Margin="40,125,20,0" Content="Upload Result"  VerticalAlignment="Top" Foreground="Purple"  />
+        <Label x:Name="lblResult" FontSize="10" Margin="20,125,20,0" Content="Upload Result"  VerticalAlignment="Top" Foreground="LightGreen"  />
 
     </Grid>
 </Window>
