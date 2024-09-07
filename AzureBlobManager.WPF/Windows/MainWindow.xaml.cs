@@ -126,7 +126,7 @@ namespace AzureBlobManager.Windows
             string? containerName = this.cmbContainers.SelectedItem as string;
             if (containerName != null)
             {
-                var listFilesInfo = await BlobService.GetContainersFileListAsync(containerName);
+                (List<FileListItemDto> fileItemsList, string errors) listFilesInfo = await BlobService.GetContainersFileListAsync(containerName);
                 if (!string.IsNullOrWhiteSpace(listFilesInfo.errors))
                 {
                     MessageBox.Show(string.Format(ErrorGettingFilesList, listFilesInfo.errors), MyAzureBlobManager);
@@ -165,13 +165,13 @@ namespace AzureBlobManager.Windows
         private async Task DownloadSelFile()
         {
             logger.Debug("DownloadSelFile call");
-            var result = GetSelectedFileAndContainerName();
+            (bool errors, string errorMsg, string fileName, string containerName) result = GetSelectedFileAndContainerName();
 
             if (result.errors)
             {
                 return;
             }
-            var loading = FileService.AttemptDownloadFile(result.fileName, result.containerName);
+            Task loading = FileService.AttemptDownloadFile(result.fileName, result.containerName);
             await loading;
         }
 
@@ -194,7 +194,7 @@ namespace AzureBlobManager.Windows
         private async void btnViewFile_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("btnViewFile_Click call");
-            var result = GetSelectedFileAndContainerName();
+            (bool errors, string errorMsg, string fileName, string containerName) result = GetSelectedFileAndContainerName();
 
             if (result.errors)
             {
@@ -205,7 +205,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            var downloadFileResult = await FileService.AttemptDownloadFileToTempFolder(result.fileName, result.containerName);
+            (bool success, string moreInfo, string downloadedFilePath) downloadFileResult = await FileService.AttemptDownloadFileToTempFolder(result.fileName, result.containerName);
 
             if (!downloadFileResult.success)
             {
@@ -230,7 +230,7 @@ namespace AzureBlobManager.Windows
 
                     if (moreInfoWindow == null || !moreInfoWindow.WasCanceled)
                     {
-                        var startInfo = new ProcessStartInfo();
+                        ProcessStartInfo startInfo = new ProcessStartInfo();
                         startInfo.FileName = downloadFileResult.downloadedFilePath;
                         startInfo.UseShellExecute = true; // Let the OS handle opening with default app
 
@@ -257,8 +257,8 @@ namespace AzureBlobManager.Windows
                 MessageBox.Show(NoContainerSelected, MyAzureBlobManager);
                 return;
             }
-            var uploadFileWindow = new UploadFileWindow(_lastUsedContainer, UiService);
-            var resp = uploadFileWindow.ShowDialog();
+            UploadFileWindow uploadFileWindow = new UploadFileWindow(_lastUsedContainer, UiService);
+            bool? resp = uploadFileWindow.ShowDialog();
             await ListContainerFiles();
         }
 
@@ -281,7 +281,7 @@ namespace AzureBlobManager.Windows
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("btnDelete_Click call");
-            var result = GetSelectedFileAndContainerName();
+            (bool errors, string errorMsg, string fileName, string containerName) result = GetSelectedFileAndContainerName();
 
             if (result.errors)
             {
@@ -302,7 +302,7 @@ namespace AzureBlobManager.Windows
                 return;
             }
 
-            var deleteResult = await BlobService.DeleteBlobFileAsync(result.containerName, result.fileName);
+            (bool success, string errorInfo) deleteResult = await BlobService.DeleteBlobFileAsync(result.containerName, result.fileName);
             if (deleteResult.success)
             {
                 MessageBox.Show(FileDeletedSuccess, MyAzureBlobManager);
@@ -390,7 +390,7 @@ namespace AzureBlobManager.Windows
         private async void btnEditBlobMetadata_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("btnEditBlobMetadata_Click call");
-            var result = GetSelectedFileAndContainerName();
+            (bool errors, string errorMsg, string fileName, string containerName) result = GetSelectedFileAndContainerName();
 
             if (result.errors)
             {

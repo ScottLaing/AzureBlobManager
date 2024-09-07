@@ -84,18 +84,6 @@ namespace AzureBlobManager.Utils
             return outStr;
         }
 
-
-        /// <summary>
-        /// Adds padding to the plain text for encryption.
-        /// </summary>
-        /// <param name="plainText">The text to which padding will be added.</param>
-        /// <returns>The padded text.</returns>
-        private static string AddPadding(string plainText)
-        {
-            plainText = Guid.NewGuid().ToString() + plainText + Guid.NewGuid().ToString();
-            return plainText;
-        }
-
         /// <summary>
         /// Decrypt the given string.  Assumes the string was encrypted using 
         /// EncryptStringAES(), using an identical sharedSecret.
@@ -178,6 +166,18 @@ namespace AzureBlobManager.Utils
             return plaintext;
         }
 
+
+        /// <summary>
+        /// Adds padding to the plain text for encryption.
+        /// </summary>
+        /// <param name="plainText">The text to which padding will be added.</param>
+        /// <returns>The padded text.</returns>
+        private static string AddPadding(string plainText)
+        {
+            plainText = Guid.NewGuid().ToString() + plainText + Guid.NewGuid().ToString();
+            return plainText;
+        }
+
         /// <summary>
         /// Reads a byte array from the given stream.
         /// </summary>
@@ -200,6 +200,100 @@ namespace AzureBlobManager.Utils
 
             return buffer;
         }
+
+        /// <summary>
+        /// Encrypts a string using AES encryption with a custom key and salt.
+        /// </summary>
+        /// <param name="plainText">The plain text to be encrypted.</param>
+        /// <param name="key">The encryption key.</param>
+        /// <param name="salt">The salt value.</param>
+        /// <returns>The encrypted string.</returns>
+        public static string AesEncryptString(string plainText, string key = AesDefaultKey, string salt = AesDefaultIv)
+        {
+            if (string.IsNullOrWhiteSpace(plainText))
+            {
+                throw new ArgumentNullException(PlainTextMustNotBeBlank);
+            }
+
+            if (salt.Length < 16)
+            {
+                throw new ArgumentException(SaltMustBeAtLeast16Characters);
+            }
+
+            if (key.Length != 16)
+            {
+                throw new ArgumentException(KeyMustBe16CharactersLong);
+            }
+
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+
+            using (var aes = Aes.Create())
+            {
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = Encoding.UTF8.GetBytes(salt);
+                aes.Mode = CipherMode.CBC; // Set the cipher mode (CBC is common)
+
+                using (var encryptor = aes.CreateEncryptor())
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        using (var cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                        {
+                            cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+                        }
+                        return Convert.ToBase64String(memoryStream.ToArray());
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decrypts an encrypted string using AES encryption with a custom key and salt.
+        /// </summary>
+        /// <param name="encryptedText">The encrypted string to be decrypted.</param>
+        /// <param name="key">The encryption key.</param>
+        /// <param name="salt">The salt value.</param>
+        /// <returns>The decrypted string.</returns>
+        public static string AesDecryptString(string encryptedText, string key = AesDefaultKey, string salt = AesDefaultIv)
+        {
+            if (string.IsNullOrWhiteSpace(encryptedText))
+            {
+                throw new ArgumentNullException(EncryptedTextMustNotBeBlank);
+            }
+
+            if (salt.Length < 16)
+            {
+                throw new ArgumentException(SaltMustBeAtLeast16Characters);
+            }
+
+            if (key.Length != 16)
+            {
+                throw new ArgumentException(KeyMustBe16CharactersLong);
+            }
+
+            byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
+
+            using (var aes = Aes.Create())
+            {
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = Encoding.UTF8.GetBytes(salt);
+                aes.Mode = CipherMode.CBC; // Set the same cipher mode
+
+                using (var decryptor = aes.CreateDecryptor())
+                {
+                    using (var memoryStream = new MemoryStream(encryptedBytes))
+                    {
+                        using (var cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                        {
+                            var decryptedBytes = new byte[encryptedBytes.Length];
+                            int decryptedCount = cryptoStream.Read(decryptedBytes, 0, decryptedBytes.Length);
+                            return Encoding.UTF8.GetString(decryptedBytes, 0, decryptedCount);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 #pragma warning restore SYSLIB0022 // Type or member is obsolete
