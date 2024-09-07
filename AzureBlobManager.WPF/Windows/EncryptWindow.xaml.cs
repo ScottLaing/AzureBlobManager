@@ -200,10 +200,10 @@ namespace AzureBlobManager.Windows
                         sbSalts.AppendLine(string.Format(SaltDisplay, n) + _salts[n-1]);
                     }
 
-                    var keyString = sbKeys.ToString();
-                    var salts = sbSalts.ToString();
-                    var header = string.Format(KeyBackup, MyAzureBlobManager, DateTime.Now.ToString(DdMmYyyyHhMmSs));
-                    var output = string.Format(KeysSalts, header, keyString, salts);
+                    string keyString = sbKeys.ToString();
+                    string salts = sbSalts.ToString();
+                    string header = string.Format(KeyBackup, MyAzureBlobManager, DateTime.Now.ToString(DdMmYyyyHhMmSs));
+                    string output = string.Format(KeysSalts, header, keyString, salts);
                     File.WriteAllText(filename, output);
                     if (_debug)
                     {
@@ -235,7 +235,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e"></param>
         private void btnImportKeys_Click(object sender, RoutedEventArgs e)
         {
-            var id = MessageBox.Show(ThisWillOverwrite, MyAzureBlobManager, MessageBoxButton.YesNo);
+            MessageBoxResult id = MessageBox.Show(ThisWillOverwrite, MyAzureBlobManager, MessageBoxButton.YesNo);
             if (id != MessageBoxResult.Yes)
             {
                 return;
@@ -256,8 +256,8 @@ namespace AzureBlobManager.Windows
                 }
 
                 // backup current keys and salts for recovery
-                var oldSalts = _salts.ToList();
-                var oldKeys = _keys.ToList();
+                List<string> oldSalts = _salts.ToList();
+                List<string> oldKeys = _keys.ToList();
 
                 // also save old keys to class level for emergency backup type scenarios,tbd
                 _oldKeys = oldKeys;
@@ -304,7 +304,7 @@ namespace AzureBlobManager.Windows
             // If the file name is not an empty string, open it for saving.
             if (!string.IsNullOrWhiteSpace(chosenFileName))
             {
-                var output = this.txtOutputText.Text;
+                string output = this.txtOutputText.Text;
                 await File.WriteAllTextAsync(chosenFileName, output);
                 MessageBox.Show(string.Format(OutputSavedSuccess, chosenFileName), MyAzureBlobManager);
             }
@@ -356,10 +356,10 @@ namespace AzureBlobManager.Windows
                     // If the file name is not an empty string, open it for saving.
                     if (!string.IsNullOrWhiteSpace(chosenFileName))
                     {
-                        var readingTask = File.ReadAllBytesAsync(chosenFileName);
+                        System.Threading.Tasks.Task<byte[]> readingTask = File.ReadAllBytesAsync(chosenFileName);
                         byte[] fileBytes = await readingTask;
 
-                        var ext = Path.GetExtension(chosenFileName);
+                        string ext = Path.GetExtension(chosenFileName);
 
                         ext = ext.Replace(Period, String.Empty);
                         ext = ext.Substring(0, Math.Min(ext.Length, PaddingLengthFileSuffix));
@@ -367,13 +367,13 @@ namespace AzureBlobManager.Windows
 
                         string base64String = Convert.ToBase64String(fileBytes);
 
-                        var encryptingTask = CryptUtils.EncryptStringAsync(ext + base64String, salt, key);
+                        System.Threading.Tasks.Task<string> encryptingTask = CryptUtils.EncryptStringAsync(ext + base64String, salt, key);
                         await encryptingTask;
 
                         outputText = encryptingTask.Result;
 
-                        var outputFile = chosenFileName + EncryptTextSuffix;
-                        var writingTask = File.WriteAllTextAsync(outputFile, outputText);
+                        string outputFile = chosenFileName + EncryptTextSuffix;
+                        System.Threading.Tasks.Task writingTask = File.WriteAllTextAsync(outputFile, outputText);
                         
                         await writingTask;
                         
@@ -420,7 +420,7 @@ namespace AzureBlobManager.Windows
                     if (!string.IsNullOrWhiteSpace(chosenFileName))
                     {
                         string fileContent = File.ReadAllText(chosenFileName);
-                        var decryptingTask = CryptUtils.DecryptStringAsync(fileContent, salt, key);
+                        System.Threading.Tasks.Task<string> decryptingTask = CryptUtils.DecryptStringAsync(fileContent, salt, key);
                         outputText = await decryptingTask;
                         string firstPart = outputText.Substring(0, PaddingLengthFileSuffix);
                         firstPart = firstPart.Replace(EqualsString, String.Empty);
