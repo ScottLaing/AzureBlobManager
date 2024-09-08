@@ -48,6 +48,7 @@ namespace AzureBlobManager.Windows
         /// <param name="uiService">The UI service.</param>
         public BlobItemChangeWindow(bool isSystemData, string keyName, string keyValue, bool isEditting, IUiService uiService)
         {
+            logger.Debug("BlobItemChangeWindow constructor call");
             InitializeComponent();
 
             this.UiService = uiService;
@@ -86,6 +87,7 @@ namespace AzureBlobManager.Windows
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            logger.Debug("BlobItemChangeWindow btnSave_Click call");
             BlobItemName = txtBlobItemName.Text;
             string trimmed = BlobItemName.Trim();
 
