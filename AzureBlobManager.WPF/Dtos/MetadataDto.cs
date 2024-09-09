@@ -17,6 +17,11 @@ namespace AzureBlobManager.Dtos
         /// </summary>
         public string Value { get; set; } = "";
 
+        public override string ToString()
+        {
+            return $"KeyName: {KeyName}, Value: {Value}";
+        }
+
         /// <summary>
         /// Converts a dictionary of key-value pairs to a list of MetadataDto objects.
         /// </summary>

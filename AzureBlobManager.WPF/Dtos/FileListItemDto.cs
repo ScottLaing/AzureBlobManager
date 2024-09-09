@@ -23,6 +23,11 @@ namespace AzureBlobManager.Dtos
         public DateTimeOffset? LastModified { get; set; }
 
         /// <summary>
+        /// Gets or sets the container name.
+        /// </summary>
+        public string Container { get; set; } = "";
+
+        /// <summary>
         /// Gets the last modified date and time in local time zone.
         /// </summary>
         public DateTime? LastModifiedFriendly
@@ -37,10 +42,10 @@ namespace AzureBlobManager.Dtos
             }
         }
 
-        /// <summary>
-        /// Gets or sets the container name.
-        /// </summary>
-        public string Container { get; set; } = "";
+        public override string ToString()
+        {
+            return $"FileName: {FileName}, FileSize: {FileSize}, LastModified: {LastModified}, Container: {Container}";
+        }
 
         /// <summary>
         /// Performs a foreach loop over the file list items.
