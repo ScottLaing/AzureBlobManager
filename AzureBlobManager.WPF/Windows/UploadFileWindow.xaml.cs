@@ -24,9 +24,11 @@ namespace AzureBlobManager.Windows
 
         private IUiService UiService;
 
+        /// <summary>
         /// Initializes a new instance of the UploadFileWindow class.
         /// </summary>
         /// <param name="currentContainer">The current container.</param>
+        /// <param name="uiService">The current container.</param>
         public UploadFileWindow(string currentContainer, IUiService uiService)
         {
             logger.Debug(StartingUploadFileWindow);
