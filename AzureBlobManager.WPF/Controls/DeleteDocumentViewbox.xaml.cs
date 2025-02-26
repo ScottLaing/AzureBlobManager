@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for DeleteDocumentViewbox.xaml
+    /// Initializes a new instance of the <see cref="DeleteDocumentViewbox"/> class.
     /// </summary>
     public partial class DeleteDocumentViewbox : UserControl
     {

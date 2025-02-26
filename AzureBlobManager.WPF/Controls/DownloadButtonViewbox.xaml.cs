@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for DownloadButtonViewbox.xaml
+    /// Initializes a new instance of the <see cref="DownloadButtonViewbox"/> class.
     /// </summary>
     public partial class DownloadButtonViewbox : UserControl
     {

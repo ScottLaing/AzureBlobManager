@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for DecryptButtonViewbox.xaml
+    /// Initializes a new instance of the <see cref="DecryptButtonViewbox"/> class.
     /// </summary>
     public partial class DecryptButtonViewbox : UserControl
     {
