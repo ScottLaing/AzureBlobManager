@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for AddSampleTextViewbox.xaml
+    /// Initializes a new instance of the <see cref="AddSampleTextViewbox"/> class.
     /// </summary>
     public partial class AddSampleTextViewbox : UserControl
     {

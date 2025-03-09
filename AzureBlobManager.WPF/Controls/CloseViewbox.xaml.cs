@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for CloseViewbox.xaml
+    /// Initializes a new instance of the <see cref="CloseViewbox"/> class.
     /// </summary>
     public partial class CloseViewbox : UserControl
     {
