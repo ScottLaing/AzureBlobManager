@@ -3,7 +3,7 @@
 namespace AzureBlobManager.Controls
 {
     /// <summary>
-    /// Interaction logic for EditorViewbox.xaml
+    /// Initializes a new instance of the <see cref="EditorViewbox"/> class.
     /// </summary>
     public partial class EditorViewbox : UserControl
     {
